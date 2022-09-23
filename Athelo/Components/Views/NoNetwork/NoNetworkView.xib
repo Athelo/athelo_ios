@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NoNetworkView" customModule="Athelo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="106"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ic-ha-aJ5" customClass="ShadowCastingView" customModule="Athelo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="106"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8yE-5P-OPB">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="106"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wavesBackground" translatesAutoresizingMaskIntoConstraints="NO" id="tE5-6g-Ydp">
+                            <rect key="frame" x="80" y="-61.5" width="334" height="269"/>
+                        </imageView>
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="muN-US-rXB">
+                            <rect key="frame" x="8" y="16" width="398" height="74"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="logoSmall" translatesAutoresizingMaskIntoConstraints="NO" id="vby-1v-YmY">
+                                    <rect key="frame" x="0.0" y="2.5" width="69" height="69"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="69" id="43h-3l-JM0"/>
+                                        <constraint firstAttribute="width" secondItem="vby-1v-YmY" secondAttribute="height" multiplier="1:1" id="xKQ-ec-M0M"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It does not look like you have good enough connectivity right now. Please check your connection." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hES-bt-vkz" customClass="BodyLabel" customModule="Athelo" customModuleProvider="target">
+                                    <rect key="frame" x="77" y="12" width="321" height="50.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" name="Gray"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="message.noconnection"/>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" name="White"/>
+                    <constraints>
+                        <constraint firstItem="muN-US-rXB" firstAttribute="leading" secondItem="8yE-5P-OPB" secondAttribute="leading" constant="8" id="6Pm-j8-Jho"/>
+                        <constraint firstAttribute="trailing" secondItem="muN-US-rXB" secondAttribute="trailing" constant="8" id="DgV-w0-6VE"/>
+                        <constraint firstAttribute="bottom" secondItem="muN-US-rXB" secondAttribute="bottom" constant="16" id="Ihm-h9-oLj"/>
+                        <constraint firstItem="muN-US-rXB" firstAttribute="top" secondItem="8yE-5P-OPB" secondAttribute="top" constant="16" id="Pck-qn-V0D"/>
+                        <constraint firstItem="tE5-6g-Ydp" firstAttribute="centerY" secondItem="8yE-5P-OPB" secondAttribute="centerY" constant="20" id="lMx-Ak-uZ1"/>
+                        <constraint firstItem="tE5-6g-Ydp" firstAttribute="width" secondItem="8yE-5P-OPB" secondAttribute="width" constant="-80" id="lWG-Mj-8Gg"/>
+                        <constraint firstAttribute="trailing" secondItem="tE5-6g-Ydp" secondAttribute="trailing" id="s7Q-1J-Ke7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="8yE-5P-OPB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6e8-LN-FAq"/>
+                <constraint firstItem="0ic-ha-aJ5" firstAttribute="top" secondItem="8yE-5P-OPB" secondAttribute="top" id="9OH-fA-f7C"/>
+                <constraint firstItem="0ic-ha-aJ5" firstAttribute="trailing" secondItem="8yE-5P-OPB" secondAttribute="trailing" id="Btp-mO-00W"/>
+                <constraint firstItem="0ic-ha-aJ5" firstAttribute="leading" secondItem="8yE-5P-OPB" secondAttribute="leading" id="XuG-12-6Za"/>
+                <constraint firstItem="8yE-5P-OPB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e3H-Kn-T6W"/>
+                <constraint firstItem="8yE-5P-OPB" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="kwH-nm-W2Z"/>
+                <constraint firstItem="0ic-ha-aJ5" firstAttribute="bottom" secondItem="8yE-5P-OPB" secondAttribute="bottom" id="mM7-5o-FqV"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8yE-5P-OPB" secondAttribute="trailing" id="oqo-PO-CUl"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageViewDecoration" destination="tE5-6g-Ydp" id="XMz-JO-XXV"/>
+                <outlet property="viewContainer" destination="8yE-5P-OPB" id="DEC-cu-oil"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="-120.53571428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="logoSmall" width="96" height="96"/>
+        <image name="wavesBackground" width="375" height="269"/>
+        <namedColor name="Gray">
+            <color red="0.42745098039215684" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="White">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

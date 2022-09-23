@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SpE-PQ-8Zs">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Watch List View Controller-->
+        <scene sceneID="cmw-e1-jW0">
+            <objects>
+                <viewController storyboardIdentifier="WatchListViewController" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SpE-PQ-8Zs" customClass="WatchListViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TmB-jH-RAG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i8k-KV-VIg">
+                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xGv-cj-mqd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="i8k-KV-VIg" firstAttribute="leading" secondItem="TmB-jH-RAG" secondAttribute="leading" id="TqK-YK-bJD"/>
+                            <constraint firstAttribute="trailing" secondItem="i8k-KV-VIg" secondAttribute="trailing" id="VKT-OM-ydZ"/>
+                            <constraint firstItem="i8k-KV-VIg" firstAttribute="top" secondItem="xGv-cj-mqd" secondAttribute="top" id="nx1-q7-HeY"/>
+                            <constraint firstAttribute="bottom" secondItem="i8k-KV-VIg" secondAttribute="bottom" id="pQM-Tn-4wN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="viewContainer" destination="i8k-KV-VIg" id="gJ8-NE-vID"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g3D-fp-jhR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="121.73913043478262" y="-544.41964285714278"/>
+        </scene>
+        <!--Connect Device View Controller-->
+        <scene sceneID="Deo-lK-vo3">
+            <objects>
+                <viewController storyboardIdentifier="ConnectDeviceViewController" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bXy-fa-fcA" customClass="ConnectDeviceViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="r4V-Em-Ysb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="lPQ-z4-J8f">
+                                <rect key="frame" x="16" y="634" width="343" height="120"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ML1-zJ-5jf" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="52"/>
+                                        <color key="backgroundColor" name="#80627F"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="5vv-DW-ELd"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Connect Device"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="action.connectsmartwatch"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="actionButtonTapped:" destination="bXy-fa-fcA" eventType="touchUpInside" id="u6L-94-EQA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRB-Px-fvU" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="68" width="343" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="Wq5-Zw-Zgo"/>
+                                        </constraints>
+                                        <color key="tintColor" name="#80627F"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Skip">
+                                            <color key="titleColor" name="#80627F"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="secondaryStyle" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="action.skip"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="skipButtonTapped:" destination="bXy-fa-fcA" eventType="touchUpInside" id="7aU-nb-ovA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xxw-c1-YRi">
+                                <rect key="frame" x="16" y="130" width="343" height="488"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1K-g7-Vyn">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="423.33333333333331"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundEllipse" translatesAutoresizingMaskIntoConstraints="NO" id="7fj-ZZ-iFE">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="423.33333333333331"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="watchAwaitingConnection" translatesAutoresizingMaskIntoConstraints="NO" id="vOH-Ku-1jI">
+                                                <rect key="frame" x="62.666666666666686" y="73.666666666666657" width="218" height="276"/>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7r-Co-I63">
+                                                <rect key="frame" x="44.666666666666657" y="77" width="253.99999999999997" height="269"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="watchConnectionFailed" translatesAutoresizingMaskIntoConstraints="NO" id="hhB-S3-vwr">
+                                                        <rect key="frame" x="0.0" y="0.0" width="254" height="269"/>
+                                                    </imageView>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="watchConnectionSuccessful" translatesAutoresizingMaskIntoConstraints="NO" id="zxR-ET-S1h">
+                                                        <rect key="frame" x="0.0" y="0.0" width="254" height="269"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="hhB-S3-vwr" secondAttribute="bottom" id="Nib-Bv-1cw"/>
+                                                    <constraint firstAttribute="trailing" secondItem="hhB-S3-vwr" secondAttribute="trailing" id="UcB-Oh-m5r"/>
+                                                    <constraint firstItem="hhB-S3-vwr" firstAttribute="top" secondItem="x7r-Co-I63" secondAttribute="top" id="V86-7k-d7m"/>
+                                                    <constraint firstAttribute="bottom" secondItem="zxR-ET-S1h" secondAttribute="bottom" id="YOW-SK-EtI"/>
+                                                    <constraint firstItem="hhB-S3-vwr" firstAttribute="leading" secondItem="x7r-Co-I63" secondAttribute="leading" id="fdX-KP-ZWZ"/>
+                                                    <constraint firstItem="zxR-ET-S1h" firstAttribute="top" secondItem="x7r-Co-I63" secondAttribute="top" id="gX4-rD-XiC"/>
+                                                    <constraint firstItem="zxR-ET-S1h" firstAttribute="leading" secondItem="x7r-Co-I63" secondAttribute="leading" id="k1k-OA-r14"/>
+                                                    <constraint firstAttribute="trailing" secondItem="zxR-ET-S1h" secondAttribute="trailing" id="raT-GR-Qfq"/>
+                                                    <constraint firstAttribute="width" secondItem="x7r-Co-I63" secondAttribute="height" multiplier="254:269" id="zNT-Dv-85M"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="x7r-Co-I63" secondAttribute="bottom" constant="16" id="32Y-k7-b7f"/>
+                                            <constraint firstAttribute="trailing" secondItem="7fj-ZZ-iFE" secondAttribute="trailing" id="8EU-bo-GRb"/>
+                                            <constraint firstItem="x7r-Co-I63" firstAttribute="centerX" secondItem="Y1K-g7-Vyn" secondAttribute="centerX" id="H0O-p8-OZG"/>
+                                            <constraint firstItem="vOH-Ku-1jI" firstAttribute="centerY" secondItem="Y1K-g7-Vyn" secondAttribute="centerY" id="I2d-2H-CPj"/>
+                                            <constraint firstItem="7fj-ZZ-iFE" firstAttribute="leading" secondItem="Y1K-g7-Vyn" secondAttribute="leading" id="Kb8-9G-LsS"/>
+                                            <constraint firstAttribute="width" secondItem="Y1K-g7-Vyn" secondAttribute="height" multiplier="359:443" id="RPl-0h-bIU"/>
+                                            <constraint firstItem="x7r-Co-I63" firstAttribute="centerY" secondItem="Y1K-g7-Vyn" secondAttribute="centerY" id="a7e-yZ-mER"/>
+                                            <constraint firstItem="vOH-Ku-1jI" firstAttribute="centerX" secondItem="Y1K-g7-Vyn" secondAttribute="centerX" id="afW-C8-drO"/>
+                                            <constraint firstItem="7fj-ZZ-iFE" firstAttribute="top" secondItem="Y1K-g7-Vyn" secondAttribute="top" id="czG-Ta-0v9"/>
+                                            <constraint firstItem="vOH-Ku-1jI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Y1K-g7-Vyn" secondAttribute="leading" constant="16" id="iPz-So-hnB"/>
+                                            <constraint firstItem="vOH-Ku-1jI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Y1K-g7-Vyn" secondAttribute="top" constant="16" id="igr-eM-lLD"/>
+                                            <constraint firstAttribute="bottom" secondItem="7fj-ZZ-iFE" secondAttribute="bottom" id="nwh-4T-kmV"/>
+                                            <constraint firstItem="x7r-Co-I63" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Y1K-g7-Vyn" secondAttribute="leading" constant="16" id="y4t-LW-iAz"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Y1K-g7-Vyn" firstAttribute="centerX" secondItem="Xxw-c1-YRi" secondAttribute="centerX" id="JB3-em-RcC"/>
+                                    <constraint firstItem="Y1K-g7-Vyn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Xxw-c1-YRi" secondAttribute="leading" id="PXU-8i-DdF"/>
+                                    <constraint firstItem="Y1K-g7-Vyn" firstAttribute="top" secondItem="Xxw-c1-YRi" secondAttribute="top" id="seU-uw-dRG"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Y1K-g7-Vyn" secondAttribute="bottom" id="vCQ-Ee-1c6"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtn-9h-aEF">
+                                <rect key="frame" x="16" y="68" width="343" height="54"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Connect your smartwatch for better user experience!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBg-jX-rL9" customClass="IntroLabel" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" name="#623E61"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="watch.sync.prompt"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="YBg-jX-rL9" firstAttribute="leading" secondItem="dtn-9h-aEF" secondAttribute="leading" id="0gV-oG-4xp"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="YBg-jX-rL9" secondAttribute="bottom" id="1hM-EY-zTW"/>
+                                    <constraint firstAttribute="height" priority="999" constant="54" id="Mn9-gs-Esr"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="54" id="e0e-Su-IHG"/>
+                                    <constraint firstAttribute="trailing" secondItem="YBg-jX-rL9" secondAttribute="trailing" id="hOC-Rt-cdv"/>
+                                    <constraint firstItem="YBg-jX-rL9" firstAttribute="top" secondItem="dtn-9h-aEF" secondAttribute="top" id="lA2-bj-PBw"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="L8w-Vg-zpt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="L8w-Vg-zpt" firstAttribute="trailing" secondItem="Xxw-c1-YRi" secondAttribute="trailing" constant="16" id="5Mn-CD-cXn"/>
+                            <constraint firstItem="L8w-Vg-zpt" firstAttribute="trailing" secondItem="dtn-9h-aEF" secondAttribute="trailing" constant="16" id="Tok-sz-77W"/>
+                            <constraint firstItem="L8w-Vg-zpt" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lPQ-z4-J8f" secondAttribute="bottom" constant="24" id="aGJ-1F-3PH"/>
+                            <constraint firstItem="lPQ-z4-J8f" firstAttribute="width" secondItem="L8w-Vg-zpt" secondAttribute="width" constant="-32" id="dpB-pb-1rX"/>
+                            <constraint firstItem="Xxw-c1-YRi" firstAttribute="top" secondItem="dtn-9h-aEF" secondAttribute="bottom" constant="8" id="eY8-ep-qXB"/>
+                            <constraint firstItem="dtn-9h-aEF" firstAttribute="top" secondItem="L8w-Vg-zpt" secondAttribute="top" constant="24" id="h4S-qI-gTb"/>
+                            <constraint firstItem="Xxw-c1-YRi" firstAttribute="leading" secondItem="L8w-Vg-zpt" secondAttribute="leading" constant="16" id="lu6-IE-dwr"/>
+                            <constraint firstItem="dtn-9h-aEF" firstAttribute="leading" secondItem="L8w-Vg-zpt" secondAttribute="leading" constant="16" id="mOL-Sh-YXj"/>
+                            <constraint firstItem="lPQ-z4-J8f" firstAttribute="centerX" secondItem="r4V-Em-Ysb" secondAttribute="centerX" id="nhF-3K-V2z"/>
+                            <constraint firstItem="lPQ-z4-J8f" firstAttribute="top" secondItem="Xxw-c1-YRi" secondAttribute="bottom" constant="16" id="w9g-6J-qzU"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="lPQ-z4-J8f" secondAttribute="bottom" priority="999" constant="24" id="weh-fr-pOr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonAction" destination="ML1-zJ-5jf" id="eIP-5Y-ZwS"/>
+                        <outlet property="buttonSkip" destination="IRB-Px-fvU" id="bJm-wl-ha9"/>
+                        <outlet property="imageViewConnectionFailure" destination="hhB-S3-vwr" id="Ibv-yW-dDt"/>
+                        <outlet property="imageViewConnectionSuccess" destination="zxR-ET-S1h" id="aHF-nT-Rwb"/>
+                        <outlet property="imageViewNotConnected" destination="vOH-Ku-1jI" id="ckS-Z5-GhI"/>
+                        <outlet property="labelHeader" destination="YBg-jX-rL9" id="A6z-aB-02a"/>
+                        <outlet property="viewConnectionStatus" destination="x7r-Co-I63" id="hLh-LU-sXM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YPy-IJ-Rvq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="829.60000000000002" y="-544.58128078817731"/>
+        </scene>
+        <!--My Device View Controller-->
+        <scene sceneID="3HE-mW-02U">
+            <objects>
+                <viewController storyboardIdentifier="MyDeviceViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0JG-xS-2C4" customClass="MyDeviceViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jOE-Hx-v99">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gca-xs-a3v" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="16" y="702" width="343" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="kXw-lQ-kl6"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Disconnect My Device"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="action.disconnectmydevice"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="disconnectMyDeviceButtonTapped:" destination="0JG-xS-2C4" eventType="touchUpInside" id="Ecg-YR-Q9i"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="bcc-oE-2f9">
+                                <rect key="frame" x="16" y="576.33333333333337" width="343" height="85.666666666666629"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flx-GN-kEc" customClass="Headline20Label" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
+                                        <string key="text">Your device “Fitbit” is connected
+ to the app.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" name="Black"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you want to change device?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lwb-nF-bTF" customClass="IntroLabel" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="63.999999999999993" width="343" height="21.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" name="Gray"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oAx-cf-WNb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="475"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="oAx-cf-WNb" secondAttribute="height" multiplier="375:475" priority="999" id="DdN-Ne-OWI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NG3-Q9-33Q"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gca-xs-a3v" firstAttribute="width" secondItem="NG3-Q9-33Q" secondAttribute="width" constant="-32" id="5iS-5b-Dlx"/>
+                            <constraint firstItem="bcc-oE-2f9" firstAttribute="centerX" secondItem="jOE-Hx-v99" secondAttribute="centerX" id="Cdv-1d-GT2"/>
+                            <constraint firstItem="NG3-Q9-33Q" firstAttribute="bottom" secondItem="gca-xs-a3v" secondAttribute="bottom" constant="24" id="Gid-qB-Noy"/>
+                            <constraint firstItem="gca-xs-a3v" firstAttribute="top" secondItem="bcc-oE-2f9" secondAttribute="bottom" constant="40" id="Glo-41-AEc"/>
+                            <constraint firstItem="oAx-cf-WNb" firstAttribute="trailing" secondItem="NG3-Q9-33Q" secondAttribute="trailing" id="IwP-nk-tcr"/>
+                            <constraint firstItem="oAx-cf-WNb" firstAttribute="leading" secondItem="NG3-Q9-33Q" secondAttribute="leading" id="RPH-Qi-RLg"/>
+                            <constraint firstItem="bcc-oE-2f9" firstAttribute="width" secondItem="NG3-Q9-33Q" secondAttribute="width" constant="-32" id="UpU-z9-4Pu"/>
+                            <constraint firstItem="bcc-oE-2f9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="oAx-cf-WNb" secondAttribute="bottom" constant="40" id="X5U-UX-ckW"/>
+                            <constraint firstItem="gca-xs-a3v" firstAttribute="centerX" secondItem="jOE-Hx-v99" secondAttribute="centerX" id="f2g-dT-1NS"/>
+                            <constraint firstItem="oAx-cf-WNb" firstAttribute="top" secondItem="jOE-Hx-v99" secondAttribute="top" id="rSk-lD-uW9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="viewGradientContainer" destination="oAx-cf-WNb" id="4Uj-Sk-C1R"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4kc-vt-UgK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1561" y="-545"/>
+        </scene>
+        <!--No Watch View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="NoWatchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="NoWatchViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hki-fc-8ra">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="575.66666666666663"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqi-U6-gpb" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="16" y="702" width="343" height="52"/>
+                                <color key="backgroundColor" name="#80627F"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="Ifz-2Z-f4A"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Connect SmartWatch"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="action.connectsmartwatch"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="connectSmartWatchButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="YoY-Lb-xSi"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Vjp-8C-Ki3">
+                                <rect key="frame" x="40" y="599.66666666666663" width="295.33333333333331" height="78.333333333333371"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This page is currently empty" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4D-Q3-1hB" customClass="Headline20Label" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="295.33333333333331" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="watch.nodata"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It looks like you haven't connected your smartwatch. Would you like to do it now?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czT-yc-WXl" customClass="ParagraphLabel" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="40" width="295.33333333333331" height="38.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" name="Gray"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="watch.connectionprompt"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hki-fc-8ra" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="3AJ-Xq-qS5"/>
+                            <constraint firstItem="hki-fc-8ra" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="HxX-en-qTY"/>
+                            <constraint firstItem="rqi-U6-gpb" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Iro-7m-Lqv"/>
+                            <constraint firstItem="rqi-U6-gpb" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" constant="-32" id="J8o-CF-zZm"/>
+                            <constraint firstItem="Vjp-8C-Ki3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="KhY-QP-Udx"/>
+                            <constraint firstItem="rqi-U6-gpb" firstAttribute="top" secondItem="Vjp-8C-Ki3" secondAttribute="bottom" constant="24" id="gO7-KG-WzV"/>
+                            <constraint firstItem="Vjp-8C-Ki3" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="q9L-8d-PcU"/>
+                            <constraint firstAttribute="trailing" secondItem="hki-fc-8ra" secondAttribute="trailing" id="s7d-hm-RqW"/>
+                            <constraint firstItem="Vjp-8C-Ki3" firstAttribute="top" secondItem="hki-fc-8ra" secondAttribute="bottom" constant="24" id="tGz-mP-KNv"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="rqi-U6-gpb" secondAttribute="bottom" constant="24" id="tII-da-MFx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="viewGradientContainer" destination="hki-fc-8ra" id="YxD-vr-bk5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="121.73913043478262" y="111.83035714285714"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="backgroundEllipse" width="359" height="444"/>
+        <image name="watchAwaitingConnection" width="218" height="276"/>
+        <image name="watchConnectionFailed" width="254" height="269"/>
+        <image name="watchConnectionSuccessful" width="254" height="269"/>
+        <namedColor name="#623E61">
+            <color red="0.3843137254901961" green="0.24313725490196078" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="#80627F">
+            <color red="0.50196078431372548" green="0.3843137254901961" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Black">
+            <color red="0.094117647058823528" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Gray">
+            <color red="0.42745098039215684" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

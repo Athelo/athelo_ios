@@ -1,0 +1,312 @@
+/* 
+  Localizable.strings
+  Athelo
+
+  Created by Krzysztof Jabłoński on 31/05/2022.
+*/
+
+"action.addsymptom" = "Add Symptom";
+"action.cancel" = "Cancel";
+"action.changepassword" = "Change Password";
+"action.connectdevice" = "Connect %@";
+"action.connectdevice.again" = "Connect %@ Again";
+"action.delete" = "Delete";
+"action.deleteaccount" = "Delete An Account";
+"action.disconnect" = "Disconnect";
+"action.disconnectmydevice" = "Disconnect My Device";
+"action.editinformation" = "Edit Information";
+"action.gotoactivity" = "Go to Activity Page";
+"action.leave" = "Leave";
+"action.letsstart" = "Let's Start!";
+"action.login" = "Log In";
+"action.logout" = "Log Out";
+"action.mute" = "Mute";
+"action.mydevice" = "My Device";
+"action.mysymptoms" = "My Symptoms";
+"action.next" = "Next";
+"action.ok" = "OK";
+"action.opencommunity" = "Open Community";
+"action.password.request" = "Request Password Reset";
+"action.password.reset" = "Reset Password";
+"action.personalinfo.edit" = "Edit Personal Information";
+"action.personalinfo.save" = "Save Personal Information";
+"action.photo.take" = "Take a Photo";
+"action.photo.select" = "Select Photo";
+"action.readarticle" = "Read Article";
+"action.register" = "Register";
+"action.save" = "Save";
+"action.search" = "Search";
+"action.savenewpassword" = "Save New Password";
+"action.sayhello" = "Hello to everyone!";
+"action.sendfeedback" = "Send Feedback";
+"action.sendmessage" = "Send Message";
+"action.signup" = "Sign Up";
+"action.skip" = "Skip";
+"action.start" = "Start";
+"action.symptomsrecommendation" = "Symptoms Recommendation";
+"action.trackmywellbeing" = "Track My Wellbeing";
+"action.unmute" = "Unmute";
+"action.uploadpicture" = "Upload Picture";
+
+"activity.filter.day" = "Day";
+"activity.filter.week" = "Week";
+"activity.filter.month" = "Month";
+"activity.info.walking.trend.downwards" = "You walked less yesterday than you did the day before";
+"activity.summary.overview.header.day" = "Daily Overview";
+"activity.summary.overview.header.week" = "Week Overview";
+"activity.summary.overview.header.month" = "Month Overview";
+"activity.summary.tile.activity.header" = "Activity";
+"activity.summary.tile.heartrate.header" = "Heart rate";
+"activity.summary.tile.hrv.header" = "Heart rate variability";
+"activity.summary.tile.steps.header" = "Steps";
+"activity.type.exercise" = "Exercises";
+"activity.type.heartrate" = "Heart Rate";
+"activity.type.hrv" = "Heart Rate Variability";
+"activity.type.steps" = "Steps";
+
+"auth.additionalinfo.body" = "Add some information about yourself";
+"auth.additionalinfo.header" = "Great! We are glad you are here!";
+"auth.apple.signin" = "Log in with Apple";
+"auth.apple.signup" = "Sign up with Apple";
+"auth.email.signin" = "Log in with Email";
+"auth.email.signup" = "Sign up with Email";
+"auth.facebook.signin" = "Log in with Facebook";
+"auth.facebook.signup" = "Sign up with Facebook";
+"auth.google.signin" = "Log in with Google";
+"auth.google.signup" = "Sign up with Google";
+"auth.twitter.signin" = "Log in with Twitter";
+"auth.twitter.signup" = "Sign up with Twitter";
+"auth.legal" = "By signing up, you agree with the\nTerms of Service and Privacy Policy";
+"auth.legal.pp" = "Privacy Policy";
+"auth.legal.tos" = "Terms of Service";
+"auth.password.forgot" = "Forgot Password";
+"auth.password.reset" = "We will send a link to your mail to reset your password";
+
+"community.chatcell.member" = "You are member";
+"community.landing.header" = "Welcome to the Athelo Group Chat!";
+"community.landing.groupchat" = "Our chat groups are still being built and will be launching soon! In the meantime, we invite you to join our moderated community chats on a variety of topics";
+"community.list.header.prompt" = "These are the communities we found after your request. Want to join?";
+"community.list.header.welcome" = "Hello! We are glad you are here!";
+"community.list.section.my.multiple" = "My Communities";
+"community.list.section.my.single" = "My Community";
+"community.list.section.other.noflair" = "Communities";
+"community.list.section.other.withflair" = "Other Communities";
+"community.participantcount.multiple" = "%i participants";
+"community.participantcount.none" = "No participants";
+"community.participantcount.one" = "1 participant";
+"community.sender.me" = "Me";
+
+"date.today" = "Today";
+"date.yesterday" = "Yesterday";
+
+"device.name.common" = "Device";
+"device.name.applewatch" = "Apple watch";
+"device.name.fitbit" = "Fitbit device";
+"device.shortname.common" = "Device";
+"device.shortname.applewatch" = "Apple Watch";
+"device.shortname.fitbit" = "Fitbit";
+
+"error.apple.credentials" = "We couldn't obtain credentials from Apple. Please check your account setitngs and try again later.";
+"error.apple.revoked" = "We couldn't obtain necessary credential data. Please try to reset your Sign in with Apple access in Settings app and try again.";
+"error.chat.missingchatdata" = "We couldn't obtain data for this community. Please try again later.";
+"error.content" = "This content could not be loaded right now. Please try again later.";
+"error.decoding" = "Requested data could not be reached right now. Please try again later.";
+"error.google.credentials" = "We couldn't obtain credentials from Google. Please check your account setitngs and try again later.";
+"error.invalidappversion" = "This app version is no longer supported. Please go to the App Store and update the app.";
+"error.nodevicedata" = "There is no device data connected to your account.";
+"error.notavailable.content" = "This content is not available yet.";
+"error.notavailable.option" = "This option is not available yet.";
+"error.notavailable.watchdata" = "Data for this week is not available. Put on your watch to keep track of updates.";
+"error.unknown" = "Unexpected error. Try again later.";
+
+"faq.morequestions" = "Still have more questions?";
+
+"feedback.header" = "Send Your Feedback Or Questions";
+"feedback.success" = "Thank you for your feedback!";
+
+"feeling.bad" = "Sad";
+"feeling.good" = "Good";
+"feeling.middling" = "OK";
+
+"form.placeholder.birthdate" = "Enter your month and year of birth";
+"form.placeholder.confirmnewpassword" = "Confirm your new password";
+"form.placeholder.confirmpassword" = "Confirm your password";
+"form.placeholder.currentpassword" = "Enter your old password";
+"form.placeholder.email" = "Enter your email";
+"form.placeholder.message" = "Enter your message";
+"form.placeholder.name" = "Enter your name";
+"form.placeholder.newpassword" = "Enter your new password";
+"form.placeholder.password" = "Enter your password";
+"form.placeholder.phonenumber" = "Enter your phone number";
+"form.placeholder.symptomdescription" = "Enter symptom explanation";
+"form.placeholder.topic" = "Choose topic";
+"form.placeholder.whatdescribesyou" = "Choose item";
+"form.placeholder.yoursymptom" = "Choose your symptom";
+
+"form.field.birthdate" = "Month and year of birth";
+"form.field.confirmnewpassword" = "Confirm New Password";
+"form.field.confirmpassword" = "Confirm Password";
+"form.field.currentpassword" = "Current Password";
+"form.field.email" = "Email";
+"form.field.message" = "Message";
+"form.field.name" = "Name";
+"form.field.newpassword" = "New Password";
+"form.field.password" = "Password";
+"form.field.phonenumber" = "Phone number";
+"form.field.symptomdescription" = "Comment";
+"form.field.topic" = "Topic";
+"form.field.whatdescribesyou" = "What best describes you?";
+"form.field.yoursymptom" = "Your symptom";
+
+"graph.legend.sleep" = "Hours";
+
+"home.header.recommendations" = "It looks like you had a night of good sleep last night, so we recommend:";
+"home.header.symptoms" = "What are your symptoms today? Let's control them together!";
+"home.header.wellbeing" = "Let's take care of your mental health together!";
+"home.wellbeing.headline" = "It`s your feelings today";
+"home.welcome" = "Welcome!";
+"home.welcome.parametrized" = "Welcome, %@!";
+"home.recommendation.chatwithcommunity" = "Let's find you a community to chat";
+"home.recommendation.connectdevice" = "Let's connect Fitbit to monitor your sleep!";
+"home.recommendation.readarticles" = "Let's find interesting articles for you";
+"home.recommendation.registerfeelings" = "How are you feeling today? It is important!";
+"home.recommendation.updatefeelings" = "Update feelings and symptoms";
+
+"intro.step.first" = "We help you stay mentally healthy";
+"intro.step.second" = "You are not alone, we will help\nyou find like-minded people";
+"intro.step.third" = "You can connect your relatives to make it easier to cope with well-being";
+"intro.swipe" = "Swipe to get started";
+"intro.welcome.header" = "Welcome to Athelo!";
+"intro.welcome.body" = "We are glad you're here. Athelo is designed to give you a bit more support through your journey.";
+
+"menu.myProfile" = "My profile";
+"menu.messages" = "Messages";
+"menu.mySymptoms" = "My symptoms";
+"menu.myCaregivers" = "My caregivers";
+"menu.inviteACaregiver" = "Invite a caregiver";
+"menu.settings" = "Settings";
+"menu.connectSmartWatch" = "Connect smart watch";
+"menu.askAthelo" = "Ask Athelo";
+"menu.sendFeedback" = "Send feedback";
+
+"message.adddatainsettings" = "Add data in settings";
+"message.comingsoon" = "Coming soon.";
+"message.devicefound" = "Device found and connected successfully!";
+"message.loading" = "Loading";
+"message.noconnection" = "It does not look like you have good enough connectivity right now. Please check your connection.";
+"message.noinformation" = "No information";
+"message.noname" = "Name field can not be empty.";
+"message.password.reset" = "A link to reset your password has been sent to your mail.";
+"message.wellbeing" = "How are you feeling today? It is important!";
+"message.somethingwentwrong" = "Something went wrong, please try again later.";
+
+"navigation.aboutus" = "About Us";
+"navigation.article" = "Article";
+"navigation.auth.signin" = "Log In";
+"navigation.auth.signup" = "Sign Up";
+"navigation.auth.additionalinfo" = "Additional Information";
+"navigation.faq" = "Ask Athelo";
+"navigation.mydevice" = "My Device";
+"navigation.password.change" = "New Password";
+"navigation.password.reset" = "Reset Password";
+"navigation.password.myprofile" = "My Profile";
+"navigation.privacypolicy" = "Privacy Policy";
+"navigation.profile.edit" = "Personal Information";
+"navigation.settings" = "Settings";
+"navigation.sleep" = "Sleep";
+"navigation.symptom.chronology" = "Symptom Chronology";
+"navigation.symptom.description" = "Symptom Description";
+"navigation.symptom.list" = "My Symptoms";
+"navigation.symptom.wellbeing" = "Track My Wellbeing";
+"navigation.tab.activity" = "Activity";
+"navigation.tab.community" = "Community";
+"navigation.tab.home" = "Home";
+"navigation.tab.news" = "News";
+"navigation.tab.sleep" = "Sleep";
+"navigation.termsofservice" = "Terms of Use";
+
+"news.filter.select" = "Search by topic";
+"news.list.tab.all" = "All News";
+"news.list.tab.favorites" = "Favorites";
+
+"nocontent.body" = "It looks like this page is currently empty";
+"nocontent.header" = "No content available";
+"nocontent.nodata" = "No Data";
+
+"profile.header.health" = "My Health";
+"profile.header.other" = "Other";
+
+"popup.deleteaccount.message" = "Are you sure you want to delete your account? All data will be deleted and cannot be recovered.";
+"popup.deleteaccount.title" = "Delete an account";
+"popup.deletesymptom.message" = "Are you sure you want to delete this symptom?";
+"popup.deletesymptom.title" = "Delete symptom";
+"popup.disconnectdevice.message" = "Do you really want to disconnect your Fitbit account?";
+"popup.disconnectdevice.title" = "Are you sure?";
+"popup.leavecommunity.message" = "Do you really want to leave this community?";
+"popup.leavecommunity.title" = "Leave The Community";
+"popup.logout.message" = "Do you really want to log out?";
+"popup.logout.title" = "Log out";
+"popup.selectphoto.message" = "Do you want to take a new photo or select one from your photo library?";
+"popup.selectphoto.title" = "Change Photo";
+
+"profile.passwordwarning" = "Your new password must be different from the old one";
+
+"recommendation.briskwalk" = "We recommend a brisk walk today";
+"recommendation.communitymessage" = "Your community group has new message";
+"recommendation.nutritionstudy" = "This new study on nutrition can be interesting for you";
+
+"symptoms.chronology.items.header" = "Symptoms:";
+"symptoms.chronology.items.year" = "%i year";
+"symptoms.filter.all" = "All";
+"symptoms.filter.mostused" = "Most Used";
+"symptoms.track.header.symptoms" = "What symptom do you have?";
+"symptoms.track.header.wellbeing" = "How are you feeling?";
+"symptoms.track.header.wellbeing.other" = "How were you feeling that day?";
+"symptoms.track.header.wellbeing.today" = "How are you feeling today?";
+"symptoms.track.header.wellbeing.yesterday" = "How were you feeling yesterday?";
+"symptoms.track.header.prompt" = "Describe your symptom";
+
+"settings.option.aboutus" = "About Us";
+"settings.option.notifications" = "Notifications";
+"settings.option.personalinformation" = "Personal Information";
+"settings.option.privacypolicy" = "Privacy Policy";
+
+"sleep.description.phase.deep" = "<b>Deep Sleep</b> it's stage of sleep when hard to wake up from.";
+"sleep.description.phase.light" = "<b>Light Sleep</b> is the transitional stage between waking and sleeping.";
+"sleep.description.phase.rem" = "<b>REM Sleep</b> happens about an hour to an hour and a half after falling asleep. REM sleep is when you tend to have vivid dreams.";
+"sleep.phase.deep" = "Deep Sleep";
+"sleep.phase.light" = "Light Sleep";
+"sleep.phase.rem" = "REM Sleep";
+"sleep.phase.total" = "Total Sleep";
+"sleep.phase.wake" = "Awake";
+"sleep.summary.average.header" = "Average Sleep Value";
+"sleep.summary.filter.day" = "Day";
+"sleep.summary.filter.week" = "Week";
+"sleep.summary.filter.month" = "Month";
+"sleep.summary.overview.header.day" = "Daily Overview";
+"sleep.summary.overview.header.week" = "Week Overview";
+"sleep.summary.overview.header.month" = "Month Overview";
+
+"title.success" = "Success";
+"title.error" = "Error";
+
+"unit.heartbeat.plural" = "bpm";
+"unit.heartbeat.short" = "bpm";
+"unit.heartbeat.singular" = "bpm";
+"unit.milisecond.plural" = "ms";
+"unit.milisecond.short" = "ms";
+"unit.milisecond.singular" = "ms";
+"unit.minute.plural" = "minutes";
+"unit.minute.short" = "min";
+"unit.minute.singular" = "minute";
+"unit.step.plural" = "steps";
+"unit.step.short" = "steps";
+"unit.step.singular" = "step";
+
+"watch.connectionprompt" = "It looks like you haven't connected your smartwatch. Would you like to do it now?";
+"watch.list.header" = "Connect your smart watch for better user experience!";
+"watch.list.subheader" = "You can choose one of the presented devices.";
+"watch.nodata" = "This page is currently empty";
+"watch.sync.failure" = "Something went wrong. We were unable to connect your %@.";
+"watch.sync.prompt" = "Connect your %@ for better user experience!";
+"watch.sync.success" = "%@ account connected successfully!";

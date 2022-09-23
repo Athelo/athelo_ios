@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LoadMoreCollectionViewCell" id="gTV-IL-0wX" customClass="LoadMoreCollectionViewCell" customModule="Athelo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="425" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="425" height="60"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39O-Ia-441" customClass="LoadingView" customModule="Athelo" customModuleProvider="target">
+                        <rect key="frame" x="190.5" y="26" width="44" height="8"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="O3x-uk-If9"/>
+                            <constraint firstAttribute="height" constant="8" id="qud-E4-b63"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="39O-Ia-441" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="PMH-0z-WZo"/>
+                <constraint firstItem="39O-Ia-441" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="rw2-DK-Vhd"/>
+            </constraints>
+            <size key="customSize" width="425" height="60"/>
+            <point key="canvasLocation" x="409.4202898550725" y="113.83928571428571"/>
+        </collectionViewCell>
+    </objects>
+</document>

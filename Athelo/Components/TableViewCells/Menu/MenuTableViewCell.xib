@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuTableViewCell" rowHeight="99" id="KGk-i7-Jjw" customClass="MenuTableViewCell" customModule="Athelo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleAspectFit" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EOZ-UW-Mnd">
+                        <rect key="frame" x="0.0" y="16" width="320" height="66"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k5U-OX-mMR">
+                                <rect key="frame" x="0.0" y="8" width="56" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="b32-eF-39B"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu Item" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dh8-rc-cAC" customClass="ButtonLabel" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="64" y="23.5" width="256" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" name="Gray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hY2-sF-Pef">
+                        <rect key="frame" x="0.0" y="98" width="320" height="1"/>
+                        <color key="backgroundColor" name="Gray"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Ug1-Dw-TPM"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="hY2-sF-Pef" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5BE-Hq-aeU"/>
+                    <constraint firstItem="EOZ-UW-Mnd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="E53-QD-d5W"/>
+                    <constraint firstItem="hY2-sF-Pef" firstAttribute="top" secondItem="EOZ-UW-Mnd" secondAttribute="bottom" constant="16" id="QZ3-MP-ySq"/>
+                    <constraint firstAttribute="bottom" secondItem="hY2-sF-Pef" secondAttribute="bottom" id="b81-Ue-ctE"/>
+                    <constraint firstAttribute="trailing" secondItem="EOZ-UW-Mnd" secondAttribute="trailing" id="erY-cb-0nz"/>
+                    <constraint firstAttribute="trailing" secondItem="hY2-sF-Pef" secondAttribute="trailing" id="qYt-Q9-VtV"/>
+                    <constraint firstItem="EOZ-UW-Mnd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="qpV-X4-cOC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="imageViewIcon" destination="k5U-OX-mMR" id="qc6-Qf-2wN"/>
+                <outlet property="labelOptionName" destination="Dh8-rc-cAC" id="nbO-4N-Gyb"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="120.20089285714285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Gray">
+            <color red="0.42745098039215684" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

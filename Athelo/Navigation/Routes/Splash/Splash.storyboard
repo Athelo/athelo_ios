@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Splash View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="SplashViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="SplashViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wavesBackground" translatesAutoresizingMaskIntoConstraints="NO" id="8rn-dh-qSP">
+                                <rect key="frame" x="0.0" y="627" width="414" height="269"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoLarge" translatesAutoresizingMaskIntoConstraints="NO" id="LB4-uz-evy">
+                                <rect key="frame" x="76" y="287" width="262" height="122"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PJW-bt-bGf">
+                                <rect key="frame" x="180" y="431" width="54.5" height="34"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AM-B2-Q1T" customClass="ButtonLabel" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="54.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" name="#988098"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="message.loading"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wg8-Y2-8Ld" customClass="LoadingView" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="5" y="26" width="44" height="8"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="0eI-1Z-2wA"/>
+                                            <constraint firstAttribute="height" constant="8" id="vUO-1m-8FA"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="LB4-uz-evy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="top" id="1V8-Jj-1i7"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LB4-uz-evy" secondAttribute="bottom" id="4Sq-cg-xis"/>
+                            <constraint firstItem="LB4-uz-evy" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" constant="-100" id="73Z-9x-2lP"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LB4-uz-evy" secondAttribute="trailing" id="JRN-nr-Ecw"/>
+                            <constraint firstItem="LB4-uz-evy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" id="W9b-bh-e8I"/>
+                            <constraint firstItem="8rn-dh-qSP" firstAttribute="trailing" secondItem="5EZ-qb-Rvc" secondAttribute="trailing" id="YOf-3j-rbZ"/>
+                            <constraint firstAttribute="bottom" secondItem="8rn-dh-qSP" secondAttribute="bottom" id="Yro-J0-slj"/>
+                            <constraint firstItem="PJW-bt-bGf" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="kjV-vZ-uXS"/>
+                            <constraint firstItem="LB4-uz-evy" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="mfO-zy-OUc"/>
+                            <constraint firstItem="PJW-bt-bGf" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="nLp-C3-Bmr"/>
+                            <constraint firstItem="8rn-dh-qSP" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="yZl-JH-T84"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="labelLoading" destination="5AM-B2-Q1T" id="sZ9-3s-KYt"/>
+                        <outlet property="stackViewLoading" destination="PJW-bt-bGf" id="SEz-ML-pMf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="128.57142857142856"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logoLarge" width="262" height="122"/>
+        <image name="wavesBackground" width="375" height="269"/>
+        <namedColor name="#988098">
+            <color red="0.59607843137254901" green="0.56470588235294117" blue="0.59607843137254901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

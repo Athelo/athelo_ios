@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SmallActionCollectionViewCell" id="gTV-IL-0wX" customClass="SmallActionCollectionViewCell" customModule="Athelo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="412" height="34"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="412" height="34"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hL2-rR-thx" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                        <rect key="frame" x="160" y="0.0" width="92" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="Z2v-53-zIa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <inset key="contentEdgeInsets" minX="24" minY="0.0" maxX="16" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="8" maxY="0.0"/>
+                        <state key="normal" title="Button" image="hand"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightMainColor" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="actionButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="mXh-Lc-KCQ"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="hL2-rR-thx" secondAttribute="bottom" id="CXD-Nd-hJS"/>
+                <constraint firstItem="hL2-rR-thx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SdI-uQ-Wbu"/>
+                <constraint firstItem="hL2-rR-thx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bKa-m6-sxl"/>
+                <constraint firstItem="hL2-rR-thx" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="dRi-fV-lla"/>
+            </constraints>
+            <size key="customSize" width="412" height="40"/>
+            <connections>
+                <outlet property="buttonAction" destination="hL2-rR-thx" id="z8K-AB-AJA"/>
+            </connections>
+            <point key="canvasLocation" x="400.00000000000006" y="104.46428571428571"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="hand" width="14" height="14"/>
+    </resources>
+</document>

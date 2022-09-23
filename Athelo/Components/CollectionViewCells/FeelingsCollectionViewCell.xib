@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeelingsCollectionViewCell" id="gTV-IL-0wX" customClass="FeelingsCollectionViewCell" customModule="Athelo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="396" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="396" height="80"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9q-cH-9RY">
+                        <rect key="frame" x="0.0" y="0.0" width="396" height="80"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2is-4f-hd9">
+                                <rect key="frame" x="16" y="16" width="364" height="48"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bbt-2b-ZBS">
+                                        <rect key="frame" x="0.0" y="6" width="303" height="36"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It`s your feelings today" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awt-Dg-Ehw" customClass="PillLabel" customModule="Athelo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="303" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" name="Black"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="home.wellbeing.headline"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Sad)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAw-LR-rvk" customClass="PillLabel" customModule="Athelo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="18" width="303" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" name="Gray"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="😓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGK-l2-svc">
+                                        <rect key="frame" x="319" y="0.0" width="45" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" name="#B5DE71"/>
+                        <constraints>
+                            <constraint firstItem="2is-4f-hd9" firstAttribute="leading" secondItem="R9q-cH-9RY" secondAttribute="leading" constant="16" id="Gca-ze-KJc"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="QIm-r2-r3Z"/>
+                            <constraint firstAttribute="bottom" secondItem="2is-4f-hd9" secondAttribute="bottom" constant="16" id="bE7-Wu-YV2"/>
+                            <constraint firstItem="2is-4f-hd9" firstAttribute="top" secondItem="R9q-cH-9RY" secondAttribute="top" constant="16" id="neN-aS-YVy"/>
+                            <constraint firstAttribute="trailing" secondItem="2is-4f-hd9" secondAttribute="trailing" constant="16" id="v8U-0B-1ix"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="backgroundColorAlpha">
+                                <real key="value" value="0.23000000000000001"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="R9q-cH-9RY" secondAttribute="bottom" id="3gy-EZ-eed"/>
+                <constraint firstItem="R9q-cH-9RY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="aGw-2u-fji"/>
+                <constraint firstItem="R9q-cH-9RY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jk0-mi-nan"/>
+                <constraint firstAttribute="trailing" secondItem="R9q-cH-9RY" secondAttribute="trailing" id="tYL-9Z-0pB"/>
+            </constraints>
+            <size key="customSize" width="396" height="80"/>
+            <connections>
+                <outlet property="labelEmoji" destination="pGK-l2-svc" id="c6x-bd-80u"/>
+                <outlet property="labelFeeling" destination="DAw-LR-rvk" id="fNS-jt-dcF"/>
+            </connections>
+            <point key="canvasLocation" x="388.40579710144931" y="125.89285714285714"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="#B5DE71">
+            <color red="0.70980392156862748" green="0.87058823529411766" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Black">
+            <color red="0.094117647058823528" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Gray">
+            <color red="0.42745098039215684" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

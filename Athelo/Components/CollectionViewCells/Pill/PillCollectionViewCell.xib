@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PillCollectionViewCell" id="gTV-IL-0wX" customClass="PillCollectionViewCell" customModule="Athelo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="496" height="283"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="496" height="283"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NoW-eS-CcN" customClass="ShadowCastingView" customModule="Athelo" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="496" height="283"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSH-V8-esI">
+                        <rect key="frame" x="0.0" y="0.0" width="496" height="283"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8zC-tQ-QTT">
+                                <rect key="frame" x="16" y="8" width="464" height="267"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aV-Pb-FV8" customClass="PillLabel" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="133.5" width="432" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" name="#623E61"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="lineHeightMultiple">
+                                                <real key="value" value="1.03"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSx-XE-a6S">
+                                        <rect key="frame" x="440" y="121.5" width="24" height="24"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="close"/>
+                                        <connections>
+                                            <action selector="removeButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="STK-0D-6ML"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" name="White"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="9S7-V1-e1o"/>
+                            <constraint firstAttribute="trailing" secondItem="8zC-tQ-QTT" secondAttribute="trailing" constant="16" id="Dq1-hm-ugC"/>
+                            <constraint firstItem="8zC-tQ-QTT" firstAttribute="top" secondItem="uSH-V8-esI" secondAttribute="top" constant="8" id="Kj8-ny-JOB"/>
+                            <constraint firstItem="8zC-tQ-QTT" firstAttribute="leading" secondItem="uSH-V8-esI" secondAttribute="leading" constant="16" id="ZFH-IT-Hhz"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="kms-HN-Ww5"/>
+                            <constraint firstAttribute="bottom" secondItem="8zC-tQ-QTT" secondAttribute="bottom" constant="8" id="sq5-7I-srn"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="NoW-eS-CcN" secondAttribute="bottom" id="4Ab-jN-0xm"/>
+                <constraint firstItem="NoW-eS-CcN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CXD-3n-0Dr"/>
+                <constraint firstAttribute="trailing" secondItem="uSH-V8-esI" secondAttribute="trailing" id="EiB-lK-aYT"/>
+                <constraint firstItem="uSH-V8-esI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="MLz-wL-cjC"/>
+                <constraint firstItem="NoW-eS-CcN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="RPs-XD-pjW"/>
+                <constraint firstItem="uSH-V8-esI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="atG-Ld-llN"/>
+                <constraint firstAttribute="trailing" secondItem="NoW-eS-CcN" secondAttribute="trailing" id="dEh-Yn-Uyb"/>
+                <constraint firstAttribute="bottom" secondItem="uSH-V8-esI" secondAttribute="bottom" id="f13-Pq-zE3"/>
+            </constraints>
+            <size key="customSize" width="496" height="366"/>
+            <connections>
+                <outlet property="buttonRemove" destination="HSx-XE-a6S" id="Udr-1n-uzO"/>
+                <outlet property="constraintViewContentWidth" destination="9S7-V1-e1o" id="LmO-yc-Vnb"/>
+                <outlet property="labelTitle" destination="4aV-Pb-FV8" id="aMa-mS-Ms2"/>
+            </connections>
+            <point key="canvasLocation" x="459.4202898550725" y="223.32589285714283"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="close" width="24" height="24"/>
+        <namedColor name="#623E61">
+            <color red="0.3843137254901961" green="0.24313725490196078" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="White">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

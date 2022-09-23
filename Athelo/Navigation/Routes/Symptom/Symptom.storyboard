@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Symptom List View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="SymptomListViewController" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="SymptomListViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJx-e5-hmJ">
+                                <rect key="frame" x="0.0" y="87" width="414" height="809"/>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3b8-9u-Ure" customClass="NoContentView" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="87" width="414" height="809"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kaq-S1-Rvb" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
+                                <color key="backgroundColor" name="Background"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="blendsFromTop" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fixedBlendHeight">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00b-24-MsP" customClass="SegmentedPickerView" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="16" y="60" width="382" height="54"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="kml-2p-j2F"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="iJx-e5-hmJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="61L-Lr-01r"/>
+                            <constraint firstItem="00b-24-MsP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="6Nh-QZ-aNT"/>
+                            <constraint firstItem="iJx-e5-hmJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="8kv-yg-cXi"/>
+                            <constraint firstItem="iJx-e5-hmJ" firstAttribute="top" secondItem="00b-24-MsP" secondAttribute="centerY" id="9Oe-u8-ing"/>
+                            <constraint firstItem="3b8-9u-Ure" firstAttribute="top" secondItem="iJx-e5-hmJ" secondAttribute="top" id="CEG-0p-diH"/>
+                            <constraint firstItem="3b8-9u-Ure" firstAttribute="trailing" secondItem="iJx-e5-hmJ" secondAttribute="trailing" id="GQv-uz-w75"/>
+                            <constraint firstItem="3b8-9u-Ure" firstAttribute="bottom" secondItem="iJx-e5-hmJ" secondAttribute="bottom" id="OPl-bl-uzg"/>
+                            <constraint firstAttribute="bottom" secondItem="iJx-e5-hmJ" secondAttribute="bottom" id="TzZ-AD-iIp"/>
+                            <constraint firstItem="kaq-S1-Rvb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Zmz-l9-x3e"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="00b-24-MsP" secondAttribute="trailing" constant="16" id="eVF-2a-SQn"/>
+                            <constraint firstItem="kaq-S1-Rvb" firstAttribute="bottom" secondItem="00b-24-MsP" secondAttribute="bottom" constant="16" id="mhd-a0-IFn"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="kaq-S1-Rvb" secondAttribute="trailing" id="nHN-3X-xzF"/>
+                            <constraint firstItem="kaq-S1-Rvb" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="stV-YG-GGT"/>
+                            <constraint firstItem="00b-24-MsP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="v2l-Xo-KHX"/>
+                            <constraint firstItem="3b8-9u-Ure" firstAttribute="leading" secondItem="iJx-e5-hmJ" secondAttribute="leading" id="zuE-3L-1nR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="segmentedPickerViewFilters" destination="00b-24-MsP" id="8pO-cD-XCo"/>
+                        <outlet property="viewListContainer" destination="iJx-e5-hmJ" id="2fZ-gE-85y"/>
+                        <outlet property="viewNoContent" destination="3b8-9u-Ure" id="acf-Dw-fX3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140.57971014492756" y="124.55357142857142"/>
+        </scene>
+        <!--Register Symptoms View Controller-->
+        <scene sceneID="byE-ae-ewd">
+            <objects>
+                <viewController storyboardIdentifier="RegisterSymptomsViewController" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="c9N-li-y1D" customClass="RegisterSymptomsViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W8f-oK-veM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oP1-Oi-d4F">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="ahD-Zn-XQ8">
+                                        <rect key="frame" x="0.0" y="24" width="414" height="771"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrS-xY-rTY">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="179"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="p09-rs-1mG">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="179"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0h1-pQ-CSr">
+                                                                <rect key="frame" x="16" y="0.0" width="382" height="100"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rxz-Xf-kv1" customClass="BodyLabel" customModule="Athelo" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <color key="textColor" name="Gray"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcu-0a-7hQ" customClass="Headline20Label" customModule="Athelo" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="50" width="382" height="50"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                        <color key="textColor" name="Black"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lUS-YY-qq5">
+                                                                <rect key="frame" x="0.0" y="116" width="414" height="63"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" priority="999" constant="63" id="EjC-9c-PCF"/>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="63" id="RYT-ZV-k72"/>
+                                                                </constraints>
+                                                            </containerView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="lUS-YY-qq5" firstAttribute="width" secondItem="p09-rs-1mG" secondAttribute="width" id="UHo-h5-4NO"/>
+                                                            <constraint firstItem="0h1-pQ-CSr" firstAttribute="width" secondItem="p09-rs-1mG" secondAttribute="width" constant="-32" id="h3P-hh-K1X"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="p09-rs-1mG" firstAttribute="top" secondItem="nrS-xY-rTY" secondAttribute="top" id="1vQ-4s-8r9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="p09-rs-1mG" secondAttribute="trailing" id="GBZ-4Y-OYT"/>
+                                                    <constraint firstAttribute="bottom" secondItem="p09-rs-1mG" secondAttribute="bottom" id="ZJq-sV-yd2"/>
+                                                    <constraint firstItem="p09-rs-1mG" firstAttribute="leading" secondItem="nrS-xY-rTY" secondAttribute="leading" id="hOl-7R-UBj"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dnr-mF-4U5">
+                                                <rect key="frame" x="0.0" y="219" width="414" height="207"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fg-g7-nsz" customClass="PanInterceptingView" customModule="Athelo" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="64" width="414" height="91"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="R0x-AG-QeD">
+                                                        <rect key="frame" x="16" y="0.0" width="382" height="207"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="How are you feeling ?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auo-OM-J73" customClass="Headline20Label" customModule="Athelo" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="24"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                <color key="textColor" name="Gray"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6I-2h-2CT" customClass="SliderView" customModule="Athelo" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="48" width="382" height="83"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" priority="999" constant="83" id="kcM-BH-OTX"/>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="83" id="nZb-rZ-wQB"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rZ-XZ-LNd" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="155" width="382" height="52"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="52" id="0TF-Pf-Tsm"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="Save My Feelings"/>
+                                                                <connections>
+                                                                    <action selector="saveMyFeelingsButtonTapped:" destination="c9N-li-y1D" eventType="touchUpInside" id="YoF-PA-pfz"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="R0x-AG-QeD" secondAttribute="bottom" id="BpG-mQ-K0e"/>
+                                                    <constraint firstAttribute="trailing" secondItem="6fg-g7-nsz" secondAttribute="trailing" id="Ddh-9y-aGL"/>
+                                                    <constraint firstItem="6fg-g7-nsz" firstAttribute="bottom" secondItem="P6I-2h-2CT" secondAttribute="bottom" constant="24" id="MQu-QE-VMG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="R0x-AG-QeD" secondAttribute="trailing" constant="16" id="N6B-13-Llj"/>
+                                                    <constraint firstItem="R0x-AG-QeD" firstAttribute="top" secondItem="Dnr-mF-4U5" secondAttribute="top" id="PJz-eO-hFh"/>
+                                                    <constraint firstItem="6fg-g7-nsz" firstAttribute="top" secondItem="P6I-2h-2CT" secondAttribute="top" constant="16" id="WgI-4W-GKf"/>
+                                                    <constraint firstItem="6fg-g7-nsz" firstAttribute="leading" secondItem="Dnr-mF-4U5" secondAttribute="leading" id="ZPb-Vg-mcd"/>
+                                                    <constraint firstItem="R0x-AG-QeD" firstAttribute="leading" secondItem="Dnr-mF-4U5" secondAttribute="leading" constant="16" id="gPB-3y-frR"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5NS-1a-Fwm">
+                                                <rect key="frame" x="0.0" y="466" width="414" height="305"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="RXQ-aS-KGp">
+                                                        <rect key="frame" x="16" y="0.0" width="382" height="305"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="What symptom do you have?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LBe-vS-7Ro" customClass="Headline20Label" customModule="Athelo" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="24"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                <color key="textColor" name="Gray"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="symptoms.track.header.symptoms"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goj-k8-94q">
+                                                                <rect key="frame" x="0.0" y="48" width="382" height="1"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" priority="999" constant="1" id="3Mz-Yc-z7J"/>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="57y-cY-ib2"/>
+                                                                </constraints>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="T5n-7e-gfJ">
+                                                                    <size key="itemSize" width="128" height="128"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells/>
+                                                            </collectionView>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAV-8t-y9x" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="73" width="382" height="80"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" priority="999" constant="80" id="b5b-M3-fY7"/>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="f9b-ZL-J4u"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedTitle" value="form.field.yoursymptom"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedPlaceholder" value="form.placeholder.yoursymptom"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MB8-qa-bBK" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="177" width="382" height="52"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="52" id="0au-Dc-lpS"/>
+                                                                    <constraint firstAttribute="height" priority="999" constant="52" id="R1b-u7-ite"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                <color key="tintColor" name="#80627F"/>
+                                                                <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                <inset key="imageEdgeInsets" minX="-16" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="Add Symptom" image="plus">
+                                                                    <color key="titleColor" name="#80627F"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="secondaryStyle" value="YES"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="action.addsymptom"/>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="imageTintColorOnActivation">
+                                                                        <color key="value" name="White"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="addSymptomButtonTapped:" destination="c9N-li-y1D" eventType="touchUpInside" id="Rjs-uS-ZNL"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GwK-UP-t6V" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="253" width="382" height="52"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="52" id="G6B-SI-8NL"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="Edit Information"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="action.editinformation"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="editInformationButtonTapped:" destination="c9N-li-y1D" eventType="touchUpInside" id="fMm-a7-E9d"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="RXQ-aS-KGp" firstAttribute="leading" secondItem="5NS-1a-Fwm" secondAttribute="leading" constant="16" id="1xY-7i-HL6"/>
+                                                    <constraint firstItem="RXQ-aS-KGp" firstAttribute="top" secondItem="5NS-1a-Fwm" secondAttribute="top" id="AHz-cp-haC"/>
+                                                    <constraint firstAttribute="trailing" secondItem="RXQ-aS-KGp" secondAttribute="trailing" constant="16" id="P9r-Fu-9A4"/>
+                                                    <constraint firstAttribute="bottom" secondItem="RXQ-aS-KGp" secondAttribute="bottom" id="VHD-gw-Sux"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ahD-Zn-XQ8" firstAttribute="trailing" secondItem="knX-lB-XXD" secondAttribute="trailing" id="GGE-h6-6A4"/>
+                                    <constraint firstItem="ahD-Zn-XQ8" firstAttribute="bottom" secondItem="knX-lB-XXD" secondAttribute="bottom" constant="-16" id="SU8-r2-AJh"/>
+                                    <constraint firstItem="ahD-Zn-XQ8" firstAttribute="top" secondItem="knX-lB-XXD" secondAttribute="top" constant="24" id="d6V-vY-Ynv"/>
+                                    <constraint firstItem="ahD-Zn-XQ8" firstAttribute="leading" secondItem="knX-lB-XXD" secondAttribute="leading" id="yPG-wV-qmW"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="knX-lB-XXD"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="dsh-8n-olJ"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cgb-Un-IW3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oP1-Oi-d4F" firstAttribute="leading" secondItem="W8f-oK-veM" secondAttribute="leading" id="Fq4-g4-40K"/>
+                            <constraint firstAttribute="trailing" secondItem="oP1-Oi-d4F" secondAttribute="trailing" id="g9F-jv-l4g"/>
+                            <constraint firstAttribute="bottom" secondItem="oP1-Oi-d4F" secondAttribute="bottom" id="nuY-oE-qZ8"/>
+                            <constraint firstItem="ahD-Zn-XQ8" firstAttribute="width" secondItem="cgb-Un-IW3" secondAttribute="width" id="tot-Vj-D0q"/>
+                            <constraint firstItem="oP1-Oi-d4F" firstAttribute="top" secondItem="cgb-Un-IW3" secondAttribute="top" id="zo4-gE-2wh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonAddSymptom" destination="MB8-qa-bBK" id="abd-Sa-0LW"/>
+                        <outlet property="buttonEditInformation" destination="GwK-UP-t6V" id="uj8-bP-LD5"/>
+                        <outlet property="collectionViewSymptoms" destination="goj-k8-94q" id="SUJ-OU-pe9"/>
+                        <outlet property="constraintStackViewContentBottom" destination="SU8-r2-AJh" id="Y1s-D4-y7c"/>
+                        <outlet property="constraintSymptomsCollectionViewHeight" destination="3Mz-Yc-z7J" id="099-rP-XFB"/>
+                        <outlet property="formTextFieldSymptom" destination="cAV-8t-y9x" id="3pt-fM-sL0"/>
+                        <outlet property="labelFeelingsHeader" destination="auo-OM-J73" id="jty-0f-D4g"/>
+                        <outlet property="labelSelectedDate" destination="Rxz-Xf-kv1" id="bWX-52-wV7"/>
+                        <outlet property="labelSelectedWeekday" destination="pcu-0a-7hQ" id="e6w-3b-QAe"/>
+                        <outlet property="scrollViewContent" destination="oP1-Oi-d4F" id="tth-ng-bvJ"/>
+                        <outlet property="sliderFeelings" destination="P6I-2h-2CT" id="PNF-pi-olu"/>
+                        <outlet property="stackViewContent" destination="ahD-Zn-XQ8" id="8ct-r1-qaA"/>
+                        <outlet property="stackViewDate" destination="0h1-pQ-CSr" id="s9K-s3-LwP"/>
+                        <outlet property="stackViewFeelings" destination="R0x-AG-QeD" id="Apm-Ai-D5c"/>
+                        <outlet property="stackViewSymptoms" destination="RXQ-aS-KGp" id="V16-EN-Ucb"/>
+                        <outlet property="viewCalendarContainer" destination="lUS-YY-qq5" id="riK-F7-YIT"/>
+                        <outlet property="viewDateContainer" destination="nrS-xY-rTY" id="Sxx-b4-NLl"/>
+                        <outlet property="viewFeelingsContainer" destination="Dnr-mF-4U5" id="UXq-N4-qbP"/>
+                        <outlet property="viewScreenEdgeInterceptor" destination="6fg-g7-nsz" id="3oU-nI-2JC"/>
+                        <outlet property="viewSymptomsContainer" destination="5NS-1a-Fwm" id="fGV-lf-8qf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e8Q-Os-cCF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140.57971014492756" y="802.90178571428567"/>
+        </scene>
+        <!--Symptom Description View Controller-->
+        <scene sceneID="heV-mi-mR9">
+            <objects>
+                <viewController storyboardIdentifier="SymptomDescriptionViewController" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bf6-wC-HW9" customClass="SymptomDescriptionViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LjM-6w-FYo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEb-I0-akM" customClass="NoContentView" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="750"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAS-UQ-kfC">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="353-DW-wyf" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="794" width="414" height="102"/>
+                                <color key="backgroundColor" name="Background"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="blendsFromTop" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fixedBlendHeight">
+                                        <real key="value" value="26"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ku-O4-oAe" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="16" y="794" width="382" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="8P1-TB-Dot"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="-16" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Symptom Chronology" image="timeFastSolid">
+                                    <color key="titleColor" name="#80627F"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="secondaryStyle" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="imageTintColorOnActivation">
+                                        <color key="value" name="#80627F"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="symptomChronologyButtonTapped:" destination="bf6-wC-HW9" eventType="touchUpInside" id="g2k-Lg-q4K"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9sB-hZ-veb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cAS-UQ-kfC" firstAttribute="trailing" secondItem="LjM-6w-FYo" secondAttribute="trailing" id="1Bw-Cl-ZGb"/>
+                            <constraint firstItem="9sB-hZ-veb" firstAttribute="bottom" secondItem="5ku-O4-oAe" secondAttribute="bottom" constant="16" id="5PS-D3-KvQ"/>
+                            <constraint firstItem="KEb-I0-akM" firstAttribute="bottom" secondItem="5ku-O4-oAe" secondAttribute="top" id="74J-DQ-eWm"/>
+                            <constraint firstAttribute="bottom" secondItem="cAS-UQ-kfC" secondAttribute="bottom" id="8BL-T1-TjU"/>
+                            <constraint firstItem="KEb-I0-akM" firstAttribute="trailing" secondItem="cAS-UQ-kfC" secondAttribute="trailing" id="9PI-9y-tKQ"/>
+                            <constraint firstItem="353-DW-wyf" firstAttribute="leading" secondItem="9sB-hZ-veb" secondAttribute="leading" id="Dtd-ap-y7h"/>
+                            <constraint firstItem="5ku-O4-oAe" firstAttribute="width" secondItem="9sB-hZ-veb" secondAttribute="width" constant="-32" id="PsN-Aq-nyE"/>
+                            <constraint firstAttribute="bottom" secondItem="353-DW-wyf" secondAttribute="bottom" id="Rqd-hJ-Esj"/>
+                            <constraint firstItem="KEb-I0-akM" firstAttribute="leading" secondItem="cAS-UQ-kfC" secondAttribute="leading" id="Usf-lN-Yyw"/>
+                            <constraint firstItem="353-DW-wyf" firstAttribute="top" secondItem="5ku-O4-oAe" secondAttribute="top" id="bR6-o8-0yT"/>
+                            <constraint firstItem="KEb-I0-akM" firstAttribute="top" secondItem="cAS-UQ-kfC" secondAttribute="top" id="dDe-ZW-xwU"/>
+                            <constraint firstItem="cAS-UQ-kfC" firstAttribute="top" secondItem="9sB-hZ-veb" secondAttribute="top" id="gMH-9K-FN0"/>
+                            <constraint firstItem="cAS-UQ-kfC" firstAttribute="leading" secondItem="LjM-6w-FYo" secondAttribute="leading" id="gra-17-3rF"/>
+                            <constraint firstItem="5ku-O4-oAe" firstAttribute="centerX" secondItem="LjM-6w-FYo" secondAttribute="centerX" id="kkJ-9K-iFj"/>
+                            <constraint firstItem="353-DW-wyf" firstAttribute="trailing" secondItem="9sB-hZ-veb" secondAttribute="trailing" id="pX0-Vh-V4H"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonSymptomChronology" destination="5ku-O4-oAe" id="rBS-8R-ZC6"/>
+                        <outlet property="viewBlendingGradient" destination="353-DW-wyf" id="IJD-bB-0Ub"/>
+                        <outlet property="viewDescriptionContainer" destination="cAS-UQ-kfC" id="E6b-W0-O9f"/>
+                        <outlet property="viewNoContent" destination="KEb-I0-akM" id="lMS-pD-Mf1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bro-Ze-xnf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="892.75362318840587" y="124.55357142857142"/>
+        </scene>
+        <!--Symptom Chronology View Controller-->
+        <scene sceneID="h1k-Od-QSE">
+            <objects>
+                <viewController storyboardIdentifier="SymptomChronologyViewController" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NFT-Es-H1w" customClass="SymptomChronologyViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P06-BW-xym">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqL-vU-4Jg">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBm-QK-CfW" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="24"/>
+                                <color key="backgroundColor" name="Background"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="3yp-Ii-sss"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="blendsFromTop" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="t5u-Ev-iEY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jqL-vU-4Jg" firstAttribute="trailing" secondItem="t5u-Ev-iEY" secondAttribute="trailing" id="FtN-V6-Y73"/>
+                            <constraint firstItem="jqL-vU-4Jg" firstAttribute="leading" secondItem="t5u-Ev-iEY" secondAttribute="leading" id="JW2-Jp-VeT"/>
+                            <constraint firstItem="jqL-vU-4Jg" firstAttribute="top" secondItem="t5u-Ev-iEY" secondAttribute="top" id="OZF-0Q-WOg"/>
+                            <constraint firstItem="gBm-QK-CfW" firstAttribute="leading" secondItem="t5u-Ev-iEY" secondAttribute="leading" id="QOA-fn-NOh"/>
+                            <constraint firstItem="gBm-QK-CfW" firstAttribute="top" secondItem="t5u-Ev-iEY" secondAttribute="top" id="qcI-vX-V5u"/>
+                            <constraint firstItem="t5u-Ev-iEY" firstAttribute="trailing" secondItem="gBm-QK-CfW" secondAttribute="trailing" id="yL1-Du-iQj"/>
+                            <constraint firstAttribute="bottom" secondItem="jqL-vU-4Jg" secondAttribute="bottom" id="zoZ-3f-BFi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="viewListContainer" destination="jqL-vU-4Jg" id="K0Q-ld-f1j"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i1b-FR-EV0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1656.521739130435" y="124.55357142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="plus" width="19" height="19"/>
+        <image name="timeFastSolid" width="24" height="24"/>
+        <namedColor name="#80627F">
+            <color red="0.50196078431372548" green="0.3843137254901961" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Background">
+            <color red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Black">
+            <color red="0.094117647058823528" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Gray">
+            <color red="0.42745098039215684" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="White">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
