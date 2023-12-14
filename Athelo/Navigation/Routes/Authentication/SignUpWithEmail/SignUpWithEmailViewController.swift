@@ -91,7 +91,7 @@ final class SignUpWithEmailViewController: KeyboardListeningViewController {
                 textField?.resignFirstResponder()
             }.store(in: &cancellables)
         
-        formTextFieldConfirmPassword.textPublisher
+        formTextFieldConfirmPassword.currentTextPublisher
             .sink(receiveValue: viewModel.assignConfirmPassword(_:))
             .store(in: &cancellables)
     }
@@ -102,7 +102,7 @@ final class SignUpWithEmailViewController: KeyboardListeningViewController {
                 textField?.becomeFirstResponder()
             }.store(in: &cancellables)
         
-        formTextFieldEmail.textPublisher
+        formTextFieldEmail.currentTextPublisher
             .sink(receiveValue: viewModel.assignEmail(_:))
             .store(in: &cancellables)
     }
@@ -127,7 +127,7 @@ final class SignUpWithEmailViewController: KeyboardListeningViewController {
                 textField?.becomeFirstResponder()
             }.store(in: &cancellables)
         
-        formTextFieldPassword.textPublisher
+        formTextFieldPassword.currentTextPublisher
             .sink(receiveValue: viewModel.assignPassword(_:))
             .store(in: &cancellables)
     }

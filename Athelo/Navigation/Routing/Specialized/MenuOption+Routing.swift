@@ -17,16 +17,25 @@ extension MenuOption {
             
             return viewController
         case .messages:
-            break
+            let router = PrivateChatListRouter(navigationController: navigationController)
+            let viewController = PrivateChatListViewController.viewController(router: router)
+            
+            return viewController
         case .mySymptoms:
             let router = SymptomListRouter(navigationController: navigationController)
             let viewController = SymptomListViewController.viewController(router: router)
             
             return viewController
         case .myCaregivers:
-            break
-        case .inviteACaregiver:
-            break
+            let router = CaregiverListRouter(navigationController: navigationController)
+            let viewController = CaregiverListViewController.viewController(router: router)
+            
+            return viewController
+        case .myWards:
+            let router = PatientListRouter(navigationController: navigationController)
+            let viewController = PatientListViewController.viewController(router: router)
+            
+            return viewController
         case .settings:
             let router = SettingsRouter(navigationController: navigationController)
             let viewController = SettingsViewController.viewController(router: router)
@@ -48,7 +57,5 @@ extension MenuOption {
             
             return viewController
         }
-        
-        return nil
     }
 }

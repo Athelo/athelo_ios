@@ -5,17 +5,30 @@
   Created by Krzysztof Jabłoński on 31/05/2022.
 */
 
-"action.addsymptom" = "Add Symptom";
+"accesscode.prompt" = "Please input your pin to continue:";
+
+"action.actas" = "Act as...";
+"action.add.caregiver" = "Add A Caregiver";
+"action.add.patient" = "Add A Ward";
+"action.add.symptom" = "Add Symptom";
 "action.cancel" = "Cancel";
 "action.changepassword" = "Change Password";
 "action.connectdevice" = "Connect %@";
 "action.connectdevice.again" = "Connect %@ Again";
 "action.delete" = "Delete";
 "action.deleteaccount" = "Delete An Account";
+"action.deletecaregiver" = "Delete a caregiver";
+"action.deletepatient" = "Delete a ward";
 "action.disconnect" = "Disconnect";
 "action.disconnectmydevice" = "Disconnect My Device";
 "action.editinformation" = "Edit Information";
+"action.find.patient" = "Find a Patient";
+"action.find.ward" = "Find a Caregiver";
 "action.gotoactivity" = "Go to Activity Page";
+"action.joincommunity" = "Join Community";
+"action.invitationcode.missing" = "I didn't receive my code";
+"action.invite" = "Invite";
+"action.invite.caregiver" = "Invite A Caregiver";
 "action.leave" = "Leave";
 "action.letsstart" = "Let's Start!";
 "action.login" = "Log In";
@@ -32,12 +45,16 @@
 "action.personalinfo.save" = "Save Personal Information";
 "action.photo.take" = "Take a Photo";
 "action.photo.select" = "Select Photo";
+"action.proceed" = "Proceed";
 "action.readarticle" = "Read Article";
 "action.register" = "Register";
+"action.remove" = "Remove";
+"action.revoke" = "Revoke";
 "action.save" = "Save";
 "action.search" = "Search";
 "action.savenewpassword" = "Save New Password";
 "action.sayhello" = "Hello to everyone!";
+"action.sendamessage" = "Send a message";
 "action.sendfeedback" = "Send Feedback";
 "action.sendmessage" = "Send Message";
 "action.signup" = "Sign Up";
@@ -64,8 +81,8 @@
 "activity.type.hrv" = "Heart Rate Variability";
 "activity.type.steps" = "Steps";
 
-"auth.additionalinfo.body" = "Add some information about yourself";
-"auth.additionalinfo.header" = "Great! We are glad you are here!";
+"auth.additionalinfo.body" = "Tell us a bit more about yourself.";
+"auth.additionalinfo.header" = "Welcome to Athelo!";
 "auth.apple.signin" = "Log in with Apple";
 "auth.apple.signup" = "Sign up with Apple";
 "auth.email.signin" = "Log in with Email";
@@ -74,6 +91,7 @@
 "auth.facebook.signup" = "Sign up with Facebook";
 "auth.google.signin" = "Log in with Google";
 "auth.google.signup" = "Sign up with Google";
+"auth.invitationcode.header" = "Enter the code that was sent to you along with the invitation";
 "auth.twitter.signin" = "Log in with Twitter";
 "auth.twitter.signup" = "Sign up with Twitter";
 "auth.legal" = "By signing up, you agree with the\nTerms of Service and Privacy Policy";
@@ -96,27 +114,33 @@
 "community.participantcount.one" = "1 participant";
 "community.sender.me" = "Me";
 
+"conversation.list.nomessages" = "No messages yet";
+
 "date.today" = "Today";
 "date.yesterday" = "Yesterday";
 
-"device.name.common" = "Device";
+"device.name.common" = "Wearable device";
 "device.name.applewatch" = "Apple watch";
 "device.name.fitbit" = "Fitbit device";
 "device.shortname.common" = "Device";
 "device.shortname.applewatch" = "Apple Watch";
 "device.shortname.fitbit" = "Fitbit";
 
+"error.accesscode.invalid" = "Invalid access code. Please try again.";
 "error.apple.credentials" = "We couldn't obtain credentials from Apple. Please check your account setitngs and try again later.";
 "error.apple.revoked" = "We couldn't obtain necessary credential data. Please try to reset your Sign in with Apple access in Settings app and try again.";
 "error.chat.missingchatdata" = "We couldn't obtain data for this community. Please try again later.";
 "error.content" = "This content could not be loaded right now. Please try again later.";
 "error.decoding" = "Requested data could not be reached right now. Please try again later.";
 "error.google.credentials" = "We couldn't obtain credentials from Google. Please check your account setitngs and try again later.";
+"error.invalidrole" = "This operation is not available for active user role. Please switch your role before continuing.";
 "error.invalidappversion" = "This app version is no longer supported. Please go to the App Store and update the app.";
+"error.missingcredentials" = "This data is not accessbile to users that are not authorized. Please login before continuing.";
 "error.nodevicedata" = "There is no device data connected to your account.";
 "error.notavailable.content" = "This content is not available yet.";
 "error.notavailable.option" = "This option is not available yet.";
-"error.notavailable.watchdata" = "Data for this week is not available. Put on your watch to keep track of updates.";
+"error.notavailable.watchdata.caregiver" = "We don't have any sleep data for the patient for this week. Please ask the patient to wear the watch to track their sleep and ensure that the data is updated regularly.";
+"error.notavailable.watchdata.patient" = "Data for this week is not available. Put on your watch to keep track of updates.";
 "error.unknown" = "Unexpected error. Try again later.";
 
 "faq.morequestions" = "Still have more questions?";
@@ -133,13 +157,21 @@
 "form.placeholder.confirmpassword" = "Confirm your password";
 "form.placeholder.currentpassword" = "Enter your old password";
 "form.placeholder.email" = "Enter your email";
+"form.placeholder.email.address.caregiver" = "Enter email address of your caregiver";
 "form.placeholder.message" = "Enter your message";
 "form.placeholder.name" = "Enter your name";
 "form.placeholder.newpassword" = "Enter your new password";
 "form.placeholder.password" = "Enter your password";
 "form.placeholder.phonenumber" = "Enter your phone number";
+"form.placeholder.phonenumber.patient" = "Enter phone number of your patient";
+"form.placeholder.phonenumber.ward" = "Enter phone number of your ward";
+"form.placeholder.relation" = "Choose";
 "form.placeholder.symptomdescription" = "Enter symptom explanation";
 "form.placeholder.topic" = "Choose topic";
+"form.placeholder.username" = "Enter your user name";
+"form.placeholder.username.caregiver" = "Enter user name of your caregiver";
+"form.placeholder.username.patient" = "Enter user name of your patient";
+"form.placeholder.username.ward" = "Enter user name of your ward";
 "form.placeholder.whatdescribesyou" = "Choose item";
 "form.placeholder.yoursymptom" = "Choose your symptom";
 
@@ -148,52 +180,66 @@
 "form.field.confirmpassword" = "Confirm Password";
 "form.field.currentpassword" = "Current Password";
 "form.field.email" = "Email";
+"form.field.email.address" = "Email Address";
 "form.field.message" = "Message";
 "form.field.name" = "Name";
 "form.field.newpassword" = "New Password";
 "form.field.password" = "Password";
 "form.field.phonenumber" = "Phone number";
+"form.field.relation" = "Who are you to this person?";
 "form.field.symptomdescription" = "Comment";
 "form.field.topic" = "Topic";
+"form.field.username" = "User Name";
 "form.field.whatdescribesyou" = "What best describes you?";
 "form.field.yoursymptom" = "Your symptom";
 
 "graph.legend.sleep" = "Hours";
 
-"home.header.recommendations" = "It looks like you had a night of good sleep last night, so we recommend:";
-"home.header.symptoms" = "What are your symptoms today? Let's control them together!";
-"home.header.wellbeing" = "Let's take care of your mental health together!";
+"home.header.recommendations" = "Have you checked your activity and sleep levels today? This new article might be interesting";
+"home.header.recommendations.caregiver" = "Have you checked %@'s activity and sleep levels today?";
+"home.header.recommendations.caregiver.activity" = "activity";
+"home.header.recommendations.caregiver.sleep" = "sleep";
+"home.header.recommendations.caregiver.name.fallback" = "this ward";
+"home.header.symptoms" = "Is anything bothering you today? Are you having any new symptoms?";
+"home.header.wellbeing" = "Let's take care of your health together!";
 "home.wellbeing.headline" = "It`s your feelings today";
 "home.welcome" = "Welcome!";
 "home.welcome.parametrized" = "Welcome, %@!";
 "home.recommendation.chatwithcommunity" = "Let's find you a community to chat";
+"home.recommendation.checkactivitylevels" = "Check activity levels";
+"home.recommendation.checksleeplevels" = "Check sleep levels";
 "home.recommendation.connectdevice" = "Let's connect Fitbit to monitor your sleep!";
 "home.recommendation.readarticles" = "Let's find interesting articles for you";
-"home.recommendation.registerfeelings" = "How are you feeling today? It is important!";
+"home.recommendation.registerfeelings" = "How are you feeling today?";
 "home.recommendation.updatefeelings" = "Update feelings and symptoms";
 
-"intro.step.first" = "We help you stay mentally healthy";
-"intro.step.second" = "You are not alone, we will help\nyou find like-minded people";
-"intro.step.third" = "You can connect your relatives to make it easier to cope with well-being";
+"intro.step.first" = "We're here to help you better understand what's happening in your body";
+"intro.step.second" = "We'll give you easy to understand but scientifically backed information about your journey";
+"intro.step.third" = "And offer you a community to join if you want one";
 "intro.swipe" = "Swipe to get started";
 "intro.welcome.header" = "Welcome to Athelo!";
-"intro.welcome.body" = "We are glad you're here. Athelo is designed to give you a bit more support through your journey.";
+"intro.welcome.body" = "We're glad you're taking time for yourself today. Let's get started...";
 
+"invitation.caregiver.header" = "Let's find your caregiver.";
+"invitation.caregiver.success" = "Caregiver invitation has been sent to %@.";
+"invitation.patient.success" = "You accepted new ward.";
+
+"menu.askAthelo" = "Ask Athelo";
+"menu.connectSmartWatch" = "Connect smart watch";
+"menu.inviteACaregiver" = "Invite a caregiver";
 "menu.myProfile" = "My profile";
+"menu.myWards" = "My wards";
 "menu.messages" = "Messages";
 "menu.mySymptoms" = "My symptoms";
 "menu.myCaregivers" = "My caregivers";
-"menu.inviteACaregiver" = "Invite a caregiver";
+"menu.sendFeedback" = "Ask Athelo";
 "menu.settings" = "Settings";
-"menu.connectSmartWatch" = "Connect smart watch";
-"menu.askAthelo" = "Ask Athelo";
-"menu.sendFeedback" = "Send feedback";
 
 "message.adddatainsettings" = "Add data in settings";
 "message.comingsoon" = "Coming soon.";
 "message.devicefound" = "Device found and connected successfully!";
 "message.loading" = "Loading";
-"message.noconnection" = "It does not look like you have good enough connectivity right now. Please check your connection.";
+"message.noconnection" = "It seems like you're having problems connecting right now. Please check your internet or cellular connection.";
 "message.noinformation" = "No information";
 "message.noname" = "Name field can not be empty.";
 "message.password.reset" = "A link to reset your password has been sent to your mail.";
@@ -202,16 +248,22 @@
 
 "navigation.aboutus" = "About Us";
 "navigation.article" = "Article";
+"navigation.auth.additionalinfo" = "Additional Information";
+"navigation.auth.invitationcode" = "Invitation Code";
 "navigation.auth.signin" = "Log In";
 "navigation.auth.signup" = "Sign Up";
-"navigation.auth.additionalinfo" = "Additional Information";
 "navigation.faq" = "Ask Athelo";
+"navigation.messages" = "Messages";
+"navigation.mycaregivers" = "My Caregivers";
 "navigation.mydevice" = "My Device";
+"navigation.mywards" = "My Wards";
 "navigation.password.change" = "New Password";
 "navigation.password.reset" = "Reset Password";
 "navigation.password.myprofile" = "My Profile";
 "navigation.privacypolicy" = "Privacy Policy";
 "navigation.profile.edit" = "Personal Information";
+"navigation.role.caregiver" = "Act As Caregiver";
+"navigation.role.patient" = "Act As a Patient";
 "navigation.settings" = "Settings";
 "navigation.sleep" = "Sleep";
 "navigation.symptom.chronology" = "Symptom Chronology";
@@ -230,17 +282,26 @@
 "news.list.tab.favorites" = "Favorites";
 
 "nocontent.body" = "It looks like this page is currently empty";
+"nocontent.body.short" = "This page is currently empty";
+"nocontent.caregivers" = "It looks like you don't have a caregiver.";
 "nocontent.header" = "No content available";
+"nocontent.graphs.caregiver" = "It looks like %@ has no data to display.";
+"nocontent.graphs.patient" = "It looks like you have no data to display.";
+"nocontent.invitations" = "You don’t have any pending invitations.";
 "nocontent.nodata" = "No Data";
 
 "profile.header.health" = "My Health";
+"profile.header.myroles" = "My Roles";
 "profile.header.other" = "Other";
 
 "popup.deleteaccount.message" = "Are you sure you want to delete your account? All data will be deleted and cannot be recovered.";
 "popup.deleteaccount.title" = "Delete an account";
 "popup.deletesymptom.message" = "Are you sure you want to delete this symptom?";
 "popup.deletesymptom.title" = "Delete symptom";
+"popup.deleteinvitation.message" = "You are trying to revoke an invitation for %@. Are you sure?";
+"popup.deleteinvitation.title" = "Revoke an invitation";
 "popup.disconnectdevice.message" = "Do you really want to disconnect your Fitbit account?";
+"popup.disconnectdevice.message.forced" = "It looks like there is an issue with your Fitbit account. Do you want to force remove your device?";
 "popup.disconnectdevice.title" = "Are you sure?";
 "popup.leavecommunity.message" = "Do you really want to leave this community?";
 "popup.leavecommunity.title" = "Leave The Community";
@@ -255,12 +316,31 @@
 "recommendation.communitymessage" = "Your community group has new message";
 "recommendation.nutritionstudy" = "This new study on nutrition can be interesting for you";
 
+"role.caregiver" = "Caregiver";
+"role.caregiver.lostaccess.message" = "It looks like you don’t have any wards. Add at least one ward to restore your caregiver access.";
+"role.caregiver.lostaccess.title" = "We're sorry!";
+"role.caregiver.mgmt.header" = "Select one of your roles or add another one";
+"role.caregiver.mgmt.nodata" = "A care receiver should have sent you an invite to join as a caregiver";
+"role.caregiver.mgmt.prompt" = "Let's find your ward or even several.";
+"role.caregiver.removepatient.message" = "Are you sure you want to remove %@ from your ward list?";
+"role.caregiver.removepatient.message.lastpatient" = "Since this is your last ward, you will lose your caregiver access.";
+"role.caregiver.removepatient.namefallback" = "this ward";
+"role.caregiver.removepatient.title" = "Remove Patient";
+"role.patient" = "Patient";
+"role.patient.mgmt.prompt" = "Let's find your caregiver or even several.";
+"role.patient.removecaregiver.message" = "Are you sure you want to remove %@ from your caregiver list?";
+"role.patient.removecaregiver.namefallback" = "this caregiver";
+"role.patient.removecaregiver.title" = "Remove Caregiver";
+"role.prompt.select" = "Act as a %@";
+"role.selection.header" = "You can proceed with registration as a patient or as a caregiver.";
+"role.selection.prompt" = "What do you choose?";
+
 "symptoms.chronology.items.header" = "Symptoms:";
 "symptoms.chronology.items.year" = "%i year";
 "symptoms.filter.all" = "All";
 "symptoms.filter.mostused" = "Most Used";
 "symptoms.track.header.symptoms" = "What symptom do you have?";
-"symptoms.track.header.wellbeing" = "How are you feeling?";
+"symptoms.track.header.wellbeing" = "How are you feeling? (7 being the best)";
 "symptoms.track.header.wellbeing.other" = "How were you feeling that day?";
 "symptoms.track.header.wellbeing.today" = "How are you feeling today?";
 "symptoms.track.header.wellbeing.yesterday" = "How were you feeling yesterday?";
@@ -308,5 +388,5 @@
 "watch.list.subheader" = "You can choose one of the presented devices.";
 "watch.nodata" = "This page is currently empty";
 "watch.sync.failure" = "Something went wrong. We were unable to connect your %@.";
-"watch.sync.prompt" = "Connect your %@ for better user experience!";
+"watch.sync.prompt" = "Connect your %@ for a more personalized experience";
 "watch.sync.success" = "%@ account connected successfully!";

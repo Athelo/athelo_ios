@@ -10,13 +10,15 @@ import SwiftUI
 struct StyledButtonView: UIViewRepresentable {
     let title: String
     let style: StyledButton.Style
+    private let imageData: ImageData?
     let tapHandler: () -> Void
     
     typealias UIViewType = StyledButton
     
-    init(title: String, style: StyledButton.Style = .main, tapHandler: @escaping () -> Void) {
+    init(title: String, style: StyledButton.Style = .main, imageData: ImageData? = nil, tapHandler: @escaping () -> Void) {
         self.title = title
         self.style = style
+        self.imageData = imageData
         self.tapHandler = tapHandler
     }
     
@@ -36,6 +38,17 @@ struct StyledButtonView: UIViewRepresentable {
         uiView.setTitle(title, for: .normal)
         uiView.style = style
         
+        if let imageData {
+            uiView.setImage(imageData.image.withRenderingMode(imageData.renderingMode), for: .normal)
+
+            if let highlightColor = imageData.selectionColor {
+                uiView.imageTintColorOnActivation = highlightColor
+            }
+            
+            uiView.imageEdgeInsets = UIEdgeInsets(right: 32.0)
+            uiView.contentEdgeInsets = UIEdgeInsets(left: 16.0)
+        }
+        
         context.coordinator.tapHandler = tapHandler
     }
 }
@@ -48,6 +61,18 @@ extension StyledButtonView {
             tapHandler?()
         }
     }
+    
+    struct ImageData {
+        let image: UIImage
+        let renderingMode: UIImage.RenderingMode
+        let selectionColor: UIColor?
+        
+        init(image: UIImage, renderingMode: UIImage.RenderingMode = .automatic, selectionColor: UIColor? = nil) {
+            self.image = image
+            self.renderingMode = renderingMode
+            self.selectionColor = selectionColor
+        }
+    }
 }
 
 struct StyledButtonView_Previews: PreviewProvider {
@@ -56,7 +81,7 @@ struct StyledButtonView_Previews: PreviewProvider {
             StyledButtonView(title: "action.ok".localized(), style: .main, tapHandler: { /* ... */ })
                 .frame(height: 52.0, alignment: .center)
             
-            StyledButtonView(title: "action.cancel".localized(), style: .secondary, tapHandler: { /* ... */ })
+            StyledButtonView(title: "action.cancel".localized(), style: .secondary, imageData: .init(image: .init(named: "person")!, selectionColor: .withStyle(.purple623E61)), tapHandler: { /* ... */ })
                 .frame(height: 52.0, alignment: .center)
             
             StyledButtonView(title: "action.delete".localized(), style: .destructive, tapHandler: { /* ... */ })

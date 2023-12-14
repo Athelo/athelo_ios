@@ -50,6 +50,19 @@ final class SleepStatsContainerModel: ObservableObject {
         self.weeklySummaryData = data
     }
     
+    func displayEmptyData() {
+        dailySummaryData = nil
+        weeklySummaryData = nil
+        monthlySummaryData = nil
+        
+        sleepPercentageData.removeAll()
+        
+        avgTimeDescription = "---"
+        
+        weeklyGraphModel.updateData(SleepStatsContainerModel.prepareWeeklyGraphData(for: nil))
+        monthlyGraphModel.updateData(SleepStatsContainerModel.prepareMonthlyGraphData(for: nil))
+    }
+    
     func percentage(for sleepPhase: SleepPhase) -> Int {
         guard sleepPhase != .wake,
               let data = sleepPercentageData[filter] else {
@@ -209,7 +222,7 @@ final class SleepStatsContainerModel: ObservableObject {
             }
             
             let column = GraphColumnData(id: columns.count, items: items, label: label, secondaryLabel: secondaryLabel)
-            let legendItem = GraphLegendItemData(id: legendItems.count, name: columnData.date?.toFormat("EEEEEE") ?? "")
+            let legendItem = GraphLegendItemData(id: legendItems.count, name: columnData.date?.in(region: .local).toFormat("EEEEEE") ?? "")
             
             columns.append(column)
             legendItems.append(legendItem)

@@ -9,10 +9,10 @@ import Foundation
 
 enum MenuOption: String {
     case myProfile
+    case myWards
+    case myCaregivers
     case messages
     case mySymptoms
-    case myCaregivers
-    case inviteACaregiver
     case settings
     case connectSmartWatch
     case askAthelo

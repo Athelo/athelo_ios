@@ -29,6 +29,11 @@ final class RendererUtility {
         case roundedRect(CGFloat)
     }
     
+    enum PlaceholderStyle: Hashable {
+        case imageIcon
+        case initials(BorderStyle)
+    }
+    
     // MARK: - Properties
     private static let instance = RendererUtility()
 
@@ -41,10 +46,10 @@ final class RendererUtility {
     }()
     
     // MARK: - Public API
-    static func renderAvatarPlaceholder(for source: RendererAvatarSource, size: CGSize, borderStyle: BorderStyle = .ellipse) -> UIImage {
+    static func renderAvatarPlaceholder(for source: RendererAvatarSource, size: CGSize, placeholderStyle: PlaceholderStyle = .initials(.ellipse)) -> UIImage {
         let displayedText = source.rendererAvatarDisplayName?.extractingInitials(maxLength: 2) ?? ""
         
-        let metadata = "\(displayedText):\(size.width):\(size.height):\(borderStyle)"
+        let metadata = "\(displayedText):\(size.width):\(size.height):\(placeholderStyle)"
         let imageIdentifier = CacheKey.avatarPlaceholder.imageIdentifier(metadata: metadata)
 
         if let cachedImage = instance.cache.object(forKey: imageIdentifier) {
@@ -55,37 +60,51 @@ final class RendererUtility {
         let image = imageRenderer.image { context in
             context.fillEllipse(with: UIColor.withStyle(.background), in: CGRect(origin: .zero, size: size))
             
-            if !displayedText.isEmpty {
-                let font = UIFont.withStyle(.body).withSize(size.height * 0.4)
-                let textColor = UIColor.withStyle(.purple623E61)
+            switch placeholderStyle {
+            case .imageIcon:
+                let targetColor = UIColor.withStyle(.purple988098)
+                let targetRect: CGRect = .init(
+                    x: size.width / 4.0,
+                    y: size.height / 4.0,
+                    width: size.width / 2.0,
+                    height: size.height / 2.0
+                )
+                
+                context.cgContext.setFillColor(targetColor.cgColor)
+                UIImage(named: "imageSolid")!.withRenderingMode(.alwaysTemplate).draw(in: targetRect)
+            case .initials(let borderStyle):
+                if !displayedText.isEmpty {
+                    let font = UIFont.withStyle(.body).withSize(size.height * 0.4)
+                    let textColor = UIColor.withStyle(.purple623E61)
 
-                let paragraph = NSMutableParagraphStyle()
-                paragraph.alignment = .center
+                    let paragraph = NSMutableParagraphStyle()
+                    paragraph.alignment = .center
 
-                let textAttributes: [NSAttributedString.Key: Any] = [
-                    .font: font,
-                    .foregroundColor: textColor,
-                    .paragraphStyle: paragraph
-                ]
+                    let textAttributes: [NSAttributedString.Key: Any] = [
+                        .font: font,
+                        .foregroundColor: textColor,
+                        .paragraphStyle: paragraph
+                    ]
 
-                let encapsulatingTextSize = (displayedText as NSString).size(withAttributes: textAttributes)
+                    let encapsulatingTextSize = (displayedText as NSString).size(withAttributes: textAttributes)
 
-                let textOriginY = (size.height - encapsulatingTextSize.height) / 2.0
-                let textOriginX = min(0.0, (size.width - encapsulatingTextSize.width) / 2.0)
-                let textWidth = size.width + abs(textOriginX) * 2.0
-                let textRect = CGRect(x: textOriginX, y: textOriginY, width: textWidth, height: encapsulatingTextSize.height)
+                    let textOriginY = (size.height - encapsulatingTextSize.height) / 2.0
+                    let textOriginX = min(0.0, (size.width - encapsulatingTextSize.width) / 2.0)
+                    let textWidth = size.width + abs(textOriginX) * 2.0
+                    let textRect = CGRect(x: textOriginX, y: textOriginY, width: textWidth, height: encapsulatingTextSize.height)
 
-                (displayedText as NSString).draw(in: textRect, withAttributes: textAttributes)
-            }
-            
-            let strokeWidth = max(1.0, floor(size.height / 32.0))
-            let strokeRect = CGRect(origin: .init(x: strokeWidth * 0.5, y: strokeWidth * 0.5), size: CGSize(width: size.width - strokeWidth, height: size.height - strokeWidth))
-            
-            switch borderStyle {
-            case .ellipse:
-                context.strikeEllipse(with: UIColor.withStyle(.purple623E61), in: strokeRect, borderWidth: strokeWidth)
-            case .roundedRect(let cornerRadius):
-                context.strikeRoundedRet(with: UIColor.withStyle(.purple623E61), in: strokeRect, cornerRadius: cornerRadius, borderWidth: strokeWidth)
+                    (displayedText as NSString).draw(in: textRect, withAttributes: textAttributes)
+                }
+                
+                let strokeWidth = max(1.0, floor(size.height / 32.0))
+                let strokeRect = CGRect(origin: .init(x: strokeWidth * 0.5, y: strokeWidth * 0.5), size: CGSize(width: size.width - strokeWidth, height: size.height - strokeWidth))
+                
+                switch borderStyle {
+                case .ellipse:
+                    context.strikeEllipse(with: UIColor.withStyle(.purple623E61), in: strokeRect, borderWidth: strokeWidth)
+                case .roundedRect(let cornerRadius):
+                    context.strikeRoundedRet(with: UIColor.withStyle(.purple623E61), in: strokeRect, cornerRadius: cornerRadius, borderWidth: strokeWidth)
+                }
             }
         }
 
@@ -105,8 +124,6 @@ final class RendererUtility {
         
         let wavesBackgroundImage = UIImage(named: "wavesBackground")!
         let logoImage = UIImage(named: "logoSmall")!
-        
-
         
         let targetScale = max(1.0, height / wavesBackgroundImage.size.height)
         let targetWidth = wavesBackgroundImage.size.width * targetScale

@@ -92,7 +92,7 @@ final class FeedbackViewController: KeyboardListeningViewController {
                 self?.formTextViewMessage.resignFirstResponder()
             }.store(in: &cancellables)
         
-        formTextViewMessage.textPublisher
+        formTextViewMessage.currentTextPublisher
             .sink { [weak self] in
                 self?.viewModel.assignText($0)
                 

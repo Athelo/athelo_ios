@@ -16,19 +16,8 @@ final class EditProfileViewModel: BaseViewModel {
     private let targetName = CurrentValueSubject<String?, Never>(nil)
     private let targetPhoneNumber = CurrentValueSubject<String?, Never>(nil)
     
-    private let targetUserType = CurrentValueSubject<UserTypeConstant?, Never>(nil)
-    
     var knownBirthDate: Date {
         targetBirthDate.value ?? Date().dateByAdding(-50, .year).dateAt(.startOfMonth).dateByAdding(14, .day).date
-    }
-    
-    var userTypePublisher: AnyPublisher<UserTypeConstant, Never> {
-        targetUserType
-            .compactMap({ $0 })
-            .eraseToAnyPublisher()
-    }
-    var userType: UserTypeConstant? {
-        targetUserType.value
     }
     
     @Published private(set) var avatarData: LoadableImageData?
@@ -68,10 +57,6 @@ final class EditProfileViewModel: BaseViewModel {
     
     func assignPhoneNumber(_ phoneNumber: String?) {
         targetPhoneNumber.send(phoneNumber)
-    }
-    
-    func assignUserType(_ userType: UserTypeConstant?) {
-        targetUserType.send(userType)
     }
     
     func lockEditMode() {
@@ -198,15 +183,6 @@ final class EditProfileViewModel: BaseViewModel {
         }
     }
     
-    func userTypesPublisher() -> AnyPublisher<[ListInputCellItemData], Error> {
-        Deferred {
-            ConstantsStore.constantsPublisher()
-                .map({ $0.userTypes })
-                .eraseToAnyPublisher()
-        }
-        .eraseToAnyPublisher()
-    }
-    
     // MARK: - Sinks
     private func sink() {
         sinkIntoIdentityManager()
@@ -219,25 +195,9 @@ final class EditProfileViewModel: BaseViewModel {
             }.store(in: &cancellables)
         
         IdentityUtility.userDataPublisher
-            .map({ $0?.avatarImage(in: .init(width: 96.0, height: 96.0)) })
+            .map({ $0?.avatarImage(in: .init(width: 96.0, height: 96.0), placeholderStyle: .imageIcon) })
             .sink { [weak self] in
                 self?.avatarData = $0
-            }.store(in: &cancellables)
-        
-        $userData
-            .compactMap({ $0?.userType })
-            .flatMap({ value -> AnyPublisher<UserTypeConstant?, Error> in
-                return ConstantsStore.constantsPublisher()
-                    .map({ $0.userTypes })
-                    .map({ innerValue -> UserTypeConstant? in
-                        innerValue.first(where: { $0.id == value })
-                    })
-                    .eraseToAnyPublisher()
-            })
-            .sink { result in
-                /* ... */
-            } receiveValue: { [weak self] in
-                self?.targetUserType.send($0)
             }.store(in: &cancellables)
     }
     
@@ -259,11 +219,6 @@ final class EditProfileViewModel: BaseViewModel {
             params["phone_number"] = targetPhoneNumber.value ?? NSNull()
         }
         
-        if let userType = userType,
-           userType.id != userData?.userType {
-            params["athelo_user_type"] = userType.id
-        }
-        
         return params
     }
     
@@ -272,16 +227,5 @@ final class EditProfileViewModel: BaseViewModel {
         targetBirthDate.send(userData?.dateOfBirth)
         targetName.send(userData?.displayName)
         targetPhoneNumber.send(userData?.phoneNumber)
-        
-        ConstantsStore.constantsPublisher()
-            .first()
-            .map({ $0.userTypes })
-            .sink { _ in
-                /* ... */
-            } receiveValue: { [weak self] userTypes in
-                if let userType = userTypes.first(where: { $0.id == self?.userData?.userType }) {
-                    self?.targetUserType.send(userType)
-                }
-            }.store(in: &cancellables)
     }
 }

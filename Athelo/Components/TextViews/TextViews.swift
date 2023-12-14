@@ -60,6 +60,22 @@ class BaseThemeTextView: UITextView {
     }
 }
 
+final class BodyTextView: BaseThemeTextView, ThemedTextView {
+    var style: UIFont.AppStyle {
+        .body
+    }
+    
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        applyStyling()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        applyStyling()
+    }
+}
+
 final class FormContentTextView: BaseThemeTextView, ThemedTextView {
     var style: UIFont.AppStyle {
         .form

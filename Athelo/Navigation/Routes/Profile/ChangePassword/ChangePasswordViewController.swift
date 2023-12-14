@@ -84,7 +84,7 @@ final class ChangePasswordViewController: KeyboardListeningViewController {
     }
     
     private func sinkIntoConfirmPasswordFormTextField() {
-        formTextFieldConfirmPassword.textPublisher
+        formTextFieldConfirmPassword.currentTextPublisher
             .sink(receiveValue: viewModel.assignConfirmPassword(_:))
             .store(in: &cancellables)
         
@@ -95,7 +95,7 @@ final class ChangePasswordViewController: KeyboardListeningViewController {
     }
     
     private func sinkIntoCurrentPasswordFormTextField() {
-        formTextFieldCurrentPassword.textPublisher
+        formTextFieldCurrentPassword.currentTextPublisher
             .sink(receiveValue: viewModel.assignCurrentPassword(_:))
             .store(in: &cancellables)
         
@@ -106,7 +106,7 @@ final class ChangePasswordViewController: KeyboardListeningViewController {
     }
     
     private func sinkIntoNewPasswordFormTextField() {
-        formTextFieldNewPassword.textPublisher
+        formTextFieldNewPassword.currentTextPublisher
             .sink(receiveValue: viewModel.assignPassword(_:))
             .store(in: &cancellables)
         

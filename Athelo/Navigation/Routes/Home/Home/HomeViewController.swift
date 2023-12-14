@@ -11,6 +11,10 @@ import UIKit
 final class HomeViewController: BaseViewController {
     // MARK: - Outlets
     @IBOutlet private weak var collectionViewContent: UICollectionView!
+    @IBOutlet private weak var viewSelectedWardContainer: UIView!
+    @IBOutlet private weak var viewSelectedWardHolder: UIView!
+    
+    private var selectedWardView: SelectedWardView?
     
     private var avatarIconImageView: UIImageView? {
         navigationItem.rightBarButtonItem?.customView as? UIImageView
@@ -39,6 +43,7 @@ final class HomeViewController: BaseViewController {
     private func configure() {
         configureContentCollectionView()
         configureOwnView()
+        configureSelectedWardContainerView()
     }
     
     private func configureContentCollectionView() {
@@ -60,6 +65,26 @@ final class HomeViewController: BaseViewController {
         cancellables.append(navigationItem.displayUserAvatar(with: router))
     }
     
+    private func configureSelectedWardContainerView() {
+        guard selectedWardView == nil else {
+            return
+        }
+        
+        let selectedWardView = SelectedWardView(
+            model: viewModel.selectedWardModel,
+            onTapAction: {
+                AppRouter.current.windowOverlayUtility.displayWardSelectionView()
+            }
+        )
+        
+        embedView(selectedWardView, to: viewSelectedWardHolder)
+        
+        self.selectedWardView = selectedWardView
+        
+        viewSelectedWardContainer.isHidden = true
+        viewSelectedWardContainer.alpha = 0.0
+    }
+    
     // MARK: - Sinks
     private func sink() {
         sinkIntoViewModel()
@@ -73,6 +98,28 @@ final class HomeViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.contentDataSource.apply($0, animatingDifferences: true)
+            }.store(in: &cancellables)
+        
+        viewModel.$displaysWardSelection
+            .map({ !$0 })
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                guard let self,
+                      self.viewSelectedWardContainer.isHidden != value else {
+                    return
+                }
+                
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: [.beginFromCurrentState]) { [weak self] in
+                    self?.viewSelectedWardContainer.isHidden = value
+                    self?.viewSelectedWardContainer.alpha = value ? 0.0 : 1.0
+                }
+            }.store(in: &cancellables)
+        
+        viewModel.$selectedInteractableItem
+            .compactMap({ $0 })
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                self?.router?.navigateUsingInteractableItem(value)
             }.store(in: &cancellables)
     }
     
@@ -122,6 +169,10 @@ final class HomeViewController: BaseViewController {
             
             if let headerData = self?.viewModel.headerSupplementaryData(at: indexPath) {
                 header.configure(headerData, indexPath: indexPath)
+                
+                if let self {
+                    header.assignDelegate(self)
+                }
             }
             
             return header
@@ -235,6 +286,13 @@ extension HomeViewController: Routable {
     
     func assignRouter(_ router: HomeRouter) {
         self.router = router
+    }
+}
+
+// MARK: SectionTitleCollectionReusableViewDelegate
+extension HomeViewController: SectionTitleCollectionReusableViewDelegate {
+    func sectionTitleCollectionReusableView(_ view: SectionTitleCollectionReusableView, activatedInteractableItem identifier: String) {
+        viewModel.checkActionableItemIdentifier(identifier)
     }
 }
 

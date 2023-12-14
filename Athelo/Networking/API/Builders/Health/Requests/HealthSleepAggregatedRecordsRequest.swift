@@ -20,12 +20,14 @@ public struct HealthSleepAggregatedRecordsRequest: APIRequest {
     let dataGranularity: DataGranularity
     let dates: [QueryDateData]?
     let intervalFunction: IntervalFunction
+    let patientID: Int?
     
-    public init(granularity: DataGranularity, aggregationFunction: AggregationFunction, intervalFunction: IntervalFunction, dates: [QueryDateData]? = nil) {
+    public init(granularity: DataGranularity, aggregationFunction: AggregationFunction, intervalFunction: IntervalFunction, dates: [QueryDateData]? = nil, patientID: Int? = nil) {
         self.aggregationFunction = aggregationFunction
         self.dataGranularity = granularity
         self.dates = dates
         self.intervalFunction = intervalFunction
+        self.patientID = patientID
     }
     
     public var parameters: [String : Any]? {

@@ -30,41 +30,41 @@ final class NotificationUtility: NSObject {
 
     // MARK: - Public API
     static func handleSilentNotification(userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        completionHandler(.noData)
+        completionHandler(.noData)
     }
 
     static func registerForNotifications(in application: UIApplication) {
-//        Messaging.messaging().delegate = instance
-//        UNUserNotificationCenter.current().delegate = instance
-//
-//        checkNotificationAuthorizationStatus(in: application, requestingStatus: false)
+        Messaging.messaging().delegate = instance
+        UNUserNotificationCenter.current().delegate = instance
+
+        checkNotificationAuthorizationStatus(in: application, requestingStatus: false)
     }
 
     static func checkNotificationAuthorizationStatus(in application: UIApplication = UIApplication.shared, requestingStatus: Bool = true) {
-//        UNUserNotificationCenter.current().getNotificationSettings { settings in
-//            switch(settings.authorizationStatus) {
-//            case .notDetermined:
-//                guard requestingStatus else {
-//                    return
-//                }
-//
-//                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { isAuthorized, error in
-//                    if isAuthorized {
-//                        DispatchQueue.main.async {
-//                            application.registerForRemoteNotifications()
-//                        }
-//                    }
-//                }
-//            case .authorized, .ephemeral, .provisional:
-//                DispatchQueue.main.async {
-//                    application.registerForRemoteNotifications()
-//                }
-//            case .denied:
-//                break
-//            @unknown default:
-//                break
-//            }
-//        }
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch(settings.authorizationStatus) {
+            case .notDetermined:
+                guard requestingStatus else {
+                    return
+                }
+
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { isAuthorized, error in
+                    if isAuthorized {
+                        DispatchQueue.main.async {
+                            application.registerForRemoteNotifications()
+                        }
+                    }
+                }
+            case .authorized, .ephemeral, .provisional:
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+            case .denied:
+                break
+            @unknown default:
+                break
+            }
+        }
     }
 
     // MARK: - Sinks
@@ -74,26 +74,26 @@ final class NotificationUtility: NSObject {
 
     private func sinkIntoApplicationStateNotifications() {
         // Added so that in case of auth status switch of .denied -> <any_available> token will be updated.
-//        NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)
-//            .sink { _ in
-//                NotificationUtility.checkNotificationAuthorizationStatus()
-//            }.store(in: &cancellables)
+        NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)
+            .sink { _ in
+                NotificationUtility.checkNotificationAuthorizationStatus()
+            }.store(in: &cancellables)
     }
 }
 
 extension NotificationUtility: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-//        guard let token = fcmToken, !token.isEmpty else {
-//            return
-//        }
-//
-//        debugPrint(#fileID, #function, token)
-//
-//        Task {
-//            if try APIEnvironment.setFCMToken(token, force: false) {
-//                ChatUtility.reconnect()
-//            }
-//        }
+        guard let token = fcmToken, !token.isEmpty else {
+            return
+        }
+
+        debugPrint(#fileID, #function, token)
+
+        Task {
+            if try APIEnvironment.setFCMToken(token, force: false) {
+                ChatUtility.reconnect()
+            }
+        }
     }
 }
 

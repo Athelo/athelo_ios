@@ -8,13 +8,13 @@
 import Combine
 import Foundation
 
-public extension Publishers {
+extension Publishers {
     enum NetworkingPublishers {
         /* ... */
     }
 }
 
-public extension Publishers.NetworkingPublishers {
+extension Publishers.NetworkingPublishers {
     struct ListRepeatingPublisher<DataType: Decodable>: Publisher {
         public typealias Output = [DataType]
         public typealias Failure = APIError
@@ -86,7 +86,14 @@ public extension Publishers.NetworkingPublishers {
     }
 }
 
-public extension Publishers.NetworkingPublishers {
+extension Publisher {
+    func repeating<T: Decodable>() -> AnyPublisher<[T], Failure> where Output == ListResponseData<T>, Failure == APIError {
+        return Publishers.NetworkingPublishers.ListRepeatingPublisher(initialRequest: Deferred { self as! AnyPublisher<ListResponseData<T>, APIError> })
+            .eraseToAnyPublisher()
+    }
+}
+
+extension Publishers.NetworkingPublishers {
     struct NeverWrappingPublisher: Publisher {
         public typealias Output = Void
         public typealias Failure = APIError

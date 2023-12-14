@@ -70,8 +70,8 @@ final class SymptomChronologyViewModel: BaseViewModel {
         
         state.send(.loading)
         
-        let request_ = HealthPerDaySummaryRequest(grouping: .bySymptoms)
-        (AtheloAPI.Health.perDaySummary(request: request_) as AnyPublisher<ListResponseData<HealthSummaryData>, APIError>)
+        let request = HealthPerDaySummaryRequest(grouping: .bySymptoms)
+        (AtheloAPI.Health.perDaySummary(request: request) as AnyPublisher<ListResponseData<HealthSummaryData>, APIError>)
             .handleEvents(receiveOutput: { [weak self] in
                 self?.nextPageURL = $0.next
             })

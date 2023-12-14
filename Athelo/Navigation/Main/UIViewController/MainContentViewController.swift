@@ -208,13 +208,26 @@ final class MainContentViewController: BaseViewController {
                 appendMenuNavigationItem(to: communityViewController)
                 
                 navigationController.viewControllers = [communityViewController]
+                
+                return
             }
             
             if let viewController = navigationController.viewControllers.last(where: { ($0 as? CommunityChatViewController)?.chatRoomidentifier == chatRoomIdentifier }) {
                 navigationController.popToViewController(viewController, animated: true)
+                
+                ChatUtility.sendMessage(.getHistory(timestamp: Date().toChatTimestamp, limit: 100), chatRoomIdentifier: chatRoomIdentifier)
             } else {
                 let router = CommunityChatRouter(navigationController: navigationController)
-                let viewController = CommunityChatViewController.viewController(configurationData: .roomID(chatRoomIdentifier), router: router)
+                let viewController = CommunityChatViewController.viewController(
+                    configurationData: .init(
+                        dataType: .roomID(chatRoomIdentifier),
+                        identityData: nil
+                    ),
+                    router: router
+                )
+                
+                // Manual assignment of view controller title is done here to prevent any future updates of `title` from not showing up. It just sometimes doesn't appear with no apparent (or at least reproducible) reason without assigning any non-empty value first when pushed from here. "Chat Room" seems neutral enough.
+                viewController.title = "Chat Room"
                 
                 navigationController.pushViewController(viewController, animated: true)
             }

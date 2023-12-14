@@ -9,42 +9,58 @@ import SwiftUI
 
 struct ActivityTilesView: View {
     @ObservedObject var model: ActivityTilesModel
+    
     private(set) var tileTapCallback: ((Tile) -> Void)?
+    private(set) var wardChangeTapCallback: (() -> Void)?
     
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(spacing: 24.0) {
-                if let headerText = model.headerText, !headerText.isEmpty {
-                    StyledText(headerText,
-                               textStyle: .paragraph,
-                               colorStyle: .gray,
-                               alignment: .leading)
-                    .padding(16.0)
-                    .frame(minHeight: 120.0, alignment: .center)
-                    .background(
-                        ZStack {
-                            Rectangle()
-                                .fill(Color(UIColor.withStyle(.white).cgColor))
-                            
-                            Image("wavesBackground")
-                                .offset(x: 0.0, y: 24.0)
-                                .opacity(0.2)
+        VStack(spacing: 0.0) {
+            if model.displaysWardData {
+                SelectedWardView(
+                    model: model.displayedWardModel,
+                    onTapAction: {
+                        wardChangeTapCallback?()
+                    }
+                )
+                .padding(.top, 24.0)
+                .padding(.horizontal, 16.0)
+            }
+            
+            FadingScrollView(axes: .vertical) {
+                VStack(spacing: 24.0) {
+                    if let headerText = model.headerText, !headerText.isEmpty {
+                        StyledText(headerText,
+                                   textStyle: .paragraph,
+                                   colorStyle: .gray,
+                                   alignment: .leading)
+                        .padding(16.0)
+                        .frame(minHeight: 120.0, alignment: .center)
+                        .background(
+                            ZStack {
+                                Rectangle()
+                                    .fill(Color(UIColor.withStyle(.white).cgColor))
+                                
+                                Image("wavesBackground")
+                                    .offset(x: 0.0, y: 24.0)
+                                    .opacity(0.2)
+                            }
+                        )
+                        .roundedCorners(radius: 30.0)
+                        .styledShadow()
+                        .transition(.slide.combined(with: .opacity))
+                    }
+                    
+                    LazyVGrid(columns: tilesGrid(), spacing: 24.0) {
+                        ForEach(Tile.displayOrdered, id: \.self) { tileType in
+                            tile(for: tileType, count: 50)
                         }
-                    )
-                    .roundedCorners(radius: 30.0)
-                    .styledShadow()
-                    .transition(.slide.combined(with: .opacity))
-                }
-                
-                LazyVGrid(columns: tilesGrid(), spacing: 24.0) {
-                    ForEach(Tile.displayOrdered, id: \.self) { tileType in
-                        tile(for: tileType, count: 50)
                     }
                 }
+                .padding(.horizontal, 16.0)
+                .padding(.top, 24.0)
+                .padding(.bottom, 24.0)
+                .animation(.default, value: model.headerText)
             }
-            .padding(.horizontal, 16.0)
-            .padding(.vertical, 24.0)
-            .animation(.default, value: model.headerText)
         }
     }
     
@@ -62,12 +78,12 @@ struct ActivityTilesView: View {
             let model = graphModel(for: tile)
             
             ActivitySingleColumnTileView(
+                graphModel: model,
                 image: tile.icon,
                 headerText: tile.title,
                 unitData: tile.unitData,
                 displayedValueConverter: tile.valueConverter
             )
-            .environmentObject(model)
             .onTapGesture {
                 tileTapCallback?(tile)
             }
@@ -168,12 +184,12 @@ struct ActivityTilesView_Previews: PreviewProvider {
     private static let model: ActivityTilesModel = {
         let model = ActivityTilesModel()
         
-        model.updateHeaderText("You walked less yesterday than you did the day before.")
-        
-        model.updateActivityGraphItems(randomGraphItems())
-        model.updateHeartRateGraphItems(randomGraphItems())
-        model.updateHRVGraphPoints(randomLinePoints())
-        model.updateStepsGraphItems(randomGraphItems())
+//        model.updateHeaderText("You walked less yesterday than you did the day before.")
+//
+//        model.updateActivityGraphItems(randomGraphItems())
+//        model.updateHeartRateGraphItems(randomGraphItems())
+//        model.updateHRVGraphPoints(randomLinePoints())
+//        model.updateStepsGraphItems(randomGraphItems())
         
         return model
     }()

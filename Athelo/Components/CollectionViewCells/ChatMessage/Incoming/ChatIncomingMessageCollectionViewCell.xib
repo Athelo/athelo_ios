@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,6 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="405" height="173"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gdo-EM-qTZ" customClass="ShadowCastingView" customModule="Athelo" customModuleProvider="target">
+                        <rect key="frame" x="66" y="0.0" width="281" height="86"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVc-0E-8b7">
                         <rect key="frame" x="66" y="0.0" width="281" height="86"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -94,12 +98,16 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="eOJ-NP-PCg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="6ml-Qr-mAn"/>
+                <constraint firstItem="Gdo-EM-qTZ" firstAttribute="leading" secondItem="NVc-0E-8b7" secondAttribute="leading" id="Dd1-md-QDc"/>
                 <constraint firstItem="NVc-0E-8b7" firstAttribute="bottom" secondItem="5sO-Ae-N6p" secondAttribute="bottom" constant="16" id="E9X-wd-NEO"/>
                 <constraint firstItem="NVc-0E-8b7" firstAttribute="top" secondItem="EJ7-o3-VEv" secondAttribute="top" constant="-16" id="F1g-0f-L6S"/>
                 <constraint firstItem="eOJ-NP-PCg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="GIg-hH-csK"/>
                 <constraint firstAttribute="bottom" secondItem="eOJ-NP-PCg" secondAttribute="bottom" constant="16" id="Gsu-bi-hhf"/>
+                <constraint firstItem="Gdo-EM-qTZ" firstAttribute="trailing" secondItem="NVc-0E-8b7" secondAttribute="trailing" id="RIf-wW-2P8"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eOJ-NP-PCg" secondAttribute="trailing" constant="32" id="T8t-RR-p5P"/>
+                <constraint firstItem="Gdo-EM-qTZ" firstAttribute="top" secondItem="NVc-0E-8b7" secondAttribute="top" id="sjQ-3B-CZ0"/>
                 <constraint firstItem="NVc-0E-8b7" firstAttribute="leading" secondItem="EJ7-o3-VEv" secondAttribute="leading" constant="-16" id="wYE-Zh-cLe"/>
+                <constraint firstItem="Gdo-EM-qTZ" firstAttribute="bottom" secondItem="NVc-0E-8b7" secondAttribute="bottom" id="y7s-at-TsW"/>
                 <constraint firstItem="NVc-0E-8b7" firstAttribute="trailing" secondItem="EJ7-o3-VEv" secondAttribute="trailing" constant="16" id="yYl-cE-0jK"/>
             </constraints>
             <size key="customSize" width="405" height="173"/>

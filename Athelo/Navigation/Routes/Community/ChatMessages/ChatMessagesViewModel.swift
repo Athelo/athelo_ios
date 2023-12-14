@@ -172,7 +172,7 @@ final class ChatMessagesViewModel: BaseViewModel {
             
             let displaysDate = !hasSameSenderAsNextMessage || !isInTheSameDayAsNextMessage
             let displaysOwnMessage = messageData.element.userData?.userProfileID == currentUserID
-            let displaysSenderName = !hasSameSenderAsPreviousMessage || !isInTheSameDayAsPreviousMessage
+            let displaysSenderName = messageData.element.userData?.displayName?.isEmpty == false && (!hasSameSenderAsPreviousMessage || !isInTheSameDayAsPreviousMessage)
             
             let displaysAvatar = displaysOwnMessage ? false : !hasSameSenderAsNextMessage
             

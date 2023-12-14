@@ -16,9 +16,11 @@ final class SleepSummaryViewController: BaseViewController {
     @IBOutlet private weak var labelDateDescription: UILabel!
     @IBOutlet private weak var labelDateRange: UILabel!
     @IBOutlet private weak var segmentedPickerRange: SegmentedPickerView!
+    @IBOutlet private weak var viewActiveWardContainer: UIView!
     @IBOutlet private weak var viewNextPeriodButtonShadowContainer: UIView!
     @IBOutlet private weak var viewSummaryContainer: UIView!
     
+    private var activeWardView: SelectedWardView?
     private var statsView: SleepStatsContainerView?
     
     // MARK: - Properties
@@ -37,9 +39,32 @@ final class SleepSummaryViewController: BaseViewController {
     
     // MARK: - Configuration
     private func configure() {
+        configureActiveWardContainerView()
         configureOwnView()
         configureRangeSegmentedPicker()
         configureSummaryContainerView()
+    }
+    
+    private func configureActiveWardContainerView() {
+        guard activeWardView == nil else {
+            return
+        }
+        
+        let activeWardView = SelectedWardView(
+            model: viewModel.wardModel,
+            onTapAction: {
+                AppRouter.current.windowOverlayUtility.displayWardSelectionView()
+            }
+        )
+        
+        embedView(activeWardView, to: viewActiveWardContainer)
+        
+        self.activeWardView = activeWardView
+        
+        let displaysWardData = viewModel.canDisplayWardData
+        
+        self.viewActiveWardContainer.isHidden = displaysWardData ? false : true
+        self.viewActiveWardContainer.alpha = displaysWardData ? 1.0 : 0.0
     }
     
     private func configureOwnView() {
@@ -82,6 +107,16 @@ final class SleepSummaryViewController: BaseViewController {
     
     private func sinkIntoViewModel() {
         bindToViewModel(viewModel, cancellables: &cancellables)
+        
+        viewModel.$canDisplayWardData
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                UIView.animate(withDuration: 0.3, delay: 0.0, options: [.beginFromCurrentState]) {
+                    self?.viewActiveWardContainer.isHidden = !value
+                    self?.viewActiveWardContainer.alpha = value ? 1.0 : 0.0
+                }
+            }.store(in: &cancellables)
         
         viewModel.$canSelectNextRange
             .removeDuplicates()

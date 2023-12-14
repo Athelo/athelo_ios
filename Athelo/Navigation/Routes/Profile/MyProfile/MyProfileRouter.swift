@@ -51,6 +51,17 @@ final class MyProfileRouter: Router {
         navigationController.pushViewController(viewController, animated: true)
     }
     
+    func navigateToRoleSelection() {
+        guard let navigationController = navigationController else {
+            fatalError("Missing \(UINavigationController.self) instance.")
+        }
+        
+        let router = SelectRoleRouter(navigationController: navigationController)
+        let viewController = SelectRoleViewController.viewController(router: router)
+        
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
     func navigateToSymptomList() {
         guard let navigationController = navigationController else {
             fatalError("Missing \(UINavigationController.self) instance.")

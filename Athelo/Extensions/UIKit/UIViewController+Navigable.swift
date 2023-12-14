@@ -12,6 +12,7 @@ enum StoryboardScene: String {
     case activity
     case authentication
     case community
+    case contacts
     case feedback
     case faq
     case home
@@ -19,6 +20,7 @@ enum StoryboardScene: String {
     case menu
     case news
     case profile
+    case role
     case settings
     case sleep
     case splash

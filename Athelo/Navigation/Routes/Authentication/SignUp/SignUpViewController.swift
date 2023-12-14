@@ -121,7 +121,7 @@ final class SignUpViewController: BaseViewController {
                 self?.thirdPartyCancellable = nil
             }, receiveValue: { [weak self] _ in
                 self?.router?.authenticationUpdateEventsSubject.send(.modelStateChanged(.loaded))
-                self?.router?.navigateToHome()
+                self?.router?.navigateOnSuccessfulAuthentication()
             })
     }
     

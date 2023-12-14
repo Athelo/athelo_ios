@@ -113,8 +113,13 @@ final class NewsDetailsViewController: BaseViewController {
             .map({ $0.title })
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
-            .assign(to: \.text, on: textViewTitle)
-            .store(in: &cancellables)
+            .sink { [weak self] in
+                self?.textViewTitle.text = $0
+                
+                if $0?.isEmpty == false {
+                    self?.updateTitleTextViewMask()
+                }
+            }.store(in: &cancellables)
         
         viewModel.$newsData
             .compactMap({ $0 })
@@ -161,13 +166,26 @@ final class NewsDetailsViewController: BaseViewController {
     
     // MARK: - Updates
     private func updateTitleTextViewMask() {
-        view.layoutIfNeeded()
-        
-        let exclusionPath = UIBezierPath(rect: viewDateContainer.frame)
-        textViewTitle.textContainer.exclusionPaths = [exclusionPath]
-        textViewTitle.invalidateIntrinsicContentSize()
-        
-        view.layoutIfNeeded()
+        if self.labelDate.text?.isEmpty == true {
+            guard !textViewTitle.textContainer.exclusionPaths.isEmpty else {
+                return
+            }
+            
+            textViewTitle.textContainer.exclusionPaths = []
+            textViewTitle.invalidateIntrinsicContentSize()
+        } else {
+            view.layoutIfNeeded()
+            
+            let exclusionPath = UIBezierPath(rect: viewDateContainer.frame)
+            textViewTitle.textContainer.exclusionPaths = [exclusionPath]
+        }
+    
+        // MARK: - Workaround based on: https://stackoverflow.com/questions/48079071/
+        if !textViewTitle.textContainer.exclusionPaths.isEmpty {
+            let titleText = textViewTitle.text
+            textViewTitle.text = " "
+            textViewTitle.text = titleText
+        }
     }
     
     // MARK: - Actions

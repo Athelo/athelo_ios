@@ -10,7 +10,7 @@ import UIKit
 
 final class SignUpRouter: AuthenticationNavigationRouter {
     // MARK: - Public API
-    func navigateToAdditionalInfoForm() {
+    @MainActor func navigateToAdditionalInfoForm() {
         guard let navigationController = navigationController else {
             fatalError("Missing \(UINavigationController.self) instance.")
         }
@@ -21,7 +21,7 @@ final class SignUpRouter: AuthenticationNavigationRouter {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func navigateToEmailLogin(additionalSafeAreaInsets: UIEdgeInsets? = nil) {
+    @MainActor func navigateToEmailLogin(additionalSafeAreaInsets: UIEdgeInsets? = nil) {
         guard let navigationController = navigationController else {
             fatalError("Missing \(UINavigationController.self) instance.")
         }
@@ -36,7 +36,7 @@ final class SignUpRouter: AuthenticationNavigationRouter {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func navigateToEmailSignup(additionalSafeAreaInsets: UIEdgeInsets? = nil) {
+    @MainActor func navigateToEmailSignup(additionalSafeAreaInsets: UIEdgeInsets? = nil) {
         guard let navigationController = navigationController else {
             fatalError("Missing \(UINavigationController.self) instance.")
         }
@@ -49,11 +49,5 @@ final class SignUpRouter: AuthenticationNavigationRouter {
         }
         
         navigationController.pushViewController(viewController, animated: true)
-    }
-    
-    func navigateToHome() {
-        Task {
-            await AppRouter.current.exchangeRoot(.home)
-        }
     }
 }

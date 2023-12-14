@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         ImageCacheUtility.setupCachingRules()
-//        NotificationUtility.registerForNotifications(in: application)
+        NotificationUtility.registerForNotifications(in: application)
         
         #if DEBUG
         UserDefaults.standard.set(true, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
@@ -41,13 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: Configuration
     private func configureNetworkingAPI() {
-        // Values will be hardcoded for now - later on, configurations for STG and PROD envs should be created.
         let configuration = APIConfiguration(
-            applicationIdentifier: "ATHELO-QA",
-            chatIdentifier: "Athelo",
+            applicationIdentifier: try! ConfigurationReader.configurationValue(for: .apiIdentifier),
+            chatIdentifier: try! ConfigurationReader.configurationValue(for: .chatIdentifier),
             appVersion: Bundle.main.appBuild,
-            servicePath: "https://i2a-social-api-qa.i2asolutions.com/api/v1",
-            chatServicePath: "https://chat-server-stg.i2asolutions.com/socket/"
+            servicePath: "https://" + (try! ConfigurationReader.configurationValue(for: .apiURL)),
+            chatServicePath: "https://" + (try! ConfigurationReader.configurationValue(for: .chatURL))
         )
         
         APIEnvironment.applyConfiguration(configuration)

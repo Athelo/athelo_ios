@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 @MainActor extension UIWindow {
@@ -19,6 +20,17 @@ import UIKit
     }
     
     // MARK: - Public API
+    func displayCustomView<T: View>(_ view: T, animated: Bool = true, pinningClosure: (_ pinnedView: UIView, _ superview: UIView) -> Void) {
+        let hostingViewController = UIHostingController(rootView: view)
+        guard let hostingView = hostingViewController.view else {
+            fatalError("Cannot display overlay: missing UIView instance of hosted SwiftUI view: \(T.self)")
+        }
+        
+        hostingView.backgroundColor = .clear
+        
+        displayCustomView(hostingView, animated: animated, pinningClosure: pinningClosure)
+    }
+    
     func displayCustomView<T: UIView>(_ view: T, animated: Bool = true, pinningClosure: (_ pinnedView: UIView, _ superview: UIView) -> Void) {
         displayContainerView(animated: animated)
         guard let containerView = loadingContainerView,
@@ -118,6 +130,10 @@ import UIKit
         hideSubview(ofClass: targetClass, animated: animated)
     }
     
+    func hideCustomView<Tag: RawRepresentable<Int>>(withPinningTag pinningTag: Tag, animated: Bool = true) {
+        hideSubview(withPinningTag: pinningTag, animated: animated)
+    }
+    
     func hideLoadingView(animated: Bool = true) {
         hideSubview(ofClass: LargeLoadingView.self, animated: animated)
     }
@@ -134,7 +150,7 @@ import UIKit
         
         let loadingContainerView = UIView()
         
-        loadingContainerView.backgroundColor = .withStyle(.black).withAlphaComponent(0.33)
+        loadingContainerView.backgroundColor = .withStyle(.black).withAlphaComponent(0.2)
         loadingContainerView.translatesAutoresizingMaskIntoConstraints = false
         loadingContainerView.tag = self.loadingViewTag
         loadingContainerView.alpha = 0.0
@@ -174,6 +190,40 @@ import UIKit
             }
         } else {
             loadingContainerView.removeFromSuperview()
+        }
+    }
+    
+    private func hideSubview<Tag: RawRepresentable<Int>>(withPinningTag pinningTag: Tag, animated: Bool = true) {
+        guard let containerView = loadingContainerView,
+              let targetSubview = containerView.subviews.first(where: {
+                  guard let tag = Tag(rawValue: $0.tag) else {
+                      return false
+                  }
+                  
+                  return tag == pinningTag
+              }) else {
+            return
+        }
+        
+        if containerView.subviews.count > 1 {
+            if animated {
+                UIView.animate(withDuration: 0.3, delay: 0.0, options: [.beginFromCurrentState]) {
+                    targetSubview.alpha = 0.0
+                } completion: { [weak self] completed in
+                    guard completed else {
+                        return
+                    }
+                    
+                    targetSubview.removeFromSuperview()
+                    if self?.loadingContainerView?.subviews.isEmpty == true {
+                        self?.hideContainerView()
+                    }
+                }
+            } else {
+                targetSubview.removeFromSuperview()
+            }
+        } else {
+            hideContainerView(animated: animated)
         }
     }
     

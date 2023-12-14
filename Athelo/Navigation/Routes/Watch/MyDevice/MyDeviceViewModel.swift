@@ -10,10 +10,15 @@ import UIKit
 
 final class MyDeviceViewModel: BaseViewModel {
     // MARK: - Properties
+    private let forceFitbitRemovalSubject = PassthroughSubject<Void, Never>()
+    var forceFitbitRemovalPublisher: AnyPublisher<Void, Never> {
+        forceFitbitRemovalSubject.eraseToAnyPublisher()
+    }
+    
     private var cancellables: [AnyCancellable] = []
     
     // MARK: - Public API
-    func disconnectDevice() {
+    func disconnectDevice(forced: Bool = false) {
         guard state.value != .loading else {
             return
         }
@@ -40,6 +45,13 @@ final class MyDeviceViewModel: BaseViewModel {
                 
                 self?.state.send(.loaded)
             } catch let error {
+                // Error code 331060 means that server was unable to remove Fitbit profile (while possible that Fitbit profile has been invalidated by the user).
+                if !forced,
+                   case .httpError(_, let errorMessage) = error as? APIError,
+                   errorMessage.errorCode == 331060 {
+                    self?.forceFitbitRemovalSubject.send()
+                }
+                
                 self?.state.send(.error(error: error))
             }
         }

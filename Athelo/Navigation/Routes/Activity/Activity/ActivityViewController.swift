@@ -48,11 +48,19 @@ final class ActivityViewController: BaseViewController {
             return
         }
         
-        let summaryView = ActivityTilesView(model: viewModel.activityModel) { tile in
-            DispatchQueue.main.async { [weak self] in
-                self?.router?.navigateToActivitySummary(using: tile.activityType)
+        let summaryView = ActivityTilesView(
+            model: viewModel.activityModel,
+            tileTapCallback: { tile in
+                DispatchQueue.main.async { [weak self] in
+                    self?.router?.navigateToActivitySummary(using: tile.activityType)
+                }
+            },
+            wardChangeTapCallback: {
+                DispatchQueue.main.async {
+                    AppRouter.current.windowOverlayUtility.displayWardSelectionView()
+                }
             }
-        }
+        )
         
         embedView(summaryView, to: viewSummaryContainer)
         
@@ -60,7 +68,8 @@ final class ActivityViewController: BaseViewController {
     }
     
     private func configureWatchConnectionContainerView() {
-        viewWatchConnectionContainer.alpha = viewModel.isConnectedToDevice ? 0.0 : 1.0
+        let shouldDisplayConnectionPrompt = !viewModel.isConnectedToDevice && !viewModel.isCaregiver
+        viewWatchConnectionContainer.alpha = shouldDisplayConnectionPrompt ? 1.0 : 0.0
         
         guard noWatchViewController == nil else {
             return
@@ -92,19 +101,23 @@ final class ActivityViewController: BaseViewController {
     private func sinkIntoViewModel() {
         bindToViewModel(viewModel, cancellables: &cancellables)
         
-        viewModel.$isConnectedToDevice
-            .removeDuplicates()
-            .map({ ($0 ? 0.0 : 1.0) as CGFloat })
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] value in
-                guard value != self?.viewWatchConnectionContainer.alpha else {
-                    return
-                }
-                
-                UIView.animate(withDuration: 0.3, delay: 0.0, options: [.beginFromCurrentState]) {
-                    self?.viewWatchConnectionContainer.alpha = value
-                }
-            }.store(in: &cancellables)
+        Publishers.CombineLatest(
+            viewModel.$isConnectedToDevice,
+            viewModel.$isCaregiver
+        )
+        .map({ !$0 && !$1 })
+        .removeDuplicates()
+        .map({ ($0 ? 1.0 : 0.0) as CGFloat })
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] value in
+            guard value != self?.viewWatchConnectionContainer.alpha else {
+                return
+            }
+            
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: [.beginFromCurrentState]) {
+                self?.viewWatchConnectionContainer.alpha = value
+            }
+        }.store(in: &cancellables)
     }
 }
 

@@ -158,7 +158,7 @@ final class FormTextView: UIView {
     }
     
     private func sinkIntoTextView() {
-        textView.textPublisher
+        textView.currentTextPublisher
             .map({ $0?.isEmpty == false })
             .removeDuplicates()
             .assign(to: \.isHidden, on: labelPlaceholder)

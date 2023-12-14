@@ -8,21 +8,17 @@
 import SwiftUI
 
 struct SmallColumnGraphView: View {
-    @EnvironmentObject var model: SmallColumnGraphModel
+    @ObservedObject var model: SmallColumnGraphModel
     
     var items: [GraphColumnItemData] {
-        model.items
-    }
-    
-    var maxValue: CGFloat {
-        items.map({ $0.value }).max() ?? 0.0
+        model.rawItems
     }
     
     var body: some View {
         GeometryReader { geometry in
             LazyVGrid(columns: gridItems(inside: geometry)) {
                 ForEach(items) { item in
-                    SmallColumnGraphColumnView(item: item, maxValue: maxValue)
+                    SmallColumnGraphColumnView(item: item, maxValue: model.maxValue)
                         .frame(height: geometry.size.height, alignment: .center)
                 }
             }
@@ -50,8 +46,7 @@ struct SmallColumnGraphView_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack {
-            SmallColumnGraphView()
-                .environmentObject(model)
+            SmallColumnGraphView(model: model)
             
             Button {
                 model.updateItems(randomizedItems())

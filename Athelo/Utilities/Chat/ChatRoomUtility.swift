@@ -108,7 +108,7 @@ final class ChatRoomUtility {
     }
     
     // MARK: - Incoming messages handling
-    private func handleIncomingChatMessage(_ chatMessage: MessagingIncomingChatSocketMessage) {        
+    private func handleIncomingChatMessage(_ chatMessage: MessagingIncomingChatSocketMessage) {
         guard chatMessage.chatRoomIdentifier == roomIdentifier else {
             return
         }

@@ -25,6 +25,9 @@
 		3E0D55AD28747EB700E2EE6A /* ActivityRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0D55AC28747EB700E2EE6A /* ActivityRouter.swift */; };
 		3E0D55AF2874865700E2EE6A /* SleepViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0D55AE2874865700E2EE6A /* SleepViewModel.swift */; };
 		3E0D55B12874869600E2EE6A /* SleepRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0D55B02874869600E2EE6A /* SleepRouter.swift */; };
+		3E12D47A29C491B2007DF485 /* SelectPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E12D47929C491B2007DF485 /* SelectPatientView.swift */; };
+		3E12D47C29C491C8007DF485 /* SelectPatientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E12D47B29C491C8007DF485 /* SelectPatientModel.swift */; };
+		3E12D47F29C49440007DF485 /* RadioStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E12D47E29C49440007DF485 /* RadioStateView.swift */; };
 		3E13418B28463722007C1381 /* WindowOverlayUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E13418A28463722007C1381 /* WindowOverlayUtility.swift */; };
 		3E13418D28463F31007C1381 /* UIView+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E13418C28463F31007C1381 /* UIView+Styling.swift */; };
 		3E13419028464468007C1381 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E13418F28464468007C1381 /* LoadingView.swift */; };
@@ -45,6 +48,8 @@
 		3E14C6902859EA41002183F5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E14C68F2859EA41002183F5 /* EditProfileViewController.swift */; };
 		3E14C6922859EA78002183F5 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E14C6912859EA78002183F5 /* EditProfileViewModel.swift */; };
 		3E14C6942859EA84002183F5 /* EditProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E14C6932859EA84002183F5 /* EditProfileRouter.swift */; };
+		3E15486329A77B8F003EB241 /* CaregiverRoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E15486229A77B8F003EB241 /* CaregiverRoleModel.swift */; };
+		3E15486529A77CA8003EB241 /* IdentityCommonProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E15486429A77CA8003EB241 /* IdentityCommonProfileData.swift */; };
 		3E16435E2849FD59000A863C /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E16435D2849FD59000A863C /* ForgotPasswordViewModel.swift */; };
 		3E164361284A0F05000A863C /* SignUpWithEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E164360284A0F05000A863C /* SignUpWithEmailViewController.swift */; };
 		3E164363284A0F30000A863C /* SignUpWithEmailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E164362284A0F30000A863C /* SignUpWithEmailRouter.swift */; };
@@ -53,6 +58,10 @@
 		3E16436A284A5283000A863C /* AdditionalProfileInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E164369284A5283000A863C /* AdditionalProfileInfoViewModel.swift */; };
 		3E16436C284A52BD000A863C /* AdditionalProfileInfoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E16436B284A52BD000A863C /* AdditionalProfileInfoRouter.swift */; };
 		3E16436E284A61DB000A863C /* Publisher+ViewModelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E16436D284A61DB000A863C /* Publisher+ViewModelState.swift */; };
+		3E1C13A128C1F6580096E4B7 /* InvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1C13A028C1F6580096E4B7 /* InvitationView.swift */; };
+		3E1C13A628C206160096E4B7 /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1C13A528C206160096E4B7 /* InvitationCodeViewController.swift */; };
+		3E1C13A828C206550096E4B7 /* InvitationCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1C13A728C206550096E4B7 /* InvitationCodeViewModel.swift */; };
+		3E1C13AA28C206670096E4B7 /* InvitationCodeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1C13A928C206670096E4B7 /* InvitationCodeRouter.swift */; };
 		3E1C7C6028B6413300D8646B /* CGPoint+Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1C7C5F28B6413300D8646B /* CGPoint+Conversion.swift */; };
 		3E1E6E17289909D800EEC8F3 /* SleepStatsContainerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1E6E16289909D800EEC8F3 /* SleepStatsContainerModel.swift */; };
 		3E1E785628B4C9BC00ED1E73 /* CurvePointsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1E785528B4C9BC00ED1E73 /* CurvePointsData.swift */; };
@@ -60,7 +69,22 @@
 		3E2153782893D23500737BCC /* StyledBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2153772893D23500737BCC /* StyledBackground.swift */; };
 		3E21537B2893DBFC00737BCC /* SleepStatsPercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21537A2893DBFC00737BCC /* SleepStatsPercentageView.swift */; };
 		3E2153802893DCB800737BCC /* SleepStatsSinglePercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21537F2893DCB800737BCC /* SleepStatsSinglePercentageView.swift */; };
+		3E243A0129DAE57700282802 /* String+Decoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E243A0029DAE57700282802 /* String+Decoration.swift */; };
 		3E264D08284F403100316BBB /* Completion+ViewModelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E264D07284F403100316BBB /* Completion+ViewModelState.swift */; };
+		3E27092529D2C0AC00A7B09C /* SelectedWardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27092429D2C0AC00A7B09C /* SelectedWardModel.swift */; };
+		3E27092729D2DD1900A7B09C /* WindowOverlayUtility+CustomOverlays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27092629D2DD1900A7B09C /* WindowOverlayUtility+CustomOverlays.swift */; };
+		3E27092B29D303C600A7B09C /* FadingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27092A29D303C600A7B09C /* FadingScrollView.swift */; };
+		3E27092E29D3046F00A7B09C /* BlendingGradientWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27092D29D3046F00A7B09C /* BlendingGradientWrapperView.swift */; };
+		3E27093129D30D3000A7B09C /* Contacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E27093029D30D3000A7B09C /* Contacts.storyboard */; };
+		3E27093529D30D6800A7B09C /* CaregiverListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27093429D30D6800A7B09C /* CaregiverListViewController.swift */; };
+		3E27093729D30D7300A7B09C /* PatientListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27093629D30D7300A7B09C /* PatientListViewController.swift */; };
+		3E27093929D30D8600A7B09C /* CaregiverListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27093829D30D8600A7B09C /* CaregiverListViewModel.swift */; };
+		3E27093B29D30D9000A7B09C /* PatientListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27093A29D30D9000A7B09C /* PatientListViewModel.swift */; };
+		3E27093D29D30D9800A7B09C /* CaregiverListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27093C29D30D9800A7B09C /* CaregiverListRouter.swift */; };
+		3E27093F29D30DB900A7B09C /* PatientListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27093E29D30DB900A7B09C /* PatientListRouter.swift */; };
+		3E27094229D31A9700A7B09C /* OptionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27094129D31A9700A7B09C /* OptionSheetView.swift */; };
+		3E27094429D3247200A7B09C /* OptionSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27094329D3247200A7B09C /* OptionSheetModel.swift */; };
+		3E27094629D3248B00A7B09C /* OptionSheetItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27094529D3248B00A7B09C /* OptionSheetItem.swift */; };
 		3E27097E2863017300D53272 /* HTMLContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27097D2863017300D53272 /* HTMLContent.swift */; };
 		3E2709832863203000D53272 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2709822863203000D53272 /* RoundedCorners.swift */; };
 		3E270ACA2855FE91001A297C /* UINavigationItem+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E270AC92855FE91001A297C /* UINavigationItem+Styling.swift */; };
@@ -68,12 +92,41 @@
 		3E271B2528A27D05004C467B /* MultiValueColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E271B2428A27D05004C467B /* MultiValueColumnView.swift */; };
 		3E271B2728A27D1A004C467B /* GraphMultiValueColumnChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E271B2628A27D1A004C467B /* GraphMultiValueColumnChartData.swift */; };
 		3E271B2928A28BDB004C467B /* Double+ChartLegend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E271B2828A28BDB004C467B /* Double+ChartLegend.swift */; };
+		3E313A5029A60EE1005DEC43 /* AccessCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E313A4F29A60EE1005DEC43 /* AccessCodeViewController.swift */; };
+		3E313A5229A60EEA005DEC43 /* AccessCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E313A5129A60EEA005DEC43 /* AccessCodeViewModel.swift */; };
+		3E313A5429A60EF3005DEC43 /* AccessCodeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E313A5329A60EF3005DEC43 /* AccessCodeRouter.swift */; };
+		3E313A5729A6117B005DEC43 /* AccessCodeUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E313A5629A6117B005DEC43 /* AccessCodeUtility.swift */; };
+		3E313A5929A61BF7005DEC43 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E313A5829A61BF7005DEC43 /* TextFields.swift */; };
+		3E32C67F2915421900C7064D /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		3E33C81C28869ECD0059B0D3 /* UIViewController+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C81B28869ECD0059B0D3 /* UIViewController+Messages.swift */; };
 		3E33C81E28869FFB0059B0D3 /* Error+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C81D28869FFB0059B0D3 /* Error+Messages.swift */; };
 		3E33C8202886C51B0059B0D3 /* CommunitiesListLiveUpdateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33C81F2886C51B0059B0D3 /* CommunitiesListLiveUpdateHandler.swift */; };
+		3E37A3BC28DB15D500201306 /* PrivateChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37A3BB28DB15D500201306 /* PrivateChatListViewController.swift */; };
+		3E37A3BE28DB160100201306 /* PrivateChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37A3BD28DB160100201306 /* PrivateChatListViewModel.swift */; };
+		3E37A3C028DB160B00201306 /* PrivateChatListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37A3BF28DB160B00201306 /* PrivateChatListRouter.swift */; };
+		3E37A3C228DB1A9100201306 /* CaregivingRelationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37A3C128DB1A9100201306 /* CaregivingRelationData.swift */; };
+		3E37A3C628DB215800201306 /* PrivateChatListLiveUpdateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37A3C528DB215800201306 /* PrivateChatListLiveUpdateHandler.swift */; };
+		3E37A3C828DB4B1100201306 /* PrivateChatListUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E37A3C728DB4B1100201306 /* PrivateChatListUtility.swift */; };
+		3E3B624A2ADE6A8A00A762F0 /* HealthAcceptCaregiverInvitationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B62492ADE6A8A00A762F0 /* HealthAcceptCaregiverInvitationRequest.swift */; };
+		3E3B62502ADE6AF800A762F0 /* HealthInviteCaregiverRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B624B2ADE6AF700A762F0 /* HealthInviteCaregiverRequest.swift */; };
+		3E3B62512ADE6AF800A762F0 /* HealthInvitationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B624C2ADE6AF800A762F0 /* HealthInvitationsRequest.swift */; };
+		3E3B62522ADE6AF800A762F0 /* HealthCancelInvitationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B624D2ADE6AF800A762F0 /* HealthCancelInvitationRequest.swift */; };
+		3E3B62532ADE6AF800A762F0 /* HealthRemoveCaregiverRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B624E2ADE6AF800A762F0 /* HealthRemoveCaregiverRequest.swift */; };
+		3E3B62542ADE6AF800A762F0 /* HealthRemovePatientRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B624F2ADE6AF800A762F0 /* HealthRemovePatientRequest.swift */; };
+		3E3B62562ADE7A1000A762F0 /* NetworkingAPIHealthServices+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B62552ADE7A1000A762F0 /* NetworkingAPIHealthServices+Extensions.swift */; };
 		3E3C149C289D2518000EAEF9 /* DeviceConfigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3C149B289D2518000EAEF9 /* DeviceConfigData.swift */; };
 		3E3C149E289D2555000EAEF9 /* ApplicationSettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3C149D289D2555000EAEF9 /* ApplicationSettingsData.swift */; };
+		3E3C585D28DC4A4700358EC8 /* CreatedChatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3C585C28DC4A4700358EC8 /* CreatedChatData.swift */; };
 		3E3E469528AFCB5B009F8766 /* PanInterceptingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3E469428AFCB5B009F8766 /* PanInterceptingView.swift */; };
+		3E3F449228C5D8F200A7665E /* ConversationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F449128C5D8F200A7665E /* ConversationItemView.swift */; };
+		3E3F449428C5E1D100A7665E /* PrivateChatRoomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F449328C5E1D100A7665E /* PrivateChatRoomData.swift */; };
+		3E3F449628C5E25400A7665E /* ConversationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F449528C5E25400A7665E /* ConversationData.swift */; };
+		3E3F449D28C5EDD400A7665E /* Date+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F449C28C5EDD400A7665E /* Date+Formatting.swift */; };
+		3E3F449F28C5F1C600A7665E /* ConversationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F449E28C5F1C600A7665E /* ConversationListView.swift */; };
+		3E3F44A128C5F2AB00A7665E /* ConversationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F44A028C5F2AB00A7665E /* ConversationListModel.swift */; };
+		3E3F44A428C5FE4E00A7665E /* ContactItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F44A328C5FE4E00A7665E /* ContactItemView.swift */; };
+		3E3F44A628C602C000A7665E /* ContactListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F44A528C602C000A7665E /* ContactListView.swift */; };
+		3E3F44A828C602D000A7665E /* ContactListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F44A728C602D000A7665E /* ContactListModel.swift */; };
 		3E42A2122897B419004B12C9 /* MyDeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E42A2112897B419004B12C9 /* MyDeviceViewModel.swift */; };
 		3E42A2152897B520004B12C9 /* FitbitProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E42A2142897B51F004B12C9 /* FitbitProfileData.swift */; };
 		3E43B9AE2847926600295E2F /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E43B9AD2847926600295E2F /* Authentication.storyboard */; };
@@ -157,6 +210,7 @@
 		3E75F53428A516B900000968 /* CGPoint+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E75F53328A516B900000968 /* CGPoint+Distance.swift */; };
 		3E75F53928A51CFA00000968 /* GraphHorizontalGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E75F53828A51CFA00000968 /* GraphHorizontalGridView.swift */; };
 		3E75F53B28A5227500000968 /* Array+NumberFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E75F53A28A5227500000968 /* Array+NumberFormatting.swift */; };
+		3E75FDC029C9E81C006F62BA /* InviteCaregiverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E75FDBF29C9E81C006F62BA /* InviteCaregiverViewController.swift */; };
 		3E78A6622876BAB3002599F7 /* NewsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78A6612876BAB3002599F7 /* NewsRouter.swift */; };
 		3E78A6652876C3BE002599F7 /* NoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78A6642876C3BE002599F7 /* NoContentView.swift */; };
 		3E78A6672876C3C4002599F7 /* NoContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E78A6662876C3C4002599F7 /* NoContentView.xib */; };
@@ -353,6 +407,8 @@
 		3EA4FF16288AC75F00717DA7 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4FF15288AC75F00717DA7 /* SliderView.swift */; };
 		3EA4FF18288AC76600717DA7 /* SliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EA4FF17288AC76600717DA7 /* SliderView.xib */; };
 		3EA4FF1C288ACC1200717DA7 /* StyledSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4FF1B288ACC1200717DA7 /* StyledSlider.swift */; };
+		3EA711FF2913C6CE000C4078 /* UITextField+Publishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA711FE2913C6CE000C4078 /* UITextField+Publishers.swift */; };
+		3EA712012913C6E3000C4078 /* UITextView+Publishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA712002913C6E3000C4078 /* UITextView+Publishers.swift */; };
 		3EA88011286462B600E81741 /* CalendarItemsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA88010286462B600E81741 /* CalendarItemsModel.swift */; };
 		3EA88014286472CE00E81741 /* FAQItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA88013286472CE00E81741 /* FAQItemData.swift */; };
 		3EA8801728648E1200E81741 /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EA8801628648E1200E81741 /* Feedback.storyboard */; };
@@ -364,6 +420,10 @@
 		3EA89088288ECF8400A9A8B0 /* MyDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA89087288ECF8400A9A8B0 /* MyDeviceViewController.swift */; };
 		3EA8908A288ED18800A9A8B0 /* MyDeviceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA89089288ED18800A9A8B0 /* MyDeviceRouter.swift */; };
 		3EA8908C288ED53D00A9A8B0 /* LocalNotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA8908B288ED53D00A9A8B0 /* LocalNotificationData.swift */; };
+		3EA979CF29CC3723002B6764 /* InviteCaregiverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA979CE29CC3723002B6764 /* InviteCaregiverViewModel.swift */; };
+		3EA979D129CC3F35002B6764 /* HealthInvitationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA979D029CC3F35002B6764 /* HealthInvitationData.swift */; };
+		3EA979D329CC4E9A002B6764 /* InviteCaregiverRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA979D229CC4E9A002B6764 /* InviteCaregiverRouter.swift */; };
+		3EA979D529CC9F1B002B6764 /* IdentityRoleUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA979D429CC9F1B002B6764 /* IdentityRoleUtility.swift */; };
 		3EAACE3C285A29F100AE1389 /* UITextField+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAACE3B285A29F100AE1389 /* UITextField+Toolbar.swift */; };
 		3EAF3D5B2852225000C2685D /* NetworkingAPIErrorMessage+ErrorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF3D5A2852225000C2685D /* NetworkingAPIErrorMessage+ErrorDetails.swift */; };
 		3EAF3D5E28522DA300C2685D /* InteractableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAF3D5D28522DA300C2685D /* InteractableLabel.swift */; };
@@ -375,6 +435,15 @@
 		3EB21BB72872D43D00ACE602 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB21BB62872D43D00ACE602 /* RoundedView.swift */; };
 		3EB387242878145100DF56EF /* BlendingGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB387232878145100DF56EF /* BlendingGradientView.swift */; };
 		3EB38729287827C700DF56EF /* NewsTopicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB38728287827C700DF56EF /* NewsTopicData.swift */; };
+		3EBE256F29C9D7D200212FE4 /* SwiftUI+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE256E29C9D7D200212FE4 /* SwiftUI+Animation.swift */; };
+		3EBE257229C9D98300212FE4 /* HealthRelationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE257129C9D98300212FE4 /* HealthRelationData.swift */; };
+		3EBE257729C9D9D600212FE4 /* HealthPermissionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE257629C9D9D600212FE4 /* HealthPermissionsData.swift */; };
+		3EBE257929C9DAC400212FE4 /* RelationInterpretationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE257829C9DAC400212FE4 /* RelationInterpretationData.swift */; };
+		3EBE8FE828D2FF1E0092CCC8 /* SelectRoleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE8FE728D2FF1E0092CCC8 /* SelectRoleScreen.swift */; };
+		3EBE8FEA28D3010D0092CCC8 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE8FE928D3010D0092CCC8 /* UserRole.swift */; };
+		3EBE8FEC28D30EAA0092CCC8 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE8FEB28D30EAA0092CCC8 /* AddContactViewController.swift */; };
+		3EBE8FEE28D310D60092CCC8 /* AddContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE8FED28D310D60092CCC8 /* AddContactViewModel.swift */; };
+		3EBE8FF028D311820092CCC8 /* AddContactRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE8FEF28D311820092CCC8 /* AddContactRouter.swift */; };
 		3EBF4F6628632614000E647F /* Faq.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EBF4F6528632614000E647F /* Faq.storyboard */; };
 		3EBF4F692863264C000E647F /* AskAtheloViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF4F682863264C000E647F /* AskAtheloViewController.swift */; };
 		3EBF4F6B28632E30000E647F /* AskAtheloRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBF4F6A28632E30000E647F /* AskAtheloRouter.swift */; };
@@ -438,6 +507,9 @@
 		3ECB51FA288056E80044F3B7 /* Inter-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB51F9288056E80044F3B7 /* Inter-MediumItalic.otf */; };
 		3ECB51FC288056EF0044F3B7 /* Inter-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB51FB288056EF0044F3B7 /* Inter-SemiBoldItalic.otf */; };
 		3ECB51FE288056F50044F3B7 /* Inter-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB51FD288056F50044F3B7 /* Inter-ThinItalic.otf */; };
+		3ECCA77C29D5AD50001DF5DF /* CaregiverListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECCA77B29D5AD50001DF5DF /* CaregiverListScreen.swift */; };
+		3ECCA78129D5BDED001DF5DF /* InvitationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECCA78029D5BDED001DF5DF /* InvitationItemView.swift */; };
+		3ECCA78329D5BDF6001DF5DF /* InvitationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECCA78229D5BDF6001DF5DF /* InvitationListView.swift */; };
 		3ED0BFAE28A239CC00224561 /* SmallColumnGraphColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED0BFA828A239CC00224561 /* SmallColumnGraphColumnView.swift */; };
 		3ED0BFAF28A239CC00224561 /* SmallColumnGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED0BFA928A239CC00224561 /* SmallColumnGraphView.swift */; };
 		3ED0BFB028A239CC00224561 /* SmallColumnGraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED0BFAA28A239CC00224561 /* SmallColumnGraphModel.swift */; };
@@ -590,9 +662,29 @@
 		3EEB1CF6288FF2B100E0AAA4 /* SleepSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEB1CF5288FF2B100E0AAA4 /* SleepSummaryView.swift */; };
 		3EF1B8942853AAC80010553D /* SectionTitleCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1B8922853AAC80010553D /* SectionTitleCollectionReusableView.swift */; };
 		3EF1B8952853AAC80010553D /* SectionTitleCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF1B8932853AAC80010553D /* SectionTitleCollectionReusableView.xib */; };
+		3EF218C829C8549100F0EA95 /* CaregiverRoleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218C729C8549100F0EA95 /* CaregiverRoleScreen.swift */; };
+		3EF218CB29C8552400F0EA95 /* PatientRoleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218CA29C8552400F0EA95 /* PatientRoleScreen.swift */; };
+		3EF218CD29C8557500F0EA95 /* PatientRoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218CC29C8557500F0EA95 /* PatientRoleModel.swift */; };
+		3EF218D029C8589900F0EA95 /* ContactItemAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218CF29C8589900F0EA95 /* ContactItemAction.swift */; };
+		3EF218D229C85C8D00F0EA95 /* ContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218D129C85C8D00F0EA95 /* ContactData.swift */; };
+		3EF218D529C8753300F0EA95 /* Role.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EF218D429C8753300F0EA95 /* Role.storyboard */; };
+		3EF218D829C8757F00F0EA95 /* SelectRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218D729C8757F00F0EA95 /* SelectRoleViewController.swift */; };
+		3EF218DA29C8801D00F0EA95 /* SelectRoleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218D929C8801D00F0EA95 /* SelectRoleRouter.swift */; };
+		3EF218DD29C89FEA00F0EA95 /* WaveBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218DC29C89FEA00F0EA95 /* WaveBackgroundView.swift */; };
+		3EF218E129C8A40200F0EA95 /* CaregiverRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218E029C8A40200F0EA95 /* CaregiverRoleViewController.swift */; };
+		3EF218E329C8A40D00F0EA95 /* PatientRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218E229C8A40D00F0EA95 /* PatientRoleViewController.swift */; };
+		3EF218E529C8A5B000F0EA95 /* CaregiverRoleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218E429C8A5B000F0EA95 /* CaregiverRoleViewModel.swift */; };
+		3EF218E729C8A5D100F0EA95 /* PatientRoleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218E629C8A5D100F0EA95 /* PatientRoleViewModel.swift */; };
+		3EF218E929C8A5FF00F0EA95 /* CaregiverRoleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218E829C8A5FF00F0EA95 /* CaregiverRoleRouter.swift */; };
+		3EF218EB29C8A61500F0EA95 /* PatientRoleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF218EA29C8A61500F0EA95 /* PatientRoleRouter.swift */; };
 		3EF70956284F5BF500B6FDB5 /* IdentitySignInWithAppleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF70955284F5BF500B6FDB5 /* IdentitySignInWithAppleHandler.swift */; };
 		3EF70959284F6B5D00B6FDB5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3EF70958284F6B5D00B6FDB5 /* GoogleSignIn */; };
 		3EF70960284F6E1D00B6FDB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EF7095F284F6E1D00B6FDB5 /* GoogleService-Info.plist */; };
+		3EF7BC3A29CD8D8400C253B2 /* RawRepresentable+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7BC3929CD8D8400C253B2 /* RawRepresentable+UserDefaults.swift */; };
+		3EF7BC3D29CDB21200C253B2 /* SelectedWardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7BC3C29CDB21200C253B2 /* SelectedWardView.swift */; };
+		3EF7BC4029CDC09B00C253B2 /* SelectContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7BC3F29CDC09B00C253B2 /* SelectContactView.swift */; };
+		3EF7BC4329CDC74200C253B2 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7BC4229CDC74200C253B2 /* Size.swift */; };
+		3EF9FA1E2943575A00BC7D9D /* ConfigurationReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF9FA1D2943575A00BC7D9D /* ConfigurationReader.swift */; };
 		3EFC0B452850AA1800841341 /* PageProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC0B442850AA1800841341 /* PageProgressView.swift */; };
 		3EFC0B472850AA2000841341 /* PageProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC0B462850AA2000841341 /* PageProgressView.xib */; };
 		3EFC0B4A2850BBB300841341 /* InfoMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC0B492850BBB300841341 /* InfoMessageView.swift */; };
@@ -620,6 +712,9 @@
 		3E0D55AC28747EB700E2EE6A /* ActivityRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRouter.swift; sourceTree = "<group>"; };
 		3E0D55AE2874865700E2EE6A /* SleepViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepViewModel.swift; sourceTree = "<group>"; };
 		3E0D55B02874869600E2EE6A /* SleepRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepRouter.swift; sourceTree = "<group>"; };
+		3E12D47929C491B2007DF485 /* SelectPatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPatientView.swift; sourceTree = "<group>"; };
+		3E12D47B29C491C8007DF485 /* SelectPatientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPatientModel.swift; sourceTree = "<group>"; };
+		3E12D47E29C49440007DF485 /* RadioStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioStateView.swift; sourceTree = "<group>"; };
 		3E13418A28463722007C1381 /* WindowOverlayUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowOverlayUtility.swift; sourceTree = "<group>"; };
 		3E13418C28463F31007C1381 /* UIView+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Styling.swift"; sourceTree = "<group>"; };
 		3E13418F28464468007C1381 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -640,6 +735,8 @@
 		3E14C68F2859EA41002183F5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		3E14C6912859EA78002183F5 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		3E14C6932859EA84002183F5 /* EditProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileRouter.swift; sourceTree = "<group>"; };
+		3E15486229A77B8F003EB241 /* CaregiverRoleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaregiverRoleModel.swift; sourceTree = "<group>"; };
+		3E15486429A77CA8003EB241 /* IdentityCommonProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityCommonProfileData.swift; sourceTree = "<group>"; };
 		3E16435D2849FD59000A863C /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		3E164360284A0F05000A863C /* SignUpWithEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWithEmailViewController.swift; sourceTree = "<group>"; };
 		3E164362284A0F30000A863C /* SignUpWithEmailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWithEmailRouter.swift; sourceTree = "<group>"; };
@@ -648,6 +745,10 @@
 		3E164369284A5283000A863C /* AdditionalProfileInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalProfileInfoViewModel.swift; sourceTree = "<group>"; };
 		3E16436B284A52BD000A863C /* AdditionalProfileInfoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalProfileInfoRouter.swift; sourceTree = "<group>"; };
 		3E16436D284A61DB000A863C /* Publisher+ViewModelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+ViewModelState.swift"; sourceTree = "<group>"; };
+		3E1C13A028C1F6580096E4B7 /* InvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationView.swift; sourceTree = "<group>"; };
+		3E1C13A528C206160096E4B7 /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
+		3E1C13A728C206550096E4B7 /* InvitationCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewModel.swift; sourceTree = "<group>"; };
+		3E1C13A928C206670096E4B7 /* InvitationCodeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeRouter.swift; sourceTree = "<group>"; };
 		3E1C7C5F28B6413300D8646B /* CGPoint+Conversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Conversion.swift"; sourceTree = "<group>"; };
 		3E1E6E16289909D800EEC8F3 /* SleepStatsContainerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepStatsContainerModel.swift; sourceTree = "<group>"; };
 		3E1E785528B4C9BC00ED1E73 /* CurvePointsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvePointsData.swift; sourceTree = "<group>"; };
@@ -655,7 +756,22 @@
 		3E2153772893D23500737BCC /* StyledBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledBackground.swift; sourceTree = "<group>"; };
 		3E21537A2893DBFC00737BCC /* SleepStatsPercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepStatsPercentageView.swift; sourceTree = "<group>"; };
 		3E21537F2893DCB800737BCC /* SleepStatsSinglePercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepStatsSinglePercentageView.swift; sourceTree = "<group>"; };
+		3E243A0029DAE57700282802 /* String+Decoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Decoration.swift"; sourceTree = "<group>"; };
 		3E264D07284F403100316BBB /* Completion+ViewModelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Completion+ViewModelState.swift"; sourceTree = "<group>"; };
+		3E27092429D2C0AC00A7B09C /* SelectedWardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedWardModel.swift; sourceTree = "<group>"; };
+		3E27092629D2DD1900A7B09C /* WindowOverlayUtility+CustomOverlays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WindowOverlayUtility+CustomOverlays.swift"; sourceTree = "<group>"; };
+		3E27092A29D303C600A7B09C /* FadingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadingScrollView.swift; sourceTree = "<group>"; };
+		3E27092D29D3046F00A7B09C /* BlendingGradientWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlendingGradientWrapperView.swift; sourceTree = "<group>"; };
+		3E27093029D30D3000A7B09C /* Contacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Contacts.storyboard; sourceTree = "<group>"; };
+		3E27093429D30D6800A7B09C /* CaregiverListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaregiverListViewController.swift; sourceTree = "<group>"; };
+		3E27093629D30D7300A7B09C /* PatientListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListViewController.swift; sourceTree = "<group>"; };
+		3E27093829D30D8600A7B09C /* CaregiverListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaregiverListViewModel.swift; sourceTree = "<group>"; };
+		3E27093A29D30D9000A7B09C /* PatientListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListViewModel.swift; sourceTree = "<group>"; };
+		3E27093C29D30D9800A7B09C /* CaregiverListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaregiverListRouter.swift; sourceTree = "<group>"; };
+		3E27093E29D30DB900A7B09C /* PatientListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListRouter.swift; sourceTree = "<group>"; };
+		3E27094129D31A9700A7B09C /* OptionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSheetView.swift; sourceTree = "<group>"; };
+		3E27094329D3247200A7B09C /* OptionSheetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSheetModel.swift; sourceTree = "<group>"; };
+		3E27094529D3248B00A7B09C /* OptionSheetItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSheetItem.swift; sourceTree = "<group>"; };
 		3E27097D2863017300D53272 /* HTMLContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLContent.swift; sourceTree = "<group>"; };
 		3E2709822863203000D53272 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 		3E270AC92855FE91001A297C /* UINavigationItem+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+Styling.swift"; sourceTree = "<group>"; };
@@ -663,12 +779,40 @@
 		3E271B2428A27D05004C467B /* MultiValueColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiValueColumnView.swift; sourceTree = "<group>"; };
 		3E271B2628A27D1A004C467B /* GraphMultiValueColumnChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphMultiValueColumnChartData.swift; sourceTree = "<group>"; };
 		3E271B2828A28BDB004C467B /* Double+ChartLegend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ChartLegend.swift"; sourceTree = "<group>"; };
+		3E313A4F29A60EE1005DEC43 /* AccessCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessCodeViewController.swift; sourceTree = "<group>"; };
+		3E313A5129A60EEA005DEC43 /* AccessCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessCodeViewModel.swift; sourceTree = "<group>"; };
+		3E313A5329A60EF3005DEC43 /* AccessCodeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessCodeRouter.swift; sourceTree = "<group>"; };
+		3E313A5629A6117B005DEC43 /* AccessCodeUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessCodeUtility.swift; sourceTree = "<group>"; };
+		3E313A5829A61BF7005DEC43 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
 		3E33C81B28869ECD0059B0D3 /* UIViewController+Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Messages.swift"; sourceTree = "<group>"; };
 		3E33C81D28869FFB0059B0D3 /* Error+Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Messages.swift"; sourceTree = "<group>"; };
 		3E33C81F2886C51B0059B0D3 /* CommunitiesListLiveUpdateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunitiesListLiveUpdateHandler.swift; sourceTree = "<group>"; };
+		3E37A3BB28DB15D500201306 /* PrivateChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateChatListViewController.swift; sourceTree = "<group>"; };
+		3E37A3BD28DB160100201306 /* PrivateChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateChatListViewModel.swift; sourceTree = "<group>"; };
+		3E37A3BF28DB160B00201306 /* PrivateChatListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateChatListRouter.swift; sourceTree = "<group>"; };
+		3E37A3C128DB1A9100201306 /* CaregivingRelationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaregivingRelationData.swift; sourceTree = "<group>"; };
+		3E37A3C528DB215800201306 /* PrivateChatListLiveUpdateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateChatListLiveUpdateHandler.swift; sourceTree = "<group>"; };
+		3E37A3C728DB4B1100201306 /* PrivateChatListUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateChatListUtility.swift; sourceTree = "<group>"; };
+		3E3B62492ADE6A8A00A762F0 /* HealthAcceptCaregiverInvitationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthAcceptCaregiverInvitationRequest.swift; sourceTree = "<group>"; };
+		3E3B624B2ADE6AF700A762F0 /* HealthInviteCaregiverRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthInviteCaregiverRequest.swift; sourceTree = "<group>"; };
+		3E3B624C2ADE6AF800A762F0 /* HealthInvitationsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthInvitationsRequest.swift; sourceTree = "<group>"; };
+		3E3B624D2ADE6AF800A762F0 /* HealthCancelInvitationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthCancelInvitationRequest.swift; sourceTree = "<group>"; };
+		3E3B624E2ADE6AF800A762F0 /* HealthRemoveCaregiverRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRemoveCaregiverRequest.swift; sourceTree = "<group>"; };
+		3E3B624F2ADE6AF800A762F0 /* HealthRemovePatientRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthRemovePatientRequest.swift; sourceTree = "<group>"; };
+		3E3B62552ADE7A1000A762F0 /* NetworkingAPIHealthServices+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkingAPIHealthServices+Extensions.swift"; sourceTree = "<group>"; };
 		3E3C149B289D2518000EAEF9 /* DeviceConfigData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceConfigData.swift; sourceTree = "<group>"; };
 		3E3C149D289D2555000EAEF9 /* ApplicationSettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSettingsData.swift; sourceTree = "<group>"; };
+		3E3C585C28DC4A4700358EC8 /* CreatedChatData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedChatData.swift; sourceTree = "<group>"; };
 		3E3E469428AFCB5B009F8766 /* PanInterceptingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanInterceptingView.swift; sourceTree = "<group>"; };
+		3E3F449128C5D8F200A7665E /* ConversationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationItemView.swift; sourceTree = "<group>"; };
+		3E3F449328C5E1D100A7665E /* PrivateChatRoomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateChatRoomData.swift; sourceTree = "<group>"; };
+		3E3F449528C5E25400A7665E /* ConversationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationData.swift; sourceTree = "<group>"; };
+		3E3F449C28C5EDD400A7665E /* Date+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatting.swift"; sourceTree = "<group>"; };
+		3E3F449E28C5F1C600A7665E /* ConversationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
+		3E3F44A028C5F2AB00A7665E /* ConversationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListModel.swift; sourceTree = "<group>"; };
+		3E3F44A328C5FE4E00A7665E /* ContactItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItemView.swift; sourceTree = "<group>"; };
+		3E3F44A528C602C000A7665E /* ContactListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListView.swift; sourceTree = "<group>"; };
+		3E3F44A728C602D000A7665E /* ContactListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListModel.swift; sourceTree = "<group>"; };
 		3E42A2112897B419004B12C9 /* MyDeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeviceViewModel.swift; sourceTree = "<group>"; };
 		3E42A2142897B51F004B12C9 /* FitbitProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitbitProfileData.swift; sourceTree = "<group>"; };
 		3E43B9AD2847926600295E2F /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
@@ -752,6 +896,7 @@
 		3E75F53328A516B900000968 /* CGPoint+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Distance.swift"; sourceTree = "<group>"; };
 		3E75F53828A51CFA00000968 /* GraphHorizontalGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphHorizontalGridView.swift; sourceTree = "<group>"; };
 		3E75F53A28A5227500000968 /* Array+NumberFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+NumberFormatting.swift"; sourceTree = "<group>"; };
+		3E75FDBF29C9E81C006F62BA /* InviteCaregiverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCaregiverViewController.swift; sourceTree = "<group>"; };
 		3E78A6612876BAB3002599F7 /* NewsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRouter.swift; sourceTree = "<group>"; };
 		3E78A6642876C3BE002599F7 /* NoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
 		3E78A6662876C3C4002599F7 /* NoContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoContentView.xib; sourceTree = "<group>"; };
@@ -948,6 +1093,8 @@
 		3EA4FF15288AC75F00717DA7 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		3EA4FF17288AC76600717DA7 /* SliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderView.xib; sourceTree = "<group>"; };
 		3EA4FF1B288ACC1200717DA7 /* StyledSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledSlider.swift; sourceTree = "<group>"; };
+		3EA711FE2913C6CE000C4078 /* UITextField+Publishers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Publishers.swift"; sourceTree = "<group>"; };
+		3EA712002913C6E3000C4078 /* UITextView+Publishers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Publishers.swift"; sourceTree = "<group>"; };
 		3EA88010286462B600E81741 /* CalendarItemsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarItemsModel.swift; sourceTree = "<group>"; };
 		3EA88013286472CE00E81741 /* FAQItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQItemData.swift; sourceTree = "<group>"; };
 		3EA8801628648E1200E81741 /* Feedback.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
@@ -959,6 +1106,10 @@
 		3EA89087288ECF8400A9A8B0 /* MyDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeviceViewController.swift; sourceTree = "<group>"; };
 		3EA89089288ED18800A9A8B0 /* MyDeviceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeviceRouter.swift; sourceTree = "<group>"; };
 		3EA8908B288ED53D00A9A8B0 /* LocalNotificationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationData.swift; sourceTree = "<group>"; };
+		3EA979CE29CC3723002B6764 /* InviteCaregiverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCaregiverViewModel.swift; sourceTree = "<group>"; };
+		3EA979D029CC3F35002B6764 /* HealthInvitationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthInvitationData.swift; sourceTree = "<group>"; };
+		3EA979D229CC4E9A002B6764 /* InviteCaregiverRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCaregiverRouter.swift; sourceTree = "<group>"; };
+		3EA979D429CC9F1B002B6764 /* IdentityRoleUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityRoleUtility.swift; sourceTree = "<group>"; };
 		3EAACE3B285A29F100AE1389 /* UITextField+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Toolbar.swift"; sourceTree = "<group>"; };
 		3EAF3D5A2852225000C2685D /* NetworkingAPIErrorMessage+ErrorDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkingAPIErrorMessage+ErrorDetails.swift"; sourceTree = "<group>"; };
 		3EAF3D5D28522DA300C2685D /* InteractableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractableLabel.swift; sourceTree = "<group>"; };
@@ -970,6 +1121,15 @@
 		3EB21BB62872D43D00ACE602 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		3EB387232878145100DF56EF /* BlendingGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlendingGradientView.swift; sourceTree = "<group>"; };
 		3EB38728287827C700DF56EF /* NewsTopicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTopicData.swift; sourceTree = "<group>"; };
+		3EBE256E29C9D7D200212FE4 /* SwiftUI+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Animation.swift"; sourceTree = "<group>"; };
+		3EBE257129C9D98300212FE4 /* HealthRelationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRelationData.swift; sourceTree = "<group>"; };
+		3EBE257629C9D9D600212FE4 /* HealthPermissionsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPermissionsData.swift; sourceTree = "<group>"; };
+		3EBE257829C9DAC400212FE4 /* RelationInterpretationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationInterpretationData.swift; sourceTree = "<group>"; };
+		3EBE8FE728D2FF1E0092CCC8 /* SelectRoleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoleScreen.swift; sourceTree = "<group>"; };
+		3EBE8FE928D3010D0092CCC8 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
+		3EBE8FEB28D30EAA0092CCC8 /* AddContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
+		3EBE8FED28D310D60092CCC8 /* AddContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactViewModel.swift; sourceTree = "<group>"; };
+		3EBE8FEF28D311820092CCC8 /* AddContactRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactRouter.swift; sourceTree = "<group>"; };
 		3EBF4F6528632614000E647F /* Faq.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Faq.storyboard; sourceTree = "<group>"; };
 		3EBF4F682863264C000E647F /* AskAtheloViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAtheloViewController.swift; sourceTree = "<group>"; };
 		3EBF4F6A28632E30000E647F /* AskAtheloRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAtheloRouter.swift; sourceTree = "<group>"; };
@@ -1030,6 +1190,9 @@
 		3ECB51F9288056E80044F3B7 /* Inter-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-MediumItalic.otf"; sourceTree = "<group>"; };
 		3ECB51FB288056EF0044F3B7 /* Inter-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBoldItalic.otf"; sourceTree = "<group>"; };
 		3ECB51FD288056F50044F3B7 /* Inter-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ThinItalic.otf"; sourceTree = "<group>"; };
+		3ECCA77B29D5AD50001DF5DF /* CaregiverListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaregiverListScreen.swift; sourceTree = "<group>"; };
+		3ECCA78029D5BDED001DF5DF /* InvitationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationItemView.swift; sourceTree = "<group>"; };
+		3ECCA78229D5BDF6001DF5DF /* InvitationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationListView.swift; sourceTree = "<group>"; };
 		3ED0BFA828A239CC00224561 /* SmallColumnGraphColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallColumnGraphColumnView.swift; sourceTree = "<group>"; };
 		3ED0BFA928A239CC00224561 /* SmallColumnGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallColumnGraphView.swift; sourceTree = "<group>"; };
 		3ED0BFAA28A239CC00224561 /* SmallColumnGraphModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallColumnGraphModel.swift; sourceTree = "<group>"; };
@@ -1180,9 +1343,31 @@
 		3EEB1CF5288FF2B100E0AAA4 /* SleepSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSummaryView.swift; sourceTree = "<group>"; };
 		3EF1B8922853AAC80010553D /* SectionTitleCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleCollectionReusableView.swift; sourceTree = "<group>"; };
 		3EF1B8932853AAC80010553D /* SectionTitleCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionTitleCollectionReusableView.xib; sourceTree = "<group>"; };
+		3EF218C729C8549100F0EA95 /* CaregiverRoleScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaregiverRoleScreen.swift; sourceTree = "<group>"; };
+		3EF218CA29C8552400F0EA95 /* PatientRoleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientRoleScreen.swift; sourceTree = "<group>"; };
+		3EF218CC29C8557500F0EA95 /* PatientRoleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientRoleModel.swift; sourceTree = "<group>"; };
+		3EF218CF29C8589900F0EA95 /* ContactItemAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItemAction.swift; sourceTree = "<group>"; };
+		3EF218D129C85C8D00F0EA95 /* ContactData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactData.swift; sourceTree = "<group>"; };
+		3EF218D429C8753300F0EA95 /* Role.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Role.storyboard; sourceTree = "<group>"; };
+		3EF218D729C8757F00F0EA95 /* SelectRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoleViewController.swift; sourceTree = "<group>"; };
+		3EF218D929C8801D00F0EA95 /* SelectRoleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoleRouter.swift; sourceTree = "<group>"; };
+		3EF218DC29C89FEA00F0EA95 /* WaveBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveBackgroundView.swift; sourceTree = "<group>"; };
+		3EF218E029C8A40200F0EA95 /* CaregiverRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaregiverRoleViewController.swift; sourceTree = "<group>"; };
+		3EF218E229C8A40D00F0EA95 /* PatientRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientRoleViewController.swift; sourceTree = "<group>"; };
+		3EF218E429C8A5B000F0EA95 /* CaregiverRoleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaregiverRoleViewModel.swift; sourceTree = "<group>"; };
+		3EF218E629C8A5D100F0EA95 /* PatientRoleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientRoleViewModel.swift; sourceTree = "<group>"; };
+		3EF218E829C8A5FF00F0EA95 /* CaregiverRoleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaregiverRoleRouter.swift; sourceTree = "<group>"; };
+		3EF218EA29C8A61500F0EA95 /* PatientRoleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientRoleRouter.swift; sourceTree = "<group>"; };
 		3EF70953284F4D3A00B6FDB5 /* Athelo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Athelo.entitlements; sourceTree = "<group>"; };
 		3EF70955284F5BF500B6FDB5 /* IdentitySignInWithAppleHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitySignInWithAppleHandler.swift; sourceTree = "<group>"; };
 		3EF7095F284F6E1D00B6FDB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3EF7BC3929CD8D8400C253B2 /* RawRepresentable+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+UserDefaults.swift"; sourceTree = "<group>"; };
+		3EF7BC3C29CDB21200C253B2 /* SelectedWardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedWardView.swift; sourceTree = "<group>"; };
+		3EF7BC3F29CDC09B00C253B2 /* SelectContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactView.swift; sourceTree = "<group>"; };
+		3EF7BC4229CDC74200C253B2 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		3EF9FA1D2943575A00BC7D9D /* ConfigurationReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationReader.swift; sourceTree = "<group>"; };
+		3EF9FA1F294357FD00BC7D9D /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		3EF9FA202943580F00BC7D9D /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		3EFC0B442850AA1800841341 /* PageProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageProgressView.swift; sourceTree = "<group>"; };
 		3EFC0B462850AA2000841341 /* PageProgressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageProgressView.xib; sourceTree = "<group>"; };
 		3EFC0B492850BBB300841341 /* InfoMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoMessageView.swift; sourceTree = "<group>"; };
@@ -1198,6 +1383,7 @@
 			files = (
 				3ED85AE02846190B0008EC11 /* SDWebImage in Frameworks */,
 				3EF70959284F6B5D00B6FDB5 /* GoogleSignIn in Frameworks */,
+				3E32C67F2915421900C7064D /* (null) in Frameworks */,
 				3EE9FDD02844C68100BE4661 /* Collections in Frameworks */,
 				3EE9FDD22844C68100BE4661 /* DequeModule in Frameworks */,
 				3EE9FDD42844C68100BE4661 /* OrderedCollections in Frameworks */,
@@ -1275,6 +1461,23 @@
 			path = ConnectDevice;
 			sourceTree = "<group>";
 		};
+		3E12D47829C49179007DF485 /* SelectPatient */ = {
+			isa = PBXGroup;
+			children = (
+				3E12D47929C491B2007DF485 /* SelectPatientView.swift */,
+				3E12D47B29C491C8007DF485 /* SelectPatientModel.swift */,
+			);
+			path = SelectPatient;
+			sourceTree = "<group>";
+		};
+		3E12D47D29C4942D007DF485 /* RadioState */ = {
+			isa = PBXGroup;
+			children = (
+				3E12D47E29C49440007DF485 /* RadioStateView.swift */,
+			);
+			path = RadioState;
+			sourceTree = "<group>";
+		};
 		3E13418928463716007C1381 /* WindowOverlay */ = {
 			isa = PBXGroup;
 			children = (
@@ -1333,6 +1536,7 @@
 			isa = PBXGroup;
 			children = (
 				3EBF4F6E286349B4000E647F /* IdentityAuthenticationMethod.swift */,
+				3E15486429A77CA8003EB241 /* IdentityCommonProfileData.swift */,
 				3E1341A12846644F007C1381 /* IdentityProfileData.swift */,
 				3E1341AE28466559007C1381 /* IdentityUserData.swift */,
 			);
@@ -1407,14 +1611,24 @@
 			children = (
 				3E4C667D289A546300E0F454 /* Activity */,
 				3ED34C682869950F00531392 /* AskAthelo */,
+				3E27092C29D3045F00A7B09C /* BlendingGradient */,
 				3EDC925F286AFCB300A4443E /* BottomClippedGradient */,
 				3E13F2532860600C009A75F6 /* Calendar */,
 				3EEB1CEA288FDC6D00E0AAA4 /* CircularProgress */,
+				3E3F44A228C5FE3D00A7665E /* Contacts */,
+				3E3F449028C5D8CE00A7665E /* Conversations */,
 				3EC079382889828000CBEB54 /* Description */,
 				3E54E4CD2861D76500D7CB30 /* ExpandableEntry  */,
 				3EC518762892B1750012663C /* Graph */,
+				3E1C139F28C1F6410096E4B7 /* Invitation */,
+				3ECCA77D29D5BDC6001DF5DF /* InvitationList */,
 				3E6BD0032885399F00A1FC4D /* ListTile */,
 				3ED85E1128911C0E00F4935A /* LoadMore */,
+				3E27094029D31A8700A7B09C /* OptionSheet */,
+				3E12D47D29C4942D007DF485 /* RadioState */,
+				3EF7BC3E29CDC08B00C253B2 /* SelectContact */,
+				3EF7BC3B29CDB20000C253B2 /* SelectedWard */,
+				3E12D47829C49179007DF485 /* SelectPatient */,
 				3EEB1CE3288FD68300E0AAA4 /* Sleep */,
 				3ED34C6B286996C100531392 /* StyledButton */,
 				3E54E4D02861EB7C00D7CB30 /* StyledHTMLContent */,
@@ -1423,6 +1637,7 @@
 				3E6BD01D288560A000A1FC4D /* Symptoms */,
 				3E2153732893CFB900737BCC /* TapOverlay */,
 				3E0D55912874249000E2EE6A /* Watch */,
+				3EF218DB29C89FA800F0EA95 /* WaveBackground */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1430,7 +1645,9 @@
 		3E13F258286065A6009A75F6 /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
+				3E27092929D303B200A7B09C /* FadingScrollView */,
 				3E2709812863202100D53272 /* RoundedCorners */,
+				3EF7BC4129CDC73400C253B2 /* Size */,
 				3E2153762893D21E00737BCC /* StyledBackground */,
 				3E13F25B286065D2009A75F6 /* StyledShadow */,
 			);
@@ -1455,6 +1672,15 @@
 			path = EditProfile;
 			sourceTree = "<group>";
 		};
+		3E15486629A78C1F003EB241 /* SignInHandlers */ = {
+			isa = PBXGroup;
+			children = (
+				3EF70955284F5BF500B6FDB5 /* IdentitySignInWithAppleHandler.swift */,
+				3E002A12284F71690025516B /* IdentitySignInWithGoogleHandler.swift */,
+			);
+			path = SignInHandlers;
+			sourceTree = "<group>";
+		};
 		3E16435F284A0E78000A863C /* SignUpWithEmail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1473,6 +1699,24 @@
 				3E16436B284A52BD000A863C /* AdditionalProfileInfoRouter.swift */,
 			);
 			path = AdditionalProfileInfo;
+			sourceTree = "<group>";
+		};
+		3E1C139F28C1F6410096E4B7 /* Invitation */ = {
+			isa = PBXGroup;
+			children = (
+				3E1C13A028C1F6580096E4B7 /* InvitationView.swift */,
+			);
+			path = Invitation;
+			sourceTree = "<group>";
+		};
+		3E1C13A428C2060A0096E4B7 /* InvitationCode */ = {
+			isa = PBXGroup;
+			children = (
+				3E1C13A528C206160096E4B7 /* InvitationCodeViewController.swift */,
+				3E1C13A728C206550096E4B7 /* InvitationCodeViewModel.swift */,
+				3E1C13A928C206670096E4B7 /* InvitationCodeRouter.swift */,
+			);
+			path = InvitationCode;
 			sourceTree = "<group>";
 		};
 		3E2153732893CFB900737BCC /* TapOverlay */ = {
@@ -1505,6 +1749,70 @@
 				3E21537F2893DCB800737BCC /* SleepStatsSinglePercentageView.swift */,
 			);
 			path = StatsSinglePercentage;
+			sourceTree = "<group>";
+		};
+		3E27092829D2E33A00A7B09C /* WindowOverlayUtility */ = {
+			isa = PBXGroup;
+			children = (
+				3E27092629D2DD1900A7B09C /* WindowOverlayUtility+CustomOverlays.swift */,
+			);
+			path = WindowOverlayUtility;
+			sourceTree = "<group>";
+		};
+		3E27092929D303B200A7B09C /* FadingScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				3E27092A29D303C600A7B09C /* FadingScrollView.swift */,
+			);
+			path = FadingScrollView;
+			sourceTree = "<group>";
+		};
+		3E27092C29D3045F00A7B09C /* BlendingGradient */ = {
+			isa = PBXGroup;
+			children = (
+				3E27092D29D3046F00A7B09C /* BlendingGradientWrapperView.swift */,
+			);
+			path = BlendingGradient;
+			sourceTree = "<group>";
+		};
+		3E27092F29D30D1C00A7B09C /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				3E27093329D30D3D00A7B09C /* CaregiverList */,
+				3E27093229D30D3700A7B09C /* PatientList */,
+				3E27093029D30D3000A7B09C /* Contacts.storyboard */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		3E27093229D30D3700A7B09C /* PatientList */ = {
+			isa = PBXGroup;
+			children = (
+				3E27093629D30D7300A7B09C /* PatientListViewController.swift */,
+				3E27093A29D30D9000A7B09C /* PatientListViewModel.swift */,
+				3E27093E29D30DB900A7B09C /* PatientListRouter.swift */,
+			);
+			path = PatientList;
+			sourceTree = "<group>";
+		};
+		3E27093329D30D3D00A7B09C /* CaregiverList */ = {
+			isa = PBXGroup;
+			children = (
+				3E27093429D30D6800A7B09C /* CaregiverListViewController.swift */,
+				3E27093829D30D8600A7B09C /* CaregiverListViewModel.swift */,
+				3E27093C29D30D9800A7B09C /* CaregiverListRouter.swift */,
+			);
+			path = CaregiverList;
+			sourceTree = "<group>";
+		};
+		3E27094029D31A8700A7B09C /* OptionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				3E27094129D31A9700A7B09C /* OptionSheetView.swift */,
+				3E27094329D3247200A7B09C /* OptionSheetModel.swift */,
+				3E27094529D3248B00A7B09C /* OptionSheetItem.swift */,
+			);
+			path = OptionSheet;
 			sourceTree = "<group>";
 		};
 		3E2709812863202100D53272 /* RoundedCorners */ = {
@@ -1541,6 +1849,42 @@
 			path = MultiValueColumn;
 			sourceTree = "<group>";
 		};
+		3E313A4A29A60EAE005DEC43 /* AccessCode */ = {
+			isa = PBXGroup;
+			children = (
+				3E313A4F29A60EE1005DEC43 /* AccessCodeViewController.swift */,
+				3E313A5129A60EEA005DEC43 /* AccessCodeViewModel.swift */,
+				3E313A5329A60EF3005DEC43 /* AccessCodeRouter.swift */,
+			);
+			path = AccessCode;
+			sourceTree = "<group>";
+		};
+		3E313A5529A6116F005DEC43 /* AccessCode */ = {
+			isa = PBXGroup;
+			children = (
+				3E313A5629A6117B005DEC43 /* AccessCodeUtility.swift */,
+			);
+			path = AccessCode;
+			sourceTree = "<group>";
+		};
+		3E37A3BA28DB158F00201306 /* PrivateChatList */ = {
+			isa = PBXGroup;
+			children = (
+				3E37A3BB28DB15D500201306 /* PrivateChatListViewController.swift */,
+				3E37A3BD28DB160100201306 /* PrivateChatListViewModel.swift */,
+				3E37A3BF28DB160B00201306 /* PrivateChatListRouter.swift */,
+				3E37A3C528DB215800201306 /* PrivateChatListLiveUpdateHandler.swift */,
+			);
+			path = PrivateChatList;
+			sourceTree = "<group>";
+		};
+		3E3B62482ADE696700A762F0 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		3E3C149A289D2502000EAEF9 /* DeviceConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -1556,6 +1900,27 @@
 				3E3E469428AFCB5B009F8766 /* PanInterceptingView.swift */,
 			);
 			path = PanIntercepting;
+			sourceTree = "<group>";
+		};
+		3E3F449028C5D8CE00A7665E /* Conversations */ = {
+			isa = PBXGroup;
+			children = (
+				3E3F449128C5D8F200A7665E /* ConversationItemView.swift */,
+				3E3F449E28C5F1C600A7665E /* ConversationListView.swift */,
+				3E3F44A028C5F2AB00A7665E /* ConversationListModel.swift */,
+			);
+			path = Conversations;
+			sourceTree = "<group>";
+		};
+		3E3F44A228C5FE3D00A7665E /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				3EF218CE29C8588A00F0EA95 /* Data */,
+				3E3F44A328C5FE4E00A7665E /* ContactItemView.swift */,
+				3E3F44A528C602C000A7665E /* ContactListView.swift */,
+				3E3F44A728C602D000A7665E /* ContactListModel.swift */,
+			);
+			path = Contacts;
 			sourceTree = "<group>";
 		};
 		3E41714328460B4200544451 /* Core */ = {
@@ -1580,6 +1945,7 @@
 		3E43B9AC2847925000295E2F /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				3E1C13A428C2060A0096E4B7 /* InvitationCode */,
 				3E164366284A4CE3000A863C /* AdditionalProfileInfo */,
 				3E43B9AF2847927C00295E2F /* Authentication */,
 				3E43B9B82847955F00295E2F /* ForgotPassword */,
@@ -1635,7 +2001,10 @@
 				3E4C669B289A820A00E0F454 /* ActivityType.swift */,
 				3E91966B287D56AE005F5290 /* Aliases.swift */,
 				3EE0E9C1285773F500984C03 /* AuthFormError.swift */,
+				3E37A3C128DB1A9100201306 /* CaregivingRelationData.swift */,
 				3EA4FF0E288A908300717DA7 /* CommonError.swift */,
+				3E3F449528C5E25400A7665E /* ConversationData.swift */,
+				3E3C585C28DC4A4700358EC8 /* CreatedChatData.swift */,
 				3E1E785528B4C9BC00ED1E73 /* CurvePointsData.swift */,
 				3E0D55A82874411800E2EE6A /* DeeplinkData.swift */,
 				3E6BD02C2885818400A1FC4D /* FeelingScale.swift */,
@@ -1647,9 +2016,11 @@
 				3ED215B12851E6F5003BB140 /* MenuOption.swift */,
 				3EE5175E2890376300454C5F /* ModelConfigurationData.swift */,
 				3E5253D52887EAB300D6D643 /* NavigationRoute.swift */,
+				3EBE257829C9DAC400212FE4 /* RelationInterpretationData.swift */,
 				3EC079432889881100CBEB54 /* SettingOption.swift */,
 				3EC51867289285D20012663C /* SleepTimeData.swift */,
 				3E4C669D289AAD1D00E0F454 /* UnitNameData.swift */,
+				3EBE8FE928D3010D0092CCC8 /* UserRole.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1667,6 +2038,7 @@
 			isa = PBXGroup;
 			children = (
 				3E43B9CD2847AFDF00295E2F /* Form */,
+				3E313A5829A61BF7005DEC43 /* TextFields.swift */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -1799,6 +2171,16 @@
 				3E27097D2863017300D53272 /* HTMLContent.swift */,
 			);
 			path = StyledHTMLContent;
+			sourceTree = "<group>";
+		};
+		3E5CC2C528D1BA2700DED1A9 /* AddContact */ = {
+			isa = PBXGroup;
+			children = (
+				3EBE8FEB28D30EAA0092CCC8 /* AddContactViewController.swift */,
+				3EBE8FED28D310D60092CCC8 /* AddContactViewModel.swift */,
+				3EBE8FEF28D311820092CCC8 /* AddContactRouter.swift */,
+			);
+			path = AddContact;
 			sourceTree = "<group>";
 		};
 		3E5EB932284DDC9C00C30ADC /* Default */ = {
@@ -2038,6 +2420,16 @@
 			path = Horizontal;
 			sourceTree = "<group>";
 		};
+		3E75FDBE29C9E806006F62BA /* InviteCaregiver */ = {
+			isa = PBXGroup;
+			children = (
+				3E75FDBF29C9E81C006F62BA /* InviteCaregiverViewController.swift */,
+				3EA979CE29CC3723002B6764 /* InviteCaregiverViewModel.swift */,
+				3EA979D229CC4E9A002B6764 /* InviteCaregiverRouter.swift */,
+			);
+			path = InviteCaregiver;
+			sourceTree = "<group>";
+		};
 		3E78A6632876C3B0002599F7 /* NoContent */ = {
 			isa = PBXGroup;
 			children = (
@@ -2078,6 +2470,7 @@
 			isa = PBXGroup;
 			children = (
 				3E13F258286065A6009A75F6 /* Modifiers */,
+				3EF218C629C8537500F0EA95 /* Screens */,
 				3E13F257286065A3009A75F6 /* Views */,
 			);
 			path = SwiftUI;
@@ -2124,6 +2517,15 @@
 				3E7F38562848D75400320E60 /* Validator.swift */,
 			);
 			path = Validators;
+			sourceTree = "<group>";
+		};
+		3E818EF829756D5B00267C65 /* CaregiverRole */ = {
+			isa = PBXGroup;
+			children = (
+				3EF218C729C8549100F0EA95 /* CaregiverRoleScreen.swift */,
+				3E15486229A77B8F003EB241 /* CaregiverRoleModel.swift */,
+			);
+			path = CaregiverRole;
 			sourceTree = "<group>";
 		};
 		3E84D31728536E8E00288F08 /* CollectionViewCells */ = {
@@ -2437,19 +2839,25 @@
 		3E8F1FB728DDA64500C327BE /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				3E3B62492ADE6A8A00A762F0 /* HealthAcceptCaregiverInvitationRequest.swift */,
+				3E8F1FBB28DDA64500C327BE /* HealthActivityDashboardRequest.swift */,
+				3E8F1FC328DDA64500C327BE /* HealthAddFeelingRequest.swift */,
+				3E8F1FBF28DDA64500C327BE /* HealthAddSymptomRequest.swift */,
+				3E3B624D2ADE6AF800A762F0 /* HealthCancelInvitationRequest.swift */,
+				3E8F1FBE28DDA64500C327BE /* HealthCreateSymptomRequest.swift */,
 				3E8F1FB828DDA64500C327BE /* HealthDashboardRequest.swift */,
+				3E8F1FBC28DDA64500C327BE /* HealthDeleteSymptomRequest.swift */,
+				3E3B624C2ADE6AF800A762F0 /* HealthInvitationsRequest.swift */,
+				3E3B624B2ADE6AF700A762F0 /* HealthInviteCaregiverRequest.swift */,
+				3E8F1FC028DDA64500C327BE /* HealthPerDaySummaryRequest.swift */,
+				3E8F1FC428DDA64500C327BE /* HealthRecordsRequest.swift */,
+				3E3B624E2ADE6AF800A762F0 /* HealthRemoveCaregiverRequest.swift */,
+				3E3B624F2ADE6AF800A762F0 /* HealthRemovePatientRequest.swift */,
+				3E8F1FC228DDA64500C327BE /* HealthSleepAggregatedRecordsRequest.swift */,
+				3E8F1FBD28DDA64500C327BE /* HealthSleepRecordsRequest.swift */,
+				3E8F1FC128DDA64500C327BE /* HealthSymptomsRequest.swift */,
 				3E8F1FB928DDA64500C327BE /* HealthUserFeelingsRequest.swift */,
 				3E8F1FBA28DDA64500C327BE /* HealthUserSymptomsRequest.swift */,
-				3E8F1FBB28DDA64500C327BE /* HealthActivityDashboardRequest.swift */,
-				3E8F1FBC28DDA64500C327BE /* HealthDeleteSymptomRequest.swift */,
-				3E8F1FBD28DDA64500C327BE /* HealthSleepRecordsRequest.swift */,
-				3E8F1FBE28DDA64500C327BE /* HealthCreateSymptomRequest.swift */,
-				3E8F1FBF28DDA64500C327BE /* HealthAddSymptomRequest.swift */,
-				3E8F1FC028DDA64500C327BE /* HealthPerDaySummaryRequest.swift */,
-				3E8F1FC128DDA64500C327BE /* HealthSymptomsRequest.swift */,
-				3E8F1FC228DDA64500C327BE /* HealthSleepAggregatedRecordsRequest.swift */,
-				3E8F1FC328DDA64500C327BE /* HealthAddFeelingRequest.swift */,
-				3E8F1FC428DDA64500C327BE /* HealthRecordsRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -2736,6 +3144,7 @@
 			children = (
 				3E919681287D7D47005F5290 /* ChatUtility.swift */,
 				3E919683287D7EA4005F5290 /* ChatRoomUtility.swift */,
+				3E37A3C728DB4B1100201306 /* PrivateChatListUtility.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2834,6 +3243,7 @@
 				3E8F1F6B28DDA64500C327BE /* NetworkingAPI+Publishers.swift */,
 				3EAF3D5A2852225000C2685D /* NetworkingAPIErrorMessage+ErrorDetails.swift */,
 				3E919676287D6FB3005F5290 /* NetworkingChatModels+Extensions.swift */,
+				3E3B62552ADE7A1000A762F0 /* NetworkingAPIHealthServices+Extensions.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -2879,6 +3289,39 @@
 				3EB387232878145100DF56EF /* BlendingGradientView.swift */,
 			);
 			path = BlendingGradient;
+			sourceTree = "<group>";
+		};
+		3EBE256D29C9D7B900212FE4 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				3EBE256E29C9D7D200212FE4 /* SwiftUI+Animation.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		3EBE257029C9D96700212FE4 /* Relation */ = {
+			isa = PBXGroup;
+			children = (
+				3EBE257129C9D98300212FE4 /* HealthRelationData.swift */,
+				3EA979D029CC3F35002B6764 /* HealthInvitationData.swift */,
+			);
+			path = Relation;
+			sourceTree = "<group>";
+		};
+		3EBE257529C9D9C900212FE4 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				3EBE257629C9D9D600212FE4 /* HealthPermissionsData.swift */,
+			);
+			path = Permissions;
+			sourceTree = "<group>";
+		};
+		3EBE8FE628D2FF100092CCC8 /* SelectRole */ = {
+			isa = PBXGroup;
+			children = (
+				3EBE8FE728D2FF1E0092CCC8 /* SelectRoleScreen.swift */,
+			);
+			path = SelectRole;
 			sourceTree = "<group>";
 		};
 		3EBF4F6428632608000E647F /* FAQ */ = {
@@ -3167,6 +3610,23 @@
 			path = Info;
 			sourceTree = "<group>";
 		};
+		3ECCA77A29D5AD42001DF5DF /* CaregiverList */ = {
+			isa = PBXGroup;
+			children = (
+				3ECCA77B29D5AD50001DF5DF /* CaregiverListScreen.swift */,
+			);
+			path = CaregiverList;
+			sourceTree = "<group>";
+		};
+		3ECCA77D29D5BDC6001DF5DF /* InvitationList */ = {
+			isa = PBXGroup;
+			children = (
+				3ECCA78029D5BDED001DF5DF /* InvitationItemView.swift */,
+				3ECCA78229D5BDF6001DF5DF /* InvitationListView.swift */,
+			);
+			path = InvitationList;
+			sourceTree = "<group>";
+		};
 		3ED0BFA728A239CC00224561 /* SmallColumnGraph */ = {
 			isa = PBXGroup;
 			children = (
@@ -3273,6 +3733,7 @@
 				3EDB378C287C520500C3EDE8 /* CommunityChat */,
 				3EE97D91286DE4F40027DC03 /* CommunitiesList */,
 				3EE626372865B94F00DF06CD /* GroupChatLanding */,
+				3E37A3BA28DB158F00201306 /* PrivateChatList */,
 				3ED2158F2851D446003BB140 /* Community.storyboard */,
 				3EA3D219287EDBF30054699A /* CommunityRouter.swift */,
 			);
@@ -3457,6 +3918,7 @@
 				3ED215862851D409003BB140 /* Activity */,
 				3E43B9AC2847925000295E2F /* Authentication */,
 				3ED215872851D40D003BB140 /* Community */,
+				3E27092F29D30D1C00A7B09C /* Contacts */,
 				3EBF4F6428632608000E647F /* FAQ */,
 				3EA8801528648E0100E81741 /* Feedback */,
 				3ED215842851D347003BB140 /* Home */,
@@ -3464,6 +3926,7 @@
 				3ED215AA2851E413003BB140 /* Menu */,
 				3ED215882851D412003BB140 /* News */,
 				3EE0E9AA28570F5D00984C03 /* Profile */,
+				3EF218D329C8752600F0EA95 /* Role */,
 				3EC0792E2889820F00CBEB54 /* Settings */,
 				3ED215852851D406003BB140 /* Sleep */,
 				3ED85AE528461B200008EC11 /* Splash */,
@@ -3477,6 +3940,7 @@
 		3ED85AE528461B200008EC11 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
+				3E313A4A29A60EAE005DEC43 /* AccessCode */,
 				3ED85AE828461B300008EC11 /* Splash */,
 				3ED85AE628461B2A0008EC11 /* Splash.storyboard */,
 			);
@@ -3524,6 +3988,7 @@
 		3ED85AFA2846298F0008EC11 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				3E313A5529A6116F005DEC43 /* AccessCode */,
 				3E919680287D7D39005F5290 /* Chat */,
 				3EF70954284F4E2700B6FDB5 /* Identity */,
 				3EC7EDC72861A8F100EEE48E /* ImageCache */,
@@ -3601,7 +4066,9 @@
 				3E4C6689289A767600E0F454 /* Dashboard */,
 				3E6BD0292885812A00A1FC4D /* Feeling */,
 				3E75F52928A4DE2F00000968 /* HRV */,
+				3EBE257529C9D9C900212FE4 /* Permissions */,
 				3ED710FE28A39A430027A6B0 /* Record */,
+				3EBE257029C9D96700212FE4 /* Relation */,
 				3EC518642892849D0012663C /* Sleep */,
 				3ED85E0E2891134F00F4935A /* Summary */,
 				3E6BCFFB2885361700A1FC4D /* Symptom */,
@@ -3667,6 +4134,7 @@
 		3EE0E9AA28570F5D00984C03 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				3E5CC2C528D1BA2700DED1A9 /* AddContact */,
 				3EE0E9CE2858AF4900984C03 /* ChangePassword */,
 				3E14C68E2859EA2C002183F5 /* EditProfile */,
 				3EE0E9AD28570F7200984C03 /* MyProfile */,
@@ -3799,6 +4267,7 @@
 			children = (
 				3EE97D87286DCDF10027DC03 /* ChatRoomData.swift */,
 				3EE97D89286DCE090027DC03 /* ChatRoomMemberData.swift */,
+				3E3F449328C5E1D100A7665E /* PrivateChatRoomData.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -3828,6 +4297,7 @@
 			children = (
 				3EE9FD882844A57600BE4661 /* Athelo */,
 				3EE9FD872844A57600BE4661 /* Products */,
+				3E3B62482ADE696700A762F0 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3844,6 +4314,7 @@
 			children = (
 				3EF70953284F4D3A00B6FDB5 /* Athelo.entitlements */,
 				3EE9FDCA2844BA5800BE4661 /* Components */,
+				3EF9FA1C2943573D00BC7D9D /* Configurations */,
 				3E41714328460B4200544451 /* Core */,
 				3E43B9BE2847968400295E2F /* Data */,
 				3EE9FDB42844A96600BE4661 /* Extensions */,
@@ -3912,7 +4383,9 @@
 				3EE9FDB82844A9BD00BE4661 /* Foundation */,
 				3E1341AB28466510007C1381 /* Models */,
 				3EAF3D592852223D00C2685D /* Networking */,
+				3EBE256D29C9D7B900212FE4 /* SwiftUI */,
 				3EE9FDBD2844AA9600BE4661 /* UIKit */,
+				3E27092829D2E33A00A7B09C /* WindowOverlayUtility */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3936,12 +4409,15 @@
 				3E539061284E3D90003CE983 /* Bundle+DictionaryKeys.swift */,
 				3EE9FDB92844A9CB00BE4661 /* Collection+Access.swift */,
 				3E919678287D70F6005F5290 /* Date+ChatTimestamps.swift */,
+				3E3F449C28C5EDD400A7665E /* Date+Formatting.swift */,
 				3E271B2828A28BDB004C467B /* Double+ChartLegend.swift */,
 				3E91967A287D7125005F5290 /* Double+Measurement.swift */,
 				3E33C81D28869FFB0059B0D3 /* Error+Messages.swift */,
 				3EE9FDBB2844AA4B00BE4661 /* KeyedDecodingContainer+Helpers.swift */,
+				3EF7BC3929CD8D8400C253B2 /* RawRepresentable+UserDefaults.swift */,
 				3E5253DE2888054200D6D643 /* Sequence+Sorting.swift */,
 				3E8F1F6E28DDA64500C327BE /* String+ApplicationSuffix.swift */,
+				3E243A0029DAE57700282802 /* String+Decoration.swift */,
 				3E54E4D32861F5B300D7CB30 /* String+HTML.swift */,
 				3ED85AF6284620850008EC11 /* String+Localization.swift */,
 				3ED215C42851FDEA003BB140 /* String+Mutators.swift */,
@@ -3971,10 +4447,13 @@
 				3E270AC92855FE91001A297C /* UINavigationItem+Styling.swift */,
 				3EE8FA5C287325BD00CE8762 /* UIScrollView+RefreshControl.swift */,
 				3EE9FDC22844AAF900BE4661 /* UITableViewDiffableDataSource+Reloading.swift */,
+				3EA711FE2913C6CE000C4078 /* UITextField+Publishers.swift */,
 				3EAACE3B285A29F100AE1389 /* UITextField+Toolbar.swift */,
 				3EE0E9B82857338200984C03 /* UITextView+Padding.swift */,
+				3EA712002913C6E3000C4078 /* UITextView+Publishers.swift */,
 				3E7BAEA3286B382000D180F0 /* UITextView+Toolbar.swift */,
 				3EE9FDC42844AB5C00BE4661 /* UIView+Embedding.swift */,
+				3E719A1528CA134F00C3822A /* UIView+FormInput.swift */,
 				3E13418C28463F31007C1381 /* UIView+Styling.swift */,
 				3EDC9262286AFCC400A4443E /* UIViewController+BackgroundGradient.swift */,
 				3E33C81B28869ECD0059B0D3 /* UIViewController+Messages.swift */,
@@ -3982,7 +4461,6 @@
 				3E6BD022288565D300A1FC4D /* UIViewController+SwiftUI.swift */,
 				3E7BAEA1286B1A2C00D180F0 /* UIViewController+ViewModelBinding.swift */,
 				3E7F385D2848DBCF00320E60 /* UIWindow+Overlays.swift */,
-				3E719A1528CA134F00C3822A /* UIView+FormInput.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -4089,14 +4567,127 @@
 			path = SectionTitle;
 			sourceTree = "<group>";
 		};
+		3EF218C629C8537500F0EA95 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				3ECCA77A29D5AD42001DF5DF /* CaregiverList */,
+				3E818EF829756D5B00267C65 /* CaregiverRole */,
+				3EF218C929C8550C00F0EA95 /* PatientRole */,
+				3EBE8FE628D2FF100092CCC8 /* SelectRole */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		3EF218C929C8550C00F0EA95 /* PatientRole */ = {
+			isa = PBXGroup;
+			children = (
+				3EF218CA29C8552400F0EA95 /* PatientRoleScreen.swift */,
+				3EF218CC29C8557500F0EA95 /* PatientRoleModel.swift */,
+			);
+			path = PatientRole;
+			sourceTree = "<group>";
+		};
+		3EF218CE29C8588A00F0EA95 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3EF218D129C85C8D00F0EA95 /* ContactData.swift */,
+				3EF218CF29C8589900F0EA95 /* ContactItemAction.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3EF218D329C8752600F0EA95 /* Role */ = {
+			isa = PBXGroup;
+			children = (
+				3EF218DE29C8A3E600F0EA95 /* CaregiverRole */,
+				3E75FDBE29C9E806006F62BA /* InviteCaregiver */,
+				3EF218DF29C8A3EE00F0EA95 /* PatientRole */,
+				3EF218D629C8755200F0EA95 /* SelectRole */,
+				3EF218D429C8753300F0EA95 /* Role.storyboard */,
+			);
+			path = Role;
+			sourceTree = "<group>";
+		};
+		3EF218D629C8755200F0EA95 /* SelectRole */ = {
+			isa = PBXGroup;
+			children = (
+				3EF218D729C8757F00F0EA95 /* SelectRoleViewController.swift */,
+				3EF218D929C8801D00F0EA95 /* SelectRoleRouter.swift */,
+			);
+			path = SelectRole;
+			sourceTree = "<group>";
+		};
+		3EF218DB29C89FA800F0EA95 /* WaveBackground */ = {
+			isa = PBXGroup;
+			children = (
+				3EF218DC29C89FEA00F0EA95 /* WaveBackgroundView.swift */,
+			);
+			path = WaveBackground;
+			sourceTree = "<group>";
+		};
+		3EF218DE29C8A3E600F0EA95 /* CaregiverRole */ = {
+			isa = PBXGroup;
+			children = (
+				3EF218E029C8A40200F0EA95 /* CaregiverRoleViewController.swift */,
+				3EF218E429C8A5B000F0EA95 /* CaregiverRoleViewModel.swift */,
+				3EF218E829C8A5FF00F0EA95 /* CaregiverRoleRouter.swift */,
+			);
+			path = CaregiverRole;
+			sourceTree = "<group>";
+		};
+		3EF218DF29C8A3EE00F0EA95 /* PatientRole */ = {
+			isa = PBXGroup;
+			children = (
+				3EF218E229C8A40D00F0EA95 /* PatientRoleViewController.swift */,
+				3EF218E629C8A5D100F0EA95 /* PatientRoleViewModel.swift */,
+				3EF218EA29C8A61500F0EA95 /* PatientRoleRouter.swift */,
+			);
+			path = PatientRole;
+			sourceTree = "<group>";
+		};
 		3EF70954284F4E2700B6FDB5 /* Identity */ = {
 			isa = PBXGroup;
 			children = (
-				3EF70955284F5BF500B6FDB5 /* IdentitySignInWithAppleHandler.swift */,
-				3E002A12284F71690025516B /* IdentitySignInWithGoogleHandler.swift */,
+				3E15486629A78C1F003EB241 /* SignInHandlers */,
 				3E13419A28466332007C1381 /* IdentityUtility.swift */,
+				3EA979D429CC9F1B002B6764 /* IdentityRoleUtility.swift */,
 			);
 			path = Identity;
+			sourceTree = "<group>";
+		};
+		3EF7BC3B29CDB20000C253B2 /* SelectedWard */ = {
+			isa = PBXGroup;
+			children = (
+				3EF7BC3C29CDB21200C253B2 /* SelectedWardView.swift */,
+				3E27092429D2C0AC00A7B09C /* SelectedWardModel.swift */,
+			);
+			path = SelectedWard;
+			sourceTree = "<group>";
+		};
+		3EF7BC3E29CDC08B00C253B2 /* SelectContact */ = {
+			isa = PBXGroup;
+			children = (
+				3EF7BC3F29CDC09B00C253B2 /* SelectContactView.swift */,
+			);
+			path = SelectContact;
+			sourceTree = "<group>";
+		};
+		3EF7BC4129CDC73400C253B2 /* Size */ = {
+			isa = PBXGroup;
+			children = (
+				3EF7BC4229CDC74200C253B2 /* Size.swift */,
+			);
+			path = Size;
+			sourceTree = "<group>";
+		};
+		3EF9FA1C2943573D00BC7D9D /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				3EF9FA1F294357FD00BC7D9D /* Staging.xcconfig */,
+				3EF9FA202943580F00BC7D9D /* Production.xcconfig */,
+				3EF9FA1D2943575A00BC7D9D /* ConfigurationReader.swift */,
+			);
+			path = Configurations;
 			sourceTree = "<group>";
 		};
 		3EFC0B432850AA0000841341 /* PageProgress */ = {
@@ -4127,6 +4718,8 @@
 				3EE9FD822844A57600BE4661 /* Sources */,
 				3EE9FD832844A57600BE4661 /* Frameworks */,
 				3EE9FD842844A57600BE4661 /* Resources */,
+				3E52EB762949CEE10045D33B /* Firebase: Update .plist File */,
+				3E98971029F01832009170D3 /* Firebase: Upload dSYM */,
 			);
 			buildRules = (
 			);
@@ -4221,6 +4814,7 @@
 				3E43B9AE2847926600295E2F /* Authentication.storyboard in Resources */,
 				3EC0792D2889663800CBEB54 /* SymptomDetailsPopupView.xib in Resources */,
 				3EBF4F6628632614000E647F /* Faq.storyboard in Resources */,
+				3EF218D529C8753300F0EA95 /* Role.storyboard in Resources */,
 				3E91967F287D727C005F5290 /* ChatOutgoingMessageCollectionViewCell.xib in Resources */,
 				3ECB51F6288056D90044F3B7 /* Inter-Italic.otf in Resources */,
 				3EE9FD932844A57800BE4661 /* Assets.xcassets in Resources */,
@@ -4259,6 +4853,7 @@
 				3EF1B8952853AAC80010553D /* SectionTitleCollectionReusableView.xib in Resources */,
 				3ECB51EC288052C00044F3B7 /* ChatInfoMessageCollectionViewCell.xib in Resources */,
 				3E78A6672876C3C4002599F7 /* NoContentView.xib in Resources */,
+				3E27093129D30D3000A7B09C /* Contacts.storyboard in Resources */,
 				3E6BD00B288541BB00A1FC4D /* Symptom.storyboard in Resources */,
 				3EB21BB22872D34900ACE602 /* SegmentedPickerView.xib in Resources */,
 				3E8DDC03286DE840005A580D /* CommunitiesListHeadingCollectionViewCell.xib in Resources */,
@@ -4274,6 +4869,49 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3E52EB762949CEE10045D33B /* Firebase: Update .plist File */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Firebase: Update .plist File";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "CONFIG_FILE_PATH=${SRCROOT}/Firebase/${PRODUCT_BUNDLE_IDENTIFIER}.GoogleService-Info.plist\nTARGET_FILE_NAME=GoogleService-Info.plist\n\nBUILD_DATA_PATH=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\n\ncp ${CONFIG_FILE_PATH} \"${BUILD_DATA_PATH}/${TARGET_FILE_NAME}\"\n";
+		};
+		3E98971029F01832009170D3 /* Firebase: Upload dSYM */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Firebase: Upload dSYM";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3EE9FD822844A57600BE4661 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -4288,6 +4926,7 @@
 				3E6BD02B2885813300A1FC4D /* FeelingData.swift in Sources */,
 				3E8F207C28DDA64500C327BE /* ContactsInvitationRequest.swift in Sources */,
 				3E5EB93F284E013800C30ADC /* ListInputView.swift in Sources */,
+				3EA979D329CC4E9A002B6764 /* InviteCaregiverRouter.swift in Sources */,
 				3E7F385B2848D75400320E60 /* PasswordsValidator.swift in Sources */,
 				3E8F209A28DDA64500C327BE /* PageBasedRequests.swift in Sources */,
 				3E6BD00E288542DE00A1FC4D /* SymptomListViewController.swift in Sources */,
@@ -4301,6 +4940,8 @@
 				3E8F205728DDA64500C327BE /* ChatChangeOwnerRequest.swift in Sources */,
 				3E8F204128DDA64500C327BE /* PostRemoveFavoriteRequest.swift in Sources */,
 				3E8F20A828DDA64500C327BE /* APIMethod.swift in Sources */,
+				3EA711FF2913C6CE000C4078 /* UITextField+Publishers.swift in Sources */,
+				3EF218CD29C8557500F0EA95 /* PatientRoleModel.swift in Sources */,
 				3ED215BA2851F0E7003BB140 /* MenuViewModel.swift in Sources */,
 				3ED215A02851D4B5003BB140 /* ActivityViewController.swift in Sources */,
 				3EB38729287827C700DF56EF /* NewsTopicData.swift in Sources */,
@@ -4309,9 +4950,13 @@
 				3E84D3202853866800288F08 /* HeadlineCollectionViewCell.swift in Sources */,
 				3E8F20B428DDA64500C327BE /* APIService.swift in Sources */,
 				3E8F209928DDA64500C327BE /* AuthenticationRequestBuilder.swift in Sources */,
+				3E37A3BC28DB15D500201306 /* PrivateChatListViewController.swift in Sources */,
 				3EC518872892B5D20012663C /* GraphVerticalLegendView.swift in Sources */,
 				3EDC9263286AFCC400A4443E /* UIViewController+BackgroundGradient.swift in Sources */,
 				3EC518892892B5E40012663C /* GraphLegendItemData.swift in Sources */,
+				3E27092E29D3046F00A7B09C /* BlendingGradientWrapperView.swift in Sources */,
+				3ECCA77C29D5AD50001DF5DF /* CaregiverListScreen.swift in Sources */,
+				3EBE8FF028D311820092CCC8 /* AddContactRouter.swift in Sources */,
 				3E7F384F2848B5D200320E60 /* UIButton+Alignment.swift in Sources */,
 				3E6BD0022885373E00A1FC4D /* SymptomListModel.swift in Sources */,
 				3E6BD02D2885818400A1FC4D /* FeelingScale.swift in Sources */,
@@ -4321,10 +4966,12 @@
 				3EE0E9D02858AF6100984C03 /* ChangePasswordViewController.swift in Sources */,
 				3E43B9CB2847A85100295E2F /* Buttons.swift in Sources */,
 				3EE9FDC32844AAF900BE4661 /* UITableViewDiffableDataSource+Reloading.swift in Sources */,
+				3E3F449428C5E1D100A7665E /* PrivateChatRoomData.swift in Sources */,
 				3EC518792892B1D70012663C /* GraphColumnView.swift in Sources */,
 				3EC518952892C0370012663C /* SleepPhase+Colors.swift in Sources */,
 				3E8F20A128DDA64500C327BE /* ChecklistItemDetailsRequest.swift in Sources */,
 				3E6BD01F2885646500A1FC4D /* SymptomDescriptionViewModel.swift in Sources */,
+				3E12D47A29C491B2007DF485 /* SelectPatientView.swift in Sources */,
 				3ED34C6D286996D300531392 /* StyledButtonView.swift in Sources */,
 				3EC774682887E5860022CB6F /* NotificationRouteSolver.swift in Sources */,
 				3EE73EDC2897D2BC006CC5A1 /* HealthSleepAggregatedPhaseRecord.swift in Sources */,
@@ -4338,35 +4985,46 @@
 				3E8F209028DDA64500C327BE /* ApplicationsRequestBuilder.swift in Sources */,
 				3ED0BFB028A239CC00224561 /* SmallColumnGraphModel.swift in Sources */,
 				3E43B9C02847969400295E2F /* KeyboardInfo.swift in Sources */,
+				3E3B62522ADE6AF800A762F0 /* HealthCancelInvitationRequest.swift in Sources */,
 				3E8F206E28DDA64500C327BE /* HealthAddSymptomRequest.swift in Sources */,
 				3E8F205928DDA64500C327BE /* ChatLeaveGroupConversationRequest.swift in Sources */,
+				3EF218E529C8A5B000F0EA95 /* CaregiverRoleViewModel.swift in Sources */,
 				3E919684287D7EA4005F5290 /* ChatRoomUtility.swift in Sources */,
 				3E271B2928A28BDB004C467B /* Double+ChartLegend.swift in Sources */,
 				3EC079332889823F00CBEB54 /* SettingsViewController.swift in Sources */,
 				3E8F204E28DDA64500C327BE /* ChatCreateConversationRequest.swift in Sources */,
 				3E4C6682289A548C00E0F454 /* ActivityTilesModel.swift in Sources */,
 				3EA8801A28648E3200E81741 /* FeedbackViewController.swift in Sources */,
+				3EF218D229C85C8D00F0EA95 /* ContactData.swift in Sources */,
 				3ED215C72851FF9C003BB140 /* LoadableImageData.swift in Sources */,
 				3E8DDC02286DE840005A580D /* CommunitiesListHeadingCollectionViewCell.swift in Sources */,
 				3ED85B0D284633ED0008EC11 /* NoNetworkView.swift in Sources */,
+				3E1C13AA28C206670096E4B7 /* InvitationCodeRouter.swift in Sources */,
 				3EB21BB72872D43D00ACE602 /* RoundedView.swift in Sources */,
 				3E8F205E28DDA64500C327BE /* ImagesRequests.swift in Sources */,
+				3EBE257229C9D98300212FE4 /* HealthRelationData.swift in Sources */,
 				3E6BD0212885647600A1FC4D /* SymptomDescriptionRouter.swift in Sources */,
+				3EF218DA29C8801D00F0EA95 /* SelectRoleRouter.swift in Sources */,
 				3E13418B28463722007C1381 /* WindowOverlayUtility.swift in Sources */,
+				3E3C585D28DC4A4700358EC8 /* CreatedChatData.swift in Sources */,
 				3ED215C32851FD28003BB140 /* RendererUtility.swift in Sources */,
+				3E1C13A828C206550096E4B7 /* InvitationCodeViewModel.swift in Sources */,
 				3EE0E9BD28574DD900984C03 /* MyProfileRouter.swift in Sources */,
 				3EBF4F692863264C000E647F /* AskAtheloViewController.swift in Sources */,
 				3E14C6902859EA41002183F5 /* EditProfileViewController.swift in Sources */,
+				3E313A5229A60EEA005DEC43 /* AccessCodeViewModel.swift in Sources */,
 				3ED85E1328911C1900F4935A /* LoadMoreView.swift in Sources */,
 				3EF1B8942853AAC80010553D /* SectionTitleCollectionReusableView.swift in Sources */,
 				3ECB51EB288052C00044F3B7 /* ChatInfoMessageCollectionViewCell.swift in Sources */,
 				3E0D55A528743EFB00E2EE6A /* ConnectDeviceViewModel.swift in Sources */,
 				3E8F205028DDA64500C327BE /* ChatRemoveUsersRequest.swift in Sources */,
+				3E75FDC029C9E81C006F62BA /* InviteCaregiverViewController.swift in Sources */,
 				3EE73EE82897DC63006CC5A1 /* SleepSummaryFilter.swift in Sources */,
 				3EE517612890377800454C5F /* Publisher+Async.swift in Sources */,
 				3E4C669C289A820A00E0F454 /* ActivityType.swift in Sources */,
 				3EAACE3C285A29F100AE1389 /* UITextField+Toolbar.swift in Sources */,
 				3EE0E9C2285773F500984C03 /* AuthFormError.swift in Sources */,
+				3EF218D829C8757F00F0EA95 /* SelectRoleViewController.swift in Sources */,
 				3ED18D1D28474ABA0075ABAF /* IntroLandingViewController.swift in Sources */,
 				3E8F208428DDA64500C327BE /* FeedbackRequests.swift in Sources */,
 				3E8F209628DDA64500C327BE /* AuthenticationRegisterRequest.swift in Sources */,
@@ -4377,8 +5035,14 @@
 				3E8F202728DDA64500C327BE /* ChatTokenData.swift in Sources */,
 				3ED85AF7284620850008EC11 /* String+Localization.swift in Sources */,
 				3E0D55A0287431EA00E2EE6A /* WatchListRouter.swift in Sources */,
+				3E27093929D30D8600A7B09C /* CaregiverListViewModel.swift in Sources */,
+				3EF218D029C8589900F0EA95 /* ContactItemAction.swift in Sources */,
+				3E3F44A828C602D000A7665E /* ContactListModel.swift in Sources */,
+				3EBE257729C9D9D600212FE4 /* HealthPermissionsData.swift in Sources */,
+				3E27094229D31A9700A7B09C /* OptionSheetView.swift in Sources */,
 				3ED85AEE28461B820008EC11 /* SplashViewController.swift in Sources */,
 				3E75F52B28A4DE4A00000968 /* HealthHRVDashboardData.swift in Sources */,
+				3E37A3C628DB215800201306 /* PrivateChatListLiveUpdateHandler.swift in Sources */,
 				3E75F53428A516B900000968 /* CGPoint+Distance.swift in Sources */,
 				3E8F203D28DDA64500C327BE /* PasswordChangeRequest.swift in Sources */,
 				3E0D558F28741DEE00E2EE6A /* WatchEntryView.swift in Sources */,
@@ -4389,6 +5053,7 @@
 				3ED215A62851D770003BB140 /* MainContentViewController.swift in Sources */,
 				3E43B9B12847929400295E2F /* AuthenticationViewController.swift in Sources */,
 				3E4C668B289A768700E0F454 /* HealthDashboardData.swift in Sources */,
+				3E27092729D2DD1900A7B09C /* WindowOverlayUtility+CustomOverlays.swift in Sources */,
 				3E4C6680289A547F00E0F454 /* ActivityTilesView.swift in Sources */,
 				3E8F207A28DDA64500C327BE /* ContactsSendInviteRequest.swift in Sources */,
 				3E54E4D42861F5B300D7CB30 /* String+HTML.swift in Sources */,
@@ -4400,9 +5065,12 @@
 				3EE0E9CB2858980F00984C03 /* UIColor+Tweaking.swift in Sources */,
 				3EA8908C288ED53D00A9A8B0 /* LocalNotificationData.swift in Sources */,
 				3EE97D97286DE6220027DC03 /* CommunitiesListRouter.swift in Sources */,
+				3EF7BC4329CDC74200C253B2 /* Size.swift in Sources */,
 				3ED85B0428462EC00008EC11 /* Publisher+Sinks.swift in Sources */,
 				3EB21BAA2872CDA500ACE602 /* NewsListRouter.swift in Sources */,
 				3E8F207D28DDA64500C327BE /* ContactsSearchRequest.swift in Sources */,
+				3E243A0129DAE57700282802 /* String+Decoration.swift in Sources */,
+				3E12D47C29C491C8007DF485 /* SelectPatientModel.swift in Sources */,
 				3E6BD023288565D300A1FC4D /* UIViewController+SwiftUI.swift in Sources */,
 				3E3C149C289D2518000EAEF9 /* DeviceConfigData.swift in Sources */,
 				3E8F207B28DDA64500C327BE /* ContactsRemoveFriendRequest.swift in Sources */,
@@ -4411,6 +5079,7 @@
 				3E8F209B28DDA64500C327BE /* PageBasedRequestBuilder.swift in Sources */,
 				3E271B2528A27D05004C467B /* MultiValueColumnView.swift in Sources */,
 				3E8F205328DDA64500C327BE /* ChatCreateGroupConversationRequest.swift in Sources */,
+				3E27092B29D303C600A7B09C /* FadingScrollView.swift in Sources */,
 				3ED2159C2851D4A5003BB140 /* HomeViewController.swift in Sources */,
 				3E8F207528DDA64500C327BE /* HealthRequestBuilder.swift in Sources */,
 				3E42A2122897B419004B12C9 /* MyDeviceViewModel.swift in Sources */,
@@ -4427,7 +5096,9 @@
 				3E8F207F28DDA64500C327BE /* ContactsInvitationListRequest.swift in Sources */,
 				3E8F203828DDA64500C327BE /* DealRequests.swift in Sources */,
 				3ED34C742869C5F800531392 /* WebViewController.swift in Sources */,
+				3EBE256F29C9D7D200212FE4 /* SwiftUI+Animation.swift in Sources */,
 				3EA8908A288ED18800A9A8B0 /* MyDeviceRouter.swift in Sources */,
+				3EF218DD29C89FEA00F0EA95 /* WaveBackgroundView.swift in Sources */,
 				3E6BD0152885511E00A1FC4D /* SymptomDescription.swift in Sources */,
 				3E78A6622876BAB3002599F7 /* NewsRouter.swift in Sources */,
 				3E6BD005288539B000A1FC4D /* ListTileView.swift in Sources */,
@@ -4437,6 +5108,8 @@
 				3E16436C284A52BD000A863C /* AdditionalProfileInfoRouter.swift in Sources */,
 				3EE1355D28AB7E8000FF4F36 /* ActivityRecordData.swift in Sources */,
 				3E78A6772876ED3C002599F7 /* FilterData.swift in Sources */,
+				3E37A3BE28DB160100201306 /* PrivateChatListViewModel.swift in Sources */,
+				3EF218E329C8A40D00F0EA95 /* PatientRoleViewController.swift in Sources */,
 				3E1E6E17289909D800EEC8F3 /* SleepStatsContainerModel.swift in Sources */,
 				3E8F204228DDA64500C327BE /* PostAddFavoriteRequest.swift in Sources */,
 				3E14C6942859EA84002183F5 /* EditProfileRouter.swift in Sources */,
@@ -4455,12 +5128,16 @@
 				3E8F208A28DDA64500C327BE /* ProfileAddTagsRequest.swift in Sources */,
 				3ED215BE2851FC79003BB140 /* RoundedImageView.swift in Sources */,
 				3EE8FA582872E34A00CE8762 /* PaginatedDataUtility.swift in Sources */,
+				3E3F449D28C5EDD400A7665E /* Date+Formatting.swift in Sources */,
 				3EE97D93286DE50A0027DC03 /* CommunitiesListViewController.swift in Sources */,
 				3E539060284E39DD003CE983 /* ConstantsStore.swift in Sources */,
 				3EE9FDCD2844BA6900BE4661 /* Labels.swift in Sources */,
 				3EC5186A289286750012663C /* SleepSummaryModel.swift in Sources */,
 				3EC5187F2892B25B0012663C /* GraphColumnData.swift in Sources */,
+				3E3B62512ADE6AF800A762F0 /* HealthInvitationsRequest.swift in Sources */,
+				3EA979D529CC9F1B002B6764 /* IdentityRoleUtility.swift in Sources */,
 				3E7BAEA2286B1A2C00D180F0 /* UIViewController+ViewModelBinding.swift in Sources */,
+				3E27094429D3247200A7B09C /* OptionSheetModel.swift in Sources */,
 				3E6BD03228859D4300A1FC4D /* SymptomsDailyListModel.swift in Sources */,
 				3E1341A22846644F007C1381 /* IdentityProfileData.swift in Sources */,
 				3EAF3D5E28522DA300C2685D /* InteractableLabel.swift in Sources */,
@@ -4468,20 +5145,27 @@
 				3E8F204B28DDA64500C327BE /* ChatsRequests.swift in Sources */,
 				3E0D55AF2874865700E2EE6A /* SleepViewModel.swift in Sources */,
 				3EAF3D5B2852225000C2685D /* NetworkingAPIErrorMessage+ErrorDetails.swift in Sources */,
+				3E3F449228C5D8F200A7665E /* ConversationItemView.swift in Sources */,
 				3EE0E9C52857780200984C03 /* PopupView.swift in Sources */,
 				3E2153782893D23500737BCC /* StyledBackground.swift in Sources */,
 				3E8F20B528DDA64500C327BE /* APIRequest.swift in Sources */,
 				3E7F38512848C81100320E60 /* UIButton+Styling.swift in Sources */,
+				3EA712012913C6E3000C4078 /* UITextView+Publishers.swift in Sources */,
 				3E6BD0172885536000A1FC4D /* SymptomDescriptionList.swift in Sources */,
+				3EF218E729C8A5D100F0EA95 /* PatientRoleViewModel.swift in Sources */,
 				3EE0E9D42858AF8D00984C03 /* ChangePasswordRouter.swift in Sources */,
 				3E78A6652876C3BE002599F7 /* NoContentView.swift in Sources */,
 				3EB21BA62872CD6400ACE602 /* NewsListViewController.swift in Sources */,
+				3E27093729D30D7300A7B09C /* PatientListViewController.swift in Sources */,
 				3EA880212864912C00E81741 /* FormTextView.swift in Sources */,
 				3E8F202928DDA64500C327BE /* ChatErrorMessage.swift in Sources */,
+				3E8F203028DDA64500C327BE /* String+ApplicationSuffix.swift in Sources */,
+				3EF7BC3D29CDB21200C253B2 /* SelectedWardView.swift in Sources */,
+				3ECCA78129D5BDED001DF5DF /* InvitationItemView.swift in Sources */,
 				3EDC9261286AFCB300A4443E /* BottomClippedGradientView.swift in Sources */,
 				3E68C34F287599FC0005C2DC /* NewsDetailsViewModel.swift in Sources */,
 				3EEB1CF2288FEE8E00E0AAA4 /* SummarySingleStatView.swift in Sources */,
-				3E8F203028DDA64500C327BE /* String+ApplicationSuffix.swift in Sources */,
+				3E27093529D30D6800A7B09C /* CaregiverListViewController.swift in Sources */,
 				3E6BD01A2885561500A1FC4D /* SymptomDescriptionViewController.swift in Sources */,
 				3E8F206528DDA64500C327BE /* ConstantsRequestBuilder.swift in Sources */,
 				3E8F207628DDA64500C327BE /* HealthDashboardParameters.swift in Sources */,
@@ -4508,23 +5192,31 @@
 				3ED85AFD284629AB0008EC11 /* NetworkUtility.swift in Sources */,
 				3E5253DD2887F45C00D6D643 /* SymptomChronologyRouter.swift in Sources */,
 				3EC0793A2889829900CBEB54 /* DescriptionView.swift in Sources */,
+				3E27093F29D30DB900A7B09C /* PatientListRouter.swift in Sources */,
 				3E68C3492875813A0005C2DC /* ArticleCollectionViewCell.swift in Sources */,
 				3EBF4F6F286349B4000E647F /* IdentityAuthenticationMethod.swift in Sources */,
 				3EFC0B452850AA1800841341 /* PageProgressView.swift in Sources */,
 				3EC0794628898A9F00CBEB54 /* LegalViewModel.swift in Sources */,
+				3E37A3C228DB1A9100201306 /* CaregivingRelationData.swift in Sources */,
+				3E27093D29D30D9800A7B09C /* CaregiverListRouter.swift in Sources */,
+				3E3B62532ADE6AF800A762F0 /* HealthRemoveCaregiverRequest.swift in Sources */,
 				3E14C6922859EA78002183F5 /* EditProfileViewModel.swift in Sources */,
 				3EBF4F6B28632E30000E647F /* AskAtheloRouter.swift in Sources */,
 				3ED34C6A2869951A00531392 /* AskAtheloView.swift in Sources */,
 				3E8F206F28DDA64500C327BE /* HealthPerDaySummaryRequest.swift in Sources */,
 				3ED215C9285200B3003BB140 /* UIImageView+Loading.swift in Sources */,
 				3EC518722892A8400012663C /* SleepStatsSingleStatView.swift in Sources */,
+				3EF218EB29C8A61500F0EA95 /* PatientRoleRouter.swift in Sources */,
 				3EEB1CEF288FED9900E0AAA4 /* SleepSummaryStatsView.swift in Sources */,
 				3EB21BB42872D36000ACE602 /* SegmentedPickerView.swift in Sources */,
+				3E313A5929A61BF7005DEC43 /* TextFields.swift in Sources */,
 				3E4C6696289A816A00E0F454 /* ActivitySummaryViewController.swift in Sources */,
+				3E3F449F28C5F1C600A7665E /* ConversationListView.swift in Sources */,
 				3E43B9B72847952600295E2F /* SignUpViewController.swift in Sources */,
 				3E5253E22888124800D6D643 /* SymptomOccurenceData.swift in Sources */,
 				3E8F203928DDA64500C327BE /* DealListRequest.swift in Sources */,
 				3E6BD028288580BC00A1FC4D /* UserSymptomData.swift in Sources */,
+				3EF218C829C8549100F0EA95 /* CaregiverRoleScreen.swift in Sources */,
 				3E16436E284A61DB000A863C /* Publisher+ViewModelState.swift in Sources */,
 				3E13F25D286092A2009A75F6 /* ImagePickingRouter.swift in Sources */,
 				3E8F206228DDA64500C327BE /* LocationRequests.swift in Sources */,
@@ -4535,10 +5227,12 @@
 				3E719A1628CA134F00C3822A /* UIView+FormInput.swift in Sources */,
 				3E0D55962874252700E2EE6A /* WatchListModel.swift in Sources */,
 				3EA8801E28648E5700E81741 /* FeedbackRouter.swift in Sources */,
+				3E3B62542ADE6AF800A762F0 /* HealthRemovePatientRequest.swift in Sources */,
 				3EB21BA82872CD9000ACE602 /* NewsListViewModel.swift in Sources */,
 				3EEB1CE9288FDC2700E0AAA4 /* SleepSummaryAverageView.swift in Sources */,
 				3E7F384D2848AD7C00320E60 /* UIButton+Localization.swift in Sources */,
 				3E270ACA2855FE91001A297C /* UINavigationItem+Styling.swift in Sources */,
+				3EF7BC4029CDC09B00C253B2 /* SelectContactView.swift in Sources */,
 				3E13F25628606033009A75F6 /* StyledText.swift in Sources */,
 				3E8F206028DDA64500C327BE /* FAQRequests.swift in Sources */,
 				3E5EB948284E031000C30ADC /* ListInputTableViewCell.swift in Sources */,
@@ -4558,22 +5252,28 @@
 				3E8F209828DDA64500C327BE /* AuthenticationRequests.swift in Sources */,
 				3E8F208528DDA64500C327BE /* FeedbackRequest.swift in Sources */,
 				3E6BCFFD2885362700A1FC4D /* SymptomData.swift in Sources */,
+				3ECCA78329D5BDF6001DF5DF /* InvitationListView.swift in Sources */,
 				3E7BAEA4286B382000D180F0 /* UITextView+Toolbar.swift in Sources */,
 				3ED85AF028461C130008EC11 /* UIViewController+Navigable.swift in Sources */,
 				3E8F208628DDA64500C327BE /* DeviceConfigRequests.swift in Sources */,
 				3E0D55AB28747D5500E2EE6A /* ActivityViewModel.swift in Sources */,
 				3E8F206728DDA64500C327BE /* HealthDashboardRequest.swift in Sources */,
+				3E1C13A628C206160096E4B7 /* InvitationCodeViewController.swift in Sources */,
 				3E5253F32888242600D6D643 /* HorizontalWeekContainerView.swift in Sources */,
 				3E5253E5288821CC00D6D643 /* RegisterSymptomsViewController.swift in Sources */,
 				3E5253EB288821FC00D6D643 /* RegisterSymptomsRouter.swift in Sources */,
 				3EE0E9AF28570F8400984C03 /* MyProfileViewController.swift in Sources */,
+				3EA979CF29CC3723002B6764 /* InviteCaregiverViewModel.swift in Sources */,
 				3EC518752892A94B0012663C /* SleepStatsDailyView.swift in Sources */,
 				3ED215C52851FDEA003BB140 /* String+Mutators.swift in Sources */,
 				3EC079352889824900CBEB54 /* SettingsViewModel.swift in Sources */,
 				3EE0E9B328570FFA00984C03 /* MyProfileCollectionViewCell.swift in Sources */,
+				3E27092529D2C0AC00A7B09C /* SelectedWardModel.swift in Sources */,
 				3E84D31628535E4E00288F08 /* HomeViewModel.swift in Sources */,
 				3E8F206D28DDA64500C327BE /* HealthCreateSymptomRequest.swift in Sources */,
+				3E15486529A77CA8003EB241 /* IdentityCommonProfileData.swift in Sources */,
 				3EE9FDC12844AAC100BE4661 /* UIKit+Reusable.swift in Sources */,
+				3E15486329A77B8F003EB241 /* CaregiverRoleModel.swift in Sources */,
 				3EE8FA5B28730EE000CE8762 /* NewsData.swift in Sources */,
 				3EC51860289270160012663C /* SleepSummaryViewModel.swift in Sources */,
 				3EEB1CF6288FF2B100E0AAA4 /* SleepSummaryView.swift in Sources */,
@@ -4586,6 +5286,7 @@
 				3EA3D21E287EFAA10054699A /* SmallActionCollectionViewCell.swift in Sources */,
 				3EE97D85286DAE2B0027DC03 /* FeedbackTopicData.swift in Sources */,
 				3E2153802893DCB800737BCC /* SleepStatsSinglePercentageView.swift in Sources */,
+				3EF218E929C8A5FF00F0EA95 /* CaregiverRoleRouter.swift in Sources */,
 				3E7F385E2848DBCF00320E60 /* UIWindow+Overlays.swift in Sources */,
 				3E8F203E28DDA64500C327BE /* PasswordResetRequest.swift in Sources */,
 				3E8F209328DDA64500C327BE /* EventsListRequest.swift in Sources */,
@@ -4598,6 +5299,7 @@
 				3E8F20A628DDA64500C327BE /* ChecklistTemplateListRequest.swift in Sources */,
 				3ED85B0028462B4F0008EC11 /* ViewModel.swift in Sources */,
 				3EE9FD8A2844A57600BE4661 /* AppDelegate.swift in Sources */,
+				3EF218E129C8A40200F0EA95 /* CaregiverRoleViewController.swift in Sources */,
 				3E5253D92887F42A00D6D643 /* SymptomChronologyViewController.swift in Sources */,
 				3E5253D62887EAB300D6D643 /* NavigationRoute.swift in Sources */,
 				3E8F203A28DDA64500C327BE /* DealDetailsRequest.swift in Sources */,
@@ -4605,6 +5307,7 @@
 				3E8F202A28DDA64500C327BE /* IncomingChatMessages.swift in Sources */,
 				3E8F204528DDA64500C327BE /* PostCreatePostRequest.swift in Sources */,
 				3E8F205C28DDA64500C327BE /* ImagesDeleteRequest.swift in Sources */,
+				3EA979D129CC3F35002B6764 /* HealthInvitationData.swift in Sources */,
 				3E43B9CF2847AFEB00295E2F /* FormTextField.swift in Sources */,
 				3E8F207728DDA64500C327BE /* ContactsRequestBuilder.swift in Sources */,
 				3E8F20B328DDA64500C327BE /* APIBuilder.swift in Sources */,
@@ -4617,8 +5320,11 @@
 				3EC774562887E0040022CB6F /* NotificationUtility.swift in Sources */,
 				3E1341AA284664D3007C1381 /* ImageData.swift in Sources */,
 				3ED85E102891135A00F4935A /* HealthSummaryData.swift in Sources */,
+				3EBE257929C9DAC400212FE4 /* RelationInterpretationData.swift in Sources */,
 				3E4C6687289A58D200E0F454 /* ActivitySingleColumnTileView.swift in Sources */,
 				3E8F203B28DDA64500C327BE /* DealRequestBuilder.swift in Sources */,
+				3E313A5729A6117B005DEC43 /* AccessCodeUtility.swift in Sources */,
+				3E313A5029A60EE1005DEC43 /* AccessCodeViewController.swift in Sources */,
 				3E164368284A4D05000A863C /* AdditionalProfileInfoViewController.swift in Sources */,
 				3ED85B0228462B750008EC11 /* SplashViewModel.swift in Sources */,
 				3E919675287D6DD4005F5290 /* ChatMessageCellDecorationData.swift in Sources */,
@@ -4639,6 +5345,7 @@
 				3E8F20AA28DDA64500C327BE /* APIConfiguration.swift in Sources */,
 				3EC079412889873B00CBEB54 /* SettingTableViewCell.swift in Sources */,
 				3EE73EDA2897D2AE006CC5A1 /* HealthSleepAggregatedRecord.swift in Sources */,
+				3E3F44A628C602C000A7665E /* ContactListView.swift in Sources */,
 				3EA89088288ECF8400A9A8B0 /* MyDeviceViewController.swift in Sources */,
 				3ED85AF9284623530008EC11 /* UILabel+Localization.swift in Sources */,
 				3E8F206428DDA64500C327BE /* LocationDetailsRequest.swift in Sources */,
@@ -4646,6 +5353,7 @@
 				3E8F20B028DDA64500C327BE /* PingbackResponseData.swift in Sources */,
 				3E8F208728DDA64500C327BE /* DeviceConfigRequestBuilder.swift in Sources */,
 				3ED0BFB828A239E500224561 /* LineGraphShape.swift in Sources */,
+				3E12D47F29C49440007DF485 /* RadioStateView.swift in Sources */,
 				3E68C35128759A080005C2DC /* NewsDetailsRouter.swift in Sources */,
 				3E33C81C28869ECD0059B0D3 /* UIViewController+Messages.swift in Sources */,
 				3E8F203C28DDA64500C327BE /* PasswordRequestBuilder.swift in Sources */,
@@ -4657,7 +5365,10 @@
 				3E1341A52846649B007C1381 /* TagData.swift in Sources */,
 				3E8F205528DDA64500C327BE /* ChatJoinGroupConversationRequest.swift in Sources */,
 				3E0D55AD28747EB700E2EE6A /* ActivityRouter.swift in Sources */,
+				3EBE8FEC28D30EAA0092CCC8 /* AddContactViewController.swift in Sources */,
+				3EF218CB29C8552400F0EA95 /* PatientRoleScreen.swift in Sources */,
 				3E5EB935284DDCBD00C30ADC /* LargeLoadingView.swift in Sources */,
+				3E3B62502ADE6AF800A762F0 /* HealthInviteCaregiverRequest.swift in Sources */,
 				3E84D31B28536EB300288F08 /* TileCollectionViewCell.swift in Sources */,
 				3E8F204728DDA64500C327BE /* PostAddPhotoToCommentRequest.swift in Sources */,
 				3E8F204828DDA64500C327BE /* PostCommentsRequest.swift in Sources */,
@@ -4678,6 +5389,8 @@
 				3E8F204328DDA64500C327BE /* PostListRequest.swift in Sources */,
 				3E8F20A928DDA64500C327BE /* APIContentType.swift in Sources */,
 				3EC0794828898AA500CBEB54 /* LegalRouter.swift in Sources */,
+				3E37A3C828DB4B1100201306 /* PrivateChatListUtility.swift in Sources */,
+				3E27093B29D30D9000A7B09C /* PatientListViewModel.swift in Sources */,
 				3E0D559E287431E300E2EE6A /* WatchListViewModel.swift in Sources */,
 				3E8F202D28DDA64500C327BE /* NetworkingImageData.swift in Sources */,
 				3E8F208128DDA64500C327BE /* FitbitDeleteProfileRequest.swift in Sources */,
@@ -4705,6 +5418,7 @@
 				3EE0E9B92857338200984C03 /* UITextView+Padding.swift in Sources */,
 				3E7BAEA0286B14AE00D180F0 /* FeedbackData.swift in Sources */,
 				3E1341AF28466559007C1381 /* IdentityUserData.swift in Sources */,
+				3EF9FA1E2943575A00BC7D9D /* ConfigurationReader.swift in Sources */,
 				3EC518842892B4C80012663C /* GraphVerticalGridView.swift in Sources */,
 				3E42A2152897B520004B12C9 /* FitbitProfileData.swift in Sources */,
 				3E8F20A228DDA64500C327BE /* ChecklistDetailsRequest.swift in Sources */,
@@ -4712,6 +5426,7 @@
 				3EDB3790287C522700C3EDE8 /* CommunityChatViewModel.swift in Sources */,
 				3E0D559C287431BB00E2EE6A /* WatchListViewController.swift in Sources */,
 				3E68C34D287599E80005C2DC /* NewsDetailsViewController.swift in Sources */,
+				3E3F449628C5E25400A7665E /* ConversationData.swift in Sources */,
 				3ED7110428A3EB0B0027A6B0 /* MultiValueColumnChartModel.swift in Sources */,
 				3E8F205128DDA64500C327BE /* ChatCloseSessionRequest.swift in Sources */,
 				3E13419028464468007C1381 /* LoadingView.swift in Sources */,
@@ -4720,6 +5435,7 @@
 				3E8F208E28DDA64500C327BE /* ProfileRequestBuilder.swift in Sources */,
 				3EDB378E287C521600C3EDE8 /* CommunityChatViewController.swift in Sources */,
 				3E919682287D7D47005F5290 /* ChatUtility.swift in Sources */,
+				3E27094629D3248B00A7B09C /* OptionSheetItem.swift in Sources */,
 				3E43B9C62847A00C00295E2F /* ForgotPasswordRouter.swift in Sources */,
 				3EC5188E2892B7ED0012663C /* GraphHorizontalLegendView.swift in Sources */,
 				3EE9FDC92844B8B000BE4661 /* UIColor+Styling.swift in Sources */,
@@ -4736,13 +5452,16 @@
 				3EC518912892B9C60012663C /* GraphColumnChartView.swift in Sources */,
 				3EC5187D2892B20C0012663C /* GraphColumnItemData.swift in Sources */,
 				3E8F202428DDA64500C327BE /* ChatSystemMessage.swift in Sources */,
+				3E1C13A128C1F6580096E4B7 /* InvitationView.swift in Sources */,
 				3ED0BFB228A239CC00224561 /* SmallLineGraphModel.swift in Sources */,
 				3E0D55A32874398200E2EE6A /* ConnectDeviceViewController.swift in Sources */,
 				3E8F208C28DDA64500C327BE /* ProfileDetailsRequest.swift in Sources */,
 				3ED85B09284630550008EC11 /* BaseNavigationController.swift in Sources */,
 				3EE9FD8C2844A57600BE4661 /* SceneDelegate.swift in Sources */,
+				3EBE8FEE28D310D60092CCC8 /* AddContactViewModel.swift in Sources */,
 				3E27097E2863017300D53272 /* HTMLContent.swift in Sources */,
 				3E4C6698289A819000E0F454 /* ActivitySummaryViewModel.swift in Sources */,
+				3E3B62562ADE7A1000A762F0 /* NetworkingAPIHealthServices+Extensions.swift in Sources */,
 				3E13419B28466332007C1381 /* IdentityUtility.swift in Sources */,
 				3ED34C6F28699CF200531392 /* AskAtheloModel.swift in Sources */,
 				3E33C81E28869FFB0059B0D3 /* Error+Messages.swift in Sources */,
@@ -4757,9 +5476,11 @@
 				3E8F208328DDA64500C327BE /* FeedbackRequestBuilder.swift in Sources */,
 				3E164363284A0F30000A863C /* SignUpWithEmailRouter.swift in Sources */,
 				3E21537B2893DBFC00737BCC /* SleepStatsPercentageView.swift in Sources */,
+				3E37A3C028DB160B00201306 /* PrivateChatListRouter.swift in Sources */,
 				3EC5186F2892984B0012663C /* SleepStatsContainerView.swift in Sources */,
 				3E0D55942874251800E2EE6A /* WatchListView.swift in Sources */,
 				3E43B9B52847951D00295E2F /* LogInViewController.swift in Sources */,
+				3EBE8FEA28D3010D0092CCC8 /* UserRole.swift in Sources */,
 				3E4C669E289AAD1D00E0F454 /* UnitNameData.swift in Sources */,
 				3EC518932892BA410012663C /* GraphColumnChartData.swift in Sources */,
 				3E7F384B2848ACD300320E60 /* ShadowCastingView.swift in Sources */,
@@ -4767,13 +5488,18 @@
 				3E7F385C2848D75400320E60 /* EmailValidator.swift in Sources */,
 				3E8F207128DDA64500C327BE /* HealthSleepAggregatedRecordsRequest.swift in Sources */,
 				3EDC9269286AFF6700A4443E /* NoWatchViewController.swift in Sources */,
+				3E313A5429A60EF3005DEC43 /* AccessCodeRouter.swift in Sources */,
 				3ED215A42851D4C5003BB140 /* SleepViewController.swift in Sources */,
 				3E0D55A728743F0300E2EE6A /* ConnectDeviceRouter.swift in Sources */,
 				3E75F53928A51CFA00000968 /* GraphHorizontalGridView.swift in Sources */,
 				3E7F38462848ABE800320E60 /* StyledButton.swift in Sources */,
+				3E3B624A2ADE6A8A00A762F0 /* HealthAcceptCaregiverInvitationRequest.swift in Sources */,
 				3E54E4CF2861D77C00D7CB30 /* ExpandableEntryView.swift in Sources */,
 				3E6BD0262885802D00A1FC4D /* SymptomDaySummary.swift in Sources */,
+				3E3F44A428C5FE4E00A7665E /* ContactItemView.swift in Sources */,
 				3E264D08284F403100316BBB /* Completion+ViewModelState.swift in Sources */,
+				3EF7BC3A29CD8D8400C253B2 /* RawRepresentable+UserDefaults.swift in Sources */,
+				3E3F44A128C5F2AB00A7665E /* ConversationListModel.swift in Sources */,
 				3ED7110228A3E8B60027A6B0 /* LinearGraphModel.swift in Sources */,
 				3E43B9BC2847965400295E2F /* KeyboardListeningViewController.swift in Sources */,
 				3EA4FF0F288A908300717DA7 /* CommonError.swift in Sources */,
@@ -4785,6 +5511,7 @@
 				3E8F206C28DDA64500C327BE /* HealthSleepRecordsRequest.swift in Sources */,
 				3EE8FA61287327A800CE8762 /* LoadMoreCollectionViewCell.swift in Sources */,
 				3E6BD00828853B4200A1FC4D /* StyledImageView.swift in Sources */,
+				3EBE8FE828D2FF1E0092CCC8 /* SelectRoleScreen.swift in Sources */,
 				3ED215AF2851E44A003BB140 /* MenuViewController.swift in Sources */,
 				3E8F204628DDA64500C327BE /* PostCommentDetailsRequest.swift in Sources */,
 			);
@@ -4804,8 +5531,9 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3EE9FD982844A57800BE4661 /* Debug */ = {
+		3EE9FD982844A57800BE4661 /* Debug (STG) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EF9FA1F294357FD00BC7D9D /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4862,10 +5590,11 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = "Debug (STG)";
 		};
-		3EE9FD992844A57800BE4661 /* Release */ = {
+		3EE9FD992844A57800BE4661 /* Release (STG) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EF9FA1F294357FD00BC7D9D /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4916,21 +5645,22 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = "Release (STG)";
 		};
-		3EE9FD9B2844A57800BE4661 /* Debug */ = {
+		3EE9FD9B2844A57800BE4661 /* Debug (STG) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 69;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = WHV365RSPM;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -4944,7 +5674,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.i2asolutions.athelo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -4954,21 +5684,22 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = Debug;
+			name = "Debug (STG)";
 		};
-		3EE9FD9C2844A57800BE4661 /* Release */ = {
+		3EE9FD9C2844A57800BE4661 /* Release (STG) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 69;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = WHV365RSPM;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -4982,8 +5713,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.i2asolutions.athelo;
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.athelohealth.mobile.stg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -4992,7 +5723,201 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = Release;
+			name = "Release (STG)";
+		};
+		3EF9FA2129435A6D00BC7D9D /* Debug (PROD) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EF9FA202943580F00BC7D9D /* Production.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug (PROD)";
+		};
+		3EF9FA2229435A6D00BC7D9D /* Debug (PROD) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 69;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9CAGH464QT;
+				ENABLE_BITCODE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Athelo/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.athelohealth.mobile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Debug (PROD)";
+		};
+		3EF9FA2329435A7800BC7D9D /* Release (PROD) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EF9FA202943580F00BC7D9D /* Production.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release (PROD)";
+		};
+		3EF9FA2429435A7800BC7D9D /* Release (PROD) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 69;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9CAGH464QT;
+				ENABLE_BITCODE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Athelo/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.athelohealth.mobile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Release (PROD)";
 		};
 /* End XCBuildConfiguration section */
 
@@ -5000,20 +5925,24 @@
 		3EE9FD812844A57600BE4661 /* Build configuration list for PBXProject "Athelo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3EE9FD982844A57800BE4661 /* Debug */,
-				3EE9FD992844A57800BE4661 /* Release */,
+				3EE9FD982844A57800BE4661 /* Debug (STG) */,
+				3EF9FA2129435A6D00BC7D9D /* Debug (PROD) */,
+				3EE9FD992844A57800BE4661 /* Release (STG) */,
+				3EF9FA2329435A7800BC7D9D /* Release (PROD) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release (STG)";
 		};
 		3EE9FD9A2844A57800BE4661 /* Build configuration list for PBXNativeTarget "Athelo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3EE9FD9B2844A57800BE4661 /* Debug */,
-				3EE9FD9C2844A57800BE4661 /* Release */,
+				3EE9FD9B2844A57800BE4661 /* Debug (STG) */,
+				3EF9FA2229435A6D00BC7D9D /* Debug (PROD) */,
+				3EE9FD9C2844A57800BE4661 /* Release (STG) */,
+				3EF9FA2429435A7800BC7D9D /* Release (PROD) */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release (STG)";
 		};
 /* End XCConfigurationList section */
 

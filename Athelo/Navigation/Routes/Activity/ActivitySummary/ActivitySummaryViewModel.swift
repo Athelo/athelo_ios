@@ -13,22 +13,46 @@ final class ActivitySummaryViewModel: BaseViewModel {
     // MARK: - Properties
     private let dataHandler = ActivitySummaryDataHandler()
     let dataModel = ActivitySummaryModel(activityType: .exercise)
+    let wardModel = SelectedWardModel()
     
     private let chartDataCache = NSCache<RangeData.DataKey, CachedObjectWrapper>()
     
+    @Published private(set) var canDisplayWardData: Bool = false
     @Published private(set) var canSelectNextRange: Bool = true
     @Published private(set) var rangeDescriptionHeader: String?
     @Published private(set) var rangeDescriptionBody: String?
     
-    private let activeDayFilter = CurrentValueSubject<Date, Never>(Date())
-    private let activeWeekFilter = CurrentValueSubject<WeekRangeData, Never>(.init(startingAt: Date().dateAt(.startOfWeek).date))
-    private let activeMonthFilter = CurrentValueSubject<Date, Never>(Date())
+    private let region: Region
+    
+    private let activeDayFilter: CurrentValueSubject<Date, Never>
+    private let activeWeekFilter: CurrentValueSubject<WeekRangeData, Never>
+    private let activeMonthFilter: CurrentValueSubject<Date, Never>
+    
+    private let roleUpdateSubject = CurrentValueSubject<Void, Never>(())
     
     private var cancellables: [AnyCancellable] = []
     
     // MARK: - Initialization
-    override init() {
+    override convenience init() {
+        self.init(region: .UTC)
+    }
+    
+    init(region: Region) {
+        self.region = region
+        
+        let startOfDay = Date.timeZoneUnaware(in: region)
+        
+        self.activeDayFilter = CurrentValueSubject(startOfDay)
+        self.activeWeekFilter = CurrentValueSubject(WeekRangeData(startingAt: startOfDay.dateAt(.startOfWeek).date))
+        self.activeMonthFilter = CurrentValueSubject(startOfDay)
+        
         super.init()
+        
+        guard let userRole = IdentityUtility.activeUserRole else {
+            fatalError("Missing user role/context to display stat data.")
+        }
+        
+        updateRoleData(userRole)
         
         sink()
     }
@@ -62,7 +86,18 @@ final class ActivitySummaryViewModel: BaseViewModel {
     
     // MARK: - Sinks
     private func sink() {
+        sinkIntoIdentityUtility()
         sinkIntoOwnSubjects()
+    }
+    
+    private func sinkIntoIdentityUtility() {
+        IdentityUtility.$activeRole
+            .dropFirst()
+            .compactMap({ $0 })
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.updateRoleData($0)
+            }.store(in: &cancellables)
     }
     
     private func sinkIntoOwnSubjects() {
@@ -88,44 +123,65 @@ final class ActivitySummaryViewModel: BaseViewModel {
         let rangeDataPublisher: AnyPublisher<RangeData, Never> = Publishers.Merge3(
             dataModel.$filter
                 .filter({ $0 == .day })
-                .flatMap({ _ in self.activeDayFilter })
+                .compactMap({ [weak self] _ in self?.activeDayFilter })
+                .flatMap({ $0 })
                 .map({ RangeData.day($0) })
                 .eraseToAnyPublisher() as AnyPublisher<RangeData, Never>,
             dataModel.$filter
                 .filter({ $0 == .week })
-                .flatMap({ _ in self.activeWeekFilter })
+                .compactMap({ [weak self] _ in self?.activeWeekFilter })
+                .flatMap({ $0 })
                 .map({ RangeData.week($0) })
                 .eraseToAnyPublisher() as AnyPublisher<RangeData, Never>,
             dataModel.$filter
                 .filter({ $0 == .month })
-                .flatMap({ _ in self.activeMonthFilter })
+                .compactMap({ [weak self] _ in self?.activeMonthFilter })
+                .flatMap({ $0 })
                 .map({ RangeData.month($0) })
                 .eraseToAnyPublisher() as AnyPublisher<RangeData, Never>
         ).eraseToAnyPublisher()
         
         rangeDataPublisher
-            .map({ ActivitySummaryViewModel.descriptionHeader(for: $0) })
+            .compactMap({ [weak self] value -> String? in
+                guard let region = self?.region else {
+                    return nil
+                }
+                
+                return ActivitySummaryViewModel.descriptionHeader(for: value, region: region)
+            })
             .removeDuplicates()
             .sink { [weak self] in
                 self?.rangeDescriptionHeader = $0
             }.store(in: &cancellables)
         
         rangeDataPublisher
-            .map({ ActivitySummaryViewModel.descriptionBody(for: $0) })
+            .map({ [weak self] value -> String? in
+                guard let region = self?.region else {
+                    return nil
+                }
+                
+                return ActivitySummaryViewModel.descriptionBody(for: value, region: region)
+            })
             .removeDuplicates()
             .sink { [weak self] in
                 self?.rangeDescriptionBody = $0
             }.store(in: &cancellables)
         
         rangeDataPublisher
-            .map({ value -> Bool in
+            .map({ [weak self] value -> Bool in
+                guard let region = self?.region else {
+                    return false
+                }
+                
+                let referenceDate = Date.timeZoneUnaware(in: region)
+                
                 switch value {
                 case .day(let date):
-                    return date.compare(toDate: Date(), granularity: .day) == .orderedAscending
+                    return date.compare(toDate: referenceDate, granularity: .day) == .orderedAscending
                 case .week(let range):
-                    return range.maxBound.compare(toDate: Date(), granularity: .day) == .orderedAscending
+                    return range.maxBound.compare(toDate: referenceDate, granularity: .day) == .orderedAscending
                 case .month(let date):
-                    return date.compare(toDate: Date(), granularity: .month) == .orderedAscending
+                    return date.compare(toDate: referenceDate, granularity: .month) == .orderedAscending
                 }
             })
             .removeDuplicates()
@@ -133,18 +189,24 @@ final class ActivitySummaryViewModel: BaseViewModel {
                 self?.canSelectNextRange = $0
             }.store(in: &cancellables)
         
-        rangeDataPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.handleDataUpdate(for: $0)
-            }.store(in: &cancellables)
+        Publishers.CombineLatest(
+            rangeDataPublisher,
+            roleUpdateSubject
+        )
+        .map({ $0.0 })
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] in
+            self?.handleDataUpdate(for: $0)
+        }.store(in: &cancellables)
     }
     
     // MARK: - Updates
-    private static func descriptionBody(for rangeData: RangeData) -> String? {
+    private static func descriptionBody(for rangeData: RangeData, region: Region) -> String? {
+        let referenceDate: Date = .timeZoneUnaware(in: region)
+        
         switch rangeData {
         case .day(let date):
-            let difference = date.difference(in: .day, from: Date())
+            let difference = date.difference(in: .day, from: referenceDate)
             switch difference {
             case .some(let days):
                 switch days {
@@ -159,7 +221,7 @@ final class ActivitySummaryViewModel: BaseViewModel {
                 return nil
             }
         case .week(let range):
-            let difference = range.minBound.difference(in: .day, from: Date().dateAt(.startOfWeek).date)
+            let difference = range.minBound.difference(in: .day, from: referenceDate.dateAt(.startOfWeek).date)
             switch difference {
             case .some(let days):
                 switch days {
@@ -174,7 +236,7 @@ final class ActivitySummaryViewModel: BaseViewModel {
                 return nil
             }
         case .month(let date):
-            let difference = date.difference(in: .month, from: Date())
+            let difference = date.difference(in: .month, from: referenceDate)
             switch difference {
             case .some(let months):
                 switch months {
@@ -191,20 +253,20 @@ final class ActivitySummaryViewModel: BaseViewModel {
         }
     }
     
-    private static func descriptionHeader(for rangeData: RangeData) -> String {
+    private static func descriptionHeader(for rangeData: RangeData, region: Region) -> String {
         switch rangeData {
         case .day(let date):
-            return date.toFormat("MMMM dd, yyyy")
+            return date.in(region: region).toFormat("MMMM dd, yyyy")
         case .week(let range):
             if range.minBound.year != range.maxBound.year {
-                return "\(range.minBound.toFormat("MMMM dd, yyyy")) - \(range.maxBound.toFormat("MMMM dd, yyyy")))"
+                return "\(range.minBound.in(region: region).toFormat("MMMM dd, yyyy")) - \(range.maxBound.in(region: region).toFormat("MMMM dd, yyyy")))"
             } else if range.minBound.month != range.maxBound.month {
-                return "\(range.minBound.toFormat("MMMM dd")) - \(range.maxBound.toFormat("MMMM dd, yyyy"))"
+                return "\(range.minBound.in(region: region).toFormat("MMMM dd")) - \(range.maxBound.in(region: region).toFormat("MMMM dd, yyyy"))"
             } else {
-                return "\(range.minBound.toFormat("MMMM dd")) - \(range.maxBound.toFormat("dd, yyyy"))"
+                return "\(range.minBound.in(region: region).toFormat("MMMM dd")) - \(range.maxBound.in(region: region).toFormat("dd, yyyy"))"
             }
         case .month(let date):
-            return date.toFormat("MMMM yyyy")
+            return date.in(region: region).toFormat("MMMM yyyy")
         }
     }
     
@@ -228,7 +290,7 @@ final class ActivitySummaryViewModel: BaseViewModel {
         
         switch data {
         case .success(let dict):
-            prepareGraphData(from: dict, for: .day(date))
+            prepareGraphData(from: dict, inRange: .day(date), for: dataHandler.activeRole)
             prepareOverviewValueData(from: dict)
         case .failure(let date):
             guard state.value != .loading else {
@@ -237,17 +299,26 @@ final class ActivitySummaryViewModel: BaseViewModel {
             
             state.send(.loading)
             
+            let requestUserRole = dataHandler.activeRole
             dataHandler.fetchHourlyAggregates(from: date, of: dataModel.activityType, step: ActivitySummaryDataHandler.Constants.dailyDataStep)
                 .ignoreOutput()
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] in
+                    guard let self else {
+                        return
+                    }
+                    
                     let result = $0.toViewModelState()
                     
                     if case .loaded = result {
-                        self?.handleDailyDataUpdate(at: date)
+                        self.handleDailyDataUpdate(at: date)
+                    } else if case .error = result, requestUserRole.isCaregiver,
+                              self.dataHandler.activeRole == requestUserRole,
+                              !self.dataHandler.hasAnyData(for: requestUserRole) {
+                        self.dataModel.displayEmptyData()
                     }
                     
-                    self?.state.send(result)
+                    self.state.send(result)
                 }.store(in: &cancellables)
         }
     }
@@ -257,7 +328,7 @@ final class ActivitySummaryViewModel: BaseViewModel {
         
         switch data {
         case .success(let dict):
-            prepareGraphData(from: dict, for: .week(range))
+            prepareGraphData(from: dict, inRange: .week(range), for: dataHandler.activeRole)
             prepareOverviewValueData(from: dict)
         case .failure(let date):
             guard state.value != .loading else {
@@ -266,17 +337,26 @@ final class ActivitySummaryViewModel: BaseViewModel {
             
             state.send(.loading)
             
+            let requestUserRole = dataHandler.activeRole
             dataHandler.fetchDailyAggregates(from: date, of: dataModel.activityType, step: ActivitySummaryDataHandler.Constants.weeklyDataStep)
                 .ignoreOutput()
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] in
+                    guard let self else {
+                        return
+                    }
+                    
                     let result = $0.toViewModelState()
                     
                     if case .loaded = result {
-                        self?.handleWeeklyDataUpdate(at: range)
+                        self.handleWeeklyDataUpdate(at: range)
+                    } else if case .error = result, requestUserRole.isCaregiver,
+                              self.dataHandler.activeRole == requestUserRole,
+                              !self.dataHandler.hasAnyData(for: requestUserRole) {
+                        self.dataModel.displayEmptyData()
                     }
                     
-                    self?.state.send(result)
+                    self.state.send(result)
                 }.store(in: &cancellables)
         }
     }
@@ -286,7 +366,7 @@ final class ActivitySummaryViewModel: BaseViewModel {
         
         switch data {
         case .success(let dict):
-            prepareGraphData(from: dict, for: .week(range))
+            prepareGraphData(from: dict, inRange: .week(range), for: dataHandler.activeRole)
             prepareOverviewValueData(from: dict)
         case .failure(let date):
             guard state.value != .loading else {
@@ -295,27 +375,36 @@ final class ActivitySummaryViewModel: BaseViewModel {
             
             state.send(.loading)
             
+            let requestUserRole = dataHandler.activeRole
             dataHandler.fetchHeartRateWeeklyAggregates(from: date, step: ActivitySummaryDataHandler.Constants.weeklyDataStep)
                 .ignoreOutput()
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] in
+                    guard let self else {
+                        return
+                    }
+                    
                     let result = $0.toViewModelState()
                     
                     if case .loaded = result {
-                        self?.handleWeeklyHeartRateDataUpdate(at: range)
+                        self.handleWeeklyHeartRateDataUpdate(at: range)
+                    } else if case .error = result, requestUserRole.isCaregiver,
+                              self.dataHandler.activeRole == requestUserRole,
+                              !self.dataHandler.hasAnyData(for: requestUserRole) {
+                        self.dataModel.displayEmptyData()
                     }
                     
-                    self?.state.send(result)
+                    self.state.send(result)
                 }.store(in: &cancellables)
         }
     }
     
     private func handleMonthlyDataUpdate(at date: Date) {
-        let data = dataHandler.aggregateData(fromDay: date.dateAt(.startOfMonth).date, to: date.dateAt(.endOfMonth).dateAtStartOf(.hour).date)
+        let data = dataHandler.aggregateData(fromDay: date.dateAt(.startOfMonth).date, to: date.dateAt(.endOfMonth).dateAtStartOf(.day).date)
         
         switch data {
         case .success(let dict):
-            prepareGraphData(from: dict, for: .month(date))
+            prepareGraphData(from: dict, inRange: .month(date), for: dataHandler.activeRole)
             prepareOverviewValueData(from: dict)
         case .failure(let date):
             guard state.value != .loading else {
@@ -324,18 +413,48 @@ final class ActivitySummaryViewModel: BaseViewModel {
             
             state.send(.loading)
             
+            let requestUserRole = dataHandler.activeRole
             dataHandler.fetchDailyAggregates(from: date, of: dataModel.activityType, step: ActivitySummaryDataHandler.Constants.monthlyDataStep)
                 .ignoreOutput()
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] in
+                    guard let self else {
+                        return
+                    }
+                    
                     let result = $0.toViewModelState()
                     
                     if case .loaded = result {
-                        self?.handleMonthlyDataUpdate(at: date)
+                        self.handleMonthlyDataUpdate(at: date)
+                    } else if case .error = result, requestUserRole.isCaregiver,
+                              self.dataHandler.activeRole == requestUserRole,
+                              !self.dataHandler.hasAnyData(for: requestUserRole) {
+                        self.dataModel.displayEmptyData()
                     }
                     
-                    self?.state.send(result)
+                    self.state.send(result)
                 }.store(in: &cancellables)
+        }
+    }
+    
+    private func overviewAggregationRule() -> OverviewDataAggregationRule {
+        switch dataModel.activityType {
+        case .exercise, .steps:
+            switch dataModel.filter {
+            case .day:
+                return .sum
+            case .week, .month:
+                return .average
+            }
+        case .heartRate:
+            switch dataModel.filter {
+            case .day, .week:
+                return .minMax
+            case .month:
+                return .average
+            }
+        case .hrv:
+            return .average
         }
     }
     
@@ -376,30 +495,24 @@ final class ActivitySummaryViewModel: BaseViewModel {
         }
     }
     
-    private func overviewAggregationRule() -> OverviewDataAggregationRule {
-        switch dataModel.activityType {
-        case .exercise, .steps:
-            switch dataModel.filter {
-            case .day:
-                return .sum
-            case .week, .month:
-                return .average
-            }
-        case .heartRate:
-            switch dataModel.filter {
-            case .day, .week:
-                return .minMax
-            case .month:
-                return .average
-            }
-        case .hrv:
-            return .average
+    private func updateRoleData(_ userRole: ActiveUserRole) {
+        dataHandler.changeActiveRole(userRole)
+        roleUpdateSubject.send()
+        
+        switch userRole {
+        case .caregiver(let patientData):
+            canDisplayWardData = true
+            wardModel.updateWard(patientData)
+        case .patient:
+            canDisplayWardData = false
+            wardModel.updateWard(nil)
         }
     }
     
-   // Records should/could be extracted per displayed chart type.
-    private func prepareGraphData(from dict: [Date: [ActivitySummaryDataHandler.SummaryDataPoint]], for rangeData: RangeData) {
-        if let cachedData = chartDataCache.object(forKey: rangeData.dataKey)?.wrapped as? CachedChartData {
+   // MARK: - Chart data handling
+    private func prepareGraphData(from dict: [Date: [ActivitySummaryDataHandler.SummaryDataPoint]], inRange rangeData: RangeData, for userRole: ActiveUserRole) {
+        let compositeCacheKey: NSString = NSString(format: "%@%@", [userRole.cacheKey, rangeData.dataKey])
+        if let cachedData = chartDataCache.object(forKey: compositeCacheKey)?.wrapped as? CachedChartData {
             applyCachedChartData(cachedData)
             return
         }
@@ -574,6 +687,17 @@ final class ActivitySummaryViewModel: BaseViewModel {
 }
 
 // MARK: - Helper extensions
+private extension ActiveUserRole {
+    var cacheKey: NSString {
+        switch self {
+        case .patient:
+            return NSString(string: "patient:")
+        case .caregiver(let patient):
+            return NSString(string: "caregiver-\(patient.contactID):")
+        }
+    }
+}
+
 private extension ActivitySummaryViewModel {
     enum OverviewDataAggregationRule {
         case average
@@ -721,5 +845,19 @@ private extension ActivitySummaryFilter {
         case .week:
             return 0.60
         }
+    }
+}
+
+private extension Date {
+    static func timeZoneUnaware(in region: Region) -> Date {
+        Date().converted(to: region)
+    }
+    
+    func converted(to region: Region) -> Date {
+        guard let convertedDate = Date(self.in(region: .current).toFormat("yyyy/MM/dd"), format: "yyyy/MM/dd", region: region) else {
+            fatalError("Could not convert \(self) to \(region).")
+        }
+        
+        return convertedDate
     }
 }

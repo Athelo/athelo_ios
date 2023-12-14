@@ -122,7 +122,7 @@ final class NewsListViewController: KeyboardListeningViewController {
                 self?.textFieldSearch.resignFirstResponder()
             }.store(in: &cancellables)
         
-        textFieldSearch.textPublisher
+        textFieldSearch.currentTextPublisher
             .sinkDiscardingValue { [weak self] in
                 self?.updateSearchTextFieldTextColor()
             }.store(in: &cancellables)

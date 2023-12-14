@@ -124,7 +124,7 @@ final class SliderView: PanInterceptingView {
         stepStackView.translatesAutoresizingMaskIntoConstraints = false
         stepStackView.axis = .vertical
         stepStackView.alignment = .center
-        stepStackView.spacing = 8.0
+        stepStackView.spacing = 4.0
         
         let stepDescriptionContainerView = UIView()
         
@@ -139,6 +139,7 @@ final class SliderView: PanInterceptingView {
         stepDescriptionLabel.text = step.text
         stepDescriptionLabel.textAlignment = .center
         stepDescriptionLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        stepDescriptionLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         stepDescriptionContainerView.addSubview(stepDescriptionLabel)
         

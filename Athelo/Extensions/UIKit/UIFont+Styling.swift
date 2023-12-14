@@ -27,6 +27,7 @@ extension UIFont {
         case messageInfo
         case paragraph
         case pill
+        case slider
         case subheading
         case subtitle
         case textField
@@ -43,7 +44,7 @@ extension UIFont {
             return .withStyle(.purple623E61)
         case .messageInfo:
             return .withStyle(.white)
-        case .articleBody, .legend, .paragraph, .subheading, .subtitle:
+        case .articleBody, .legend, .paragraph, .slider, .subheading, .subtitle:
             return .withStyle(.gray)
         case .textFieldError:
             return .withStyle(.redFF0000)
@@ -86,6 +87,8 @@ extension UIFont {
             return UIFont(name: "Inter-MediumItalic", size: 12.0)!
         case .paragraph:
             return UIFont(name: "Inter-Regular", size: 18.0)!
+        case .slider:
+            return UIFont(name: "Inter-Regular", size: 14.0)!
         case .subheading:
             return UIFont(name: "Inter-SemiBold", size: 16.0)!
         case .subtitle:

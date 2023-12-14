@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -24,11 +24,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCJ-pC-nTY" customClass="NoContentView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="16" y="222" width="382" height="624"/>
+                                <rect key="frame" x="16" y="226" width="382" height="620"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cdX-GG-gbI">
-                                <rect key="frame" x="0.0" y="206" width="414" height="690"/>
+                                <rect key="frame" x="0.0" y="210" width="414" height="686"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PGp-nJ-kgW">
                                     <size key="itemSize" width="128" height="128"/>
@@ -39,7 +39,7 @@
                                 <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Wv-bc-Ebg" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="206"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="210"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="blendsFromTop" value="NO"/>
@@ -49,11 +49,11 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Df5-9b-nMT" customClass="ShadowCastingView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="16" y="154" width="382" height="52"/>
+                                <rect key="frame" x="16" y="158" width="382" height="52"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Rdj-Z1-Vpg">
-                                <rect key="frame" x="16" y="68" width="382" height="138"/>
+                                <rect key="frame" x="16" y="72" width="382" height="138"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zaf-7E-gH4" customClass="SegmentedPickerView" customModule="Athelo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="54"/>
@@ -158,7 +158,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XV8-I7-q6s">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="duc-ri-mwG">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="446"/>
@@ -180,10 +180,10 @@
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ua-xw-ojU">
-                                                        <rect key="frame" x="280.5" y="0.0" width="101.5" height="17"/>
+                                                        <rect key="frame" x="272.5" y="0.0" width="109.5" height="17"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20th May, 2023" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4us-Wk-V22" customClass="BodyLabel" customModule="Athelo" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="101.5" height="17"/>
+                                                                <rect key="frame" x="8" y="0.0" width="101.5" height="17"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" name="#623E61"/>
                                                                 <nil key="highlightedColor"/>
@@ -191,7 +191,7 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="4us-Wk-V22" firstAttribute="leading" secondItem="2ua-xw-ojU" secondAttribute="leading" id="BNr-Yx-rca"/>
+                                                            <constraint firstItem="4us-Wk-V22" firstAttribute="leading" secondItem="2ua-xw-ojU" secondAttribute="leading" constant="8" id="BNr-Yx-rca"/>
                                                             <constraint firstAttribute="trailing" secondItem="4us-Wk-V22" secondAttribute="trailing" id="Pin-UJ-hVv"/>
                                                             <constraint firstAttribute="bottom" secondItem="4us-Wk-V22" secondAttribute="bottom" id="aF4-zK-8cn"/>
                                                             <constraint firstItem="4us-Wk-V22" firstAttribute="top" relation="greaterThanOrEqual" secondItem="2ua-xw-ojU" secondAttribute="top" id="b4n-C2-HKA"/>
@@ -207,15 +207,16 @@
                                                     <constraint firstAttribute="trailing" secondItem="2ua-xw-ojU" secondAttribute="trailing" id="Ykj-GF-TPj"/>
                                                     <constraint firstItem="Fwv-0q-rGP" firstAttribute="top" secondItem="zzF-OC-eqh" secondAttribute="top" id="eWv-KS-ELd"/>
                                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2ua-xw-ojU" secondAttribute="bottom" id="jDC-6g-gWa"/>
-                                                    <constraint firstItem="4us-Wk-V22" firstAttribute="firstBaseline" secondItem="Fwv-0q-rGP" secondAttribute="firstBaseline" priority="999" id="kzu-81-RGw"/>
+                                                    <constraint firstItem="4us-Wk-V22" firstAttribute="firstBaseline" secondItem="Fwv-0q-rGP" secondAttribute="firstBaseline" priority="999" constant="-2" id="kzu-81-RGw"/>
                                                 </constraints>
                                             </view>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="Ldg-Iu-U7Y" customClass="ParagraphTextView" customModule="Athelo" customModuleProvider="target">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldg-Iu-U7Y" customClass="ParagraphTextView" customModule="Athelo" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="408.5" width="382" height="37.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" name="Gray"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                             </textView>
                                         </subviews>
                                         <constraints>

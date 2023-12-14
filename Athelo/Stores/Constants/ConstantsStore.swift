@@ -62,7 +62,7 @@ final class ConstantsStore {
         return Publishers.NetworkingPublishers.ListRepeatingPublisher(initialRequest: Deferred { AtheloAPI.Applications.applications() as AnyPublisher<ListResponseData<ApplicationData>, APIError> })
             .mapError({ $0 as Error })
             .tryMap({ value -> ApplicationData in
-                guard let application = value.first(where: { $0.identifier == "ATHELO-QA" }) else {
+                guard let application = value.first(where: { $0.identifier == (try! ConfigurationReader.configurationValue(for: .apiIdentifier)) }) else {
                     throw CommonError.missingContent
                 }
                 

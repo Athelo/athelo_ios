@@ -21,7 +21,6 @@ final class EditProfileViewController: KeyboardListeningViewController {
     @IBOutlet private weak var formTextFieldEmail: FormTextField!
     @IBOutlet private weak var formTextFieldName: FormTextField!
     @IBOutlet private weak var formTextFieldPhoneNumber: FormTextField!
-    @IBOutlet private weak var formTextFieldWhatDescribesYou: FormTextField!
     @IBOutlet private weak var stackViewActions: UIStackView!
     @IBOutlet private weak var stackViewAvatar: UIStackView!
     @IBOutlet private weak var stackViewContent: UIStackView!
@@ -67,7 +66,6 @@ final class EditProfileViewController: KeyboardListeningViewController {
         configurePhoneNumberFormTextField()
         configureRequestPasswordResetButton()
         configureUploadPictureButton()
-        configureWhatDescribesYouFormTextField()
     }
     
     private func configureBirthDateFormTextField() {
@@ -128,26 +126,6 @@ final class EditProfileViewController: KeyboardListeningViewController {
         buttonUploadPicture.isHidden = true
     }
     
-    private func configureWhatDescribesYouFormTextField() {
-        formTextFieldWhatDescribesYou.delegate = self
-        
-        let iconTapPublisher = formTextFieldWhatDescribesYou.displayIcon(.verticalChevron)
-        
-        iconTapPublisher
-            .sink { [weak self] in
-                guard self?.viewModel.editsContent == true else {
-                    return
-                }
-                
-                if self?.userTypeInputView == nil {
-                    self?.displayUserTypeInputView()
-                } else {
-                    self?.hideUserTypeInputView()
-                    self?.view.endEditing(true)
-                }
-            }.store(in: &cancellables)
-    }
-    
     // MARK: - Sinks
     private func sink() {
         sinkIntoKeyboardChanges()
@@ -176,7 +154,7 @@ final class EditProfileViewController: KeyboardListeningViewController {
                 self?.view.endEditing(true)
             }.store(in: &cancellables)
         
-        formTextFieldName.textPublisher
+        formTextFieldName.currentTextPublisher
             .sink(receiveValue: viewModel.assignName(_:))
             .store(in: &cancellables)
     }
@@ -187,7 +165,7 @@ final class EditProfileViewController: KeyboardListeningViewController {
                 self?.view.endEditing(true)
             }.store(in: &cancellables)
         
-        formTextFieldPhoneNumber.textPublisher
+        formTextFieldPhoneNumber.currentTextPublisher
             .sink(receiveValue: viewModel.assignPhoneNumber(_:))
             .store(in: &cancellables)
     }
@@ -236,12 +214,6 @@ final class EditProfileViewController: KeyboardListeningViewController {
             .sink { [weak self] in
                 self?.updateFormTextFieldsContents(using: $0)
             }.store(in: &cancellables)
-        
-        viewModel.userTypePublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.formTextFieldWhatDescribesYou.text = $0.name
-            }.store(in: &cancellables)
     }
     
     // MARK: - Updates
@@ -249,7 +221,6 @@ final class EditProfileViewController: KeyboardListeningViewController {
         view.endEditing(true)
         
         hideBirthDatePickerView()
-        hideUserTypeInputView()
     }
     
     private func displayBirthDateInputView() {
@@ -292,68 +263,12 @@ final class EditProfileViewController: KeyboardListeningViewController {
         view.endEditing(true)
     }
     
-    private func displayUserTypeInputView() {
-        guard userTypeInputView == nil else {
-            return
-        }
-        
-        let inputView = ListInputView.instantiate()
-        
-        inputView.translatesAutoresizingMaskIntoConstraints = false
-        inputView.alpha = 0.0
-        
-        contentScrollView.addSubview(inputView)
-        userTypeInputView = inputView
-        
-        adjustFrameOfFormInputView(inputView, inRelationTo: formTextFieldWhatDescribesYou, inside: stackViewContent, of: contentScrollView, estimatedComponentHeight: inputView.maximumExpectedContainerHeight)
-        
-        UIView.animate(withDuration: 0.3) {
-            inputView.alpha = 1.0
-        }
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleUserTypeInputViewDismissalGestureRecognizer(_:)))
-        tapGestureRecognizer.delegate = self
-        
-        if let oldGestureRecognizer = userTypeDismissalGestureRecognizer {
-            view.removeGestureRecognizer(oldGestureRecognizer)
-        }
-        view.addGestureRecognizer(tapGestureRecognizer)
-        
-        userTypeDismissalGestureRecognizer = tapGestureRecognizer
-        
-        inputView.assignAndFireItemsPublisher(viewModel.userTypesPublisher(), preselecting: viewModel.userType)
-        
-        userTypeInputCancellable?.cancel()
-        userTypeInputCancellable = inputView.selectedItemPublisher
-            .compactMap({ $0 as? UserTypeConstant })
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] value in
-                self?.formTextFieldWhatDescribesYou.text = value.name
-                self?.viewModel.assignUserType(value)
-                
-                self?.hideUserTypeInputView()
-                self?.view.endEditing(true)
-            }
-        
-        view.endEditing(true)
-        
-        formTextFieldWhatDescribesYou.activateIcon(.verticalChevron)
-    }
-    
     @IBAction private func handleBirthDateInputViewDismissalGestureRecognizer(_ sender: Any?) {
         guard (sender as? UITapGestureRecognizer) == birthDateDismissalGestureRecognizer else {
             return
         }
         
         hideBirthDatePickerView()
-    }
-    
-    @IBAction private func handleUserTypeInputViewDismissalGestureRecognizer(_ sender: Any?) {
-        guard (sender as? UITapGestureRecognizer) == userTypeDismissalGestureRecognizer else {
-            return
-        }
-        
-        hideUserTypeInputView()
     }
     
     private func hideBirthDatePickerView() {
@@ -376,26 +291,6 @@ final class EditProfileViewController: KeyboardListeningViewController {
                     
                     self?.birthDateInputHostingController = nil
                 }
-            }
-        }
-    }
-    
-    private func hideUserTypeInputView() {
-        guard userTypeInputView != nil else {
-            return
-        }
-        
-        if let userTypeDismissalGestureRecognizer = userTypeDismissalGestureRecognizer {
-            view.removeGestureRecognizer(userTypeDismissalGestureRecognizer)
-        }
-        
-        formTextFieldWhatDescribesYou.rotateIcon(.verticalChevron)
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.userTypeInputView?.alpha = 0.0
-        } completion: { [weak self] completed in
-            if completed {
-                self?.userTypeInputView?.removeFromSuperview()
-                self?.userTypeInputView = nil
             }
         }
     }
@@ -443,8 +338,7 @@ final class EditProfileViewController: KeyboardListeningViewController {
         [formTextFieldBirthDate,
          formTextFieldEmail,
          formTextFieldName,
-         formTextFieldPhoneNumber,
-         formTextFieldWhatDescribesYou].forEach({
+         formTextFieldPhoneNumber].forEach({
             $0?.isUserInteractionEnabled = canEdit
         })
     }
@@ -567,13 +461,6 @@ extension EditProfileViewController: UITextFieldDelegate {
         
         if formTextFieldBirthDate.containsInstanceOfTextField(textField) {
             displayBirthDateInputView()
-            hideUserTypeInputView()
-            
-            view.endEditing(true)
-            return false
-        } else if formTextFieldWhatDescribesYou.containsInstanceOfTextField(textField) {
-            displayUserTypeInputView()
-            hideBirthDatePickerView()
             
             view.endEditing(true)
             return false

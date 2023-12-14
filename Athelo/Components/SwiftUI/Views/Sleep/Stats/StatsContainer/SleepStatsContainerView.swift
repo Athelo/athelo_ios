@@ -26,7 +26,7 @@ struct SleepStatsContainerView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ScrollView(.vertical) {
+            FadingScrollView(axes: .vertical) {
                 VStack(spacing: 24.0) {
                     HStack(alignment: .center) {
                         StyledText(model.overviewHeader,
@@ -121,7 +121,7 @@ struct SleepStatsContainerView: View {
                     }
                 }
                 .padding(.top, 40.0)
-                .padding(.bottom, 16.0)
+                .padding(.bottom, 24.0)
                 .animation(.default, value: model.filter)
             }
         }

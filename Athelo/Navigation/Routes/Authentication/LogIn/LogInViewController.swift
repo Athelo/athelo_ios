@@ -90,12 +90,12 @@ final class LogInViewController: KeyboardListeningViewController {
     }
     
     private func sinkIntoFormTextFields() {
-        formTextFieldEmail.textPublisher
+        formTextFieldEmail.currentTextPublisher
             .removeDuplicates()
             .sink(receiveValue: viewModel.assignEmail(_:))
             .store(in: &cancellables)
         
-        formTextFieldPassword.textPublisher
+        formTextFieldPassword.currentTextPublisher
             .removeDuplicates()
             .sink(receiveValue: viewModel.assignPassword(_:))
             .store(in: &cancellables)
@@ -137,8 +137,9 @@ final class LogInViewController: KeyboardListeningViewController {
         
         viewModel.state
             .filter({ $0 == .loaded })
+            .receive(on: DispatchQueue.main)
             .sinkDiscardingValue { [weak self] in
-                self?.router?.navigateToHome()
+                self?.router?.navigateOnSuccessfulAuthentication()
             }.store(in: &cancellables)
         
         viewModel.state

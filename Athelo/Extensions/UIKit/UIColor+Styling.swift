@@ -14,7 +14,7 @@ extension UIColor {
         case blue1877F2 = "#1877F2"
         case gray = "Gray"
         case green7FC704 = "#7FC704"
-        case green8FCC25 = "#BFCC25"
+        case green8FCC25 = "#8FCC25"
         case green81B821 = "#81B821"
         case greenB5DE71 = "#B5DE71"
         case greenDEEEC3 = "#DEEEC3"
@@ -28,7 +28,9 @@ extension UIColor {
         case purple80627F = "#80627F"
         case purple988098 = "#988098"
         case purpleC1B4C0 = "#C1B4C0"
+        case redE31A1A = "#E31A1A"
         case redFF0000 = "#FF0000"
+        case redFF4D4D = "#FF4D4D"
         case shadow = "Shadow"
         case white = "White"
     }

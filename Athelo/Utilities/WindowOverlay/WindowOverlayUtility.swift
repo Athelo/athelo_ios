@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import SwiftUI
 import UIKit
 
 @MainActor final class WindowOverlayUtility {
@@ -44,6 +45,12 @@ import UIKit
     
     // MARK: - Public API
     func displayCustomOverlayView<T: UIView>(_ view: T, animated: Bool = true, pinningClosure: (_ pinnedView: UIView, _ superview: UIView) -> Void) {
+        window.displayCustomView(view, animated: animated, pinningClosure: pinningClosure)
+        
+        bringMessagesToFront()
+    }
+    
+    func displayCustomOverlayView<T: View>(_ view: T, animated: Bool = true, pinningClosure: (_ pinnedView: UIView, _ superview: UIView) -> Void) {
         window.displayCustomView(view, animated: animated, pinningClosure: pinningClosure)
         
         bringMessagesToFront()
@@ -134,6 +141,10 @@ import UIKit
     
     func hideCustomOverlayView<T: UIView>(of targetClass: T.Type, animated: Bool = true) {
         window.hideCustomView(of: targetClass, animated: animated)
+    }
+    
+    func hideCustomOverlayView<Tag: RawRepresentable<Int>>(withPinningTag pinningTag: Tag, animated: Bool = true) {
+        window.hideCustomView(withPinningTag: pinningTag, animated: animated)
     }
     
     func hideLoadingView(animated: Bool = true) {

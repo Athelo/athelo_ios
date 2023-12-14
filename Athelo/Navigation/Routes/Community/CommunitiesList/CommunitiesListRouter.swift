@@ -16,7 +16,13 @@ final class CommunitiesListRouter: CommunityRouter, UserProfileRoutable {
         }
         
         let router = CommunityChatRouter(navigationController: navigationController, communityUpdateEventSubject: communityUpdateEventsSubject)
-        let viewController = CommunityChatViewController.viewController(configurationData: .data(chat), router: router)
+        let viewController = CommunityChatViewController.viewController(
+            configurationData: .init(
+                dataType: .data(chat),
+                identityData: nil
+            ),
+            router: router
+        )
         
         navigationController.pushViewController(viewController, animated: true)
     }

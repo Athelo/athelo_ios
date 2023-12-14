@@ -58,7 +58,7 @@ extension SmallActionCollectionViewCell: ConfigurableCell {
         if let icon = item.icon {
             buttonAction.setImage(icon, for: .normal)
             
-            buttonAction.imageEdgeInsets = .init(left: -8.0, right: 8.0)
+            buttonAction.imageEdgeInsets = UIEdgeInsets(left: -8.0, right: 8.0)
             buttonAction.contentEdgeInsets.left = 24.0
         } else {
             buttonAction.imageEdgeInsets = .zero

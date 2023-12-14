@@ -48,7 +48,13 @@ final class SettingsViewController: BaseViewController {
     }
     
     private func configureVersionLabel() {
-        labelVersion.text = "v. \(Bundle.main.appBuild) (\(Bundle.main.appVersion))"
+        var versionText = "v. \(Bundle.main.appBuild) (\(Bundle.main.appVersion))"
+        if let identifier: String = try? ConfigurationReader.configurationValue(for: .apiIdentifier),
+           identifier.contains("QA") {
+            versionText += " [QA]"
+        }
+        
+        labelVersion.text = versionText
     }
     
     // MARK: - Sinks

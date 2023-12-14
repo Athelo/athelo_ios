@@ -32,8 +32,6 @@ private extension MenuOption {
             return UIImage(named: "chatHeart")
         case .connectSmartWatch:
             return UIImage(named: "watch")
-        case .inviteACaregiver:
-            return UIImage(named: "addContact")
         case .messages:
             return UIImage(named: "envelope")
         case .myCaregivers:
@@ -42,8 +40,12 @@ private extension MenuOption {
             return UIImage(named: "person")
         case .mySymptoms:
             return UIImage(named: "monitor")
+        case .myWards:
+            return UIImage(named: "handHeart")
         case .sendFeedback:
-            return UIImage(named: "paperPlane")
+            return UIImage(named: "chatHeart")
+            // Restore this option once Ask Athelo will be added back to menu.
+//            return UIImage(named: "paperPlane")
         case .settings:
             return UIImage(named: "sliders")
         }

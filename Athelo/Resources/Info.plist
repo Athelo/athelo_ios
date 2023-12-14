@@ -10,9 +10,19 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.85793544772-bkqhurad28k7fh783qvkhjthamegochq</string>
+				<string>com.googleusercontent.apps.864070173721-iejpseeouv4u6p1d3nn8cptr887qf7pp</string>
+				<string>com.googleusercontent.apps.864070173721-6ou1f13kop3tle5njr4f9orgfuqphkit</string>
 			</array>
 		</dict>
 	</array>
+	<key>Config-APIIdentifier</key>
+	<string>$(API_IDENTIFIER)</string>
+	<key>Config-APIURL</key>
+	<string>$(API_URL)</string>
+	<key>Config-ChatIdentifier</key>
+	<string>$(CHAT_IDENTIFIER)</string>
+	<key>Config-ChatURL</key>
+	<string>$(CHAT_URL)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>mailto</string>

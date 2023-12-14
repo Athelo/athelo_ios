@@ -42,12 +42,14 @@ final class MyProfileViewModel: BaseViewModel {
         }
         
         switch section {
-        case .profileDetails:
-            return nil
         case .health:
             return SectionTitleDecorationData(title: "profile.header.health".localized(), font: .withStyle(.headline20))
         case .other:
             return SectionTitleDecorationData(title: "profile.header.other".localized(), font: .withStyle(.headline20))
+        case .profileDetails:
+            return nil
+        case .roles:
+            return SectionTitleDecorationData(title: "profile.header.myroles".localized(), font: .withStyle(.headline20))
         }
     }
     
@@ -119,11 +121,15 @@ final class MyProfileViewModel: BaseViewModel {
         snapshot.appendSections([.profileDetails])
         snapshot.appendItems([.profile], toSection: .profileDetails)
         
+        snapshot.appendSections([.roles])
+        snapshot.appendItems([.option(.actAs)], toSection: .roles)
+        
         snapshot.appendSections([.health])
         snapshot.appendItems([.option(.trackMyWellbeing), .option(.mySymptoms)], toSection: .health)
         
         snapshot.appendSections([.other])
-        if IdentityUtility.userData?.hasFitbitUserProfile == true {
+        if IdentityUtility.activeUserRole?.isCaregiver == false,
+           IdentityUtility.userData?.hasFitbitUserProfile == true {
             snapshot.appendItems([.option(.myDevice)], toSection: .other)
         }
         if IdentityUtility.authenticationMethods?.containsNativeAuthData() == true {
@@ -138,6 +144,7 @@ final class MyProfileViewModel: BaseViewModel {
 // MARK: - Helper extensions
 extension MyProfileViewModel {
     enum ItemType {
+        case actAs
         case changePassword
         case deleteAnAccount
         case logOut
@@ -151,24 +158,26 @@ extension MyProfileViewModel {
         
         private var tileIcon: UIImage {
             switch self {
+            case .actAs:
+                return .init(named: "handHeartSolid")!
             case .changePassword:
-                return UIImage(named: "lockSolid")!
+                return .init(named: "lockSolid")!
             case .deleteAnAccount:
-                return UIImage(named: "personSolid")!
+                return .init(named: "personSolid")!
             case .logOut:
-                return UIImage(named: "signOutSolid")!
+                return .init(named: "signOutSolid")!
             case .myDevice:
-                return UIImage(named: "smartwatch")!
+                return .init(named: "smartwatch")!
             case .mySymptoms:
-                return UIImage(named: "monitorSolid")!
+                return .init(named: "monitorSolid")!
             case .trackMyWellbeing:
-                return UIImage(named: "laughSolid")!
+                return .init(named: "laughSolid")!
             }
         }
         
         private var tileStyle: TileDecorationData.Style {
             switch self {
-            case .changePassword, .logOut, .myDevice, .mySymptoms, .trackMyWellbeing:
+            case .actAs, .changePassword, .logOut, .myDevice, .mySymptoms, .trackMyWellbeing:
                 return .plain
             case .deleteAnAccount:
                 return .destructive
@@ -177,6 +186,8 @@ extension MyProfileViewModel {
         
         private var tileTitle: String {
             switch self {
+            case .actAs:
+                return "action.actas".localized()
             case .changePassword:
                 return "action.changepassword".localized()
             case .deleteAnAccount:
@@ -199,6 +210,7 @@ extension MyProfileViewModel {
         case health
         case other
         case profileDetails
+        case roles
     }
     
     enum ItemIdentifier: Hashable {

@@ -21,7 +21,7 @@ struct HealthSleepAggregatedPhaseRecord: Decodable {
         
         self.date = try container.decodeDate(forKey: .date, format: "yyyy-MM-dd'T'HH:mm:ss")
         self.duration = try container.decodeValue(forKey: .duration)
-        self.level = try container.decodeValue(forKey: .level)
+        self.level = (try? container.decodeValue(forKey: .level)) ?? .wake
     }
 }
 

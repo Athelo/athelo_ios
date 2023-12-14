@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,6 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="453" height="120"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rzk-Ta-c0N" customClass="ShadowCastingView" customModule="Athelo" customModuleProvider="target">
+                        <rect key="frame" x="129.5" y="16" width="307.5" height="74"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yk4-bQ-afQ">
                         <rect key="frame" x="129.5" y="16" width="307.5" height="74"/>
                         <color key="backgroundColor" name="#988098"/>
@@ -74,9 +79,13 @@
                 <constraint firstAttribute="trailing" secondItem="SeN-9I-KlB" secondAttribute="trailing" constant="32" id="3Yc-cB-0Ib"/>
                 <constraint firstItem="yk4-bQ-afQ" firstAttribute="top" secondItem="SeN-9I-KlB" secondAttribute="top" constant="-4" id="6Ej-Nu-TeA"/>
                 <constraint firstItem="yk4-bQ-afQ" firstAttribute="bottom" secondItem="g1A-sz-VM3" secondAttribute="bottom" constant="16" id="8wN-rU-XrX"/>
+                <constraint firstItem="Rzk-Ta-c0N" firstAttribute="top" secondItem="yk4-bQ-afQ" secondAttribute="top" id="Gyt-WK-VPx"/>
                 <constraint firstItem="SeN-9I-KlB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="48" id="MmQ-Bs-8QA"/>
                 <constraint firstItem="0Qu-V7-Kbn" firstAttribute="leading" secondItem="yk4-bQ-afQ" secondAttribute="leading" priority="999" constant="16" id="VGD-gB-vjt"/>
                 <constraint firstItem="g1A-sz-VM3" firstAttribute="leading" secondItem="yk4-bQ-afQ" secondAttribute="leading" priority="999" constant="16" id="VjM-5B-rPH"/>
+                <constraint firstItem="Rzk-Ta-c0N" firstAttribute="leading" secondItem="yk4-bQ-afQ" secondAttribute="leading" id="W9S-Sf-yRC"/>
+                <constraint firstItem="Rzk-Ta-c0N" firstAttribute="trailing" secondItem="yk4-bQ-afQ" secondAttribute="trailing" id="WMu-QX-DEA"/>
+                <constraint firstItem="Rzk-Ta-c0N" firstAttribute="bottom" secondItem="yk4-bQ-afQ" secondAttribute="bottom" id="fgJ-Zj-RzX"/>
                 <constraint firstAttribute="bottom" secondItem="SeN-9I-KlB" secondAttribute="bottom" constant="16" id="gfj-tg-ZPj"/>
                 <constraint firstItem="SeN-9I-KlB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="qny-Qr-ZW4"/>
                 <constraint firstItem="yk4-bQ-afQ" firstAttribute="trailing" secondItem="SeN-9I-KlB" secondAttribute="trailing" constant="16" id="ttz-hi-y51"/>
@@ -104,5 +113,8 @@
         <namedColor name="White">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

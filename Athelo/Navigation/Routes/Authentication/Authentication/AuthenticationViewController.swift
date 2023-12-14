@@ -56,7 +56,7 @@ final class AuthenticationViewController: BaseViewController {
     }
     
     // MARK: - Outlets
-    @IBOutlet private weak var labelLegal: InteractableLabel!
+    @IBOutlet private weak var textViewLegal: UITextView!
     @IBOutlet private weak var viewContainer: UIView!
     
     private var signUpNavigationController: BaseNavigationController?
@@ -76,8 +76,9 @@ final class AuthenticationViewController: BaseViewController {
     
     // MARK: - Configuration
     private func configure() {
+        configureLegalTextView()
+        
         configureContainerView()
-        configureLegalLabel()
     }
     
     private func configureContainerView() {
@@ -92,7 +93,7 @@ final class AuthenticationViewController: BaseViewController {
         let router = SignUpRouter(navigationController: navigationController, updateEventsSubject: router?.authenticationUpdateEventsSubject)
         let viewController = SignUpViewController.viewController(router: router)
         
-        viewController.additionalSafeAreaInsets = UIEdgeInsets(bottom: labelLegal.bounds.height + 32.0)
+        viewController.additionalSafeAreaInsets = UIEdgeInsets(bottom: textViewLegal.bounds.height + 32.0)
         
         navigationController.setViewControllers([viewController], animated: false)
         
@@ -116,39 +117,36 @@ final class AuthenticationViewController: BaseViewController {
         signUpNavigationController = navigationController
     }
     
-    private func configureLegalLabel() {
-        guard let text = labelLegal.text, !text.isEmpty else {
+    private func configureLegalTextView() {
+        textViewLegal.removePadding()
+        
+        textViewLegal.text = "auth.legal".localized()
+        guard let attributedText = textViewLegal.attributedText, !attributedText.string.isEmpty else {
             return
         }
         
-        labelLegal.assignDelegate(self)
-        
-        var foundRanges: [NSRange] = []
-        LabelIdentifiers.allCases.forEach({
-            labelLegal.markSubstringAsInteractable($0.boundString, identifier: $0.rawValue)
-            
-            if let range = (labelLegal.text as? NSString)?.range(of: $0.boundString) {
-                foundRanges.append(range)
+        let updatedAttributedText = NSMutableAttributedString(attributedString: attributedText)
+        for identifier in LabelIdentifiers.allCases {
+            let range = (attributedText.string as NSString).range(of: identifier.boundString)
+            guard range.location != NSNotFound else {
+                continue
             }
-        })
-        
-        guard !foundRanges.isEmpty else {
-            return
+            
+            guard let customURL = URL(string: "athelo://\(identifier.rawValue)") else {
+                continue
+            }
+            
+            updatedAttributedText.addAttribute(.link, value: customURL, range: range)
+            updatedAttributedText.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
+//            updatedAttributedText.addAttribute(.foregroundColor, value: UIColor.withStyle(.purple80627F), range: range)
         }
         
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineHeightMultiple = 1.24
-        paragraph.alignment = .center
+        textViewLegal.attributedText = updatedAttributedText
         
-        let attributedString = NSMutableAttributedString(string: text, attributes: [
-            .paragraphStyle: paragraph
-        ])
+        weak var weakSelf = self
+        let tapGestureRecognizer = UITapGestureRecognizer(target: weakSelf, action: #selector(handleLegalTextViewTap(_:)))
         
-        for foundRange in foundRanges {
-            attributedString.addAttribute(.foregroundColor, value: UIColor.withStyle(.black), range: foundRange)
-        }
-        
-        labelLegal.attributedText = attributedString
+        textViewLegal.addGestureRecognizer(tapGestureRecognizer)
     }
     
     // MARK: - Sinks
@@ -185,18 +183,31 @@ final class AuthenticationViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] value in
                 UIView.animate(withDuration: 0.1, delay: 0.0, options: [.beginFromCurrentState]) {
-                    self?.labelLegal.alpha = value
+                    self?.textViewLegal.alpha = value
                 }
             }.store(in: &cancellables)
     }
-}
-
-// MARK: - Protocol conformance
-// MARK: InteractableLabelDelegate
-extension AuthenticationViewController: InteractableLabelDelegate {
-    func interactableLabel(_ label: InteractableLabel, selectedTextWithIdentifier identifier: String) {
-        guard let identifier = LabelIdentifiers(rawValue: identifier),
-            let navigationController = signUpNavigationController else {
+    
+    // MARK: - Actions
+    @objc private func handleLegalTextViewTap(_ sender: Any) {
+        guard let tapGestureRecognizer = sender as? UITapGestureRecognizer else {
+            return
+        }
+        
+        let tapLocation = tapGestureRecognizer.location(in: textViewLegal)
+        guard let textPosition = textViewLegal.closestPosition(to: tapLocation),
+              let positionStyling = textViewLegal.textStyling(at: textPosition, in: .forward),
+              let url = positionStyling[.link] as? URL else {
+            return
+        }
+        
+        guard url.scheme == "athelo",
+              let host = url.host,
+              let identifier = LabelIdentifiers(rawValue: host) else {
+            return
+        }
+        
+        guard let navigationController = signUpNavigationController else {
             return
         }
         
@@ -205,17 +216,18 @@ extension AuthenticationViewController: InteractableLabelDelegate {
         
         navigationController.pushViewController(viewController, animated: true)
         
-        let shouldRestoreLegal = !labelLegal.isHidden
-        labelLegal.isHidden = true
+        let shouldRestoreLegal = !textViewLegal.isHidden
+        textViewLegal.isHidden = true
         
         viewController.assignOnDisapperAction { [weak self] in
             if shouldRestoreLegal {
-                self?.labelLegal.isHidden = false
+                self?.textViewLegal.isHidden = false
             }
         }
     }
 }
 
+// MARK: - Protocol conformance
 // MARK: Navigable
 extension AuthenticationViewController: Navigable {
     static var storyboardScene: StoryboardScene{

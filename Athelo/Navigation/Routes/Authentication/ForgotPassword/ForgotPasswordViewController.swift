@@ -73,7 +73,7 @@ final class ForgotPasswordViewController: KeyboardListeningViewController {
                 textField?.resignFirstResponder()
             }.store(in: &cancellables)
         
-        formTextFieldEmail.textPublisher
+        formTextFieldEmail.currentTextPublisher
             .removeDuplicates()
             .sink(receiveValue: viewModel.assignEmail(_:))
             .store(in: &cancellables)

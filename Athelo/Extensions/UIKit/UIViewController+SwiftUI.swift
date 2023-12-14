@@ -10,9 +10,9 @@ import SwiftUI
 import UIKit
 
 extension UIViewController {
-    func embedView<V: View>(_ view: V, to subview: UIView) {
+    @discardableResult func embedView<V: View>(_ view: V, to subview: UIView) -> UIView? {
         guard subview.isDescendant(of: self.view) else {
-            return
+            return nil
         }
         
         let hostingController = UIHostingController(rootView: view)
@@ -31,5 +31,7 @@ extension UIViewController {
         ])
         
         hostingController.didMove(toParent: self)
+        
+        return hostingController.view
     }
 }

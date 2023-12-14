@@ -102,6 +102,10 @@ final class ChatUtility {
         utility.systemMessagesCancellable = nil
     }
     
+    static func privateChatListUtility() -> PrivateChatListUtility {
+        PrivateChatListUtility(manager: utility.manager)
+    }
+    
     static func registerChatRoomForPendingGreeting(_ chatRoomIdentifier: ChatRoomIdentifier) {
         guard !shouldDisplayPendingGreetingButton(for: chatRoomIdentifier) else {
             return

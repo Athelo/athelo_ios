@@ -19,13 +19,19 @@ final class SleepSummaryModel: ObservableObject {
     }
     
     // MARK: - Properties
+    let displayedWardModel = SelectedWardModel()
     let headerModel: SleepSummaryHeaderModel = SleepSummaryHeaderModel()
     let progressModel: CircularProgressModel = CircularProgressModel(progress: 0.0, text: "nocontent.nodata".localized())
     
     private var avgSleepTime: TimeInterval = 0.0
     
     @Published private(set) var displaysHeader: Bool = false
+    @Published private(set) var displaysWardData: Bool = false
     @Published private(set) var summaryData: SleepSummaryData?
+    
+    var hasWardData: Bool {
+        displayedWardModel.selectedWard != nil
+    }
     
     private var cancellables: [AnyCancellable] = []
     
@@ -35,11 +41,21 @@ final class SleepSummaryModel: ObservableObject {
     }
     
     // MARK: - Public API
+    func updateDisplayedWardData(_ wardData: ContactData?) {
+        displayedWardModel.updateWard(wardData)
+    }
+    
     func updateSummaryData(_ summaryData: SleepSummaryData, weeklyAvgSleepTime avgSleepTime: TimeInterval) {
         self.summaryData = summaryData
         self.avgSleepTime = avgSleepTime
         
         progressModel.updateProgress(sleepProgress(), text: totalSleepTime)
+    }
+    
+    func updateWardDataVisibility(_ visible: Bool) {
+        if displaysWardData != visible {
+            displaysWardData = visible
+        }
     }
     
     func sleepTime(for phase: HealthSleepRecordData.SleepPhase) -> String {

@@ -50,3 +50,13 @@ extension ChatRoomData: ChatRoomCellConfigurationData {
         userProfilesCount
     }
 }
+
+extension ChatRoomData: CommunityChatData {
+    var displayName: String? {
+        name
+    }
+    
+    var memberCount: Int? {
+        userProfilesCount
+    }
+}

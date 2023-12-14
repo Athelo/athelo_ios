@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ActivitySingleColumnTileView: View {    
-    @EnvironmentObject var graphModel: SmallColumnGraphModel
+    @ObservedObject var graphModel: SmallColumnGraphModel
     
     let image: UIImage
     let headerText: String
     let unitData: UnitNameData?
     let displayedValueConverter: ((Double) -> Double)?
     
-    init(image: UIImage, headerText: String, unitData: UnitNameData?, displayedValueConverter: ((Double) -> Double)? = nil) {
+    init(graphModel: SmallColumnGraphModel, image: UIImage, headerText: String, unitData: UnitNameData?, displayedValueConverter: ((Double) -> Double)? = nil) {
+        self.graphModel = graphModel
+        
         self.image = image
         self.headerText = headerText
         self.unitData = unitData
@@ -54,8 +56,7 @@ struct ActivitySingleColumnTileView: View {
                 }
             }
             
-            SmallColumnGraphView()
-                .environmentObject(graphModel)
+            SmallColumnGraphView(model: graphModel)
                 .drawingGroup()
                 
         }
@@ -77,10 +78,10 @@ struct ActivitySingleColumnTileView_Previews: PreviewProvider {
     
     static var previews: some View {
         ActivitySingleColumnTileView(
+            graphModel: graphModel,
             image: UIImage(named: "gymSolid")!,
             headerText: "Activity",
             unitData: .init(plural: "minutes", short: "min", singular: "minute")
         )
-        .environmentObject(graphModel)
     }
 }

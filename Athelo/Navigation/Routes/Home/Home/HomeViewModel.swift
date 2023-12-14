@@ -6,15 +6,22 @@
 //
 
 import Combine
+import SwiftDate
 import UIKit
 
 protocol HomeDecorationData {
     /* ... */
 }
 
+typealias InteractableItemData = SectionTitleCollectionReusableView.InteractableItemData
+
 final class HomeViewModel: BaseViewModel {
     // MARK: - Properties
+    let selectedWardModel = SelectedWardModel()
+    
     @Published private(set) var dataSnapshot: NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>?
+    @Published private(set) var displaysWardSelection: Bool = false
+    @Published private(set) var selectedInteractableItem: InteractableKey?
     
     private let sectionData = CurrentValueSubject<HomeLayoutData?, Never>(nil)
     private let symptomData = CurrentValueSubject<SymptomDaySummaryData?, Never>(nil)
@@ -67,6 +74,14 @@ final class HomeViewModel: BaseViewModel {
         symptomData.send(updatedSummaryData)
     }
     
+    func checkActionableItemIdentifier(_ identifier: String) {
+        guard let validItem = InteractableKey.allCases.first(where: { $0.rawValue == identifier }) else {
+            return
+        }
+        
+        self.selectedInteractableItem = validItem
+    }
+    
     func decorationData(at indexPath: IndexPath) -> HomeDecorationData? {
         guard let section = section(at: indexPath.section) else {
             return nil
@@ -110,8 +125,16 @@ final class HomeViewModel: BaseViewModel {
         switch section {
         case .heading:
             return nil
-        case .recommendations:
-            return SectionTitleDecorationData(title: "home.header.recommendations".localized())
+        case .recommendations(let userRole):
+            if let caregiverPatientData = userRole.relatedPatientData {
+                let patientName = caregiverPatientData.contactDisplayName ?? "home.header.recommendations.caregiver.name.fallback".localized()
+                return SectionTitleDecorationData(
+                    title: "home.header.recommendations.caregiver".localized(arguments: [patientName]) /*,
+                    interactableData: InteractableKey.allCases.map({ $0.interactableData }) */
+                )
+            } else {
+                return SectionTitleDecorationData(title: "home.header.recommendations".localized())
+            }
         case .symptomAction, .symptomList:
             return SectionTitleDecorationData(title: "home.header.symptoms".localized())
         case .wellBeing:
@@ -140,8 +163,10 @@ final class HomeViewModel: BaseViewModel {
         )
         .mapError({ $0 as Error })
         .map { (feelings, symptoms) -> SymptomDaySummaryData in
-            let feeling = feelings.filter({ $0.occurrenceDate.compare(toDate: currentDate, granularity: .day) == .orderedSame }).sorted(by: \.id).last
-            let symptoms = symptoms.filter({ $0.occurrenceDate.compare(toDate: currentDate, granularity: .day) == .orderedSame })
+            let referenceDate = currentDate.converted(to: .UTC)
+            
+            let feeling = feelings.filter({ $0.occurrenceDate.compare(toDate: referenceDate, granularity: .day) == .orderedSame }).sorted(by: \.id).last
+            let symptoms = symptoms.filter({ $0.occurrenceDate.compare(toDate: referenceDate, granularity: .day) == .orderedSame })
             
             return .init(date: currentDate, symptoms: symptoms.uniqueByUnderlyingSymptomID(), feeling: feeling)
         }
@@ -172,6 +197,12 @@ final class HomeViewModel: BaseViewModel {
                 
                 self?.dataSnapshot = snapshot
             }.store(in: &cancellables)
+        
+        IdentityUtility.$activeRole
+            .map({ $0?.relatedPatientData })
+            .sink { [weak self] value in
+                self?.selectedWardModel.updateWard(value)
+            }.store(in: &cancellables)
     }
     
     private func sinkIntoLocalNotifications() {
@@ -183,18 +214,28 @@ final class HomeViewModel: BaseViewModel {
     }
     
     private func sinkIntoOwnSubjects() {
-        Publishers.CombineLatest(
+        Publishers.CombineLatest3(
             symptomData,
             IdentityUtility.userDataPublisher
                 .compactMap({ $0?.hasFitbitUserProfile })
                 .removeDuplicates()
+                .eraseToAnyPublisher(),
+            IdentityUtility.$activeRole
+                .compactMap({ $0 })
                 .eraseToAnyPublisher()
         )
-        .map({ (symptomData, hasConnectedDevice) -> HomeLayoutData in
+        .map({ (symptomData, hasConnectedDevice, userRole) -> HomeLayoutData in
             var recommendations: [RecommendationPrompt] = []
             
-            if !hasConnectedDevice {
+            if !userRole.isCaregiver, !hasConnectedDevice {
                 recommendations.append(.connectDevice)
+            }
+            
+            if userRole.isCaregiver {
+                recommendations.append(contentsOf: [
+                    .checkActivityLevels,
+                    .checkSleepLevels
+                ])
             }
             
             recommendations.append(contentsOf: [
@@ -205,7 +246,8 @@ final class HomeViewModel: BaseViewModel {
             return HomeLayoutData(
                 feeling: symptomData?.feeling?.feeling,
                 symptoms: symptomData?.symptoms.map({ $0.symptom }),
-                recommendations: recommendations
+                recommendations: recommendations,
+                userRole: userRole
             )
         })
         .sink { [weak self] in
@@ -216,6 +258,13 @@ final class HomeViewModel: BaseViewModel {
             .compactMap({ $0 })
             .sink { [weak self] in
                 self?.rebuildSnapshot(using: $0)
+            }.store(in: &cancellables)
+        
+        selectedWardModel.$selectedWard
+            .map({ $0 != nil })
+            .removeDuplicates()
+            .sink { [weak self] value in
+                self?.displaysWardSelection = value
             }.store(in: &cancellables)
     }
     
@@ -230,28 +279,30 @@ final class HomeViewModel: BaseViewModel {
             snapshot.appendItems([.init(sectionData: .heading("home.welcome".localized()))])
         }
         
-        snapshot.appendSections([.wellBeing])
-        if let feelingData = layoutData.feeling {
-            snapshot.appendItems([.init(feelingScale: feelingData)])
-        } else {
-            snapshot.appendItems([.init(recommendationPrompt: .registerFeelings)])
-        }
-        
-        if layoutData.symptoms?.isEmpty == false {
-            snapshot.appendSections([.symptomList])
+        if !layoutData.userRole.isCaregiver {
+            snapshot.appendSections([.wellBeing])
+            if let feelingData = layoutData.feeling {
+                snapshot.appendItems([.init(feelingScale: feelingData)])
+            } else {
+                snapshot.appendItems([.init(recommendationPrompt: .registerFeelings)])
+            }
             
-            if let symptoms = layoutData.symptoms {
-                snapshot.appendItems(symptoms.map({ ItemIdentifier(symptomData: $0) }))
+            if layoutData.symptoms?.isEmpty == false {
+                snapshot.appendSections([.symptomList])
+                
+                if let symptoms = layoutData.symptoms {
+                    snapshot.appendItems(symptoms.map({ ItemIdentifier(symptomData: $0) }))
+                }
+            }
+            
+            if layoutData.feeling != nil || layoutData.symptoms?.isEmpty == false {
+                snapshot.appendSections([.symptomAction])
+                snapshot.appendItems([.init(recommendationPrompt: .updateFeelings)])
             }
         }
         
-        if layoutData.feeling != nil || layoutData.symptoms?.isEmpty == false {
-            snapshot.appendSections([.symptomAction])
-            snapshot.appendItems([.init(recommendationPrompt: .updateFeelings)])
-        }
-        
         if let recommendations = layoutData.recommendations {
-            snapshot.appendSections([.recommendations])
+            snapshot.appendSections([.recommendations(layoutData.userRole)])
             snapshot.appendItems(recommendations.map({ ItemIdentifier(recommendationPrompt: $0) }))
         }
         
@@ -264,7 +315,7 @@ extension HomeViewModel {
     enum SectionIdentifier: Hashable {
         case heading
         case wellBeing
-        case recommendations
+        case recommendations(ActiveUserRole)
         case symptomAction
         case symptomList
     }
@@ -291,8 +342,28 @@ extension HomeViewModel {
 }
 
 extension HomeViewModel {
+    enum InteractableKey: String, CaseIterable {
+        case recommendationCaregiverActivity
+        case recommendationCaregiverSleep
+        
+        var substring: String {
+            switch self {
+            case .recommendationCaregiverActivity:
+                return "home.header.recommendations.caregiver.activity".localized()
+            case .recommendationCaregiverSleep:
+                return "home.header.recommendations.caregiver.sleep".localized()
+            }
+        }
+        
+        var interactableData: InteractableItemData {
+            InteractableItemData(key: self.rawValue, substring: self.substring)
+        }
+    }
+    
     enum RecommendationPrompt {
         case chatWithCommunity
+        case checkActivityLevels
+        case checkSleepLevels
         case connectDevice
         case readArticles
         case registerFeelings
@@ -301,15 +372,19 @@ extension HomeViewModel {
         var icon: UIImage {
             switch self {
             case .chatWithCommunity:
-                return .init(named: "chatSolid")!
+                return UIImage(named: "chatSolid")!
+            case .checkActivityLevels:
+                return UIImage(named: "lovedOneSolid")!
+            case .checkSleepLevels:
+                return UIImage(named: "moonSolid")!
             case .connectDevice:
-                return .init(named: "watchSolid")!
+                return UIImage(named: "watchSolid")!
             case .readArticles:
-                return .init(named: "bookSolid")!
+                return UIImage(named: "bookSolid")!
             case .registerFeelings:
-                return .init(named: "laughSolid")!
+                return UIImage(named: "laughSolid")!
             case .updateFeelings:
-                return .init(named: "monitorSolid")!
+                return UIImage(named: "monitorSolid")!
             }
         }
         
@@ -317,6 +392,10 @@ extension HomeViewModel {
             switch self {
             case .chatWithCommunity:
                 return "home.recommendation.chatwithcommunity".localized()
+            case .checkActivityLevels:
+                return "home.recommendation.checkactivitylevels".localized()
+            case .checkSleepLevels:
+                return "home.recommendation.checksleeplevels".localized()
             case .connectDevice:
                 return "home.recommendation.connectdevice".localized()
             case .readArticles:
@@ -324,7 +403,7 @@ extension HomeViewModel {
             case .registerFeelings:
                 return "home.recommendation.registerfeelings".localized()
             case .updateFeelings:
-                return "Update feelings and symptoms".localized();
+                return "home.recommendation.updatefeelings".localized();
             }
         }
         
@@ -337,6 +416,7 @@ extension HomeViewModel {
         let feeling: FeelingScale?
         let symptoms: [SymptomData]?
         let recommendations: [RecommendationPrompt]?
+        let userRole: ActiveUserRole
     }
     
     enum SectionData: Hashable {
@@ -349,6 +429,20 @@ extension HomeViewModel {
                 return text
             }
         }
+    }
+}
+
+private extension Date {
+    static func timeZoneUnaware(in region: Region) -> Date {
+        Date().converted(to: region)
+    }
+    
+    func converted(to region: Region) -> Date {
+        guard let convertedDate = Date(self.in(region: .current).toFormat("yyyy/MM/dd"), format: "yyyy/MM/dd", region: region) else {
+            fatalError("Could not convert \(self) to \(region).")
+        }
+        
+        return convertedDate
     }
 }
 

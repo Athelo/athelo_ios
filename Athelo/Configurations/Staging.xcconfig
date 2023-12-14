@@ -1,0 +1,14 @@
+//
+//  Staging.xcconfig
+//  Athelo
+//
+//  Created by Krzysztof Jabłoński on 09/12/2022.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_IDENTIFIER = ATHELO-QA
+API_URL = app-stg.athelohealth.com/api/v1
+CHAT_IDENTIFIER = Athelo
+CHAT_URL = chat-server-stg.i2asolutions.com/socket/

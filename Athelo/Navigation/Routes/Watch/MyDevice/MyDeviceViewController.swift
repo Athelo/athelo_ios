@@ -60,16 +60,42 @@ final class MyDeviceViewController: BaseViewController {
             .sinkDiscardingValue { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             }.store(in: &cancellables)
+        
+        viewModel.forceFitbitRemovalPublisher
+            .receive(on: DispatchQueue.main)
+            .sinkDiscardingValue { [weak self] in
+                self?.displayForcedDeviceDisconnectionPrompt()
+            }.store(in: &cancellables)
     }
     
     // MARK: - Actions
     @IBAction private func disconnectMyDeviceButtonTapped(_ sender: Any) {
+        displayDeviceDisconnectionPrompt()
+    }
+    
+    // MARK: - Updates
+    private func displayDeviceDisconnectionPrompt() {
         let disconnectAction = PopupActionData(title: "action.disconnect".localized(), customStyle: .destructive) { [weak self] in
             self?.viewModel.disconnectDevice()
         }
         let cancelAction = PopupActionData(title: "action.cancel".localized())
         
-        let popupConfigurationData = PopupConfigurationData.init(template: .disconnectDevice, primaryAction: disconnectAction, secondaryAction: cancelAction)
+        let popupConfigurationData = PopupConfigurationData(template: .disconnectDevice, primaryAction: disconnectAction, secondaryAction: cancelAction)
+        AppRouter.current.windowOverlayUtility.displayPopupView(with: popupConfigurationData)
+    }
+    
+    private func displayForcedDeviceDisconnectionPrompt() {
+        let disconnectAction = PopupActionData(title: "action.remove".localized(), customStyle: .destructive) { [weak self] in
+            self?.viewModel.disconnectDevice(forced: true)
+        }
+        let cancelAction = PopupActionData(title: "action.cancel".localized())
+        
+        let popupConfigurationData = PopupConfigurationData(
+            title: "popup.disconnectdevice.title".localized(),
+            message: "popup.disconnectdevice.message.forced".localized(),
+            primaryAction: disconnectAction,
+            secondaryAction: cancelAction
+        )
         AppRouter.current.windowOverlayUtility.displayPopupView(with: popupConfigurationData)
     }
 }

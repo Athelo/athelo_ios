@@ -97,7 +97,7 @@ final class MyProfileViewController: BaseViewController {
                 }
                 
                 return cell
-            case .health, .other:
+            case .health, .roles, .other:
                 let cell = collectionView.dequeueReusableCell(withClass: TileCollectionViewCell.self, for: indexPath)
                 
                 if let tileData = self?.viewModel.tile(at: indexPath) {
@@ -143,7 +143,7 @@ final class MyProfileViewController: BaseViewController {
                 section.contentInsets = .init(top: 24.0, leading: 16.0, bottom: 24.0, trailing: 16.0)
                 
                 return section
-            case .health, .other:
+            case .health, .roles, .other:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(72.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
@@ -201,6 +201,8 @@ extension MyProfileViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let item = viewModel.item(at: indexPath) {
             switch item {
+            case .actAs:
+                router?.navigateToRoleSelection()
             case .changePassword:
                 router?.navigateToChangePasswordForm()
             case .deleteAnAccount:
@@ -224,6 +226,7 @@ extension MyProfileViewController: UICollectionViewDelegate {
                 router?.navigateToDeviceDetails()
             case .mySymptoms:
                 router?.navigateToSymptomList()
+
             case .trackMyWellbeing:
                 router?.navigateToSymptomRegistration()
             }

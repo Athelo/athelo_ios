@@ -93,7 +93,7 @@ final class InteractableLabel: BodyLabel {
 
             let glyphRange = layoutManager.characterRange(forGlyphRange: nsRange, actualGlyphRange: nil)
             let glyphRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
-
+            
             if glyphRect.contains(point) {
                 delegate?.interactableLabel(self, selectedTextWithIdentifier: rangeIdentifier)
                 return true

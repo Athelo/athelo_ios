@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RQw-i4-Con">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Due-2L-Ed3">
                                     <size key="itemSize" width="128" height="128"/>
@@ -56,14 +56,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feu-Mg-f8l" customClass="ShadowCastingView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="159" y="76" width="96" height="96"/>
+                                <rect key="frame" x="159" y="80" width="96" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zwn-Br-fbi">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="0Ke-fe-8SI">
-                                        <rect key="frame" x="16" y="32" width="382" height="676"/>
+                                        <rect key="frame" x="16" y="32" width="382" height="572"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="myC-ew-hkH">
                                                 <rect key="frame" x="107.5" y="0.0" width="167" height="156"/>
@@ -137,8 +137,8 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedPlaceholder" value="form.placeholder.email"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3f-zN-gxu" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="388" width="382" height="80"/>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3f-zN-gxu" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="376" width="382" height="80"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="Vcu-Q5-1sl"/>
@@ -149,7 +149,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tB8-tA-e3u" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="492" width="382" height="80"/>
+                                                <rect key="frame" x="0.0" y="388" width="382" height="80"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="FZ1-Ft-GQ3"/>
@@ -160,7 +160,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gk1-lH-kbb" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="596" width="382" height="80"/>
+                                                <rect key="frame" x="0.0" y="492" width="382" height="80"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="MGo-sa-Ix5"/>
@@ -191,7 +191,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="u7G-q0-Uiy"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jol-XA-5GQ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                 <color key="backgroundColor" name="Background"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aW0-Du-3sv" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
@@ -279,7 +279,6 @@
                         <outlet property="formTextFieldEmail" destination="KSu-x3-1US" id="BSJ-PU-NcW"/>
                         <outlet property="formTextFieldName" destination="DZ7-Up-L11" id="B9s-Ke-aBu"/>
                         <outlet property="formTextFieldPhoneNumber" destination="tB8-tA-e3u" id="zWZ-d3-kFV"/>
-                        <outlet property="formTextFieldWhatDescribesYou" destination="v3f-zN-gxu" id="VCS-bi-llA"/>
                         <outlet property="imageViewAvatar" destination="1Oo-DT-xUS" id="oRW-Od-p0E"/>
                         <outlet property="stackViewActions" destination="RaU-Dh-OKW" id="ngm-ec-lIE"/>
                         <outlet property="stackViewAvatar" destination="myC-ew-hkH" id="fBZ-xN-jj7"/>
@@ -290,6 +289,122 @@
             </objects>
             <point key="canvasLocation" x="771.01449275362324" y="91.741071428571431"/>
         </scene>
+        <!--Add Contact View Controller-->
+        <scene sceneID="TWc-Tt-hIu">
+            <objects>
+                <viewController storyboardIdentifier="AddContactViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BTC-7v-Il9" customClass="AddContactViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4BV-ld-1F0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e11-JV-1vq">
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="D9R-Dq-kRP">
+                                        <rect key="frame" x="16" y="24" width="382" height="348.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's find your caregiver" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3M-so-ngw" customClass="IntroLabel" customModule="Athelo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="#623E61"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ISZ-1a-DT7">
+                                                <rect key="frame" x="0.0" y="60.5" width="382" height="288"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbE-ct-isC" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="80"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" priority="999" constant="80" id="22V-zc-BYc"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="mfM-z8-qUV"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedTitle" value="form.field.username.ward"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedPlaceholder" value="form.field.placeholder.ward"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dqd-s4-9Mk" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="104" width="382" height="80"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" priority="999" constant="80" id="Vhc-ki-Oed"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="qoY-q0-QjQ"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedTitle" value="form.field.phonenumber.ward"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedPlaceholder" value="form.placeholder.phonenumber.ward"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcA-xU-vkk" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="208" width="382" height="80"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" priority="999" constant="80" id="5ld-53-sZe"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="E6L-bi-0bl"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedTitle" value="form.field.relation"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedPlaceholder" value="form.placeholder.relation"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="D9R-Dq-kRP" firstAttribute="width" secondItem="e11-JV-1vq" secondAttribute="width" constant="-32" id="2Xf-D9-jDF"/>
+                                    <constraint firstItem="D9R-Dq-kRP" firstAttribute="leading" secondItem="5bw-KS-fIn" secondAttribute="leading" constant="16" id="Gtd-DY-0lY"/>
+                                    <constraint firstItem="D9R-Dq-kRP" firstAttribute="trailing" secondItem="5bw-KS-fIn" secondAttribute="trailing" constant="-16" id="JsD-f3-z5G"/>
+                                    <constraint firstItem="D9R-Dq-kRP" firstAttribute="top" secondItem="5bw-KS-fIn" secondAttribute="top" constant="24" id="hKG-FX-nu7"/>
+                                    <constraint firstItem="D9R-Dq-kRP" firstAttribute="bottom" secondItem="5bw-KS-fIn" secondAttribute="bottom" constant="-68" id="wn2-WL-eRL"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="5bw-KS-fIn"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="wxZ-rv-2zv"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jas-AJ-f9o">
+                                <rect key="frame" x="16" y="810" width="382" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="rAn-TM-CCp"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Find a Caregiver"/>
+                                <connections>
+                                    <action selector="findButtonTapped:" destination="BTC-7v-Il9" eventType="touchUpInside" id="Pes-fE-f8p"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qha-du-TFa"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Jas-AJ-f9o" firstAttribute="centerX" secondItem="4BV-ld-1F0" secondAttribute="centerX" id="1ps-QK-xJS"/>
+                            <constraint firstItem="qha-du-TFa" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="e11-JV-1vq" secondAttribute="bottom" id="82d-hQ-rg9"/>
+                            <constraint firstItem="e11-JV-1vq" firstAttribute="trailing" secondItem="qha-du-TFa" secondAttribute="trailing" id="DcP-8f-SeU"/>
+                            <constraint firstItem="Jas-AJ-f9o" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="e11-JV-1vq" secondAttribute="bottom" constant="68" id="GxQ-r9-xMw"/>
+                            <constraint firstItem="Jas-AJ-f9o" firstAttribute="bottom" secondItem="qha-du-TFa" secondAttribute="bottom" priority="999" id="Six-34-kE2"/>
+                            <constraint firstItem="Jas-AJ-f9o" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="qha-du-TFa" secondAttribute="bottom" id="VMV-S5-btx"/>
+                            <constraint firstItem="e11-JV-1vq" firstAttribute="top" secondItem="qha-du-TFa" secondAttribute="top" id="WCB-ag-8DE"/>
+                            <constraint firstAttribute="bottom" secondItem="e11-JV-1vq" secondAttribute="bottom" priority="999" id="dTx-Xh-WrO"/>
+                            <constraint firstItem="Jas-AJ-f9o" firstAttribute="leading" secondItem="qha-du-TFa" secondAttribute="leading" constant="16" id="i6N-WS-mvK"/>
+                            <constraint firstItem="e11-JV-1vq" firstAttribute="leading" secondItem="qha-du-TFa" secondAttribute="leading" id="tGx-8E-nRn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonFind" destination="Jas-AJ-f9o" id="T9m-9F-RCb"/>
+                        <outlet property="constraintContentScrollViewBottom" destination="dTx-Xh-WrO" id="NVa-ad-UoB"/>
+                        <outlet property="formTextFieldPhoneNumber" destination="dqd-s4-9Mk" id="rFz-MA-LXd"/>
+                        <outlet property="formTextFieldRelation" destination="XcA-xU-vkk" id="mgD-J0-Fkc"/>
+                        <outlet property="formTextFieldUserName" destination="zbE-ct-isC" id="97N-kk-LyI"/>
+                        <outlet property="labelHeader" destination="T3M-so-ngw" id="ROe-ek-2Lr"/>
+                        <outlet property="scrollViewContent" destination="e11-JV-1vq" id="heO-qf-hda"/>
+                        <outlet property="stackViewForm" destination="ISZ-1a-DT7" id="CoW-EL-7KW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kan-XK-16m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1462.3188405797102" y="91.741071428571431"/>
+        </scene>
         <!--Change Password View Controller-->
         <scene sceneID="F8j-eG-dD5">
             <objects>
@@ -299,7 +414,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jT4-SF-wGJ">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="jGc-QE-cbg">
                                         <rect key="frame" x="16" y="36" width="382" height="345.5"/>
@@ -374,7 +489,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="KAD-XG-ZPN"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYb-XX-ID1">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                 <color key="backgroundColor" name="Background"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hu-ME-Wo8" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">

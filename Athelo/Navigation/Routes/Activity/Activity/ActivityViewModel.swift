@@ -7,13 +7,17 @@
 
 import Combine
 import Foundation
+import SwiftDate
 
 final class ActivityViewModel: BaseViewModel {
     // MARK: - Properties
     let activityModel = ActivityTilesModel()
-    private var referenceDate = Date()
     
     @Published private(set) var isConnectedToDevice: Bool = IdentityUtility.userData?.hasFitbitUserProfile == true
+    @Published private(set) var isCaregiver: Bool = false
+    
+    private var patientID: Int?
+    private var referenceDate = Date()
     
     private var cancellables: [AnyCancellable] = []
     
@@ -22,6 +26,8 @@ final class ActivityViewModel: BaseViewModel {
         super.init()
         
         updateWithEmptyData()
+        updatePatientDataWithActiveRole(IdentityUtility.activeUserRole)
+        
         sink()
     }
     
@@ -31,10 +37,8 @@ final class ActivityViewModel: BaseViewModel {
         
         referenceDate = Date()
         
-        updateActivityData()
-        updateHeartRateData()
-        updateHRVData()
-        updateStepsData()
+        updatePatientDataWithActiveRole(IdentityUtility.activeUserRole)
+        updateGraphs()
     }
     
     // MARK: - Sinks
@@ -50,10 +54,25 @@ final class ActivityViewModel: BaseViewModel {
             .sink { [weak self] in
                 self?.isConnectedToDevice = $0
             }.store(in: &cancellables)
+        
+        IdentityUtility.$activeRole
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                self?.updatePatientDataWithActiveRole(value)
+                self?.updateGraphs(zeroOutBeforeUpdate: value?.isCaregiver == true)
+            }.store(in: &cancellables)
     }
     
     private func sinkIntoOwnSubjects() {
         $isConnectedToDevice
+            .removeDuplicates()
+            .filter({ $0 })
+            .sinkDiscardingValue { [weak self] in
+                self?.refresh()
+            }.store(in: &cancellables)
+        
+        $isCaregiver
             .removeDuplicates()
             .filter({ $0 })
             .sinkDiscardingValue { [weak self] in
@@ -64,11 +83,11 @@ final class ActivityViewModel: BaseViewModel {
     // MARK: - Updates
     private func updateActivityData() {
         let lowerBoundDate = referenceDate.dateByAdding(-6, .day).date
-        let request = HealthActivityDashboardRequest(aggregationFunction: .sum, intervalFunction: .day, startDate: lowerBoundDate, endDate: referenceDate)
+        let request = HealthActivityDashboardRequest(aggregationFunction: .sum, intervalFunction: .day, startDate: lowerBoundDate, endDate: referenceDate, patientID: patientID)
         
         (AtheloAPI.Health.activityDashboard(request: request) as AnyPublisher<ActivityRecordContainerData, APIError>)
             .map({ [weak self] value -> [GraphColumnItemData] in
-                let date = self?.referenceDate ?? Date()
+                let date = (self?.referenceDate ?? Date()).converted(to: .UTC)
                 return value.toGraphColumnItems(from: date.dateByAdding(-6, .day).date, to: date)
             })
             .sink { [weak self] in
@@ -82,17 +101,28 @@ final class ActivityViewModel: BaseViewModel {
             }.store(in: &cancellables)
     }
     
+    private func updateGraphs(zeroOutBeforeUpdate: Bool = false) {
+        if zeroOutBeforeUpdate {
+            updateWithEmptyData()
+        }
+        
+        updateActivityData()
+        updateHeartRateData()
+        updateHRVData()
+        updateStepsData()
+    }
+    
     private func updateHeaderText() {
         activityModel.updateHeaderText("activity.info.walking.trend.downwards".localized())
     }
     
     private func updateHeartRateData() {
         let lowerBoundDate = referenceDate.dateByAdding(-6, .day).date
-        let request = HealthDashboardRequest(dataType: .heartRate, aggregationFunction: .avg, intervalFunction: .day, dates: [.lowerBound(lowerBoundDate, canBeEqual: true)])
+        let request = HealthDashboardRequest(dataType: .heartRate, aggregationFunction: .avg, intervalFunction: .day, dates: [.lowerBound(lowerBoundDate, canBeEqual: true)], patientID: patientID)
         
         (AtheloAPI.Health.dashboard(request: request) as AnyPublisher<[HealthDashboardData], APIError>)
             .map({ [weak self] value in
-                let date = self?.referenceDate ?? Date()
+                let date = (self?.referenceDate ?? Date()).converted(to: .UTC)
                 return value.extendWithEmptyItems(from: date.dateByAdding(-6, .day).date, to: date).toGraphColumnItems()
             })
             .sink { [weak self] in
@@ -108,12 +138,12 @@ final class ActivityViewModel: BaseViewModel {
     
     private func updateHRVData() {
         let lowerBoundDate = referenceDate.dateByAdding(-6, .day).date
-        let request = HealthDashboardRequest(dataType: .hrv, aggregationFunction: .avg, intervalFunction: .day, dates: [.lowerBound(lowerBoundDate, canBeEqual: true)])
+        let request = HealthDashboardRequest(dataType: .hrv, aggregationFunction: .avg, intervalFunction: .day, dates: [.lowerBound(lowerBoundDate, canBeEqual: true)], patientID: patientID)
         
         (AtheloAPI.Health.dashboard(request: request) as AnyPublisher<[HealthHRVDashboardData], APIError>)
-            .map({
-                let referenceDate = lowerBoundDate.dateAt(.startOfDay).date
-                return $0.toLinePoints(startingFrom: referenceDate, endingAt: referenceDate.dateByAdding(6, .day).date)
+            .map({ [weak self] value in
+                let referenceDate = (self?.referenceDate ?? Date()).converted(to: .UTC)
+                return value.toLinePoints(startingFrom: referenceDate.dateByAdding(-6, .day).date, endingAt: referenceDate)
             })
             .sink { [weak self] in
                 if case .failure(let error) = $0 {
@@ -126,13 +156,30 @@ final class ActivityViewModel: BaseViewModel {
             }.store(in: &cancellables)
     }
     
+    private func updatePatientDataWithActiveRole(_ activeRole: ActiveUserRole?) {
+        switch activeRole {
+        case .caregiver(let patient):
+            isCaregiver = true
+            patientID = patient.contactID
+            
+            activityModel.updateWardDataVisibility(true)
+            activityModel.updateDisplayedWardData(patient)
+        case .patient, .none:
+            isCaregiver = false
+            patientID = nil
+            
+            activityModel.updateWardDataVisibility(false)
+            activityModel.updateDisplayedWardData(nil)
+        }
+    }
+    
     private func updateStepsData() {
         let lowerBoundDate = referenceDate.dateByAdding(-6, .day).date
-        let request = HealthDashboardRequest(dataType: .steps, aggregationFunction: .sum, intervalFunction: .day, dates: [.lowerBound(lowerBoundDate, canBeEqual: true)])
+        let request = HealthDashboardRequest(dataType: .steps, aggregationFunction: .sum, intervalFunction: .day, dates: [.lowerBound(lowerBoundDate, canBeEqual: true)], patientID: patientID)
         
         (AtheloAPI.Health.dashboard(request: request) as AnyPublisher<[HealthDashboardData], APIError>)
             .map({ [weak self] value in
-                let date = self?.referenceDate ?? Date()
+                let date = (self?.referenceDate ?? Date()).converted(to: .UTC)
                 return value.extendWithEmptyItems(from: date.dateByAdding(-6, .day).date, to: date).toGraphColumnItems()
             })
             .sink { [weak self] in
@@ -256,18 +303,16 @@ private extension Array where Element == HealthHRVDashboardData {
     }
 }
 
-//#warning("Remove data mocking for Activity when bound to services.")
-//// MARK: - Mocks
-//private extension ActivityViewModel {
-//    func mockedGraphEntries() -> [GraphColumnItemData] {
-//        (0...6).map({
-//            GraphColumnItemData(id: $0, color: .withStyle(.lightOlivaceous), value: .random(in: 0.0...5.0), label: nil)
-//        })
-//    }
-//
-//    func mockedLinePoints() -> [GraphLinePointData] {
-//        (0...6).map({
-//            .init(x: Double($0), y: .random(in: 0.0...1.0))
-//        })
-//    }
-//}
+private extension Date {
+    static func timeZoneUnaware(in region: Region) -> Date {
+        Date().converted(to: region)
+    }
+    
+    func converted(to region: Region) -> Date {
+        guard let convertedDate = Date(self.in(region: .current).toFormat("yyyy/MM/dd"), format: "yyyy/MM/dd", region: region) else {
+            fatalError("Could not convert \(self) to \(region).")
+        }
+        
+        return convertedDate
+    }
+}

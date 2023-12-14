@@ -10,7 +10,7 @@ import Foundation
 
 actor CommunitiesListLiveUpdateHandler {
     // MARK: - Properties
-    @Published nonisolated private(set) var updatedChatRooms: [ChatRoomData]?
+    @Published private(set) var updatedChatRooms: [ChatRoomData]?
     
     private var awaitingChatRooms = Set<ChatRoomIdentifier>()
     private var lockedLiveUpdates: Bool = true

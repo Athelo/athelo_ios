@@ -68,6 +68,10 @@ final class SegmentedPickerView: UIView {
         display(options: options, preselecting: preselectedOptionIndex)
     }
     
+//    func manuallySelectOption(at index: Int, animated: Bool = false) {
+//        selectOption(at: index, animated: animated, notifyPublisher: false)
+//    }
+    
     // MARK: - Updates
     private func display(options: [String], preselecting preselectedOptionIndex: Int? = nil) {
         let validOptions = options.filter({ !$0.isEmpty })
@@ -132,7 +136,7 @@ final class SegmentedPickerView: UIView {
         selectOption(at: button.tag - 1)
     }
     
-    private func selectOption(at index: Int, animated: Bool = true) {
+    private func selectOption(at index: Int, animated: Bool = true, notifyPublisher: Bool = true) {
         guard index != selectedItemSubject.value,
               let optionView = viewWithTag(index + 1) else {
             return
@@ -147,6 +151,8 @@ final class SegmentedPickerView: UIView {
             self?.layoutIfNeeded()
         }
         
-        selectedItemSubject.send(index)
+        if notifyPublisher {
+            selectedItemSubject.send(index)
+        }
     }
 }

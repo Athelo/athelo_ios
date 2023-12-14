@@ -41,26 +41,37 @@ final class SplashViewModel: BaseViewModel {
                 
                 return true
             })
-            .flatMap { _ -> AnyPublisher<Bool, Error> in
-                IdentityUtility.refreshUserDetails()
+            .flatMap { _ -> AnyPublisher<AppRouter.Root, Never> in
+                if !AccessCodeUtility.codeHasBeenProvided {
+                    return Just<AppRouter.Root>(.accessCode)
+                        .eraseToAnyPublisher()
+                }
+                
+                return IdentityUtility.refreshUserDetails()
                     .map({ _ in true })
+                    .replaceError(with: false)
+                    .map { value -> AppRouter.Root in
+                        if value {
+                            if IdentityUtility.activeUserRole != nil {
+                                return .home
+                            } else {
+                                return .roleSelection
+                            }
+                        } else {
+                            if PreferencesStore.hasDisplayedIntro() {
+                                return .auth
+                            } else {
+                                return .intro
+                            }
+                        }
+                    }
                     .eraseToAnyPublisher()
             }
-            .replaceError(with: false)
-            .map { value -> AppRouter.Root in
-                if value {
-                    return .home
-                } else {
-                    if PreferencesStore.hasDisplayedIntro() {
-                        return .auth
-                    } else {
-                        return .intro
-                    }
-                }
-            }
             .first()
-            .sink { [weak self] in
-                self?.route = $0
+            .sink { _ in
+                /* ... */
+            } receiveValue: { [weak self] value in
+                self?.route = value
             }.store(in: &cancellables)
     }
     

@@ -17,22 +17,50 @@ final class SleepSummaryDataHandler {
         static let monthlyDataStep: Int = 200
     }
     
+    private final class AggregateData {
+        let userRole: ActiveUserRole
+        
+        init(userRole: ActiveUserRole) {
+            self.userRole = userRole
+        }
+        
+        var dailyPhaseSumAggregates: [Date: [HealthSleepAggregatedPhaseRecord]] = [:]
+        
+        var isEmpty: Bool {
+            dailyPhaseSumAggregates.isEmpty
+        }
+    }
+    
     // MARK: - Properties
-    private var dailyPhaseSumAggregates: [Date: [HealthSleepAggregatedPhaseRecord]] = [:]
+    private var aggregateData: [ActiveUserRole: AggregateData] = [:]
+    private(set) var activeRole: ActiveUserRole = .patient
     
     // MARK: - Public API
+    func changeActiveRole(_ activeRole: ActiveUserRole) {
+        self.activeRole = activeRole
+    }
+    
     func fetchPhaseSumAggregateData(from date: Date, step: Int = Constants.dailyDataStep) -> AnyPublisher<Void, Error> {
         let lowerBound = date.dateByAdding(-max(0, step), .day).date
         let upperBound = date
         
-        let dateRanges: [QueryDateData] = [.lowerBound(lowerBound, canBeEqual: true), .upperBound(upperBound.dateByAdding(1, .day).date, canBeEqual: true)]
-        let request = HealthSleepAggregatedRecordsRequest(granularity: .byPhase, aggregationFunction: .sum, intervalFunction: .day, dates: dateRanges)
+        let currentUserRole = activeRole
+        let patientID = currentUserRole.relatedPatientID
+        
+        let dateRanges: [QueryDateData] = [.lowerBound(lowerBound, canBeEqual: true), .upperBound(upperBound.dateByAdding(2, .day).date, canBeEqual: true)]
+        let request = HealthSleepAggregatedRecordsRequest(granularity: .byPhase, aggregationFunction: .sum, intervalFunction: .day, dates: dateRanges, patientID: patientID)
         
         return (AtheloAPI.Health.sleepAggregatedRecords(request: request) as AnyPublisher<[HealthSleepAggregatedPhaseRecord], APIError>)
             .handleEvents(receiveOutput: { [weak self] value in
+                guard let self else {
+                    return
+                }
+                
+                let aggregateData = self.roleAggregateData(for: currentUserRole)
+                
                 let groupings = Dictionary(grouping: value.insertingDummyEntries(between: lowerBound, and: upperBound), by: \.date)
                 for grouping in groupings {
-                    self?.dailyPhaseSumAggregates[day: grouping.key] = grouping.value
+                    aggregateData.dailyPhaseSumAggregates[day: grouping.key] = grouping.value
                 }
             })
             .map({ _ in () })
@@ -40,8 +68,16 @@ final class SleepSummaryDataHandler {
             .eraseToAnyPublisher()
     }
     
+    func hasAnyData(for userRole: ActiveUserRole) -> Bool {
+        guard let data = aggregateData[userRole] else {
+            return false
+        }
+        
+        return !data.isEmpty
+    }
+    
     func phaseSumAggregateData(at date: Date) -> SleepTimeData? {
-        guard let aggregates = dailyPhaseSumAggregates[day: date] else {
+        guard let aggregates = aggregateData(for: activeRole, at: date) else {
             return nil
         }
         
@@ -63,6 +99,22 @@ final class SleepSummaryDataHandler {
         }
         
         return .success(items)
+    }
+    
+    // MARK: - Data access
+    private func aggregateData(for userRole: ActiveUserRole, at date: Date) -> [HealthSleepAggregatedPhaseRecord]? {
+        roleAggregateData(for: userRole).dailyPhaseSumAggregates[day: date]
+    }
+    
+    private func roleAggregateData(for userRole: ActiveUserRole) -> AggregateData {
+        if let existingAggregateData = aggregateData[userRole] {
+            return existingAggregateData
+        }
+        
+        let targetAggregateData = AggregateData(userRole: userRole)
+        
+        aggregateData[userRole] = targetAggregateData
+        return targetAggregateData
     }
 }
 

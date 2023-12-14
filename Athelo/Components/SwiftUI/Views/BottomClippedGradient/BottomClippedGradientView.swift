@@ -11,6 +11,14 @@ struct BottomClippedGradientViewImageData {
     let image: UIImage
     let shouldClip: Bool
     let yOffset: CGFloat
+    let topContentInset: CGFloat
+    
+    init(image: UIImage, shouldClip: Bool, yOffset: CGFloat, topContentInset: CGFloat = 0.0) {
+        self.image = image
+        self.shouldClip = shouldClip
+        self.yOffset = yOffset
+        self.topContentInset = max(0.0, topContentInset)
+    }
 }
 
 struct BottomClippedGradientView: View {
@@ -18,6 +26,8 @@ struct BottomClippedGradientView: View {
     
     private let color: CGColor
     private let imageData: ImageData?
+    
+    @State private var topOffset: CGFloat = 0.0
     
     init(color: CGColor? = nil, imageData: BottomClippedGradientViewImageData? = nil) {
         self.color = color ?? UIColor.withStyle(.greenB5DE71).cgColor
@@ -45,13 +55,16 @@ struct BottomClippedGradientView: View {
             if let imageData = imageData {
                 GeometryReader { geometry in
                     VStack {
-                        Spacer()
+                        Spacer(minLength: imageData.topContentInset)
+                        
                         HStack {
-                            Spacer()
+                            Spacer(minLength: topOffset)
+                            
                             Image(uiImage: imageData.image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(maxWidth: min(imageData.image.size.width, geometry.size.width - 32.0), alignment: .center)
+                            
                             Spacer()
                         }
                     }
@@ -93,7 +106,11 @@ struct BottomClippedGradientView_Previews: PreviewProvider {
             Rectangle()
                 .fill(.white)
             
-            BottomClippedGradientView(imageData: .init(image: UIImage(named: "womanYogaPose")!, shouldClip: false, yOffset: -16.0))
+            VStack {
+                BottomClippedGradientView(imageData: .init(image: UIImage(named: "caregiver")!, shouldClip: true, yOffset: -0.0))
+                
+                Spacer(minLength: 300.0)
+            }
         }
     }
 }

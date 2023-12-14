@@ -43,11 +43,11 @@ struct HorizontalWeekContainerView: View {
         LazyVGrid(columns: columns) {
             ForEach(items) { item in
                 VStack(alignment: .center, spacing: 2.0) {
-                    StyledText(item.date.toFormat("dd"),
+                    StyledText(item.date.in(region: .local).toFormat("dd"),
                                textStyle: .button,
                                colorStyle: isSelected(item.date) ? .purple623E61 : .black)
                         
-                    StyledText(item.date.toFormat("EEEEEE"),
+                    StyledText(item.date.in(region: .local).toFormat("EEEEEE"),
                                textStyle: .body,
                                colorStyle: isSelected(item.date) ? .purple623E61 : .lightGray)
                 }

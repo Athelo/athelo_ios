@@ -8,16 +8,22 @@
 import Foundation
 
 enum HealthRequestBuilder: APIBuilderProtocol {
+    case acceptCaregiverInvitation(request: HealthAcceptCaregiverInvitationRequest)
     case activityDashboard(request: HealthActivityDashboardRequest)
     case addUserFeeling(request: HealthAddFeelingRequest)
     case addUserSymptom(request: HealthAddSymptomRequest)
+    case cancelInvitation(request: HealthCancelInvitationRequest)
     case caregiverList
     case createSymptom(request: HealthCreateSymptomRequest)
     case dashboard(request: HealthDashboardRequest)
     case deleteSymptom(request: HealthDeleteSymptomRequest)
+    case invitations(request: HealthInvitationsRequest)
+    case inviteCaregiver(request: HealthInviteCaregiverRequest)
     case patientList
     case perDaySummary(request: HealthPerDaySummaryRequest)
     case records(request: HealthRecordsRequest)
+    case removeCaregiver(request: HealthRemoveCaregiverRequest)
+    case removePatient(request: HealthRemovePatientRequest)
     case sleepAggregatedRecords(request: HealthSleepAggregatedRecordsRequest)
     case sleepRecords(request: HealthSleepRecordsRequest)
     case symptoms(request: HealthSymptomsRequest)
@@ -26,33 +32,36 @@ enum HealthRequestBuilder: APIBuilderProtocol {
     case userSymptomsSummary
     
     var headers: [String : String]? {
-        switch self {
-        case .activityDashboard, .addUserFeeling, .addUserSymptom, .caregiverList, .createSymptom, .dashboard, .deleteSymptom, .patientList, .perDaySummary, .records, .sleepAggregatedRecords, .sleepRecords, .symptoms, .userFeelings, .userSymptoms, .userSymptomsSummary:
-            return nil
-        }
+        return nil
     }
     
     var method: APIMethod {
         switch self {
-        case .activityDashboard, .addUserFeeling, .addUserSymptom, .createSymptom, .dashboard, .sleepAggregatedRecords:
+        case .acceptCaregiverInvitation, .activityDashboard, .addUserFeeling, .addUserSymptom, .cancelInvitation, .createSymptom, .dashboard, .inviteCaregiver, .sleepAggregatedRecords:
             return .post
-        case .deleteSymptom:
+        case .deleteSymptom, .removeCaregiver, .removePatient:
             return .delete
-        case .caregiverList, .patientList, .perDaySummary, .records, .sleepRecords, .symptoms, .userFeelings, .userSymptoms, .userSymptomsSummary:
+        case .caregiverList, .invitations, .patientList, .perDaySummary, .records, .sleepRecords, .symptoms, .userFeelings, .userSymptoms, .userSymptomsSummary:
             return .get
         }
     }
     
     var parameters: [String : Any]? {
         switch self {
-        case .activityDashboard(let request as APIRequest),
+        case .acceptCaregiverInvitation(let request as APIRequest),
+                .activityDashboard(let request as APIRequest),
                 .addUserFeeling(let request as APIRequest),
                 .addUserSymptom(let request as APIRequest),
+                .cancelInvitation(let request as APIRequest),
                 .createSymptom(let request as APIRequest),
                 .dashboard(let request as APIRequest),
                 .deleteSymptom(let request as APIRequest),
+                .invitations(let request as APIRequest),
+                .inviteCaregiver(let request as APIRequest),
                 .perDaySummary(let request as APIRequest),
                 .records(let request as APIRequest),
+                .removeCaregiver(let request as APIRequest),
+                .removePatient(let request as APIRequest),
                 .sleepAggregatedRecords(let request as APIRequest),
                 .sleepRecords(let request as APIRequest),
                 .symptoms(let request as APIRequest),
@@ -68,13 +77,19 @@ enum HealthRequestBuilder: APIBuilderProtocol {
     
     var path: String {
         switch self {
+        case .acceptCaregiverInvitation(let request):
+            return "/health/caregiver_invitations/consume/\(request.invitationCode)/"
         case .activityDashboard(let request):
             var path = "/health/activity/generate-dashboard/"
             
-            let queryItems: [URLQueryItem] = [
+            var queryItems: [URLQueryItem] = [
                 .init(name: "start_date", value: request.startDate.toString(.custom("yyyy-MM-dd"))),
                 .init(name: "end_date", value: request.endDate.toString(.custom("yyyy-MM-dd")))
             ]
+            
+            if let patientID = request.patientID, patientID > 0 {
+                queryItems.append(.init(name: "_patient_id", value: "\(patientID)"))
+            }
             
             path += queryItems.intoQuery()
             
@@ -83,6 +98,8 @@ enum HealthRequestBuilder: APIBuilderProtocol {
             return "/health/user_feeling/"
         case .addUserSymptom:
             return "/health/user_symptoms/"
+        case .cancelInvitation(let request):
+            return "/health/caregiver_invitations/\(request.invitationID)/cancel/"
         case .caregiverList:
             return "/health/caregivers/"
         case .createSymptom:
@@ -96,6 +113,10 @@ enum HealthRequestBuilder: APIBuilderProtocol {
                 queryItems.append(contentsOf: dates)
             }
             
+            if let patientID = request.patientID, patientID > 0 {
+                queryItems.append(.init(name: "_patient_id", value: "\(patientID)"))
+            }
+            
             if !queryItems.isEmpty {
                 path += queryItems.intoQuery()
             }
@@ -103,6 +124,26 @@ enum HealthRequestBuilder: APIBuilderProtocol {
             return path
         case .deleteSymptom(let request):
             return "/health/user_symptoms/\(request.symptomID)/"
+        case .invitations(let request):
+            var path = "/health/caregiver_invitations/"
+            
+            var queryItems: [URLQueryItem] = []
+            
+            if let invitationIDs = request.invitationIDs, !invitationIDs.isEmpty {
+                queryItems.append(.init(name: "id__in", value: invitationIDs.map({ "\($0)" }).joined(separator: ",")))
+            }
+            
+            if let statuses = request.statuses, !statuses.isEmpty {
+                queryItems.append(URLQueryItem(name: "status__in", value: statuses.map({ $0.parameterName }).joined(separator: ",")))
+            }
+            
+            if !queryItems.isEmpty {
+                path += queryItems.intoQuery()
+            }
+            
+            return path
+        case .inviteCaregiver:
+            return "/health/caregiver_invitations/invite/"
         case .patientList:
             return "/health/patients/"
         case .perDaySummary(let request):
@@ -137,11 +178,19 @@ enum HealthRequestBuilder: APIBuilderProtocol {
                 queryItems.append(.init(name: "page_size", value: "\(pageSize)"))
             }
             
+            if let patientID = request.patientID, patientID > 0 {
+                queryItems.append(.init(name: "_patient_id", value: "\(patientID)"))
+            }
+            
             if !queryItems.isEmpty {
                 path += queryItems.intoQuery()
             }
             
             return path
+        case .removeCaregiver(let request):
+            return "/health/caregivers/\(request.caregiverID)/"
+        case .removePatient(let request):
+            return "/health/patients/\(request.patientID)/"
         case .sleepAggregatedRecords(let request):
             var path = "/health/sleep_record/\(request.dataGranularity.path)/"
             
@@ -149,6 +198,10 @@ enum HealthRequestBuilder: APIBuilderProtocol {
             
             if let dates = request.dates?.toQueryItems(for: "collected_at_date", format: "yyyy-MM-dd"), !dates.isEmpty {
                 queryItems.append(contentsOf: dates)
+            }
+            
+            if let patientID = request.patientID, patientID > 0 {
+                queryItems.append(.init(name: "_patient_id", value: "\(patientID)"))
             }
             
             if !queryItems.isEmpty {
@@ -171,6 +224,10 @@ enum HealthRequestBuilder: APIBuilderProtocol {
             
             if let exactYear = request.exactYear {
                 queryItems.append(.init(name: "collected_at_date__year", value: "\(exactYear)"))
+            }
+            
+            if let patientID = request.patientID, patientID > 0 {
+                queryItems.append(.init(name: "_patient_id", value: "\(patientID)"))
             }
             
             if !queryItems.isEmpty {

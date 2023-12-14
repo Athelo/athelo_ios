@@ -31,9 +31,9 @@ final class PopupView: UIView {
     
     func configure(using data: PopupConfigurationData) {
         labelTitle.text = data.title
-        labelMessage.text = data.message
+        labelMessage.attributedText = data.message
         
-        labelMessage.isHidden = !(data.message?.isEmpty == false)
+        labelMessage.isHidden = !(data.message?.string.isEmpty == false)
         
         primaryAction = data.primaryAction.action
         
@@ -105,14 +105,20 @@ extension PopupView {
     
     struct ConfigurationData {
         let title: String
-        let message: String?
+        let message: NSAttributedString?
         let displaysCloseButton: Bool
         let primaryAction: PopupActionData
         let secondaryAction: PopupActionData?
         
         init(title: String, message: String? = nil, displaysCloseButton: Bool = false, primaryAction: PopupActionData = .init(title: "OK"), secondaryAction: PopupActionData? = nil) {
             self.title = title
-            self.message = message
+            
+            if let message {
+                self.message = NSAttributedString(string: message)
+            } else {
+                self.message = nil
+            }
+            
             self.displaysCloseButton = displaysCloseButton
             
             self.primaryAction = primaryAction
@@ -121,8 +127,17 @@ extension PopupView {
         
         init(template: ConfigurationTemplate, primaryAction: PopupActionData = .init(title: "OK"), secondaryAction: PopupActionData? = nil) {
             self.title = template.title
-            self.message = template.message
+            self.message = NSAttributedString(string: template.message)
             self.displaysCloseButton = template.displaysCloseButton
+            
+            self.primaryAction = primaryAction
+            self.secondaryAction = secondaryAction
+        }
+        
+        init(title: String, message: NSAttributedString? = nil, displaysCloseButton: Bool = false, primaryAction: PopupActionData = .init(title: "OK"), secondaryAction: PopupActionData? = nil) {
+            self.title = title
+            self.message = message
+            self.displaysCloseButton = displaysCloseButton
             
             self.primaryAction = primaryAction
             self.secondaryAction = secondaryAction

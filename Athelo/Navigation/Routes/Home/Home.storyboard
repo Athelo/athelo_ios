@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,29 +18,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1Mj-rI-lpW">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8BK-0W-IUc">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Knk-eT-8Cx">
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p59-xV-idF">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="81"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t30-QD-zyZ">
+                                                <rect key="frame" x="16" y="24" width="382" height="57"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="57" id="mSM-Ya-Yur"/>
+                                                    <constraint firstAttribute="height" priority="999" constant="57" id="w3A-x5-aVv"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="t30-QD-zyZ" firstAttribute="top" secondItem="p59-xV-idF" secondAttribute="top" constant="24" id="HGs-yq-jYS"/>
+                                            <constraint firstAttribute="bottom" secondItem="t30-QD-zyZ" secondAttribute="bottom" id="IkX-qk-LHz"/>
+                                            <constraint firstItem="t30-QD-zyZ" firstAttribute="centerX" secondItem="p59-xV-idF" secondAttribute="centerX" id="Z1e-UX-eE1"/>
+                                            <constraint firstItem="t30-QD-zyZ" firstAttribute="leading" secondItem="p59-xV-idF" secondAttribute="leading" constant="16" id="p03-vt-deJ"/>
+                                        </constraints>
+                                    </view>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1Mj-rI-lpW">
+                                        <rect key="frame" x="0.0" y="89" width="414" height="759"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8BK-0W-IUc">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIS-tj-Gly" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="137" width="414" height="24"/>
+                                <color key="backgroundColor" name="Background"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="kAx-18-fXp"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="blendsFromTop" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="1Mj-rI-lpW" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="b5u-3f-Wpx"/>
-                            <constraint firstAttribute="bottom" secondItem="1Mj-rI-lpW" secondAttribute="bottom" id="dmo-i9-11v"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1Mj-rI-lpW" secondAttribute="trailing" id="hsu-mu-ATZ"/>
-                            <constraint firstItem="1Mj-rI-lpW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xwG-m6-cdj"/>
+                            <constraint firstItem="Knk-eT-8Cx" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="ANf-MF-dHd"/>
+                            <constraint firstItem="Knk-eT-8Cx" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="I3W-TV-RZy"/>
+                            <constraint firstItem="MIS-tj-Gly" firstAttribute="trailing" secondItem="1Mj-rI-lpW" secondAttribute="trailing" id="Imj-mq-9T9"/>
+                            <constraint firstItem="MIS-tj-Gly" firstAttribute="leading" secondItem="1Mj-rI-lpW" secondAttribute="leading" id="TEN-d2-0Eq"/>
+                            <constraint firstItem="Knk-eT-8Cx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="jRv-Ae-WFi"/>
+                            <constraint firstItem="MIS-tj-Gly" firstAttribute="top" secondItem="1Mj-rI-lpW" secondAttribute="top" id="nAH-d4-L1b"/>
+                            <constraint firstAttribute="bottom" secondItem="Knk-eT-8Cx" secondAttribute="bottom" id="wkG-iE-TPg"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionViewContent" destination="1Mj-rI-lpW" id="vfg-F3-2pq"/>
+                        <outlet property="viewSelectedWardContainer" destination="p59-xV-idF" id="9hB-Rf-cc7"/>
+                        <outlet property="viewSelectedWardHolder" destination="t30-QD-zyZ" id="sS2-We-HVY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -48,6 +89,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="Background">
+            <color red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

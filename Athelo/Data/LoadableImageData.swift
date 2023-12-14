@@ -14,21 +14,21 @@ enum LoadableImageData: Hashable {
 }
 
 extension ChatRoomMemberData {
-    func avatarImage(in size: CGSize, borderStyle: RendererUtility.BorderStyle = .ellipse) -> LoadableImageData {
+    func avatarImage(in size: CGSize, placeholderStyle: RendererUtility.PlaceholderStyle = .initials(.ellipse)) -> LoadableImageData {
         if let imageURL = photo?.fittingImageURL(forSize: size) {
             return .url(imageURL)
         }
         
-        return .image(RendererUtility.renderAvatarPlaceholder(for: self, size: size, borderStyle: borderStyle))
+        return .image(RendererUtility.renderAvatarPlaceholder(for: self, size: size, placeholderStyle: placeholderStyle))
     }
 }
 
-extension IdentityProfileData {
-    func avatarImage(in size: CGSize, borderStyle: RendererUtility.BorderStyle = .ellipse) -> LoadableImageData {
-        if let imageURL = photo?.fittingImageURL(forSize: size) {
+extension ContactData {
+    func avatarImage(in size: CGSize, placeholderStyle: RendererUtility.PlaceholderStyle = .initials(.ellipse)) -> LoadableImageData {
+        if let imageURL = contactPhoto?.fittingImageURL(forSize: size) {
             return .url(imageURL)
         }
         
-        return .image(RendererUtility.renderAvatarPlaceholder(for: self, size: size, borderStyle: borderStyle))
+        return .image(RendererUtility.renderAvatarPlaceholder(for: self, size: size, placeholderStyle: placeholderStyle))
     }
 }

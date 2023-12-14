@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -21,31 +21,28 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AI9-aa-nWf">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="By signing up, you agree with the Terms of Service and Privacy Policy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9f-ug-4bf" customClass="InteractableLabel" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="78.5" y="807.5" width="257.5" height="38.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="By signing up, you agree with the Terms of Service and Privacy Policy" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khr-df-ZsX" customClass="BodyTextView" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="16" y="791.5" width="382" height="54.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" name="Gray"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="auth.legal"/>
-                                </userDefinedRuntimeAttributes>
-                            </label>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="d9f-ug-4bf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="8pA-uf-BIE"/>
+                            <constraint firstItem="Khr-df-ZsX" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" constant="-32" id="Jmi-hz-iOB"/>
                             <constraint firstAttribute="bottom" secondItem="AI9-aa-nWf" secondAttribute="bottom" id="KNa-WL-72e"/>
                             <constraint firstAttribute="trailing" secondItem="AI9-aa-nWf" secondAttribute="trailing" id="Xau-cD-KKa"/>
-                            <constraint firstItem="d9f-ug-4bf" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="bQB-3v-wkU"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d9f-ug-4bf" secondAttribute="trailing" constant="16" id="h9v-Jx-JjZ"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="d9f-ug-4bf" secondAttribute="bottom" constant="16" id="pjn-sK-LNz"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Khr-df-ZsX" secondAttribute="bottom" constant="16" id="okZ-Hp-Kz5"/>
+                            <constraint firstItem="Khr-df-ZsX" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="s0L-Jo-5tM"/>
                             <constraint firstItem="AI9-aa-nWf" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="wuv-NX-vax"/>
                             <constraint firstItem="AI9-aa-nWf" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="z3n-Ms-9VX"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="labelLegal" destination="d9f-ug-4bf" id="8kX-n5-rCM"/>
+                        <outlet property="textViewLegal" destination="Khr-df-ZsX" id="UPM-FA-U2Z"/>
                         <outlet property="viewContainer" destination="AI9-aa-nWf" id="rpj-8X-pzL"/>
                     </connections>
                 </viewController>
@@ -62,7 +59,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JsE-yn-igc">
-                                <rect key="frame" x="47" y="44" width="320" height="41"/>
+                                <rect key="frame" x="47" y="48" width="320" height="41"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ek-Y0-1O0" customClass="Headline24Button" customModule="Athelo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="41"/>
@@ -100,7 +97,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0Q-iU-Ezi">
-                                <rect key="frame" x="157" y="93" width="100" height="4"/>
+                                <rect key="frame" x="157" y="97" width="100" height="4"/>
                                 <color key="backgroundColor" name="Gray"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="JxY-ut-ryG"/>
@@ -108,10 +105,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DAb-Nh-bHh">
-                                <rect key="frame" x="0.0" y="85" width="414" height="777"/>
+                                <rect key="frame" x="0.0" y="89" width="414" height="773"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="9Xa-ee-5ve">
-                                        <rect key="frame" x="16" y="248.5" width="382" height="280"/>
+                                        <rect key="frame" x="16" y="284.5" width="382" height="204"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paV-v9-yMw" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="52"/>
@@ -165,8 +162,8 @@
                                                     <action selector="googleButtonTapped:" destination="678-Qq-9mK" eventType="touchUpInside" id="cqd-YI-Xfc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDJ-3r-P2b" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="228" width="382" height="52"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDJ-3r-P2b" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="204" width="382" height="0.0"/>
                                                 <color key="backgroundColor" name="#80627F"/>
                                                 <color key="tintColor" name="#1877F2"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -181,7 +178,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syr-CB-g9V" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="280" width="382" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="204" width="382" height="0.0"/>
                                                 <color key="backgroundColor" name="#80627F"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Sign up with Twitter" image="socialTwitter"/>
@@ -248,7 +245,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFX-px-hql">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="thi-Ya-heD">
                                         <rect key="frame" x="16" y="36" width="382" height="288"/>
@@ -303,7 +300,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="hc6-ha-0KV"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sll-UH-RJd">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                 <color key="backgroundColor" name="Background"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HdJ-dY-5ci" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
@@ -380,7 +377,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsn-DR-syP">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Zvq-LH-l3i">
                                         <rect key="frame" x="16" y="36" width="382" height="240"/>
@@ -441,7 +438,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="ZwQ-vb-RgS"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KX4-V7-E5d">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                 <color key="backgroundColor" name="Background"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wPH-rT-nAt" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
@@ -515,10 +512,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mrg-Wk-UuC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="yyt-gS-AZS">
-                                        <rect key="frame" x="16" y="36" width="382" height="273"/>
+                                        <rect key="frame" x="16" y="36" width="382" height="169"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="i0g-H2-msN">
                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="49"/>
@@ -544,7 +541,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="xGa-gn-qcE">
-                                                <rect key="frame" x="0.0" y="89" width="382" height="184"/>
+                                                <rect key="frame" x="0.0" y="89" width="382" height="80"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOD-uU-6VA" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="80"/>
@@ -558,8 +555,8 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedPlaceholder" value="form.placeholder.name"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dlD-SL-Fkx" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="104" width="382" height="80"/>
+                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dlD-SL-Fkx" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="80"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="H7y-5S-Yuo"/>
@@ -586,7 +583,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="0cy-ov-bME"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLZ-S8-XP9">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                 <color key="backgroundColor" name="Background"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzo-nQ-TAP" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
@@ -641,7 +638,6 @@
                         <outlet property="constraintScrollViewContentBottom" destination="Shg-dV-yjt" id="23a-BK-ZFi"/>
                         <outlet property="constraintStackViewContentBottom" destination="NJJ-1t-WYs" id="8h1-Zc-jc0"/>
                         <outlet property="formTextFieldName" destination="UOD-uU-6VA" id="FlH-4F-dfV"/>
-                        <outlet property="formTextFieldWhatDescribesYou" destination="dlD-SL-Fkx" id="fSC-iW-aeS"/>
                         <outlet property="scrollViewContent" destination="Mrg-Wk-UuC" id="Z2V-F2-spb"/>
                         <outlet property="stackViewContent" destination="yyt-gS-AZS" id="AcE-n3-Vfu"/>
                     </connections>
@@ -659,7 +655,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIs-QY-LUm">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="f46-SU-j7n">
                                         <rect key="frame" x="16" y="36" width="382" height="147"/>
@@ -698,7 +694,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="O9s-bZ-q5O"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxV-kB-Gmn">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                 <color key="backgroundColor" name="Background"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2OF-L4-uhU" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">

@@ -73,7 +73,7 @@ extension MyProfileCollectionViewCell: ConfigurableCell {
     typealias DataType = IdentityProfileData
     
     func configure(_ item: IdentityProfileData, indexPath: IndexPath) {
-        imageViewAvatar.displayLoadableImage(item.avatarImage(in: imageViewAvatar.bounds.size, borderStyle: .roundedRect(25.0)))
+        imageViewAvatar.displayLoadableImage(item.avatarImage(in: imageViewAvatar.bounds.size, placeholderStyle: .initials(.roundedRect(25.0))))
         
         textViewName.text = item.displayName
         

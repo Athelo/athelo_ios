@@ -11,6 +11,10 @@ import SwiftUI
 struct SmallLineGraphView: View {
     @EnvironmentObject var model: SmallLineGraphModel
     
+    private var points: [GraphLinePointData] {
+        model.rawValues
+    }
+    
     var body: some View {
         VStack {
             GeometryReader { geometry in
@@ -28,7 +32,7 @@ struct SmallLineGraphView: View {
                     shape(inside: geometry, enclosing: false)
                         .stroke(Color(UIColor.withStyle(.lightOlivaceous).cgColor), style: .init(lineWidth: 2.0, lineCap: .round, lineJoin: .round, miterLimit: 0.0, dash: [], dashPhase: 0.0))
                 }
-                .animation(.default, value: model.points)
+                .animation(.default, value: points)
             }
         }
     }
@@ -36,7 +40,7 @@ struct SmallLineGraphView: View {
     @ViewBuilder
     private func shape(inside geometry: GeometryProxy, enclosing: Bool) -> some Shape {
         LineGraphShape(
-            splines: splinePoints(definedBy: model.points.map({ $0.toPoint }), inside: geometry, interpolationMode: model.interpolationMode),
+            splines: splinePoints(definedBy: points.map({ $0.toPoint }), inside: geometry, interpolationMode: model.interpolationMode),
             enclosing: enclosing,
             geometry: geometry
         )

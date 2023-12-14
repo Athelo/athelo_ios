@@ -15,7 +15,7 @@ final class ActivitySummaryModel: ObservableObject {
     @Published private(set) var filter: ActivitySummaryFilter = .day
     @Published private(set) var overviewDescription: String = "---"
     
-    let columnChartDataModel = GraphColumnChartModel(data: .init(columns: [], horizontalLegendItems: []))
+    let columnChartDataModel = GraphColumnChartModel(data: GraphColumnChartData(columns: [], horizontalLegendItems: []))
     let linearChartDataModel = LinearChartModel()
     let multiValueColumnChartModel = MultiValueColumnChartModel(items: [])
     
@@ -29,16 +29,24 @@ final class ActivitySummaryModel: ObservableObject {
     }
     
     // MARK: - Public API
+    func displayEmptyData() {
+        columnChartDataModel.updateData(GraphColumnChartData(columns: [], horizontalLegendItems: []))
+        linearChartDataModel.updatePointsData(LinearChartPointsData(dataPoints: []))
+        multiValueColumnChartModel.updateItems([])
+        
+        overviewDescription = "---"
+    }
+    
     func updateActivityType(_ activityType: ActivityType) {
         self.activityType = activityType
     }
     
-    func updateOverviewDescription(_ description: String) {
-        self.overviewDescription = description
-    }
-    
     func updateFilter(_ filter: ActivitySummaryFilter) {
         self.filter = filter
+    }
+    
+    func updateOverviewDescription(_ description: String) {
+        self.overviewDescription = description
     }
     
     var infoText: String? {

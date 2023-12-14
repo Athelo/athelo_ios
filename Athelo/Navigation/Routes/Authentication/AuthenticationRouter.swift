@@ -66,4 +66,12 @@ class AuthenticationNavigationRouter: Router, AuthenticationRouterProtocol {
         self.navigationController = navigationController
         self.authenticationUpdateEventsSubject = updateEventsSubject ?? AuthenticationUpdateEventsSubject()
     }
+    
+    @MainActor func navigateOnSuccessfulAuthentication() {
+        if IdentityUtility.activeUserRole != nil {
+            AppRouter.current.exchangeRoot(.home)
+        } else {
+            AppRouter.current.exchangeRoot(.roleSelection)
+        }
+    }
 }

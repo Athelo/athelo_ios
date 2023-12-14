@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NcK-vT-uQj">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUZ-a7-Lfd">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -55,89 +55,102 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iKs-pp-Mx8" customClass="SegmentedPickerView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="16" y="60" width="382" height="54"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="Kwf-bM-18e"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IdV-Pi-jlM" customClass="ShadowCastingView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="294" y="146" width="40" height="40"/>
+                                <rect key="frame" x="294" y="242" width="40" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZg-kY-ugj" customClass="ShadowCastingView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="358" y="146" width="40" height="40"/>
+                                <rect key="frame" x="358" y="242" width="40" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="9ds-uM-3Vx">
-                                <rect key="frame" x="16" y="138" width="382" height="56"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Y8u-Ak-fw5">
+                                <rect key="frame" x="16" y="72" width="382" height="218"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Dmh-dj-HEs">
-                                        <rect key="frame" x="0.0" y="7.5" width="254" height="41"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTa-mv-IlQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="60"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="999" constant="60" id="E5S-23-5Js"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="oQJ-Y1-tzg"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iKs-pp-Mx8" customClass="SegmentedPickerView" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="84" width="382" height="54"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="54" id="Kwf-bM-18e"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="9ds-uM-3Vx">
+                                        <rect key="frame" x="0.0" y="162" width="382" height="56"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="May 17, 2022" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45v-PG-TDt" customClass="BodyLabel" customModule="Athelo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="85" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" name="Gray"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nF9-U0-KbM" customClass="Headline20Label" customModule="Athelo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="17" width="53" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="textColor" name="Black"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Dmh-dj-HEs">
+                                                <rect key="frame" x="0.0" y="7.5" width="254" height="41"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="May 17, 2022" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45v-PG-TDt" customClass="BodyLabel" customModule="Athelo" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="85" height="17"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" name="Gray"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nF9-U0-KbM" customClass="Headline20Label" customModule="Athelo" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="17" width="53" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <color key="textColor" name="Black"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Utb-wo-VTh">
+                                                <rect key="frame" x="278" y="8" width="40" height="40"/>
+                                                <color key="backgroundColor" name="White"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="Fgc-cb-PTq"/>
+                                                    <constraint firstAttribute="height" constant="40" id="e3F-0U-ELl"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="arrowLeft"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="previousPeriodButtonTapped:" destination="IXX-vj-qgz" eventType="touchUpInside" id="tlU-7j-4Ky"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqi-om-lAX">
+                                                <rect key="frame" x="342" y="8" width="40" height="40"/>
+                                                <color key="backgroundColor" name="White"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="KQt-o9-586"/>
+                                                    <constraint firstAttribute="height" constant="40" id="tSI-aN-hPL"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="arrowRight"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="nextPeriodButtonTapped:" destination="IXX-vj-qgz" eventType="touchUpInside" id="fCM-1I-oWd"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="999" constant="56" id="bj5-HI-z1B"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="r5t-y5-iv4"/>
+                                        </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Utb-wo-VTh">
-                                        <rect key="frame" x="278" y="8" width="40" height="40"/>
-                                        <color key="backgroundColor" name="White"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="Fgc-cb-PTq"/>
-                                            <constraint firstAttribute="height" constant="40" id="e3F-0U-ELl"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="arrowLeft"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="previousPeriodButtonTapped:" destination="IXX-vj-qgz" eventType="touchUpInside" id="tlU-7j-4Ky"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqi-om-lAX">
-                                        <rect key="frame" x="342" y="8" width="40" height="40"/>
-                                        <color key="backgroundColor" name="White"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="KQt-o9-586"/>
-                                            <constraint firstAttribute="height" constant="40" id="tSI-aN-hPL"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="arrowRight"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="nextPeriodButtonTapped:" destination="IXX-vj-qgz" eventType="touchUpInside" id="fCM-1I-oWd"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="999" constant="56" id="bj5-HI-z1B"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="r5t-y5-iv4"/>
-                                </constraints>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCe-ik-Bol">
-                                <rect key="frame" x="0.0" y="194" width="414" height="702"/>
+                                <rect key="frame" x="0.0" y="306" width="414" height="590"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </containerView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Oy-pX-Yn7" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="194" width="414" height="16"/>
+                                <rect key="frame" x="0.0" y="306" width="414" height="16"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="4P8-oi-np1"/>
@@ -153,26 +166,23 @@
                         <viewLayoutGuide key="safeArea" id="Uo1-oh-8sa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="9ds-uM-3Vx" firstAttribute="top" secondItem="iKs-pp-Mx8" secondAttribute="bottom" constant="24" id="4J1-Pd-x7e"/>
-                            <constraint firstItem="EZg-kY-ugj" firstAttribute="leading" secondItem="uqi-om-lAX" secondAttribute="leading" id="5lS-BI-EVz"/>
-                            <constraint firstItem="EZg-kY-ugj" firstAttribute="bottom" secondItem="uqi-om-lAX" secondAttribute="bottom" id="9GV-eq-NIF"/>
-                            <constraint firstItem="iKs-pp-Mx8" firstAttribute="top" secondItem="Uo1-oh-8sa" secondAttribute="top" constant="16" id="AEz-h1-ERu"/>
-                            <constraint firstItem="EZg-kY-ugj" firstAttribute="trailing" secondItem="uqi-om-lAX" secondAttribute="trailing" id="Ctd-br-UGl"/>
-                            <constraint firstItem="Uo1-oh-8sa" firstAttribute="trailing" secondItem="iKs-pp-Mx8" secondAttribute="trailing" constant="16" id="DZI-dZ-hJ0"/>
-                            <constraint firstItem="IdV-Pi-jlM" firstAttribute="bottom" secondItem="Utb-wo-VTh" secondAttribute="bottom" id="Kxh-Fi-Lff"/>
-                            <constraint firstItem="iKs-pp-Mx8" firstAttribute="leading" secondItem="Uo1-oh-8sa" secondAttribute="leading" constant="16" id="LY2-n0-XW8"/>
+                            <constraint firstItem="Y8u-Ak-fw5" firstAttribute="leading" secondItem="Uo1-oh-8sa" secondAttribute="leading" constant="16" id="BMk-ff-X2q"/>
+                            <constraint firstItem="IdV-Pi-jlM" firstAttribute="top" secondItem="Utb-wo-VTh" secondAttribute="top" id="Cpi-mI-mD9"/>
                             <constraint firstAttribute="bottom" secondItem="fCe-ik-Bol" secondAttribute="bottom" id="Lfm-yX-izx"/>
-                            <constraint firstItem="9ds-uM-3Vx" firstAttribute="leading" secondItem="Uo1-oh-8sa" secondAttribute="leading" constant="16" id="S1R-S9-wHQ"/>
-                            <constraint firstItem="Uo1-oh-8sa" firstAttribute="trailing" secondItem="9ds-uM-3Vx" secondAttribute="trailing" constant="16" id="XPd-qW-WA5"/>
+                            <constraint firstItem="EZg-kY-ugj" firstAttribute="leading" secondItem="uqi-om-lAX" secondAttribute="leading" id="N7D-Lh-DNK"/>
+                            <constraint firstItem="IdV-Pi-jlM" firstAttribute="leading" secondItem="Utb-wo-VTh" secondAttribute="leading" id="NQY-qK-ACN"/>
+                            <constraint firstItem="EZg-kY-ugj" firstAttribute="trailing" secondItem="uqi-om-lAX" secondAttribute="trailing" id="NqE-re-EzX"/>
                             <constraint firstItem="fCe-ik-Bol" firstAttribute="leading" secondItem="Uo1-oh-8sa" secondAttribute="leading" id="Xg0-QR-gXk"/>
-                            <constraint firstItem="fCe-ik-Bol" firstAttribute="top" secondItem="9ds-uM-3Vx" secondAttribute="bottom" id="Yij-jx-0yb"/>
-                            <constraint firstItem="IdV-Pi-jlM" firstAttribute="top" secondItem="Utb-wo-VTh" secondAttribute="top" id="Yn6-Dp-hrb"/>
                             <constraint firstItem="7Oy-pX-Yn7" firstAttribute="leading" secondItem="ZTa-JE-Olh" secondAttribute="leading" id="ZFC-b6-onV"/>
+                            <constraint firstItem="Y8u-Ak-fw5" firstAttribute="top" secondItem="Uo1-oh-8sa" secondAttribute="top" constant="24" id="ZXB-h2-NeB"/>
                             <constraint firstItem="fCe-ik-Bol" firstAttribute="trailing" secondItem="Uo1-oh-8sa" secondAttribute="trailing" id="arg-N7-OJh"/>
-                            <constraint firstItem="IdV-Pi-jlM" firstAttribute="trailing" secondItem="Utb-wo-VTh" secondAttribute="trailing" id="jTH-1c-3RO"/>
+                            <constraint firstItem="IdV-Pi-jlM" firstAttribute="trailing" secondItem="Utb-wo-VTh" secondAttribute="trailing" id="hW0-R2-JuV"/>
+                            <constraint firstItem="EZg-kY-ugj" firstAttribute="top" secondItem="uqi-om-lAX" secondAttribute="top" id="hXu-PZ-2dF"/>
+                            <constraint firstItem="Uo1-oh-8sa" firstAttribute="trailing" secondItem="Y8u-Ak-fw5" secondAttribute="trailing" constant="16" id="i7z-Hz-82X"/>
                             <constraint firstAttribute="trailing" secondItem="7Oy-pX-Yn7" secondAttribute="trailing" id="np6-dm-k1n"/>
-                            <constraint firstItem="IdV-Pi-jlM" firstAttribute="leading" secondItem="Utb-wo-VTh" secondAttribute="leading" id="sHZ-ZI-2iG"/>
-                            <constraint firstItem="EZg-kY-ugj" firstAttribute="top" secondItem="uqi-om-lAX" secondAttribute="top" id="xrQ-QR-QbK"/>
+                            <constraint firstItem="EZg-kY-ugj" firstAttribute="bottom" secondItem="uqi-om-lAX" secondAttribute="bottom" id="pW7-nD-obm"/>
+                            <constraint firstItem="IdV-Pi-jlM" firstAttribute="bottom" secondItem="Utb-wo-VTh" secondAttribute="bottom" id="u8n-vy-iSW"/>
+                            <constraint firstItem="fCe-ik-Bol" firstAttribute="top" secondItem="Y8u-Ak-fw5" secondAttribute="bottom" constant="16" id="xeC-op-ez5"/>
                             <constraint firstItem="7Oy-pX-Yn7" firstAttribute="top" secondItem="fCe-ik-Bol" secondAttribute="top" id="zpT-1i-NYN"/>
                         </constraints>
                     </view>
@@ -182,6 +192,7 @@
                         <outlet property="labelDateDescription" destination="nF9-U0-KbM" id="T1w-vo-qPA"/>
                         <outlet property="labelDateRange" destination="45v-PG-TDt" id="Hb9-vh-b3N"/>
                         <outlet property="segmentedPickerRange" destination="iKs-pp-Mx8" id="2Ez-bG-qrv"/>
+                        <outlet property="viewActiveWardContainer" destination="wTa-mv-IlQ" id="xFA-bh-Bc8"/>
                         <outlet property="viewNextPeriodButtonShadowContainer" destination="EZg-kY-ugj" id="77P-Ac-eUp"/>
                         <outlet property="viewSummaryContainer" destination="fCe-ik-Bol" id="z78-T1-J7f"/>
                     </connections>

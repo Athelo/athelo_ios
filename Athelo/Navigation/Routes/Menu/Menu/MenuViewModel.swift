@@ -14,7 +14,7 @@ final class MenuViewModel: BaseViewModel {
     @Published private(set) var userAvatar: LoadableImageData?
     @Published private(set) var userName: String?
     
-    private let displayedOptions = CurrentValueSubject<[MenuOption], Never>(MenuOption.inMenuOrder())
+    private let displayedOptions = CurrentValueSubject<[MenuOption], Never>([])
     
     private var cancellables: [AnyCancellable] = []
     
@@ -32,25 +32,21 @@ final class MenuViewModel: BaseViewModel {
     
     // MARK: - Sinks
     private func sink() {
+        sinkIntoIdentityUtility()
         sinkIntoOwnSubjects()
-        sinkIntoUserStore()
     }
     
-    private func sinkIntoOwnSubjects() {
-        displayedOptions
-            .map {
-                var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>()
-                
-                snapshot.appendSections([.options])
-                snapshot.appendItems($0.map({ ItemIdentifier(option: $0) }), toSection: .options)
-                
-                return snapshot
-            }.sink { [weak self] in
-                self?.listSnapshot = $0
+    private func sinkIntoIdentityUtility() {
+        IdentityUtility.$activeRole
+            .compactMap({ $0 })
+            .removeDuplicates { lhs, rhs in
+                lhs.isCaregiver == rhs.isCaregiver
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.displayedOptions.send(MenuOption.inMenuOrder(for: $0))
             }.store(in: &cancellables)
-    }
-    
-    private func sinkIntoUserStore() {
+        
         IdentityUtility.userDataPublisher
             .compactMap({ $0?.displayName })
             .filter({ !$0.isEmpty })
@@ -67,24 +63,49 @@ final class MenuViewModel: BaseViewModel {
                 self?.userAvatar = $0
             }.store(in: &cancellables)
     }
+    
+    private func sinkIntoOwnSubjects() {
+        displayedOptions
+            .map {
+                var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>()
+                
+                snapshot.appendSections([.options])
+                snapshot.appendItems($0.map({ ItemIdentifier(option: $0) }), toSection: .options)
+                
+                return snapshot
+            }.sink { [weak self] in
+                self?.listSnapshot = $0
+            }.store(in: &cancellables)
+    }
 }
 
 // MARK: - Helper extensions
 private extension MenuOption {
-    static func inMenuOrder() -> [Self] {
-        [
-            .myProfile,
-            // Disabled for now.
-//            .messages,
-            .mySymptoms,
-            // Disabled for now, restore once caregiver functionality will become available.
-//            .myCaregivers,
-//            .inviteACaregiver,
-            .settings,
-            .connectSmartWatch,
-            .askAthelo,
-            .sendFeedback
-        ]
+    static func inMenuOrder(for role: ActiveUserRole? = IdentityUtility.activeUserRole) -> [Self] {
+        let isCaregiver = role?.isCaregiver == true
+        var options: [MenuOption] = [.myProfile]
+    
+        if isCaregiver {
+            options.append(.myWards)
+        } else {
+            options.append(.myCaregivers)
+        }
+        
+        options.append(.messages)
+        
+        if !isCaregiver {
+            options.append(.mySymptoms)
+        }
+        
+        options.append(.settings)
+        
+        if !isCaregiver {
+            options.append(.connectSmartWatch)
+        }
+        
+        options.append(.sendFeedback)
+        
+        return options
     }
 }
 

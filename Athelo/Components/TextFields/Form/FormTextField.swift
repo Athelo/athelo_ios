@@ -252,6 +252,10 @@ final class FormTextField: UIView {
         textField.resignFirstResponder()
     }
     
+    func setActiveIconsHidden(_ hidden: Bool) {
+        rightStackView?.isHidden = hidden
+    }
+    
     // MARK: - Configuration
     private func configure() {
         configureRightView()
@@ -279,7 +283,7 @@ final class FormTextField: UIView {
     }
     
     private func sinkIntoOwnSubjects() {
-        self.textPublisher
+        self.currentTextPublisher
             .sinkDiscardingValue { [weak self] in
                 self?.clearErrorMarking(updatingInputTextColor: false)
                 self?.textColor = self?.isEditing == true ? .withStyle(.purple623E61) : UIFont.colorForStyle(.textField)

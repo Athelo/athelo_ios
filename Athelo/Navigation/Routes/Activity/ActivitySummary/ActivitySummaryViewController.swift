@@ -6,6 +6,7 @@
 //
 
 import Combine
+import SwiftUI
 import UIKit
 
 typealias ActivitySummaryFilter = ActivitySummaryViewController.FilterType
@@ -17,13 +18,16 @@ final class ActivitySummaryViewController: BaseViewController {
     @IBOutlet private weak var labelDateDescription: UILabel!
     @IBOutlet private weak var labelDateRange: UILabel!
     @IBOutlet private weak var segmentedPickerFilter: SegmentedPickerView!
+    @IBOutlet private weak var viewActiveWardContainer: UIView!
     @IBOutlet private weak var viewNextPeriodButtonShadowContainer: UIView!
     @IBOutlet private weak var viewSummaryContainer: UIView!
     
+    private var activeWardView: SelectedWardView?
     private var summaryView: ActivitySummaryView?
     
     // MARK: - Properties
     private let viewModel = ActivitySummaryViewModel()
+    
     private var router: ActivitySummaryRouter?
     
     private var cancellables: [AnyCancellable] = []
@@ -38,8 +42,31 @@ final class ActivitySummaryViewController: BaseViewController {
     
     // MARK: - Configuration
     private func configure() {
+        configureActiveWardContainerView()
         configureFilterSegmentedPicker()
         configureSummaryContainerView()
+    }
+    
+    private func configureActiveWardContainerView() {
+        guard activeWardView == nil else {
+            return
+        }
+        
+        let activeWardView = SelectedWardView( 
+            model: viewModel.wardModel,
+            onTapAction: {
+                AppRouter.current.windowOverlayUtility.displayWardSelectionView()
+            }
+        )
+        
+        embedView(activeWardView, to: viewActiveWardContainer)
+        
+        self.activeWardView = activeWardView
+        
+        let displaysWardData = viewModel.canDisplayWardData
+        
+        self.viewActiveWardContainer.isHidden = displaysWardData ? false : true
+        self.viewActiveWardContainer.alpha = displaysWardData ? 1.0 : 0.0
     }
     
     private func configureFilterSegmentedPicker() {
@@ -95,6 +122,16 @@ final class ActivitySummaryViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .assign(to: \.text, on: labelDateRange)
             .store(in: &cancellables)
+        
+        viewModel.$canDisplayWardData
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                UIView.animate(withDuration: 0.3, delay: 0.0, options: [.beginFromCurrentState]) {
+                    self?.viewActiveWardContainer.isHidden = !value
+                    self?.viewActiveWardContainer.alpha = value ? 1.0 : 0.0
+                }
+            }.store(in: &cancellables)
     }
     
     // MARK: - Actions

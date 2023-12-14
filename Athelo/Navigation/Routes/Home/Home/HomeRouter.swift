@@ -18,16 +18,27 @@ final class HomeRouter: Router, UserProfileRoutable, WebContentRouter {
     }
     
     // MARK: - Public API
-    func navigateUsingPrompt(_ navigationPrompt: HomeViewModel.RecommendationPrompt) {
+    @MainActor func navigateUsingInteractableItem(_ item: HomeViewModel.InteractableKey) {
+        switch item {
+        case .recommendationCaregiverActivity:
+            AppRouter.current.switchHomeTab(.activity)
+        case .recommendationCaregiverSleep:
+            AppRouter.current.switchHomeTab(.sleep)
+        }
+        
+        NSLog("Switch time")
+    }
+    
+    @MainActor func navigateUsingPrompt(_ navigationPrompt: HomeViewModel.RecommendationPrompt) {
         switch navigationPrompt {
         case .chatWithCommunity:
-            Task {
-                await AppRouter.current.switchHomeTab(.community)
-            }
+            AppRouter.current.switchHomeTab(.community)
+        case .checkActivityLevels:
+            AppRouter.current.switchHomeTab(.activity)
+        case .checkSleepLevels:
+            AppRouter.current.switchHomeTab(.sleep)
         case .readArticles:
-            Task {
-                await AppRouter.current.switchHomeTab(.news)
-            }
+            AppRouter.current.switchHomeTab(.news)
         case .connectDevice:
             guard let navigationController = navigationController else {
                 fatalError("Missing \(UINavigationController.self) instance.")

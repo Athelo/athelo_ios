@@ -38,6 +38,12 @@ final class CommunitiesListViewController: BaseViewController {
         viewModel.enableLiveUpdates()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        NotificationUtility.checkNotificationAuthorizationStatus(requestingStatus: true)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         

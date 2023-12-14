@@ -14,11 +14,13 @@ protocol ListTileDataProtocol {
 
 struct ListTileData {
     let data: ListTileDataProtocol
+    let displaysBackgroundWaves: Bool
     let displaysNavigationChevron: Bool
-    var forceTitleLeadingOffset: Bool
+    let forceTitleLeadingOffset: Bool
     
-    init(data: ListTileDataProtocol, displaysNavigationChevron: Bool = false, forceTitleLeadingOffset: Bool = false) {
+    init(data: ListTileDataProtocol, displaysBackgroundWaves: Bool = false, displaysNavigationChevron: Bool = false, forceTitleLeadingOffset: Bool = false) {
         self.data = data
+        self.displaysBackgroundWaves = displaysBackgroundWaves
         self.displaysNavigationChevron = displaysNavigationChevron
         self.forceTitleLeadingOffset = forceTitleLeadingOffset
     }
@@ -50,7 +52,27 @@ struct ListTileView: View {
         }
         .padding(16.0)
         .frame(minHeight: 72.0, alignment: .center)
-        .background(Rectangle().fill(.white))
+        .background(
+            ZStack(alignment: .center) {
+                Rectangle().fill(.white)
+                
+                if data.displaysBackgroundWaves {
+                    WaveBackgroundView(offset: .init(x: 80.0, y: 20.0))
+                        .opacity(0.2)
+                        .mask(
+                            LinearGradient(
+                                stops: [
+                                    .init(color: .clear, location: 0.0),
+                                    .init(color: .black, location: 0.2),
+                                    .init(color: .black, location: 1.0)
+                                ],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                }
+            }
+        )
         .cornerRadius(20.0)
         .styledShadow()
     }
@@ -63,7 +85,7 @@ struct ListTileView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        ListTileView(data: .init(data: SampleData(listTileTitle: "Lump or area of thickening, also, more lines of text :) And more! And more! Please expand! Thank you :)", listTileImage: .image(.init(named: "symptomBladder")!)), displaysNavigationChevron: true, forceTitleLeadingOffset: true))
+        ListTileView(data: .init(data: SampleData(listTileTitle: "Lump or area of thickening.", listTileImage: .image(.init(named: "symptomBladder")!)), displaysBackgroundWaves: true, displaysNavigationChevron: true, forceTitleLeadingOffset: true))
             .padding()
     }
 }

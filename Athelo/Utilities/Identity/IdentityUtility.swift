@@ -41,7 +41,7 @@ enum SignInHandlerState: Equatable {
     }
 }
 
-final class IdentityUtility: NSObject {
+@dynamicMemberLookup final class IdentityUtility: NSObject {
     // MARK: - Constants
     enum ProfileError: LocalizedError {
         case missingAppleCredentialsData
@@ -93,6 +93,11 @@ final class IdentityUtility: NSObject {
     // MARK: - Properties
     private static let shared = IdentityUtility()
     
+    private let roleUtility = IdentityRoleUtility()
+    static var activeUserRole: ActiveUserRole? {
+        shared.roleUtility.activeRole
+    }
+    
     private let userDataSubject = CurrentValueSubject<IdentityProfileData?, Never>(nil)
     static var userDataPublisher: AnyPublisher<IdentityProfileData?, Never> {
         shared.userDataSubject.eraseToAnyPublisher()
@@ -113,8 +118,22 @@ final class IdentityUtility: NSObject {
         IdentitySignInWithGoogleHandler()
     }()
     
+    private var cancellables: [AnyCancellable] = []
+    
+    // MARK: - Subscripts
+    static subscript<T>(dynamicMember keyPath: KeyPath<IdentityRoleUtility, T>) -> T {
+        shared.roleUtility[keyPath: keyPath]
+    }
+    
+    // MARK: - Initialization
+    private override init() {
+        super.init()
+        
+        sink()
+    }
+    
     // MARK: - Public API
-    static func createAccount(name: String, userType: UserTypeConstant) -> AnyPublisher<IdentityProfileData, Error> {
+    static func createAccount(name: String) -> AnyPublisher<IdentityProfileData, Error> {
         guard APIEnvironment.hasTokenData() else {
             return Fail(error: APIError.missingCredentials)
                 .mapError({ $0 as Error })
@@ -134,8 +153,7 @@ final class IdentityUtility: NSObject {
         }
         
         let request = ProfileCreateRequest(email: knownEmail, additionalParams: [
-            "display_name": name,
-            "athelo_user_type": userType.id
+            "display_name": name
         ])
         
         return (AtheloAPI.Profile.create(request: request) as AnyPublisher<IdentityProfileData, APIError>)
@@ -207,6 +225,34 @@ final class IdentityUtility: NSObject {
         }
     }
     
+    static func switchActiveRole(_ activeRole: ActiveUserRole?) {
+        guard userData != nil else {
+            return
+        }
+        
+        if let activeRole {
+            shared.roleUtility.changeActiveRole(activeRole)
+        } else {
+            shared.roleUtility.resetRoleForActiveUser()
+        }
+    }
+    
+    @discardableResult static func refreshCaregiverData() -> AnyPublisher<[ContactData], Error>? {
+        guard userData != nil else {
+            return nil
+        }
+        
+        return shared.roleUtility.updateCaregiverDataForActiveUser()
+    }
+    
+    @discardableResult static func refreshPatientData() -> AnyPublisher<[ContactData], Error>? {
+        guard userData != nil else {
+            return nil
+        }
+        
+        return shared.roleUtility.updatePatientDataForActiveUser()
+    }
+    
     static func refreshUserDetails() -> AnyPublisher<IdentityProfileData, Error> {
         guard APIEnvironment.hasTokenData() else {
             return Fail(error: APIError.missingCredentials)
@@ -248,21 +294,34 @@ final class IdentityUtility: NSObject {
             .eraseToAnyPublisher()
     }
     
+    // MARK: - Sinks
+    private func sink() {
+        sinkIntoOwnSubjects()
+    }
+    
+    private func sinkIntoOwnSubjects() {
+        userDataSubject
+            .sink { [weak self] in
+                self?.roleUtility.updateActiveUser($0)
+            }.store(in: &cancellables)
+    }
+    
     // MARK: - Updates
     private static func checkChatRoomsAvailability() {
         guard let userID = userData?.id else {
             return
         }
         
-        let request = ChatGroupConversationListRequest(isPublic: true, userID: userID)
+        let communitiesRequest = ChatGroupConversationListRequest(isPublic: true, userID: userID)
+        let privateConversationsRequest = ChatConversationListRequest()
         
         Task {
-            guard let results = try? await (AtheloAPI.Chat.groupConversationList(request: request) as AnyPublisher<ListResponseData<ChatRoomData>, APIError>).asAsyncTask() else {
-                return
-            }
+            let communities = try? await (AtheloAPI.Chat.groupConversationList(request: communitiesRequest) as AnyPublisher<ListResponseData<ChatRoomData>, APIError>).asAsyncTask()
+            let privateConversations = try? await (AtheloAPI.Chat.conversationList(request: privateConversationsRequest) as AnyPublisher<ListResponseData<PrivateChatRoomData>, APIError>).asAsyncTask()
             
-            if !results.results.isEmpty {
+            if communities?.results.isEmpty == false || privateConversations?.results.isEmpty == false {
                 ChatUtility.connect()
+                NotificationUtility.checkNotificationAuthorizationStatus(requestingStatus: true)
             }
         }
     }
@@ -275,6 +334,8 @@ final class IdentityUtility: NSObject {
         
         authenticationMethodsSubject.send(nil)
         userDataSubject.send(nil)
+        
+        roleUtility.clearCachedData()
     }
     
     private func updateProfileData(with profileData: IdentityProfileData) {
@@ -286,7 +347,6 @@ final class IdentityUtility: NSObject {
         loginPublisher
             .handleEvents(receiveOutput: {
                 try? APIEnvironment.setUserToken($0)
-                
             })
             .flatMap({ _ -> AnyPublisher<IdentityProfileData, Error> in
                 refreshUserDetails()

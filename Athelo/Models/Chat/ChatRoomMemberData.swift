@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatRoomMemberData: Decodable, Identifiable {
+struct ChatRoomMemberData: Decodable, Hashable, Identifiable {
     let id: Int
     
     let displayName: String?

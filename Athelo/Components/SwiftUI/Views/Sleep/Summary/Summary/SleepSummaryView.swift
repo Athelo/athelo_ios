@@ -12,35 +12,48 @@ struct SleepSummaryView: View {
     
     private let headerActionTapHandler: () -> Void
     private let summaryActionTapHandler: () -> Void
+    private let wardChangeTapHandler: () -> Void
     
-    init(model: SleepSummaryModel, headerActionTapHandler: @escaping () -> Void, summaryActionTapHandler: @escaping () -> Void) {
+    init(model: SleepSummaryModel, headerActionTapHandler: @escaping () -> Void, summaryActionTapHandler: @escaping () -> Void, wardChangeTapHandler: @escaping () -> Void) {
         self.model = model
         
         self.headerActionTapHandler = headerActionTapHandler
         self.summaryActionTapHandler = summaryActionTapHandler
+        self.wardChangeTapHandler = wardChangeTapHandler
     }
     
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(spacing: 24.0) {
-                if model.displaysHeader {
-                    SleepSummaryHeaderView(linkTapAction: headerActionTapHandler)
-                        .environmentObject(model.headerModel)
-                        .zIndex(3)
-                }
-                
-                SleepSummaryAverageView()
-                    .environmentObject(model)
-                    .zIndex(1)
-                
-                SleepSummaryStatsView(linkTapAction: summaryActionTapHandler)
-                    .environmentObject(model)
-                    .zIndex(2)
+        VStack(spacing: 0.0) {
+            if model.displaysWardData {
+                SelectedWardView(
+                    model: model.displayedWardModel,
+                    onTapAction: wardChangeTapHandler
+                )
+                .padding(.horizontal, 16.0)
+                .padding(.top, 24.0)
             }
-            .padding(.top, 24.0)
-            .padding([.leading, .trailing, .bottom], 16.0)
+            
+            FadingScrollView(axes: .vertical) {
+                VStack(spacing: 24.0) {
+                    if model.displaysHeader {
+                        SleepSummaryHeaderView(linkTapAction: headerActionTapHandler)
+                            .environmentObject(model.headerModel)
+                            .zIndex(3)
+                    }
+                    
+                    SleepSummaryAverageView()
+                        .environmentObject(model)
+                        .zIndex(1)
+                    
+                    SleepSummaryStatsView(linkTapAction: summaryActionTapHandler)
+                        .environmentObject(model)
+                        .zIndex(2)
+                }
+                .padding(.top, 24.0)
+                .padding([.leading, .trailing, .bottom], 16.0)
+            }
+            .background(Rectangle().fill(.clear))
         }
-        .background(Rectangle().fill(.clear))
     }
 }
 
@@ -52,6 +65,8 @@ struct SleepSummaryView_Previews: PreviewProvider {
             SleepSummaryView(model: model) {
                 /* ... */
             } summaryActionTapHandler: {
+                /* ... */
+            } wardChangeTapHandler: {
                 /* ... */
             }
             

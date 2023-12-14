@@ -75,6 +75,11 @@ private extension Array where Element == [ServiceConstantValue] {
 }
 
 // MARK: - Service data types definition
+struct CaregiverRelationLabelConstant: ServiceConstantStringIdentifiableProtocol {
+    let key: String
+    let name: String
+}
+
 struct FeedbackCategoryServiceConstant: ServiceConstantIntIdentifiableProtocol {
     let id: Int
     let name: String
@@ -105,37 +110,32 @@ struct UserProfileStatusServiceConstant: ServiceConstantIntIdentifiableProtocol 
     let name: String
 }
 
-struct UserTypeConstant: ServiceConstantIntIdentifiableProtocol {
-    let id: Int
-    let name: String
-}
-
 struct ServiceConstants: Codable {
+    let caregiverRelationLabels: [CaregiverRelationLabelConstant]
     let feedbackCategories: [FeedbackCategoryServiceConstant]
     let friendRequestStatusTypes: [FriendRequestStatusServiceConstant]
     let reportedChatMessageTypes: [ReportedChatMessageTypeServiceConstant]
     let thirdPartyAccessTokenSources: [ThirdPartyAccessTokenSourceServiceConstant]
     let userProfileStatusTypes: [UserProfileStatusServiceConstant]
-    let userTypes: [UserTypeConstant]
 
     private enum CodingKeys: String, CodingKey {
+        case caregiverRelationLabels = "caregiver_relation_label"
         case feedbackCategories = "feedback_category"
         case friendRequestStatusTypes = "friend_request_status"
         case reportedChatMessageTypes = "reported_chat_message_type"
         case thirdPartyAccessTokenSources = "third_party_access_token_source"
         case userProfileStatusTypes = "userprofile_status"
-        case userTypes = "athelo_user_type"
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
+        self.caregiverRelationLabels = try container.decodeIdentifiableValues(forKey: .caregiverRelationLabels)
         self.feedbackCategories = try container.decodeIdentifiableValues(forKey: .feedbackCategories)
         self.friendRequestStatusTypes = try container.decodeIdentifiableValues(forKey: .friendRequestStatusTypes)
         self.reportedChatMessageTypes = try container.decodeIdentifiableValues(forKey: .reportedChatMessageTypes)
         self.thirdPartyAccessTokenSources = try container.decodeIdentifiableValues(forKey: .thirdPartyAccessTokenSources)
         self.userProfileStatusTypes = try container.decodeIdentifiableValues(forKey: .userProfileStatusTypes)
-        self.userTypes = try container.decodeIdentifiableValues(forKey: .userTypes)
     }
 }
 
@@ -156,9 +156,10 @@ private extension String {
     }
 }
 
-extension FeedbackCategoryServiceConstant: ListInputCellItemData {
+extension CaregiverRelationLabelConstant: ListInputCellItemData {
+    // TODO: This doesn't look great - think of a way to either unbind ID type or generate static UI based on whatever.
     var listInputItemID: Int {
-        id
+        key.hashValue
     }
     
     var listInputItemName: String {
@@ -166,7 +167,7 @@ extension FeedbackCategoryServiceConstant: ListInputCellItemData {
     }
 }
 
-extension UserTypeConstant: ListInputCellItemData {
+extension FeedbackCategoryServiceConstant: ListInputCellItemData {
     var listInputItemID: Int {
         id
     }

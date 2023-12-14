@@ -88,7 +88,7 @@ final class SymptomDetailsPopupView: UIView {
     }
     
     private func sinkIntoDescriptionTextView() {
-        textViewDescription.textPublisher
+        textViewDescription.currentTextPublisher
             .debounce(for: 0.1, scheduler: DispatchQueue.main)
             .compactMap({ [weak self] _ -> CGFloat? in
                 var contentHeight: CGFloat = ceil(self?.textViewDescription.contentSize.height ?? 0.0)
@@ -107,7 +107,7 @@ final class SymptomDetailsPopupView: UIView {
                 }
             }.store(in: &cancellables)
         
-        textViewDescription.textPublisher
+        textViewDescription.currentTextPublisher
             .map({ $0?.isEmpty == false })
             .removeDuplicates()
             .map({ $0 ? 0.0 : 1.0 })

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,14 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJx-e5-hmJ">
-                                <rect key="frame" x="0.0" y="87" width="414" height="809"/>
+                                <rect key="frame" x="0.0" y="91" width="414" height="805"/>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3b8-9u-Ure" customClass="NoContentView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="87" width="414" height="809"/>
+                                <rect key="frame" x="0.0" y="91" width="414" height="805"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kaq-S1-Rvb" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="134"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="blendsFromTop" value="NO"/>
@@ -36,7 +36,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00b-24-MsP" customClass="SegmentedPickerView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="16" y="60" width="382" height="54"/>
+                                <rect key="frame" x="16" y="64" width="382" height="54"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="kml-2p-j2F"/>
@@ -82,10 +82,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oP1-Oi-d4F">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="ahD-Zn-XQ8">
-                                        <rect key="frame" x="0.0" y="24" width="414" height="771"/>
+                                        <rect key="frame" x="0.0" y="24" width="414" height="748"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrS-xY-rTY">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="179"/>
@@ -133,31 +133,34 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dnr-mF-4U5">
-                                                <rect key="frame" x="0.0" y="219" width="414" height="207"/>
+                                                <rect key="frame" x="0.0" y="219" width="414" height="184"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fg-g7-nsz" customClass="PanInterceptingView" customModule="Athelo" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="64" width="414" height="91"/>
+                                                        <rect key="frame" x="0.0" y="64" width="414" height="68"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="R0x-AG-QeD">
-                                                        <rect key="frame" x="16" y="0.0" width="382" height="207"/>
+                                                        <rect key="frame" x="16" y="0.0" width="382" height="184"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="How are you feeling ?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auo-OM-J73" customClass="Headline20Label" customModule="Athelo" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="How are you feeling? (7 being the best)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auo-OM-J73" customClass="Headline20Label" customModule="Athelo" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="24"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                 <color key="textColor" name="Gray"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="symptoms.track.header.wellbeing"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6I-2h-2CT" customClass="SliderView" customModule="Athelo" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="48" width="382" height="83"/>
+                                                                <rect key="frame" x="0.0" y="48" width="382" height="60"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" priority="999" constant="83" id="kcM-BH-OTX"/>
-                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="83" id="nZb-rZ-wQB"/>
+                                                                    <constraint firstAttribute="height" priority="999" constant="60" id="kcM-BH-OTX"/>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="nZb-rZ-wQB"/>
                                                                 </constraints>
                                                             </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rZ-XZ-LNd" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="155" width="382" height="52"/>
+                                                                <rect key="frame" x="0.0" y="132" width="382" height="52"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="52" id="0TF-Pf-Tsm"/>
                                                                 </constraints>
@@ -183,7 +186,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5NS-1a-Fwm">
-                                                <rect key="frame" x="0.0" y="466" width="414" height="305"/>
+                                                <rect key="frame" x="0.0" y="443" width="414" height="305"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="RXQ-aS-KGp">
                                                         <rect key="frame" x="16" y="0.0" width="382" height="305"/>
@@ -239,7 +242,7 @@
                                                                 </state>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="secondaryStyle" value="YES"/>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="action.addsymptom"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="action.add.symptom"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="imageTintColorOnActivation">
                                                                         <color key="value" name="White"/>
                                                                     </userDefinedRuntimeAttribute>
@@ -333,11 +336,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEb-I0-akM" customClass="NoContentView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="414" height="750"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="746"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAS-UQ-kfC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="353-DW-wyf" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="794" width="414" height="102"/>
@@ -410,10 +413,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqL-vU-4Jg">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBm-QK-CfW" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="414" height="24"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="24"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="3yp-Ii-sss"/>

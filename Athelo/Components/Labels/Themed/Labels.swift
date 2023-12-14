@@ -37,6 +37,8 @@ class BaseThemeLabel: UILabel {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineHeightMultiple = lineHeightMultiple
             paragraphStyle.alignment = textAlignment
+            paragraphStyle.lineBreakMode = lineBreakMode
+            paragraphStyle.lineBreakStrategy = lineBreakStrategy
             
             var attributes: [NSAttributedString.Key: Any] = [
                 .paragraphStyle: paragraphStyle
@@ -245,7 +247,7 @@ final class MessageLabel: BaseThemeLabel, ThemedLabel {
     }
 }
 
-final class ParagraphLabel: BaseThemeLabel, ThemedLabel {
+class ParagraphLabel: BaseThemeLabel, ThemedLabel {
     var style: UIFont.AppStyle {
         .paragraph
     }

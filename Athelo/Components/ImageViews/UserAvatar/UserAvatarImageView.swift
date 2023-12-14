@@ -35,7 +35,7 @@ final class UserAvatarImageView: RoundedImageView {
     }
     
     static func instantiate() -> UserAvatarImageView {
-        UserAvatarImageView(frame: .init(origin: .zero, size: .init(width: 32.0, height: 32.0)))
+        UserAvatarImageView(frame: CGRect(origin: .zero, size: CGSize(width: 32.0, height: 32.0)))
     }
     
     // MARK: - Configuration
@@ -64,7 +64,7 @@ final class UserAvatarImageView: RoundedImageView {
     private func sinkIntoIdentityUtility() {
         IdentityUtility.userDataPublisher
             .receive(on: DispatchQueue.main)
-            .compactMap({ $0?.avatarImage(in: .init(width: 32.0, height: 32.0)) })
+            .compactMap({ $0?.avatarImage(in: CGSize(width: 32.0, height: 32.0)) })
             .removeDuplicates()
             .sink { [weak self] in
                 self?.displayLoadableImage($0)

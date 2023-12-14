@@ -60,12 +60,14 @@ final class RegisterSymptomsViewModel: BaseViewModel {
 
         state.send(.loading)
         
-        let request = HealthAddSymptomRequest(symptomID: selectedSymptom.id, occurrenceDate: selectedDateModel.date, note: symptomNote)
+        let symptomReportingDate = selectedDateModel.date
+        
+        let request = HealthAddSymptomRequest(symptomID: selectedSymptom.id, occurrenceDate: symptomReportingDate, note: symptomNote)
         sinkIntoSymptomDaySummaryPublisher({
             (AtheloAPI.Health.addUserSymptom(request: request) as AnyPublisher<CreatedSymptomData, APIError>)
                 .map({ $0.occurrenceDate })
                 .mapError({ $0 as Error })
-                .flatMap({ RegisterSymptomsViewModel.symptomDaySummaryPublisher(at: $0) })
+                .flatMap({ _ in RegisterSymptomsViewModel.symptomDaySummaryPublisher(at: symptomReportingDate) })
                 .handleEvents(receiveOutput: { [weak self] in
                     LocalNotificationData.postNotification(.symptomSummaryDataUpdated, parameters: [.summaryData: $0])
                     
@@ -90,8 +92,8 @@ final class RegisterSymptomsViewModel: BaseViewModel {
         
         state.send(.loading)
         
-        let lowerDateBound = referenceDate.dateByAdding(-6, .day).date
-        let upperDateBound = referenceDate
+        let lowerDateBound = referenceDate.dateByAdding(-7, .day).date
+        let upperDateBound = referenceDate.dateByAdding(1, .day).date
         let boundary: [QueryDateData] = [.lowerBound(lowerDateBound, canBeEqual: true), .upperBound(upperDateBound, canBeEqual: true)]
         
         let feelingsRequest = HealthUserFeelingsRequest(occurrenceDates: boundary)
@@ -104,7 +106,7 @@ final class RegisterSymptomsViewModel: BaseViewModel {
         .map({ (feelings, symptoms) -> [SymptomDaySummaryData] in
             var data: [SymptomDaySummaryData] = []
             
-            for offset in (-6...0) {
+            for offset in (-8...0) {
                 let date = upperDateBound.dateByAdding(offset, .day).date
                 
                 let feeling = feelings.filter({ $0.occurrenceDate.compare(toDate: date, granularity: .day) == .orderedSame }).sorted(by: \.id).last
@@ -130,7 +132,7 @@ final class RegisterSymptomsViewModel: BaseViewModel {
         state.send(.loading)
         
         let reportDate = selectedDateModel.date
-        let generalFeeling = FeelingScale(value: value).toGeneralFeeling()
+        let generalFeeling = Int(value)
         
         let request = HealthAddFeelingRequest(generalFeeling: generalFeeling, occurrenceDate: reportDate)
         sinkIntoSymptomDaySummaryPublisher({
@@ -145,14 +147,13 @@ final class RegisterSymptomsViewModel: BaseViewModel {
     }
     
     func removeSymptom(with id: Int) {
-        guard let symptom = symptom(with: id),
-              state.value != .loading else {
+        guard state.value != .loading else {
             return
         }
         
         state.send(.loading)
         
-        let symptomReportingDate = symptom.occurrenceDate
+        let symptomReportingDate = selectedDateModel.date
         
         let request = HealthDeleteSymptomRequest(symptomID: id)
         sinkIntoSymptomDaySummaryPublisher({
@@ -219,7 +220,8 @@ final class RegisterSymptomsViewModel: BaseViewModel {
             selectedDateModel.$date
         )
         .compactMap({ (items, date) -> SymptomDaySummaryData? in
-            items.first(where: { $0.date.compare(toDate: date, granularity: .day) == .orderedSame })
+            let referenceDate = date.converted(to: .UTC)
+            return items.first(where: { $0.date.compare(toDate: referenceDate, granularity: .day) == .orderedSame })
         })
         .sink { [weak self] in
             self?.activeItemSubject.send($0)
@@ -259,11 +261,18 @@ final class RegisterSymptomsViewModel: BaseViewModel {
                 self?.state.send(result.toViewModelState())
             } receiveValue: { [weak self] value in
                 guard var currentItems = self?.items.value,
-                      let replacedItemIndex = currentItems.firstIndex(where: { $0.date.compare(toDate: value.date, granularity: .day) == .orderedSame }) else {
+                      let replacedItemIndex = currentItems.firstIndex(where: { $0.date.compare(toDate: value.date.converted(to: .UTC), granularity: .day) == .orderedSame }) else {
                     return
                 }
                 
-                currentItems[replacedItemIndex] = value
+                let replacedItemDate = currentItems[safe: replacedItemIndex]?.date ?? value.date
+                let updatedItem: SymptomDaySummaryData = .init(
+                    date: replacedItemDate,
+                    symptoms: value.symptoms,
+                    feeling: value.feeling
+                )
+                
+                currentItems[replacedItemIndex] = updatedItem
                 
                 self?.items.send(currentItems)
             }.store(in: &cancellables)
@@ -282,8 +291,10 @@ final class RegisterSymptomsViewModel: BaseViewModel {
         )
         .mapError({ $0 as Error })
         .map { (feelings, symptoms) -> SymptomDaySummaryData in
-            let feeling = feelings.filter({ $0.occurrenceDate.compare(toDate: date, granularity: .day) == .orderedSame }).sorted(by: \.id).last
-            let symptoms = symptoms.filter({ $0.occurrenceDate.compare(toDate: date, granularity: .day) == .orderedSame })
+            let referenceDate = date.converted(to: .UTC)
+            
+            let feeling = feelings.filter({ $0.occurrenceDate.compare(toDate: referenceDate, granularity: .day) == .orderedSame }).sorted(by: \.id).last
+            let symptoms = symptoms.filter({ $0.occurrenceDate.compare(toDate: referenceDate, granularity: .day) == .orderedSame })
             
             return .init(date: date, symptoms: symptoms, feeling: feeling)
         }
@@ -303,5 +314,19 @@ extension RegisterSymptomsViewModel {
         init(symptom: UserSymptomData, canBeEdited: Bool) {
             self.identifier = "s:\(symptom.id)-\(canBeEdited)"
         }
+    }
+}
+
+private extension Date {
+    static func timeZoneUnaware(in region: Region) -> Date {
+        Date().converted(to: region)
+    }
+    
+    func converted(to region: Region) -> Date {
+        guard let convertedDate = Date(self.in(region: .current).toFormat("yyyy/MM/dd"), format: "yyyy/MM/dd", region: region) else {
+            fatalError("Could not convert \(self) to \(region).")
+        }
+        
+        return convertedDate
     }
 }

@@ -8,9 +8,5 @@
 import UIKit
 
 final class AdditionalProfileInfoRouter: AuthenticationNavigationRouter {
-    func navigateToSync() {
-        Task {
-            await AppRouter.current.exchangeRoot(.sync)
-        }
-    }
+    /* ... */
 }

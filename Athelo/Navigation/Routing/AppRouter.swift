@@ -16,9 +16,11 @@ import UIKit
     }
     
     enum Root: Hashable {
+        case accessCode
         case auth
         case home
         case intro
+        case roleSelection
         case splash
         case sync
     }
@@ -75,13 +77,20 @@ import UIKit
             return
         }
         
+        // Forcing so that no popup artifacts are being held/displayed.
+        windowOverlayUtility.hidePopupView()
+        
         switch root {
+        case .accessCode:
+            displayAccessCodeRoot()
         case .auth:
             displayAuthRoot()
         case .home:
             displayHome()
         case .intro:
             displayIntroRoot()
+        case .roleSelection:
+            displayRoleSelection()
         case .splash:
             displaySplashRoot()
         case .sync:
@@ -137,6 +146,16 @@ import UIKit
     }
     
     // MARK: - Navigation
+    private func displayAccessCodeRoot() {
+        let router = AccessCodeRouter()
+        let viewController = AccessCodeViewController.viewController(router: router)
+        
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        
+        UIView.transition(with: window, duration: Constants.rootTransitionTime, options: [.transitionCrossDissolve], animations: nil)
+    }
+    
     private func displayAuthRoot() {
         let router = AuthenticationRouter(updateEventsSubject: nil)
         let viewController = AuthenticationViewController.viewController(router: router)
@@ -177,6 +196,21 @@ import UIKit
         UIView.transition(with: window, duration: Constants.rootTransitionTime, options: [.transitionCrossDissolve], animations: nil)
     }
     
+    private func displayRoleSelection() {
+        let navigationController = BaseNavigationController()
+        
+        let configurationData = SelectRoleViewController.ConfigurationData(expectsDeviceSync: true)
+        let router = SelectRoleRouter(navigationController: navigationController)
+        let viewController = SelectRoleViewController.viewController(configurationData: configurationData, router: router)
+        
+        navigationController.setViewControllers([viewController], animated: false)
+        
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
+        
+        UIView.transition(with: window, duration: Constants.rootTransitionTime, options: [.transitionCrossDissolve], animations: nil)
+    }
+    
     private func displaySplashRoot() {
         let router = SplashRouter()
         let viewController = SplashViewController.viewController(router: router)
@@ -192,7 +226,7 @@ import UIKit
         
         let router = ConnectDeviceRouter(navigationController: navigationController)
         let configurationData = ConnectDeviceViewController.ConfigurationData(deviceType: .fitbit) {
-            AppRouter.current.displayHome()
+            AppRouter.current.exchangeRoot(.home)
         }
         
         let viewController = ConnectDeviceViewController.viewController(configurationData: configurationData, router: router)

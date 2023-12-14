@@ -116,11 +116,11 @@ final class ConnectDeviceViewModel: BaseViewModel {
             .map({ (device, status) -> String in
                 switch status {
                 case .notEstablished:
-                    return "watch.sync.prompt".localized(arguments: [device?.shortName ?? "device.shortname.common".localized()])
+                    return "watch.sync.prompt".localized(arguments: ["device.name.common".localized()])
                 case .connected:
-                    return "watch.sync.success".localized(arguments: [device?.shortName ?? "device.shortname.common".localized()])
+                    return "watch.sync.success".localized(arguments: ["device.name.common".localized()])
                 case .connectionFailed:
-                    return "watch.sync.failure".localized(arguments: [device?.shortName ?? "device.shortname.common".localized()])
+                    return "watch.sync.failure".localized(arguments: ["device.name.common".localized()])
                 }
             })
             .removeDuplicates()

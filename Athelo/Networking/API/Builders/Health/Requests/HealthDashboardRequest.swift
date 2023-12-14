@@ -16,12 +16,14 @@ public struct HealthDashboardRequest: APIRequest {
     let dataType: DataType
     let dates: [QueryDateData]?
     let intervalFunction: IntervalFunction
+    let patientID: Int?
     
-    public init(dataType: DataType, aggregationFunction: AggregationFunction, intervalFunction: IntervalFunction, dates: [QueryDateData]? = nil) {
+    public init(dataType: DataType, aggregationFunction: AggregationFunction, intervalFunction: IntervalFunction, dates: [QueryDateData]? = nil, patientID: Int? = nil) {
         self.aggregationFunction = aggregationFunction
         self.dataType = dataType
         self.dates = dates
         self.intervalFunction = intervalFunction
+        self.patientID = patientID
     }
     
     public var parameters: [String : Any]? {

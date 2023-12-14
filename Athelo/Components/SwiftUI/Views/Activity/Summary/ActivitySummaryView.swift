@@ -16,7 +16,7 @@ struct ActivitySummaryView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ScrollView(.vertical) {
+            FadingScrollView(axes: .vertical) {
                 VStack(spacing: 24.0) {
                     HStack(alignment: .center) {
                         StyledText(model.overviewHeader,

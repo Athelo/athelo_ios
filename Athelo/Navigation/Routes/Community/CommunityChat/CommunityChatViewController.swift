@@ -80,7 +80,7 @@ final class CommunityChatViewController: KeyboardListeningViewController {
         configureNotificationsButton()
         configureOwnView()
         
-        updateMessagingViewsVisibility(withMessagingAvailable: viewModel.chatRoom?.belongTo == true)
+        updateMessagingViewsVisibility(withMessagingAvailable: viewModel.canSendMessages)
     }
     
     private func configureActionsContainerView() {
@@ -113,9 +113,13 @@ final class CommunityChatViewController: KeyboardListeningViewController {
     }
     
     private func configureJoinCommunityButton() {
-        let bottomOffset = max(0.0, 16.0 - AppRouter.current.window.safeAreaInsets.bottom)
-        
-        constraintButtonJoinCommunityBottom.constant = bottomOffset
+        if viewModel.personData != nil {
+            buttonJoinCommunity.isHidden = true
+        } else {
+            let bottomOffset = max(0.0, 16.0 - AppRouter.current.window.safeAreaInsets.bottom)
+            
+            constraintButtonJoinCommunityBottom.constant = bottomOffset
+        }
     }
     
     private func configureLeaveButton() {
@@ -131,7 +135,7 @@ final class CommunityChatViewController: KeyboardListeningViewController {
     }
     
     private func configureOwnView() {
-        title = viewModel.chatRoom?.name
+        title = viewModel.displayTitle
     }
     
     // MARK: - Sinks
@@ -154,20 +158,20 @@ final class CommunityChatViewController: KeyboardListeningViewController {
     }
     
     private func sinkIntoMessageTextView() {
-        textViewMessage.textPublisher
+        textViewMessage.currentTextPublisher
             .map({ $0?.isEmpty == false })
             .removeDuplicates()
             .assign(to: \.isHidden, on: labelMessagePlaceholder)
             .store(in: &cancellables)
         
-        textViewMessage.textPublisher
+        textViewMessage.currentTextPublisher
             .map({ $0?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false })
             .removeDuplicates()
             .map({ $0 ? 1.0 : 0.5 })
             .assign(to: \.alpha, on: buttonSendMessage)
             .store(in: &cancellables)
         
-        textViewMessage.textPublisher
+        textViewMessage.currentTextPublisher
             .receive(on: DispatchQueue.main)
             .compactMap({ [weak self] _ in
                 self?.textViewMessage.contentSize.height
@@ -184,6 +188,20 @@ final class CommunityChatViewController: KeyboardListeningViewController {
     private func sinkIntoViewModel() {
         bindToViewModel(viewModel, cancellables: &cancellables)
         
+        viewModel.$canSendMessages
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: [.beginFromCurrentState]) {
+                    self?.updateMessagingViewsVisibility(withMessagingAvailable: value)
+                }
+            }.store(in: &cancellables)
+        
+        viewModel.clearInputPromptPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.textViewMessage.text = nil
+            }.store(in: &cancellables)
+        
         viewModel.$chatRoom
             .compactMap({ $0?.chatRoomIdentifier })
             .removeDuplicates()
@@ -191,24 +209,24 @@ final class CommunityChatViewController: KeyboardListeningViewController {
                 viewController?.assignConfigurationData($0)
             }.store(in: &cancellables)
         
-        viewModel.$chatRoom
-            .map({ $0?.name })
-            .removeDuplicates()
+        viewModel.$displayTitle
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.title = $0
             }.store(in: &cancellables)
         
-        viewModel.$chatRoom
-            .map({ $0?.belongTo == true })
+        viewModel.$navbarItem
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.updateChatActionsNavbarButton($0)
+            }.store(in: &cancellables)
+        
+        viewModel.$participantsCount
+            .map({ !($0?.isEmpty == false) })
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] value in
-                self?.updateChatActionsNavbarButtonVisiblity(value)
-                UIView.animate(withDuration: 0.2, delay: 0.0, options: [.beginFromCurrentState]) {
-                    self?.updateMessagingViewsVisibility(withMessagingAvailable: value)
-                }
-            }.store(in: &cancellables)
+            .assign(to: \.isHidden, on: labelParticipantsCount)
+            .store(in: &cancellables)
         
         viewModel.$participantsCount
             .removeDuplicates()
@@ -234,13 +252,23 @@ final class CommunityChatViewController: KeyboardListeningViewController {
         }
     }
     
-    private func updateChatActionsNavbarButtonVisiblity(_ isVisible: Bool) {
-        if isVisible {
+    private func updateChatActionsNavbarButton(_ buttonType: CommunityChatViewModel.NavbarItem?) {
+        switch buttonType {
+        case .avatar(let avatar):
+            let imageSize = CGSize(width: 32.0, height: 32.0)
+            
+            let avatarImageView = RoundedImageView(frame: .init(origin: .zero, size: imageSize))
+            avatarImageView.image = RendererUtility.renderAvatarPlaceholder(for: avatar, size: imageSize)
+            
+            let item = UIBarButtonItem(customView: avatarImageView)
+            
+            navigationItem.setRightBarButton(item, animated: true)
+        case .options:
             weak var weakSelf = self
             let item = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: weakSelf, action: #selector(chatActionsButtonTapped(_:)))
             
             navigationItem.setRightBarButton(item, animated: true)
-        } else {
+        case .none:
             navigationItem.setRightBarButton(nil, animated: true)
         }
     }
@@ -286,19 +314,27 @@ final class CommunityChatViewController: KeyboardListeningViewController {
             return
         }
         
-        if viewModel.sendMessage(message) {
-            textViewMessage.text = nil
-        }
+        viewModel.sendMessage(message)
     }
 }
 
 // MARK: - Protocol conformance
 // MARK: Configurable
 extension CommunityChatViewController: Configurable {
-    enum ConfigurationData {
-        case data(ChatRoomData)
+    enum ChatDataType {
+        case data(CommunityChatData)
         case id(Int)
         case roomID(ChatRoomIdentifier)
+    }
+    
+    enum ChatContactData {
+        case data(ContactData)
+        case id(Int)
+    }
+    
+    struct ConfigurationData {
+        let dataType: ChatDataType?
+        let identityData: ChatContactData?
     }
     
     func assignConfigurationData(_ configurationData: ConfigurationData) {

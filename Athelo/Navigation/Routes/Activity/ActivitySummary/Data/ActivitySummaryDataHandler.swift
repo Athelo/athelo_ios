@@ -21,18 +21,33 @@ final class ActivitySummaryDataHandler {
         static let heartRecordPageSize: Int = 1000
     }
     
+    private final class AggregateData {
+        let userRole: ActiveUserRole
+        
+        var hourlyAggregates: [Date: [ActivityDataPoint]] = [:]
+        var dailyAggregates: [Date: [ActivityDataPoint]] = [:]
+        var weeklyHeartRateAggregates: [Date: [ActivityDataPoint]] = [:]
+        
+        init(userRole: ActiveUserRole) {
+            self.userRole = userRole
+        }
+        
+        var isEmpty: Bool {
+            hourlyAggregates.isEmpty && dailyAggregates.isEmpty && weeklyHeartRateAggregates.isEmpty
+        }
+    }
+    
     // MARK: - Properties
-    private var hourlyAggregates: [Date: [ActivityDataPoint]] = [:]
-    private var dailyAggregates: [Date: [ActivityDataPoint]] = [:]
-    private var weeklyHeartRateAggregates: [Date: [ActivityDataPoint]] = [:]
+    private var aggregateData: [ActiveUserRole: AggregateData] = [:]
+    private(set) var activeRole: ActiveUserRole = .patient
     
     // MARK: - Public API
     func aggregateData(atDay date: Date) -> [ActivityDataPoint]? {
-        dailyAggregates[day: date]
+        aggregateData(for: activeRole, atDay: date)
     }
     
     func aggregateData(atHour date: Date) -> [ActivityDataPoint]? {
-        hourlyAggregates[hour: date]
+        aggregateData(for: activeRole, atHour: date)
     }
     
     func aggregateData(fromDay lowerBound: Date, to upperBound: Date) -> AggregateDataResult {
@@ -58,7 +73,7 @@ final class ActivitySummaryDataHandler {
         var referenceDate = upperBound
         while referenceDate.compare(toDate: lowerBound, granularity: .hour) != .orderedAscending {
             guard let aggregates = aggregateData(atHour: referenceDate) else {
-                return .failure(referenceDate)
+                return .failure(referenceDate.dateAt(.startOfDay).date)
             }
             
             items[referenceDate] = aggregates
@@ -69,42 +84,49 @@ final class ActivitySummaryDataHandler {
         return .success(items)
     }
  
+    func changeActiveRole(_ activeRole: ActiveUserRole) {
+        self.activeRole = activeRole
+    }
+    
     func fetchDailyAggregates(from date: Date, of type: ActivityType, step: Int = Constants.weeklyDataStep) -> AnyPublisher<Void, Error> {
         let lowerBound = date.dateByAdding(-max(0, step), .day).date
-        let upperBound = date
+        let upperBound = date.dateByAdding(2, .day).date
         
         let dateRanges: [QueryDateData] = [
             .lowerBound(lowerBound, canBeEqual: true),
             .upperBound(upperBound, canBeEqual: true)
         ]
         
+        let currentUserRole = activeRole
+        let patientID = currentUserRole.relatedPatientID
+        
         switch type {
         case .exercise:
-            let request = HealthActivityDashboardRequest(aggregationFunction: .sum, intervalFunction: .day, startDate: lowerBound, endDate: upperBound)
+            let request = HealthActivityDashboardRequest(aggregationFunction: .sum, intervalFunction: .day, startDate: lowerBound, endDate: upperBound, patientID: patientID)
             return (AtheloAPI.Health.activityDashboard(request: request) as AnyPublisher<ActivityRecordContainerData, APIError>)
                 .handleEvents(receiveOutput: { [weak self] value in
-                    self?.handleDailyAggregatedRecords(value.toDashboardItems(), between: lowerBound, and: upperBound)
+                    self?.handleDailyAggregatedRecords(value.toDashboardItems(), between: lowerBound, and: upperBound, for: currentUserRole)
                 })
                 .eraseTypes()
         case .heartRate:
-            let request = HealthDashboardRequest(dataType: .heartRate, aggregationFunction: .avg, intervalFunction: .day, dates: dateRanges)
+            let request = HealthDashboardRequest(dataType: .heartRate, aggregationFunction: .avg, intervalFunction: .day, dates: dateRanges, patientID: patientID)
             return (AtheloAPI.Health.dashboard(request: request) as AnyPublisher<[HealthDashboardData], APIError>)
                 .handleEvents(receiveOutput: { [weak self] values in
-                    self?.handleDailyHeartRateRecords(values, between: lowerBound, and: upperBound)
+                    self?.handleDailyHeartRateRecords(values, between: lowerBound, and: upperBound, for: currentUserRole)
                 })
                 .eraseTypes()
         case .hrv:
-            let request = HealthDashboardRequest(dataType: .hrv, aggregationFunction: .avg, intervalFunction: .day, dates: dateRanges)
+            let request = HealthDashboardRequest(dataType: .hrv, aggregationFunction: .avg, intervalFunction: .day, dates: dateRanges, patientID: patientID)
             return (AtheloAPI.Health.dashboard(request: request) as AnyPublisher<[HealthHRVDashboardData], APIError>)
                 .handleEvents(receiveOutput: { [weak self] values in
-                    self?.handleDailyHRVRecords(values, between: lowerBound, and: upperBound)
+                    self?.handleDailyHRVRecords(values, between: lowerBound, and: upperBound, for: currentUserRole)
                 })
                 .eraseTypes()
         case .steps:
-            let request = HealthDashboardRequest(dataType: .steps, aggregationFunction: .sum, intervalFunction: .day, dates: dateRanges)
+            let request = HealthDashboardRequest(dataType: .steps, aggregationFunction: .sum, intervalFunction: .day, dates: dateRanges, patientID: patientID)
             return (AtheloAPI.Health.dashboard(request: request) as AnyPublisher<[HealthDashboardData], APIError>)
                 .handleEvents(receiveOutput: { [weak self] values in
-                    self?.handleDailyAggregatedRecords(values, between: lowerBound, and: upperBound)
+                    self?.handleDailyAggregatedRecords(values, between: lowerBound, and: upperBound, for: currentUserRole)
                 })
                 .eraseTypes()
         }
@@ -112,40 +134,43 @@ final class ActivitySummaryDataHandler {
     
     func fetchHourlyAggregates(from date: Date, of type: ActivityType, step: Int = Constants.dailyDataStep) -> AnyPublisher<Void, Error> {
         let lowerBound = date.dateByAdding(-max(0, step), .day).date
-        let upperBound = date
+        let upperBound = date.dateByAdding(2, .day).date
         
         let dateRanges: [QueryDateData] = [
             .lowerBound(lowerBound, canBeEqual: true),
             .upperBound(upperBound, canBeEqual: true)
         ]
         
+        let currentUserRole = activeRole
+        let patientID = currentUserRole.relatedPatientID
+        
         switch type {
         case .exercise:
-            let request = HealthActivityDashboardRequest(aggregationFunction: .sum, intervalFunction: .hour, startDate: lowerBound, endDate: upperBound)
+            let request = HealthActivityDashboardRequest(aggregationFunction: .sum, intervalFunction: .hour, startDate: lowerBound, endDate: upperBound, patientID: patientID)
             return (AtheloAPI.Health.activityDashboard(request: request) as AnyPublisher<ActivityRecordContainerData, APIError>)
                 .handleEvents(receiveOutput: { [weak self] value in
-                    self?.handleHourlyAggregatedRecords(value.toDashboardItems(), between: lowerBound, and: upperBound)
+                    self?.handleHourlyAggregatedRecords(value.toDashboardItems(), between: lowerBound, and: upperBound, for: currentUserRole)
                 })
                 .eraseTypes()
         case .heartRate:
-            let request = HealthRecordsRequest(dataType: .heartRate, dates: dateRanges, pageSize: Constants.heartRecordPageSize)
+            let request = HealthRecordsRequest(dataType: .heartRate, dates: dateRanges, pageSize: Constants.heartRecordPageSize, patientID: patientID)
             return Publishers.NetworkingPublishers.ListRepeatingPublisher(initialRequest: Deferred { AtheloAPI.Health.records(request: request) as AnyPublisher<ListResponseData<HealthRecordData>, APIError> })
                 .handleEvents(receiveOutput: { [weak self] value in
-                    self?.handleHourlyHeartRateRecords(value, between: lowerBound, and: upperBound)
+                    self?.handleHourlyHeartRateRecords(value, between: lowerBound, and: upperBound, for: currentUserRole)
                 })
                 .eraseTypes()
         case .hrv:
-            let request = HealthDashboardRequest(dataType: .hrv, aggregationFunction: .avg, intervalFunction: .hour, dates: dateRanges)
+            let request = HealthDashboardRequest(dataType: .hrv, aggregationFunction: .avg, intervalFunction: .hour, dates: dateRanges, patientID: patientID)
             return (AtheloAPI.Health.dashboard(request: request) as AnyPublisher<[HealthHRVDashboardData], APIError>)
                 .handleEvents(receiveOutput: { [weak self] values in
-                    self?.handleHourlyHRVRecords(values, between: lowerBound, and: upperBound)
+                    self?.handleHourlyHRVRecords(values, between: lowerBound, and: upperBound, for: currentUserRole)
                 })
                 .eraseTypes()
         case .steps:
-            let request = HealthDashboardRequest(dataType: .steps, aggregationFunction: .sum, intervalFunction: .hour, dates: dateRanges)
+            let request = HealthDashboardRequest(dataType: .steps, aggregationFunction: .sum, intervalFunction: .hour, dates: dateRanges, patientID: patientID)
             return (AtheloAPI.Health.dashboard(request: request) as AnyPublisher<[HealthDashboardData], APIError>)
                 .handleEvents(receiveOutput: { [weak self] values in
-                    self?.handleHourlyAggregatedRecords(values, between: lowerBound, and: upperBound)
+                    self?.handleHourlyAggregatedRecords(values, between: lowerBound, and: upperBound, for: currentUserRole)
                 })
                 .eraseTypes()
         }
@@ -160,18 +185,29 @@ final class ActivitySummaryDataHandler {
             .upperBound(upperBound, canBeEqual: true)
         ]
         
-        let request = HealthDashboardRequest(dataType: .heartRate, aggregationFunction: .avg, intervalFunction: .hour, dates: dateRanges)
+        let currentUserRole = activeRole
+        let patientID = currentUserRole.relatedPatientID
+        
+        let request = HealthDashboardRequest(dataType: .heartRate, aggregationFunction: .avg, intervalFunction: .hour, dates: dateRanges, patientID: patientID)
         return (AtheloAPI.Health.dashboard(request: request) as AnyPublisher<[HealthDashboardData], APIError>)
             .handleEvents(receiveOutput: { [weak self] values in
-                self?.handleWeeklyHeartRateRecords(values, between: lowerBound, and: upperBound)
+                self?.handleWeeklyHeartRateRecords(values, between: lowerBound, and: upperBound, for: currentUserRole)
             })
             .map({ _ in () })
             .mapError({ $0 as Error })
             .eraseToAnyPublisher()
     }
     
+    func hasAnyData(for role: ActiveUserRole) -> Bool {
+        guard let aggregateData = aggregateData[role] else {
+            return false
+        }
+        
+        return !aggregateData.isEmpty
+    }
+    
     func heartRateWeeklyAggregateData(atDay date: Date) -> [ActivityDataPoint]? {
-        weeklyHeartRateAggregates[day: date]
+        weeklyHeartRateAggregateData(for: activeRole, at: date)
     }
     
     func heartRateWeeklyAggregateData(fromDay lowerBound: Date, to upperBound: Date) -> AggregateDataResult {
@@ -191,44 +227,72 @@ final class ActivitySummaryDataHandler {
         return .success(items)
     }
     
+    // MARK: - Data access
+    private func aggregateData(for userRole: ActiveUserRole, atDay date: Date) -> [ActivityDataPoint]? {
+        roleAggregateData(for: userRole).dailyAggregates[day: date]
+    }
+    
+    private func aggregateData(for userRole: ActiveUserRole, atHour date: Date) -> [ActivityDataPoint]? {
+        roleAggregateData(for: userRole).hourlyAggregates[hour: date]
+    }
+    
+    private func roleAggregateData(for userRole: ActiveUserRole) -> AggregateData {
+        if let existingAggregateData = aggregateData[userRole] {
+            return existingAggregateData
+        }
+        
+        let targetAggregateData = AggregateData(userRole: userRole)
+        
+        aggregateData[userRole] = targetAggregateData
+        return targetAggregateData
+    }
+    
+    private func weeklyHeartRateAggregateData(for userRole: ActiveUserRole, at date: Date) -> [ActivityDataPoint]? {
+        roleAggregateData(for: userRole).weeklyHeartRateAggregates[day: date]
+    }
+    
     // MARK: - Updates
-    private func fillEmptyDailyEntries<S: Sequence>(between lowerBound: Date, and upperBound: Date, knownItems: S) where S.Element == Date {
+    private func fillEmptyDailyEntries<S: Sequence>(between lowerBound: Date, and upperBound: Date, knownItems: S, for userRole: ActiveUserRole) where S.Element == Date {
         let expectedEntries = lowerBound.values(to: upperBound, granularity: .day)
         let emptyEntries = Set(expectedEntries).subtracting(Set(knownItems))
         
+        let aggregateData = roleAggregateData(for: userRole)
         for emptyEntry in emptyEntries {
-            dailyAggregates[day: emptyEntry] = [.empty(at: emptyEntry)]
+            aggregateData.dailyAggregates[day: emptyEntry] = [.empty(at: emptyEntry)]
         }
     }
     
-    private func fillEmptyWeeklyHeartRateEntries<S: Sequence>(between lowerBound: Date, and upperBound: Date, knownItems: S) where S.Element == Date {
+    private func fillEmptyWeeklyHeartRateEntries<S: Sequence>(between lowerBound: Date, and upperBound: Date, knownItems: S, for userRole: ActiveUserRole) where S.Element == Date {
         let expectedEntries = lowerBound.values(to: upperBound, granularity: .day)
         let emptyEntries = Set(expectedEntries).subtracting(Set(knownItems))
         
+        let aggregateData = roleAggregateData(for: userRole)
         for emptyEntry in emptyEntries {
-            weeklyHeartRateAggregates[day: emptyEntry] = [.empty(at: emptyEntry)]
+            aggregateData.weeklyHeartRateAggregates[day: emptyEntry] = [.empty(at: emptyEntry)]
         }
     }
     
-    private func fillEmptyHourlyEntries<S: Sequence>(between lowerBound: Date, and upperBound: Date, knownItems: S) where S.Element == Date {
+    private func fillEmptyHourlyEntries<S: Sequence>(between lowerBound: Date, and upperBound: Date, knownItems: S, for userRole: ActiveUserRole) where S.Element == Date {
         let expectedEntries = lowerBound.values(to: upperBound, granularity: .hour)
         let emptyEntries = Set(expectedEntries).subtracting(Set(knownItems))
         
+        let aggregateData = roleAggregateData(for: userRole)
         for emptyEntry in emptyEntries {
-            hourlyAggregates[hour: emptyEntry] = [.empty(at: emptyEntry)]
+            aggregateData.hourlyAggregates[hour: emptyEntry] = [.empty(at: emptyEntry)]
         }
     }
     
-    private func handleDailyAggregatedRecords(_ records: [HealthDashboardData], between lowerBound: Date, and upperBound: Date) {
+    private func handleDailyAggregatedRecords(_ records: [HealthDashboardData], between lowerBound: Date, and upperBound: Date, for userRole: ActiveUserRole) {
+        let aggregateData = roleAggregateData(for: userRole)
         for record in records.map({ SummaryDataPoint(healthDashboardData: $0) }) {
-            dailyAggregates[day: record.date] = [record]
+            aggregateData.dailyAggregates[day: record.date] = [record]
         }
         
         let recordedEntries = Set(records.map({ $0.date.dateAt(.startOfDay).date }) )
-        fillEmptyDailyEntries(between: lowerBound, and: upperBound, knownItems: recordedEntries)
+        fillEmptyDailyEntries(between: lowerBound, and: upperBound, knownItems: recordedEntries, for: userRole)
     }
     
-    private func handleDailyHeartRateRecords(_ records: [HealthDashboardData], between lowerBound: Date, and upperBound: Date) {
+    private func handleDailyHeartRateRecords(_ records: [HealthDashboardData], between lowerBound: Date, and upperBound: Date, for userRole: ActiveUserRole) {
         var aggregatedValues: [Date: [ActivityDataPoint]] = [:]
         for record in records {
             let referenceDate = record.date.dateAtStartOf(.day).date
@@ -239,32 +303,35 @@ final class ActivitySummaryDataHandler {
             aggregatedValues[referenceDate]?.append(.init(healthDashboardData: record))
         }
         
+        let aggregateData = roleAggregateData(for: userRole)
         for grouping in aggregatedValues {
-            dailyAggregates[day: grouping.key] = grouping.value
+            aggregateData.dailyAggregates[day: grouping.key] = grouping.value
         }
         
-        fillEmptyDailyEntries(between: lowerBound, and: upperBound, knownItems: aggregatedValues.keys)
+        fillEmptyDailyEntries(between: lowerBound, and: upperBound, knownItems: aggregatedValues.keys, for: userRole)
     }
     
-    private func handleDailyHRVRecords(_ records: [HealthHRVDashboardData], between lowerBound: Date, and upperBound: Date) {
+    private func handleDailyHRVRecords(_ records: [HealthHRVDashboardData], between lowerBound: Date, and upperBound: Date, for userRole: ActiveUserRole) {
+        let aggregateData = roleAggregateData(for: userRole)
         for record in records.map({ SummaryDataPoint(healthHRVDashboardData: $0) }) {
-            dailyAggregates[day: record.date] = [record]
+            aggregateData.dailyAggregates[day: record.date] = [record]
         }
         
         let recordedEntries = Set(records.map({ $0.date.dateAt(.startOfDay).date }))
-        fillEmptyDailyEntries(between: lowerBound, and: upperBound, knownItems: recordedEntries)
+        fillEmptyDailyEntries(between: lowerBound, and: upperBound, knownItems: recordedEntries, for: activeRole)
     }
     
-    private func handleHourlyAggregatedRecords(_ records: [HealthDashboardData], between lowerBound: Date, and upperBound: Date) {
+    private func handleHourlyAggregatedRecords(_ records: [HealthDashboardData], between lowerBound: Date, and upperBound: Date, for userRole: ActiveUserRole) {
+        let aggregateData = roleAggregateData(for: userRole)
         for record in records.map({ SummaryDataPoint(healthDashboardData: $0) }) {
-            hourlyAggregates[hour: record.date] = [record]
+            aggregateData.hourlyAggregates[hour: record.date] = [record]
         }
         
         let recordedEntries = Set(records.map({ $0.date.dateAtStartOf(.hour).date }) )
-        fillEmptyHourlyEntries(between: lowerBound, and: upperBound, knownItems: recordedEntries)
+        fillEmptyHourlyEntries(between: lowerBound, and: upperBound, knownItems: recordedEntries, for: activeRole)
     }
     
-    private func handleHourlyHeartRateRecords(_ records: [HealthRecordData], between lowerBound: Date, and upperBound: Date) {
+    private func handleHourlyHeartRateRecords(_ records: [HealthRecordData], between lowerBound: Date, and upperBound: Date, for userRole: ActiveUserRole) {
         var aggregatedValues: [Date: [ActivityDataPoint]] = [:]
         for record in records {
             let referenceDate = record.recordDate.dateAtStartOf(.hour).date
@@ -275,23 +342,25 @@ final class ActivitySummaryDataHandler {
             aggregatedValues[referenceDate]?.append(.init(healthRecordData: record))
         }
         
+        let aggregateData = roleAggregateData(for: userRole)
         for grouping in aggregatedValues {
-            hourlyAggregates[hour: grouping.key] = grouping.value
+            aggregateData.hourlyAggregates[hour: grouping.key] = grouping.value
         }
         
-        fillEmptyHourlyEntries(between: lowerBound, and: upperBound, knownItems: aggregatedValues.keys)
+        fillEmptyHourlyEntries(between: lowerBound, and: upperBound, knownItems: aggregatedValues.keys, for: activeRole)
     }
     
-    private func handleHourlyHRVRecords(_ records: [HealthHRVDashboardData], between lowerBound: Date, and upperBound: Date) {
+    private func handleHourlyHRVRecords(_ records: [HealthHRVDashboardData], between lowerBound: Date, and upperBound: Date, for userRole: ActiveUserRole) {
+        let aggregateData = roleAggregateData(for: userRole)
         for record in records.map({ SummaryDataPoint(healthHRVDashboardData: $0) }) {
-            hourlyAggregates[hour: record.date] = [record]
+            aggregateData.hourlyAggregates[hour: record.date] = [record]
         }
         
         let recordedEntries = Set(records.map({ $0.date.dateAtStartOf(.hour).date }))
-        fillEmptyHourlyEntries(between: lowerBound, and: upperBound, knownItems: recordedEntries)
+        fillEmptyHourlyEntries(between: lowerBound, and: upperBound, knownItems: recordedEntries, for: activeRole)
     }
     
-    private func handleWeeklyHeartRateRecords(_ records: [HealthDashboardData], between lowerBound: Date, and upperBound: Date) {
+    private func handleWeeklyHeartRateRecords(_ records: [HealthDashboardData], between lowerBound: Date, and upperBound: Date, for userRole: ActiveUserRole) {
         var aggregatedValues: [Date: [ActivityDataPoint]] = [:]
         for record in records {
             let referenceDate = record.date.dateAt(.startOfDay).date
@@ -302,11 +371,12 @@ final class ActivitySummaryDataHandler {
             aggregatedValues[referenceDate]?.append(.init(healthDashboardData: record))
         }
         
+        let aggregateData = roleAggregateData(for: userRole)
         for grouping in aggregatedValues {
-            weeklyHeartRateAggregates[day: grouping.key] = grouping.value
+            aggregateData.weeklyHeartRateAggregates[day: grouping.key] = grouping.value
         }
         
-        fillEmptyWeeklyHeartRateEntries(between: lowerBound, and: upperBound, knownItems: aggregatedValues.keys)
+        fillEmptyWeeklyHeartRateEntries(between: lowerBound, and: upperBound, knownItems: aggregatedValues.keys, for: userRole)
     }
 }
 

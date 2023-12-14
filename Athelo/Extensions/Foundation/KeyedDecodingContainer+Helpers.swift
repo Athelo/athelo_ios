@@ -28,8 +28,12 @@ extension KeyedDecodingContainer {
     }
     
     func decodeDate(forKey key: Self.Key, format: String) throws -> Date {
+        return try decodeDate(forKey: key, format: format, region: .ISO)
+    }
+    
+    func decodeDate(forKey key: Self.Key, format: String, region: Region) throws -> Date {
         let dateString: String = try decodeValue(forKey: key)
-        guard let date = Date(dateString, format: format, region: .ISO) else {
+        guard let date = Date(dateString, format: format, region: region) else {
             throw DecodingError.dataCorruptedError(forKey: key, in: self, debugDescription: "Invalid date format of \(format) for value \(dateString).")
         }
         
@@ -37,11 +41,15 @@ extension KeyedDecodingContainer {
     }
     
     func decodeDateIfPresent(for key: Self.Key, format: String) throws -> Date? {
+        return try decodeDateIfPresent(for: key, format: format, region: .ISO)
+    }
+    
+    func decodeDateIfPresent(for key: Self.Key, format: String, region: Region) throws -> Date? {
         guard let dateString: String = try decodeValueIfPresent(forKey: key) else {
             return nil
         }
         
-        return Date(dateString, format: format, region: .ISO)
+        return Date(dateString, format: format, region: region)
     }
     
     func decodeISODate(for key: Self.Key) throws -> Date{

@@ -109,9 +109,13 @@ final class RegisterSymptomsViewController: BaseViewController {
         }
         
         sliderFeelings.assignConfigurationData(.init(minValue: 1, maxValue: 100, initialValue: 1, stepped: true, steps: [
-            .init(font: .withStyle(.emoji), text: "😊"),
-            .init(font: .withStyle(.emoji), text: "🤕"),
-            .init(font: .withStyle(.emoji), text: "😓")
+            .init(font: .withStyle(.slider), text: "1"),
+            .init(font: .withStyle(.slider), text: "2"),
+            .init(font: .withStyle(.slider), text: "3"),
+            .init(font: .withStyle(.slider), text: "4"),
+            .init(font: .withStyle(.slider), text: "5"),
+            .init(font: .withStyle(.slider), text: "6"),
+            .init(font: .withStyle(.slider), text: "7")
         ]))
     }
     
@@ -124,11 +128,11 @@ final class RegisterSymptomsViewController: BaseViewController {
     }
     
     private func configureSelectedDateLabel() {
-        labelSelectedDate.text = viewModel.referenceDate.toFormat("MMMM dd, yyyy")
+        labelSelectedDate.text = viewModel.referenceDate.in(region: .local).toFormat("MMMM dd, yyyy")
     }
     
     private func configureSelectedWeekdayLabel() {
-        labelSelectedWeekday.text = viewModel.referenceDate.toFormat("EEEE")
+        labelSelectedWeekday.text = viewModel.referenceDate.in(region: .local).toFormat("EEEE")
     }
     
     private func configureSymptomFormTextField() {
@@ -186,8 +190,8 @@ final class RegisterSymptomsViewController: BaseViewController {
             .store(in: &cancellables)
         
         viewModel.activeItemPublisher
-            .compactMap({ $0?.feeling?.feeling ?? .good })
-            .map({ $0.displayableValue() })
+            .compactMap({ $0?.feeling?.generalFeeling })
+            .map({ Float($0) })
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.sliderFeelings.setSliderValue($0)
@@ -236,11 +240,13 @@ final class RegisterSymptomsViewController: BaseViewController {
                 }
                 
                 self?.symptomsDataSource.apply($0, animatingDifferences: false, completion: {
-                    let contentHeight = self?.symptomsLayout.collectionViewContentSize.height ?? 0.0
-                    if self?.constraintSymptomsCollectionViewHeight.constant != contentHeight {
-                        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.beginFromCurrentState]) {
-                            self?.constraintSymptomsCollectionViewHeight.constant = contentHeight
-                            self?.view.layoutIfNeeded()
+                    DispatchQueue.main.async {
+                        let contentHeight = max(1.0, self?.symptomsLayout.collectionViewContentSize.height ?? 0.0)
+                        if self?.constraintSymptomsCollectionViewHeight.constant != contentHeight {
+                            UIView.animate(withDuration: 0.2, delay: 0.0, options: [.beginFromCurrentState]) {
+                                self?.constraintSymptomsCollectionViewHeight.constant = contentHeight
+                                self?.view.layoutIfNeeded()
+                            }
                         }
                     }
                 })

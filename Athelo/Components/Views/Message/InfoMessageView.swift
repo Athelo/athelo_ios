@@ -26,6 +26,7 @@ final class InfoMessageView: UIView {
     @IBOutlet private weak var imageViewDecoration: UIImageView!
     @IBOutlet private weak var labelMessage: UILabel!
     @IBOutlet private weak var viewContainer: UIView!
+    @IBOutlet private weak var viewOverlay: UIView!
     
     // MARK: - Properties
     var dismissButtonTapPublisher: AnyPublisher<Void, Never> {
@@ -54,6 +55,11 @@ final class InfoMessageView: UIView {
     func displayMessage(_ message: String, type: InfoMessageData.MessageType) {
         labelMessage.textColor = type.textColor
         labelMessage.text = message
+        
+        viewOverlay.backgroundColor = type.backgroundColor
+        
+        buttonDismiss.tintColor = type.textColor
+        buttonDismiss.setImage(UIImage(named: "close")?.withRenderingMode(.alwaysTemplate), for: .normal)
     }
     
     // MARK: - Configuration
@@ -90,14 +96,23 @@ final class InfoMessageView: UIView {
 
 // MARK: - Helper extensions
 private extension InfoMessageData.MessageType {
-    var textColor: UIColor {
-        switch self{
+    var backgroundColor: UIColor {
+        switch self {
         case .error:
-            return .withStyle(.redFF0000)
+            return .withStyle(.redFF4D4D)
+        case .success:
+            return .withStyle(.green8FCC25)
+        case .plain:
+            return .clear
+        }
+    }
+    
+    var textColor: UIColor {
+        switch self {
+        case .error, .success:
+            return .withStyle(.white)
         case .plain:
             return .withStyle(.gray)
-        case .success:
-            return .withStyle(.lightOlivaceous)
         }
     }
 }
