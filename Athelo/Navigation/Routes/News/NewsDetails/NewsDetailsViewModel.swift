@@ -12,6 +12,8 @@ final class NewsDetailsViewModel: BaseViewModel {
     // MARK: - Properties
     @Published private(set) var newsData: NewsData?
     
+    @Published private(set) var contentfulNewsData: ContentfulNewsData?
+    
     private var originalFavoriteState: Bool?
     var shouldSendFavoriteUpdateEvent: Bool {
         guard let newsData = newsData,
@@ -48,6 +50,17 @@ final class NewsDetailsViewModel: BaseViewModel {
                     self?.newsData = value
                     self?.originalFavoriteState = value.isFavourite
                 }.store(in: &cancellables)
+        }
+    }
+    
+    func assignConfigurationData(_ configurationData: ModelConfigurationData<ContentfulNewsData>) {
+        switch configurationData {
+        case .data(let data):
+            self.contentfulNewsData = data
+//            self.originalFavoriteState = data.isFavourite
+        case .id(let id):
+            state.send(.loading)
+            // TODO: Call contentful with ID
         }
     }
     

@@ -39,8 +39,10 @@ protocol Navigable {
 
 protocol Configurable {
     associatedtype ConfigurationDataType
+    associatedtype ConfigurationDataTypeSecondary
 
     func assignConfigurationData(_ configurationData: ConfigurationDataType)
+    func assignConfigurationData(_ configurationData: ConfigurationDataTypeSecondary)
 }
 
 extension UIViewController {
@@ -72,6 +74,15 @@ extension Navigable where Self: UIViewController {
         let viewController = viewControllerInstance()
 
         viewController.assignConfigurationData(configurationData)
+        viewController.assignRouter(router)
+
+        return viewController
+    }
+    
+    static func viewController(secondaryConfigurationData: Self.ConfigurationDataTypeSecondary, router: Self.RouterType) -> Self where Self: Configurable & Routable {
+        let viewController = viewControllerInstance()
+
+        viewController.assignConfigurationData(secondaryConfigurationData)
         viewController.assignRouter(router)
 
         return viewController

@@ -11,7 +11,8 @@ import UIKit
 
 final class NewsListViewController: KeyboardListeningViewController {
     // MARK: - Outlets
-    @IBOutlet private weak var collectionViewNews: UICollectionView!
+    @IBOutlet private weak var tableView: UITableView!
+    // @IBOutlet private weak var collectionViewNews: UICollectionView!
     @IBOutlet private weak var noContentView: NoContentView!
     @IBOutlet private weak var segementedPickerFavorites: SegmentedPickerView!
     @IBOutlet private weak var textFieldSearch: UITextField!
@@ -26,8 +27,8 @@ final class NewsListViewController: KeyboardListeningViewController {
     private let viewModel = NewsListViewModel()
     private var router: NewsListRouter?
     
-    private lazy var newsDataSource = createNewsCollectionViewDataSource()
-    private lazy var newsLayout = createNewsCollectionViewLayout()
+//    private lazy var newsDataSource = createNewsCollectionViewDataSource()
+//    private lazy var newsLayout = createNewsCollectionViewLayout()
     
     private var cancellables: [AnyCancellable] = []
     
@@ -37,6 +38,27 @@ final class NewsListViewController: KeyboardListeningViewController {
         
         configure()
         sink()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let contentful = ContentfulService()
+        contentful.getAllNews(completionBlock: { result in
+            print(result)
+            switch result {
+            case .success(let entriesArrayResponse):
+                print(entriesArrayResponse)
+            case .failure(let error):
+              print("Oh no something went wrong: \(error)")
+            }
+        })
+        viewModel.didReceiveNews = self.didReceiveContentfulNews
+        viewModel.getNews()
+    }
+    
+    private func didReceiveContentfulNews(ContentfulNewsData: [ContentfulNewsData]) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Configuration
@@ -52,16 +74,25 @@ final class NewsListViewController: KeyboardListeningViewController {
     }
     
     private func configureNewsCollectionView() {
-        collectionViewNews.register(ArticleCollectionViewCell.self)
+//        collectionViewNews.register(ArticleCollectionViewCell.self)
         
-        collectionViewNews.collectionViewLayout = createNewsCollectionViewLayout()
-        collectionViewNews.dataSource = createNewsCollectionViewDataSource()
-        collectionViewNews.delegate = self
+//        collectionViewNews.collectionViewLayout = createNewsCollectionViewLayout()
+//        collectionViewNews.dataSource = createNewsCollectionViewDataSource()
+//        collectionViewNews.delegate = self
+        
+        self.tableView.register(UINib.init(nibName: "NewsListItemTableViewCell", bundle: nil), forCellReuseIdentifier: "newsItem")
+
+
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = .withStyle(.purple988098)
         
-        collectionViewNews.refreshControl = refreshControl
+        tableView.refreshControl = refreshControl
+        
+//        collectionViewNews.refreshControl = refreshControl
     }
     
     private func configureNoContentView() {
@@ -85,9 +116,14 @@ final class NewsListViewController: KeyboardListeningViewController {
     
     private func sinkIntoFavoritesSegmentedPicker() {
         segementedPickerFavorites.selectedItemPublisher
-            .compactMap({ NewsListViewModel.Filter(rawValue: $0) })
-            .sink(receiveValue: viewModel.switchFilter(to:))
-            .store(in: &cancellables)
+        .compactMap({ NewsListViewModel.Filter(rawValue: $0) })
+        .sink(receiveValue: viewModel.filterFavourite(to:))
+        .store(in: &cancellables)
+        tableView.reloadData()
+//        segementedPickerFavorites.selectedItemPublisher
+//            .compactMap({ NewsListViewModel.Filter(rawValue: $0) })
+//            .sink(receiveValue: viewModel.switchFilter(to:))
+//            .store(in: &cancellables)
     }
     
     private func sinkIntoKeyboardChanges() {
@@ -101,14 +137,22 @@ final class NewsListViewController: KeyboardListeningViewController {
     }
     
     private func sinkIntoNewsCollectionView() {
-        collectionViewNews.refreshControl?.controlEventPublisher(for: .valueChanged)
+        tableView.refreshControl?.controlEventPublisher(for: .valueChanged)
             .sinkDiscardingValue { [weak self] in
                 if self?.viewModel.state.value == .loading {
-                    self?.collectionViewNews.refreshControl?.endRefreshing()
+                    self?.tableView?.refreshControl?.endRefreshing()
                 } else {
                     self?.viewModel.refresh()
                 }
             }.store(in: &cancellables)
+//        collectionViewNews.refreshControl?.controlEventPublisher(for: .valueChanged)
+//            .sinkDiscardingValue { [weak self] in
+//                if self?.viewModel.state.value == .loading {
+//                    self?.collectionViewNews.refreshControl?.endRefreshing()
+//                } else {
+//                    self?.viewModel.refresh()
+//                }
+//            }.store(in: &cancellables)
     }
     
     private func sinkIntoSearchTextField() {
@@ -135,7 +179,7 @@ final class NewsListViewController: KeyboardListeningViewController {
             .compactMap({ $0 })
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.newsDataSource.apply($0)
+//                self?.newsDataSource.apply($0)
             }.store(in: &cancellables)
         
         viewModel.state
@@ -143,7 +187,8 @@ final class NewsListViewController: KeyboardListeningViewController {
             .sink { [weak self] in
                 switch $0 {
                 case .error, .loaded:
-                    self?.collectionViewNews.refreshControl?.endRefreshing()
+                    self?.tableView?.refreshControl?.endRefreshing()
+//                    self?.collectionViewNews.refreshControl?.endRefreshing()
                 case .loading, .initial:
                     break
                 }
@@ -179,45 +224,45 @@ final class NewsListViewController: KeyboardListeningViewController {
         self.filtersView = filtersView
     }
     
-    private func createNewsCollectionViewDataSource() -> UICollectionViewDiffableDataSource<NewsListViewModel.SectionIdentifier, NewsListViewModel.ItemIdentifier> {
-        let dataSource = UICollectionViewDiffableDataSource<NewsListViewModel.SectionIdentifier, NewsListViewModel.ItemIdentifier>(collectionView: collectionViewNews) { [weak self] collectionView, indexPath, itemIdentifier in
-            switch itemIdentifier {
-            case .newsItem:
-                let cell = collectionView.dequeueReusableCell(withClass: ArticleCollectionViewCell.self, for: indexPath)
-                
-                if let decorationData = self?.viewModel.decorationItem(for: itemIdentifier) ?? self?.viewModel.decorationItem(at: indexPath) {
-                    cell.configure(decorationData, indexPath: indexPath)
-                }
-                
-                return cell
-            }
-        }
-        
-        return dataSource
-    }
-    
-    private func createNewsCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { _, _ in
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(136.0))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1.0))
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-            
-            let section = NSCollectionLayoutSection(group: group)
-            section.interGroupSpacing = 24.0
-            section.contentInsets = .init(top: 40.0, leading: 16.0, bottom: 24.0, trailing: 16.0)
-            
-            return section
-        }
-        
-        let configuration = UICollectionViewCompositionalLayoutConfiguration()
-        configuration.scrollDirection = .vertical
-        
-        layout.configuration = configuration
-        
-        return layout
-    }
+//    private func createNewsCollectionViewDataSource() -> UICollectionViewDiffableDataSource<NewsListViewModel.SectionIdentifier, NewsListViewModel.ItemIdentifier> {
+//        let dataSource = UICollectionViewDiffableDataSource<NewsListViewModel.SectionIdentifier, NewsListViewModel.ItemIdentifier>(collectionView: collectionViewNews) { [weak self] collectionView, indexPath, itemIdentifier in
+//            switch itemIdentifier {
+//            case .newsItem:
+//                let cell = collectionView.dequeueReusableCell(withClass: ArticleCollectionViewCell.self, for: indexPath)
+//                
+//                if let decorationData = self?.viewModel.decorationItem(for: itemIdentifier) ?? self?.viewModel.decorationItem(at: indexPath) {
+//                    cell.configure(decorationData, indexPath: indexPath)
+//                }
+//                
+//                return cell
+//            }
+//        }
+//        
+//        return dataSource
+//    }
+//    
+//    private func createNewsCollectionViewLayout() -> UICollectionViewCompositionalLayout {
+//        let layout = UICollectionViewCompositionalLayout { _, _ in
+//            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(136.0))
+//            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//            
+//            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1.0))
+//            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+//            
+//            let section = NSCollectionLayoutSection(group: group)
+//            section.interGroupSpacing = 24.0
+//            section.contentInsets = .init(top: 40.0, leading: 16.0, bottom: 24.0, trailing: 16.0)
+//            
+//            return section
+//        }
+//        
+//        let configuration = UICollectionViewCompositionalLayoutConfiguration()
+//        configuration.scrollDirection = .vertical
+//        
+//        layout.configuration = configuration
+//        
+//        return layout
+//    }
     
     private func displayFiltersView() {
         createFiltersView()
@@ -289,12 +334,42 @@ extension NewsListViewController: Routable {
 }
 
 // MARK: UICollectionViewDelegate
-extension NewsListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let item = viewModel.item(at: indexPath) else {
+//extension NewsListViewController: UICollectionViewDelegate {
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        guard let item = viewModel.item(at: indexPath) else {
+//            return
+//        }
+//        
+//        router?.navigateToNewsDetails(using: .data(item))
+//    }
+//}
+
+extension NewsListViewController: UITableViewDelegate {
+    
+}
+
+
+extension NewsListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.newsList?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "newsItem") as? NewsListItemTableViewCell else {
+            return UITableViewCell()
+        }
+        if let newsItem = self.viewModel.newsList?[indexPath.row] {
+            cell.configureCell(contentfulData: newsItem)
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let newsItem = self.viewModel.newsList?[indexPath.row] else {
             return
         }
         
-        router?.navigateToNewsDetails(using: .data(item))
+        router?.navigateToNewsDetails(using: .data(newsItem))
     }
 }

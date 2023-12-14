@@ -8,6 +8,7 @@
 import Combine
 import SwiftDate
 import UIKit
+import RichTextRenderer
 
 final class NewsDetailsViewController: BaseViewController {
     // MARK: - Outlets
@@ -83,14 +84,96 @@ final class NewsDetailsViewController: BaseViewController {
         sinkIntoViewModel()
     }
     
+//    private func sinkIntoViewModel() {
+//        bindToViewModel(viewModel, cancellables: &cancellables)
+//        
+//        viewModel.$newsData
+//            .compactMap({ $0 })
+//            .receive(on: DispatchQueue.main)
+//            .map({ value -> URL? in
+//                value.photo?.fittingImageURL(forSizeInPixels: AppRouter.current.window.bounds.width)
+//            })
+//            .removeDuplicates()
+//            .sink { [weak self] in
+//                if let url = $0 {
+//                    self?.loadingViewPhoto.isHidden = false
+//                    self?.imageViewPhoto.isHidden = false
+//                    
+//                    self?.imageViewPhoto.sd_setImage(with: url, completed: { [weak self] image, _, _, _ in
+//                        self?.loadingViewPhoto.isHidden = true
+//                        self?.imageViewPhoto.isHidden = image == nil
+//                    })
+//                } else {
+//                    self?.loadingViewPhoto.isHidden = true
+//                    self?.imageViewPhoto.isHidden = true
+//                }
+//            }.store(in: &cancellables)
+//        
+//        viewModel.$newsData
+//            .compactMap({ $0 })
+//            .map({ $0.title })
+//            .removeDuplicates()
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] in
+//                self?.textViewTitle.text = $0
+//                
+//                if $0?.isEmpty == false {
+//                    self?.updateTitleTextViewMask()
+//                }
+//            }.store(in: &cancellables)
+//        
+//        viewModel.$newsData
+//            .compactMap({ $0 })
+//            .map({ $0.createdAt.toString(.custom("MMM dd, yyyy")) })
+//            .removeDuplicates()
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] in
+//                self?.labelDate.text = $0
+//                self?.updateTitleTextViewMask()
+//            }.store(in: &cancellables)
+//        
+//        viewModel.$newsData
+//            .compactMap({ $0 })
+//            .map({ $0.content })
+//            .removeDuplicates()
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] in
+//                self?.textViewBody.text = $0
+//                self?.textViewBody.isHidden = !(self?.textViewBody.text.isEmpty == false)
+//            }.store(in: &cancellables)
+//        
+//        viewModel.$newsData
+//            .map({ !($0?.contentURL != nil) })
+//            .removeDuplicates()
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] in
+//                self?.buttonArticle.isHidden = $0
+//                self?.viewButtonBackground.isHidden = $0
+//                
+//                self?.constraintStackViewContentBottom.constant = -(16.0 + ($0 ? 0.0 : ((self?.buttonArticle.frame.height ?? 0.0) + 16.0)))
+//            }.store(in: &cancellables)
+//        
+//        viewModel.$newsData
+//            .compactMap({ $0 })
+//            .map({ $0.isFavourite })
+//            .removeDuplicates()
+//            .map({ $0 ? "heartSolid" : "heart" })
+//            .receive(on: DispatchQueue.main)
+//            .map({ UIImage(named: $0) })
+//            .sink { [weak button = buttonFavorite] in
+//                button?.setImage($0, for: .normal)
+//            }.store(in: &cancellables)
+//    }
+    
     private func sinkIntoViewModel() {
         bindToViewModel(viewModel, cancellables: &cancellables)
         
-        viewModel.$newsData
+        viewModel.$contentfulNewsData
             .compactMap({ $0 })
             .receive(on: DispatchQueue.main)
             .map({ value -> URL? in
-                value.photo?.fittingImageURL(forSizeInPixels: AppRouter.current.window.bounds.width)
+                value.image?.url
+//                value.image?.fittingImageURL(forSizeInPixels: AppRouter.current.window.bounds.width)
             })
             .removeDuplicates()
             .sink { [weak self] in
@@ -108,7 +191,7 @@ final class NewsDetailsViewController: BaseViewController {
                 }
             }.store(in: &cancellables)
         
-        viewModel.$newsData
+        viewModel.$contentfulNewsData
             .compactMap({ $0 })
             .map({ $0.title })
             .removeDuplicates()
@@ -116,14 +199,14 @@ final class NewsDetailsViewController: BaseViewController {
             .sink { [weak self] in
                 self?.textViewTitle.text = $0
                 
-                if $0?.isEmpty == false {
+                if $0.isEmpty == false {
                     self?.updateTitleTextViewMask()
                 }
             }.store(in: &cancellables)
         
-        viewModel.$newsData
+        viewModel.$contentfulNewsData
             .compactMap({ $0 })
-            .map({ $0.createdAt.toString(.custom("MMM dd, yyyy")) })
+            .map({ $0.updatedAt!.toString(.custom("MMM dd, yyyy")) })
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
@@ -131,37 +214,43 @@ final class NewsDetailsViewController: BaseViewController {
                 self?.updateTitleTextViewMask()
             }.store(in: &cancellables)
         
-        viewModel.$newsData
+        viewModel.$contentfulNewsData
             .compactMap({ $0 })
-            .map({ $0.content })
+            .map({ $0.body })
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.textViewBody.text = $0
+                // Default configuration of the renderer.
+                var configuration = DefaultRendererConfiguration()
+                let renderer = RichTextDocumentRenderer(configuration: configuration)
+                
+                if let body = $0 {
+                    self?.textViewBody.attributedText = renderer.render(document: body)
+                }
                 self?.textViewBody.isHidden = !(self?.textViewBody.text.isEmpty == false)
             }.store(in: &cancellables)
         
-        viewModel.$newsData
-            .map({ !($0?.contentURL != nil) })
-            .removeDuplicates()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.buttonArticle.isHidden = $0
-                self?.viewButtonBackground.isHidden = $0
-                
-                self?.constraintStackViewContentBottom.constant = -(16.0 + ($0 ? 0.0 : ((self?.buttonArticle.frame.height ?? 0.0) + 16.0)))
-            }.store(in: &cancellables)
+//        viewModel.$contentfulNewsData
+//            .map({ !($0?.contentURL != nil) })
+//            .removeDuplicates()
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] in
+//                self?.buttonArticle.isHidden = $0
+//                self?.viewButtonBackground.isHidden = $0
+//                
+//                self?.constraintStackViewContentBottom.constant = -(16.0 + ($0 ? 0.0 : ((self?.buttonArticle.frame.height ?? 0.0) + 16.0)))
+//            }.store(in: &cancellables)
         
-        viewModel.$newsData
-            .compactMap({ $0 })
-            .map({ $0.isFavourite })
-            .removeDuplicates()
-            .map({ $0 ? "heartSolid" : "heart" })
-            .receive(on: DispatchQueue.main)
-            .map({ UIImage(named: $0) })
-            .sink { [weak button = buttonFavorite] in
-                button?.setImage($0, for: .normal)
-            }.store(in: &cancellables)
+//        viewModel.$contentfulNewsData
+//            .compactMap({ $0 })
+//            .map({ $0.isFavourite })
+//            .removeDuplicates()
+//            .map({ $0 ? "heartSolid" : "heart" })
+//            .receive(on: DispatchQueue.main)
+//            .map({ UIImage(named: $0) })
+//            .sink { [weak button = buttonFavorite] in
+//                button?.setImage($0, for: .normal)
+//            }.store(in: &cancellables)
     }
     
     // MARK: - Updates
@@ -205,9 +294,15 @@ final class NewsDetailsViewController: BaseViewController {
 // MARK: - Protocol conformance
 // MARK: Configurable
 extension NewsDetailsViewController: Configurable {
-    typealias ConfigurationDataType = ModelConfigurationData<NewsData>
+    typealias ConfigurationDataTypeSecondary = ModelConfigurationData<NewsData>
     
     func assignConfigurationData(_ configurationData: ModelConfigurationData<NewsData>) {
+        viewModel.assignConfigurationData(configurationData)
+    }
+    
+    typealias ConfigurationDataType = ModelConfigurationData<ContentfulNewsData>
+    
+    func assignConfigurationData(_ configurationData: ModelConfigurationData<ContentfulNewsData>) {
         viewModel.assignConfigurationData(configurationData)
     }
 }

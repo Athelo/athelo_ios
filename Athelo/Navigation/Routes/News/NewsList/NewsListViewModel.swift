@@ -38,8 +38,10 @@ final class NewsListViewModel: BaseViewModel {
             .eraseToAnyPublisher()
     }
     
-    @Published private(set) var itemSnapshot: NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>?
+    var didReceiveNews: (([ContentfulNewsData]) -> Void)? = nil
     
+    @Published private(set) var itemSnapshot: NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>?
+
     private var cachedFilters: [FilterData]?
     
     private let query = CurrentValueSubject<String?, Never>(nil)
@@ -139,6 +141,7 @@ final class NewsListViewModel: BaseViewModel {
         
         switch filter {
         case .allNews:
+            getNews()
             allNewsFetcher.refresh()
         case .favoriteNews:
             favoriteNewsFetcher.refresh()
@@ -152,6 +155,36 @@ final class NewsListViewModel: BaseViewModel {
         
         self.filterSubject.send(filter)
     }
+    
+    var newsList: Array<ContentfulNewsData>? = nil
+    
+    var allNewsList: Array<ContentfulNewsData>? = nil
+    
+    func getNews() {
+        let contentful = ContentfulService()
+        contentful.getAllNews(completionBlock: { [weak self] result in
+            print(result)
+            switch result {
+            case .success(let entriesArrayResponse):
+                print(entriesArrayResponse)
+                self?.newsList = entriesArrayResponse
+                self?.allNewsList = entriesArrayResponse
+                self?.didReceiveNews?(entriesArrayResponse)
+            case .failure(let error):
+              print("Oh no something went wrong: \(error)")
+            }
+        })
+    }
+    
+    func filterFavourite(to filter: Filter) {
+        guard allNewsList != nil else {return}
+//        newsList = Array(allNewsList![0...1])
+    }
+    
+    func getDecorationItem(at: IndexPath) -> ArticleCellDecorationData? {
+        self.newsList?[at.row]
+    }
+    
     
     // MARK: - Sinks
     private func sink() {

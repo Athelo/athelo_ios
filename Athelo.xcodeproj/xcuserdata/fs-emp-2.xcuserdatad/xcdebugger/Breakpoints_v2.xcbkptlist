@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "2FE4C1ED-9522-432C-BC27-222F80BEEC99"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "87F34B4D-837C-4228-93DB-9C6B8F015DF5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athelo/Networking/API/Definitions/ContentfulService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "getAllNews(completionBlock:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BBD073D9-C07F-4507-BD29-957FDDB86C88"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athelo/Networking/API/Definitions/ContentfulService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "getAllNews(completionBlock:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BBD073D9-C07F-4507-BD29-957FDDB86C88 - f12bd86e14576d8c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Athelo.ContentfulService.getAllNews(completionBlock: (Swift.Result&lt;Swift.Array&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Athelo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fs-emp-2/MobileProjects/Athelo-iOS-local/Athelo/Networking/API/Definitions/ContentfulService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "BBD073D9-C07F-4507-BD29-957FDDB86C88 - 1ab98279b15bb672"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Contentful.HomogeneousArrayResponse&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; () in Athelo.ContentfulService.getAllNews(completionBlock: (Swift.Result&lt;Swift.Array&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Athelo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fs-emp-2/MobileProjects/Athelo-iOS-local/Athelo/Networking/API/Definitions/ContentfulService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2BA0348A-494C-4C1F-9A17-084F00A4E18A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athelo/Networking/API/Definitions/ContentfulService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "getAllNews(completionBlock:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2BA0348A-494C-4C1F-9A17-084F00A4E18A - 1ab98279b15bb672"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Contentful.HomogeneousArrayResponse&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; () in Athelo.ContentfulService.getAllNews(completionBlock: (Swift.Result&lt;Swift.Array&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Athelo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fs-emp-2/MobileProjects/Athelo-iOS-local/Athelo/Networking/API/Definitions/ContentfulService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  uuid = "2BA0348A-494C-4C1F-9A17-084F00A4E18A - 1ab98279b15bb672"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Contentful.HomogeneousArrayResponse&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; () in Athelo.ContentfulService.getAllNews(completionBlock: (Swift.Result&lt;Swift.Array&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Athelo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fs-emp-2/MobileProjects/Athelo-iOS-local/Athelo/Networking/API/Definitions/ContentfulService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "2BA0348A-494C-4C1F-9A17-084F00A4E18A - 1ab98279b15bb672"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Contentful.HomogeneousArrayResponse&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; () in Athelo.ContentfulService.getAllNews(completionBlock: (Swift.Result&lt;Swift.Array&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Athelo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fs-emp-2/MobileProjects/Athelo-iOS-local/Athelo/Networking/API/Definitions/ContentfulService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "412">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE61199D-4187-4A13-A3CD-B8AB74548A61"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athelo/Networking/API/Definitions/ContentfulService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "getAllNews(completionBlock:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BE61199D-4187-4A13-A3CD-B8AB74548A61 - 1ab98279b15bb672"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Contentful.HomogeneousArrayResponse&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; () in Athelo.ContentfulService.getAllNews(completionBlock: (Swift.Result&lt;Swift.Array&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Athelo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fs-emp-2/MobileProjects/Athelo-iOS-local/Athelo/Networking/API/Definitions/ContentfulService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  uuid = "BE61199D-4187-4A13-A3CD-B8AB74548A61 - 1ab98279b15bb672"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Contentful.HomogeneousArrayResponse&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; () in Athelo.ContentfulService.getAllNews(completionBlock: (Swift.Result&lt;Swift.Array&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Athelo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fs-emp-2/MobileProjects/Athelo-iOS-local/Athelo/Networking/API/Definitions/ContentfulService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "BE61199D-4187-4A13-A3CD-B8AB74548A61 - 1ab98279b15bb672"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Contentful.HomogeneousArrayResponse&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; () in Athelo.ContentfulService.getAllNews(completionBlock: (Swift.Result&lt;Swift.Array&lt;Athelo.ContentfulNewsData&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Athelo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fs-emp-2/MobileProjects/Athelo-iOS-local/Athelo/Networking/API/Definitions/ContentfulService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "412">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A2BCE8B3-406D-48C8-8B8F-CC533E6D657C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athelo/Networking/API/Definitions/ContentfulService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "getAllNews(completionBlock:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6F8DF713-4A3F-44AD-9B96-397AE4F71D3F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athelo/Networking/API/Definitions/ContentfulService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "getAllNews(completionBlock:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

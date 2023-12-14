@@ -24,7 +24,7 @@ final class SleepRouter: Router, UserProfileRoutable {
         }
         
         let router = NewsDetailsRouter(navigationController: navigationController)
-        let viewController = NewsDetailsViewController.viewController(configurationData: configurationData, router: router)
+        let viewController = NewsDetailsViewController.viewController(secondaryConfigurationData: configurationData, router: router)
         
         navigationController.pushViewController(viewController, animated: true)
     }

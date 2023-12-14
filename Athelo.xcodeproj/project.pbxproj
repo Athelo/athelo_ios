@@ -691,6 +691,12 @@
 		3EFC0B4C2850BBB900841341 /* InfoMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC0B4B2850BBB900841341 /* InfoMessageView.xib */; };
 		3EFFCB3C288E8EA2000F066A /* FeelingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFFCB3A288E8EA2000F066A /* FeelingsCollectionViewCell.swift */; };
 		3EFFCB3D288E8EA2000F066A /* FeelingsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFFCB3B288E8EA2000F066A /* FeelingsCollectionViewCell.xib */; };
+		C0087EB52AEC26260035AD26 /* Contentful in Frameworks */ = {isa = PBXBuildFile; productRef = C0087EB42AEC26260035AD26 /* Contentful */; };
+		C0087EB72AEC280E0035AD26 /* ContentfulModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0087EB62AEC280E0035AD26 /* ContentfulModel.swift */; };
+		C067F9C22B058BC3009B7ED2 /* NewsListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C067F9C02B058BC3009B7ED2 /* NewsListItemTableViewCell.swift */; };
+		C067F9C32B058BC3009B7ED2 /* NewsListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C067F9C12B058BC3009B7ED2 /* NewsListItemTableViewCell.xib */; };
+		C067F9C62B05A8F6009B7ED2 /* ContentfulRichTextRenderer in Frameworks */ = {isa = PBXBuildFile; productRef = C067F9C52B05A8F6009B7ED2 /* ContentfulRichTextRenderer */; };
+		C0CEE1232AEC246800C3E530 /* ContentfulService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CEE1222AEC246800C3E530 /* ContentfulService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1374,6 +1380,10 @@
 		3EFC0B4B2850BBB900841341 /* InfoMessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoMessageView.xib; sourceTree = "<group>"; };
 		3EFFCB3A288E8EA2000F066A /* FeelingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3EFFCB3B288E8EA2000F066A /* FeelingsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeelingsCollectionViewCell.xib; sourceTree = "<group>"; };
+		C0087EB62AEC280E0035AD26 /* ContentfulModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentfulModel.swift; sourceTree = "<group>"; };
+		C067F9C02B058BC3009B7ED2 /* NewsListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListItemTableViewCell.swift; sourceTree = "<group>"; };
+		C067F9C12B058BC3009B7ED2 /* NewsListItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsListItemTableViewCell.xib; sourceTree = "<group>"; };
+		C0CEE1222AEC246800C3E530 /* ContentfulService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentfulService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1382,6 +1392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ED85AE02846190B0008EC11 /* SDWebImage in Frameworks */,
+				C067F9C62B05A8F6009B7ED2 /* ContentfulRichTextRenderer in Frameworks */,
 				3EF70959284F6B5D00B6FDB5 /* GoogleSignIn in Frameworks */,
 				3E32C67F2915421900C7064D /* (null) in Frameworks */,
 				3EE9FDD02844C68100BE4661 /* Collections in Frameworks */,
@@ -1389,6 +1400,7 @@
 				3EE9FDD42844C68100BE4661 /* OrderedCollections in Frameworks */,
 				3ED85AE3284619550008EC11 /* SwiftDate in Frameworks */,
 				3EC774642887E12D0022CB6F /* FirebaseCrashlytics in Frameworks */,
+				C0087EB52AEC26260035AD26 /* Contentful in Frameworks */,
 				3ED85ADD284618B50008EC11 /* CombineCocoa in Frameworks */,
 				3EC774662887E12D0022CB6F /* FirebaseMessaging in Frameworks */,
 				3EC774622887E12D0022CB6F /* FirebaseAppDistribution-Beta in Frameworks */,
@@ -3079,6 +3091,7 @@
 				3E8F201528DDA64500C327BE /* URLResponseData.swift */,
 				3E8F201628DDA64500C327BE /* IdentityTokenData.swift */,
 				3E8F201728DDA64500C327BE /* PingbackResponseData.swift */,
+				C0087EB62AEC280E0035AD26 /* ContentfulModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3097,6 +3110,7 @@
 				3E8F201E28DDA64500C327BE /* APIBuilder.swift */,
 				3E8F201F28DDA64500C327BE /* APIService.swift */,
 				3E8F202028DDA64500C327BE /* APIRequest.swift */,
+				C0CEE1222AEC246800C3E530 /* ContentfulService.swift */,
 			);
 			path = Definitions;
 			sourceTree = "<group>";
@@ -3259,6 +3273,7 @@
 		3EB21BA42872CD4800ACE602 /* NewsList */ = {
 			isa = PBXGroup;
 			children = (
+				C067F9BF2B058B9E009B7ED2 /* News cell */,
 				3EB21BA52872CD6400ACE602 /* NewsListViewController.swift */,
 				3EB21BA72872CD9000ACE602 /* NewsListViewModel.swift */,
 				3EB21BA92872CDA500ACE602 /* NewsListRouter.swift */,
@@ -4708,6 +4723,15 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
+		C067F9BF2B058B9E009B7ED2 /* News cell */ = {
+			isa = PBXGroup;
+			children = (
+				C067F9C02B058BC3009B7ED2 /* NewsListItemTableViewCell.swift */,
+				C067F9C12B058BC3009B7ED2 /* NewsListItemTableViewCell.xib */,
+			);
+			path = "News cell";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4737,6 +4761,8 @@
 				3EC774612887E12D0022CB6F /* FirebaseAppDistribution-Beta */,
 				3EC774632887E12D0022CB6F /* FirebaseCrashlytics */,
 				3EC774652887E12D0022CB6F /* FirebaseMessaging */,
+				C0087EB42AEC26260035AD26 /* Contentful */,
+				C067F9C52B05A8F6009B7ED2 /* ContentfulRichTextRenderer */,
 			);
 			productName = Athelo;
 			productReference = 3EE9FD862844A57600BE4661 /* Athelo.app */;
@@ -4773,6 +4799,8 @@
 				3ED85AE1284619550008EC11 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				3EF70957284F6B5D00B6FDB5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				3EC774602887E12D0022CB6F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C0087EB32AEC26260035AD26 /* XCRemoteSwiftPackageReference "contentful" */,
+				C067F9C42B05A8F6009B7ED2 /* XCRemoteSwiftPackageReference "rich-text-renderer.swift" */,
 			);
 			productRefGroup = 3EE9FD872844A57600BE4661 /* Products */;
 			projectDirPath = "";
@@ -4801,6 +4829,7 @@
 				3ECB51B728802FEE0044F3B7 /* CalendarDayCollectionViewCell.xib in Resources */,
 				3ECB51F4288056D10044F3B7 /* Inter-ExtraLightItalic.otf in Resources */,
 				3EFC0B472850AA2000841341 /* PageProgressView.xib in Resources */,
+				C067F9C32B058BC3009B7ED2 /* NewsListItemTableViewCell.xib in Resources */,
 				3EE9FD962844A57800BE4661 /* LaunchScreen.storyboard in Resources */,
 				3EE8FA62287327A800CE8762 /* LoadMoreCollectionViewCell.xib in Resources */,
 				3EE9FDB02844A85300BE4661 /* Inter-ExtraBold.ttf in Resources */,
@@ -4920,6 +4949,7 @@
 				3EE626392865B97B00DF06CD /* CommunitiesLandingViewController.swift in Sources */,
 				3ED0BFC028A242D100224561 /* ActivitySummaryModel.swift in Sources */,
 				3E8F202328DDA64500C327BE /* ChatUnreadCountMessage.swift in Sources */,
+				C0087EB72AEC280E0035AD26 /* ContentfulModel.swift in Sources */,
 				3E13419528465FAF007C1381 /* PreferencesStore.swift in Sources */,
 				3EC5189C2892C67E0012663C /* SleepStatsLegendItemView.swift in Sources */,
 				3ED0BFB428A239DC00224561 /* GraphLinePointData.swift in Sources */,
@@ -5116,6 +5146,7 @@
 				3E6BD0002885370000A1FC4D /* SymptomListView.swift in Sources */,
 				3ED215B22851E6F5003BB140 /* MenuOption.swift in Sources */,
 				3EC0793D288986B700CBEB54 /* LegalViewController.swift in Sources */,
+				C0CEE1232AEC246800C3E530 /* ContentfulService.swift in Sources */,
 				3ED18D2128475A840075ABAF /* IntroRouter.swift in Sources */,
 				3E8F206928DDA64500C327BE /* HealthUserSymptomsRequest.swift in Sources */,
 				3E6BD0122885453D00A1FC4D /* SymptomListRouter.swift in Sources */,
@@ -5160,6 +5191,7 @@
 				3EA880212864912C00E81741 /* FormTextView.swift in Sources */,
 				3E8F202928DDA64500C327BE /* ChatErrorMessage.swift in Sources */,
 				3E8F203028DDA64500C327BE /* String+ApplicationSuffix.swift in Sources */,
+				C067F9C22B058BC3009B7ED2 /* NewsListItemTableViewCell.swift in Sources */,
 				3EF7BC3D29CDB21200C253B2 /* SelectedWardView.swift in Sources */,
 				3ECCA78129D5BDED001DF5DF /* InvitationItemView.swift in Sources */,
 				3EDC9261286AFCB300A4443E /* BottomClippedGradientView.swift in Sources */,
@@ -5654,9 +5686,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = WHV365RSPM;
+				DEVELOPMENT_TEAM = 9CAGH464QT;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
@@ -5674,7 +5706,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.i2asolutions.athelo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -5693,9 +5725,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = WHV365RSPM;
+				DEVELOPMENT_TEAM = 9CAGH464QT;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
@@ -5713,7 +5745,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.athelohealth.mobile.stg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -5793,13 +5825,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9CAGH464QT;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
+				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (PROD)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -5813,7 +5845,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.athelohealth.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -5887,13 +5919,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9CAGH464QT;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
+				INFOPLIST_KEY_CFBundleDisplayName = Athelo;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -5907,7 +5939,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.athelohealth.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -5995,6 +6027,22 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		C0087EB32AEC26260035AD26 /* XCRemoteSwiftPackageReference "contentful" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/contentful/contentful.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		C067F9C42B05A8F6009B7ED2 /* XCRemoteSwiftPackageReference "rich-text-renderer.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/contentful/rich-text-renderer.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -6047,6 +6095,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3EF70957284F6B5D00B6FDB5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
+		};
+		C0087EB42AEC26260035AD26 /* Contentful */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0087EB32AEC26260035AD26 /* XCRemoteSwiftPackageReference "contentful" */;
+			productName = Contentful;
+		};
+		C067F9C52B05A8F6009B7ED2 /* ContentfulRichTextRenderer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C067F9C42B05A8F6009B7ED2 /* XCRemoteSwiftPackageReference "rich-text-renderer.swift" */;
+			productName = ContentfulRichTextRenderer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
