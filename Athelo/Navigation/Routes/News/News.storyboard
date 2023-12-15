@@ -161,7 +161,7 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="duc-ri-mwG">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="446"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="740"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ksf-JN-siX">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="261.5"/>
@@ -218,8 +218,15 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                             </textView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qvV-2Y-Jc1">
+                                                <rect key="frame" x="0.0" y="478" width="414" height="262"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="qvV-2Y-Jc1" secondAttribute="height" multiplier="375:237" id="EMp-b3-Gwo"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="qvV-2Y-Jc1" firstAttribute="width" secondItem="qvV-2Y-Jc1" secondAttribute="height" multiplier="375:237" id="CIn-Fn-3hz"/>
                                             <constraint firstItem="Ldg-Iu-U7Y" firstAttribute="width" secondItem="duc-ri-mwG" secondAttribute="width" constant="-32" id="K6b-ej-xKd"/>
                                             <constraint firstItem="Ksf-JN-siX" firstAttribute="width" secondItem="duc-ri-mwG" secondAttribute="width" id="Pjl-0x-Jtu"/>
                                         </constraints>
@@ -286,6 +293,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomImageView" destination="qvV-2Y-Jc1" id="yRa-rq-OZB"/>
                         <outlet property="buttonArticle" destination="74z-4h-NGp" id="TPG-GG-gkU"/>
                         <outlet property="constraintStackViewContentBottom" destination="CeL-zA-7DB" id="mav-GJ-9jK"/>
                         <outlet property="imageViewPhoto" destination="Ksf-JN-siX" id="AWP-Dl-Clk"/>

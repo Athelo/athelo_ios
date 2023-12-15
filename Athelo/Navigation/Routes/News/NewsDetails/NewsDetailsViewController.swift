@@ -22,7 +22,7 @@ final class NewsDetailsViewController: BaseViewController, UITextViewDelegate {
     @IBOutlet private weak var viewButtonBackground: UIView!
     @IBOutlet private weak var viewDateContainer: UIView!
     @IBOutlet private weak var viewHeaderContainer: UIView!
-    
+    @IBOutlet private weak var bottomImageView: UIImageView!
     private weak var buttonFavorite: UIButton?
     
     // MARK: - Constraints
@@ -104,9 +104,28 @@ final class NewsDetailsViewController: BaseViewController, UITextViewDelegate {
                         self?.loadingViewPhoto.isHidden = true
                         self?.imageViewPhoto.isHidden = image == nil
                     })
+                    
                 } else {
                     self?.loadingViewPhoto.isHidden = true
                     self?.imageViewPhoto.isHidden = true
+                }
+            }.store(in: &cancellables)
+        
+        
+        viewModel.$newsData
+            .compactMap({ $0?.contentfulData })
+            .receive(on: DispatchQueue.main)
+            .map({ value -> URL? in
+                value.bottomLogo?.url
+            })
+            .removeDuplicates()
+            .sink { [weak self] in
+                if let url = $0 {
+                    self?.bottomImageView.sd_setImage(with: url, completed: { [weak self] image, _, _, _ in
+                        self?.bottomImageView.isHidden = image == nil
+                    })
+                } else {
+                    self?.bottomImageView.isHidden = true
                 }
             }.store(in: &cancellables)
         
@@ -149,6 +168,7 @@ final class NewsDetailsViewController: BaseViewController, UITextViewDelegate {
                 self?.textViewBody.delegate = self
                 self?.textViewBody.isHidden = !(self?.textViewBody.text.isEmpty == false)
             }.store(in: &cancellables)
+//        self.viewButtonBackground.isHidden = true
         
 //        viewModel.$newsData
 //            .map({ !($0?.contentURL != nil) })

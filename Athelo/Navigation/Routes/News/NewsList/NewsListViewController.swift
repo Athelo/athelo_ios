@@ -304,6 +304,5 @@ extension NewsListViewController: UICollectionViewDelegate {
             present(SFSafariViewController(url: url, configuration: SFSafariViewController.Configuration()), animated: true)
             return
         }
-//        router?.navigateToNewsDetails(using: .data(item))
     }
 }
