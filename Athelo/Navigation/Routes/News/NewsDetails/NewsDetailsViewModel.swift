@@ -36,18 +36,18 @@ final class NewsDetailsViewModel: BaseViewModel {
         switch configurationData {
         case .data(let data):
             self.newsData = data
-            self.originalFavoriteState = data.isFavourite
-        case .id(let id):
-            state.send(.loading)
-            
-            let request = PostDetailsRequest(id: id)
-            (AtheloAPI.Posts.details(request: request) as AnyPublisher<NewsData, APIError>)
-                .sink { [weak self] result in
-                    self?.state.send(result.toViewModelState())
-                } receiveValue: { [weak self] value in
-                    self?.newsData = value
-                    self?.originalFavoriteState = value.isFavourite
-                }.store(in: &cancellables)
+//            self.originalFavoriteState = data.isFavourite
+        case .id(_): break
+//            state.send(.loading)
+//            
+//            let request = PostDetailsRequest(id: id)
+//            (AtheloAPI.Posts.details(request: request) as AnyPublisher<NewsData, APIError>)
+//                .sink { [weak self] result in
+//                    self?.state.send(result.toViewModelState())
+//                } receiveValue: { [weak self] value in
+//                    self?.newsData = value
+//                    self?.originalFavoriteState = value.isFavourite
+//                }.store(in: &cancellables)
         }
     }
     

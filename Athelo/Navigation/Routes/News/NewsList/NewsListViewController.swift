@@ -8,6 +8,7 @@
 import Combine
 import CombineCocoa
 import UIKit
+import SafariServices
 
 final class NewsListViewController: KeyboardListeningViewController {
     // MARK: - Outlets
@@ -291,10 +292,18 @@ extension NewsListViewController: Routable {
 // MARK: UICollectionViewDelegate
 extension NewsListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let item = viewModel.item(at: indexPath) else {
+        guard let item = viewModel.item(at: indexPath), let newsItem = item.contentfulData else {
             return
         }
         
-        router?.navigateToNewsDetails(using: .data(item))
+        guard newsItem.shouldOpenInBrowser, !newsItem.browserUrl.isEmpty else {
+            guard let url = URL(string: newsItem.browserUrl) else {
+                router?.navigateToNewsDetails(using: .data(item))
+                return
+            }
+            present(SFSafariViewController(url: url, configuration: SFSafariViewController.Configuration()), animated: true)
+            return
+        }
+//        router?.navigateToNewsDetails(using: .data(item))
     }
 }

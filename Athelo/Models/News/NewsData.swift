@@ -9,7 +9,6 @@ import Foundation
 
 struct NewsData: Decodable, Equatable, Identifiable, Hashable {
     let id: Int
-    
     let content: String?
     let contentURL: URL?
     let createdAt: Date
@@ -17,6 +16,7 @@ struct NewsData: Decodable, Equatable, Identifiable, Hashable {
     let title: String?
     let photo: ImageData?
     let updatedAt: Date?
+    let contentfulData: ContentfulNewsData?
     
     private enum CodingKeys: String, CodingKey {
         case id, content, title, photo
@@ -38,6 +38,23 @@ struct NewsData: Decodable, Equatable, Identifiable, Hashable {
         self.title = try container.decodeValueIfPresent(forKey: .title)
         self.photo = try container.decodeValueIfPresent(forKey: .photo)
         self.updatedAt = try container.decodeISODateIfPresent(for: .updatedAt)
+        self.contentfulData = nil
+    }
+    
+    init(abc data: ContentfulNewsData) {
+        self.id = 0
+        self.content = data.articleCellBody
+        self.contentURL = URL(string: data.browserUrl)
+        self.createdAt = data.createdAt ?? Date()
+        self.isFavourite = false
+        self.title = data.title
+        if let url = data.image?.url {
+            self.photo = ImageData(id: 0, image: url, image50px: nil, image100px: nil, image125px: nil, image250px: nil, image500px: nil, name: nil)
+        } else {
+            self.photo = nil
+        }
+        self.updatedAt = data.updatedAt
+        self.contentfulData = data
     }
 }
 

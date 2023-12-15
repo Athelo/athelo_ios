@@ -691,6 +691,9 @@
 		3EFC0B4C2850BBB900841341 /* InfoMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC0B4B2850BBB900841341 /* InfoMessageView.xib */; };
 		3EFFCB3C288E8EA2000F066A /* FeelingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFFCB3A288E8EA2000F066A /* FeelingsCollectionViewCell.swift */; };
 		3EFFCB3D288E8EA2000F066A /* FeelingsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFFCB3B288E8EA2000F066A /* FeelingsCollectionViewCell.xib */; };
+		C00495172B2BA142004F8804 /* Contentful in Frameworks */ = {isa = PBXBuildFile; productRef = C00495162B2BA142004F8804 /* Contentful */; };
+		C004951A2B2BA15A004F8804 /* ContentfulRichTextRenderer in Frameworks */ = {isa = PBXBuildFile; productRef = C00495192B2BA15A004F8804 /* ContentfulRichTextRenderer */; };
+		C004951C2B2BA185004F8804 /* ContentfulService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004951B2B2BA185004F8804 /* ContentfulService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1374,6 +1377,7 @@
 		3EFC0B4B2850BBB900841341 /* InfoMessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoMessageView.xib; sourceTree = "<group>"; };
 		3EFFCB3A288E8EA2000F066A /* FeelingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3EFFCB3B288E8EA2000F066A /* FeelingsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeelingsCollectionViewCell.xib; sourceTree = "<group>"; };
+		C004951B2B2BA185004F8804 /* ContentfulService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentfulService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1382,6 +1386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ED85AE02846190B0008EC11 /* SDWebImage in Frameworks */,
+				C004951A2B2BA15A004F8804 /* ContentfulRichTextRenderer in Frameworks */,
 				3EF70959284F6B5D00B6FDB5 /* GoogleSignIn in Frameworks */,
 				3E32C67F2915421900C7064D /* (null) in Frameworks */,
 				3EE9FDD02844C68100BE4661 /* Collections in Frameworks */,
@@ -1389,6 +1394,7 @@
 				3EE9FDD42844C68100BE4661 /* OrderedCollections in Frameworks */,
 				3ED85AE3284619550008EC11 /* SwiftDate in Frameworks */,
 				3EC774642887E12D0022CB6F /* FirebaseCrashlytics in Frameworks */,
+				C00495172B2BA142004F8804 /* Contentful in Frameworks */,
 				3ED85ADD284618B50008EC11 /* CombineCocoa in Frameworks */,
 				3EC774662887E12D0022CB6F /* FirebaseMessaging in Frameworks */,
 				3EC774622887E12D0022CB6F /* FirebaseAppDistribution-Beta in Frameworks */,
@@ -3097,6 +3103,7 @@
 				3E8F201E28DDA64500C327BE /* APIBuilder.swift */,
 				3E8F201F28DDA64500C327BE /* APIService.swift */,
 				3E8F202028DDA64500C327BE /* APIRequest.swift */,
+				C004951B2B2BA185004F8804 /* ContentfulService.swift */,
 			);
 			path = Definitions;
 			sourceTree = "<group>";
@@ -4737,6 +4744,8 @@
 				3EC774612887E12D0022CB6F /* FirebaseAppDistribution-Beta */,
 				3EC774632887E12D0022CB6F /* FirebaseCrashlytics */,
 				3EC774652887E12D0022CB6F /* FirebaseMessaging */,
+				C00495162B2BA142004F8804 /* Contentful */,
+				C00495192B2BA15A004F8804 /* ContentfulRichTextRenderer */,
 			);
 			productName = Athelo;
 			productReference = 3EE9FD862844A57600BE4661 /* Athelo.app */;
@@ -4773,6 +4782,8 @@
 				3ED85AE1284619550008EC11 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				3EF70957284F6B5D00B6FDB5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				3EC774602887E12D0022CB6F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C00495152B2BA142004F8804 /* XCRemoteSwiftPackageReference "contentful" */,
+				C00495182B2BA15A004F8804 /* XCRemoteSwiftPackageReference "rich-text-renderer.swift" */,
 			);
 			productRefGroup = 3EE9FD872844A57600BE4661 /* Products */;
 			projectDirPath = "";
@@ -5116,6 +5127,7 @@
 				3E6BD0002885370000A1FC4D /* SymptomListView.swift in Sources */,
 				3ED215B22851E6F5003BB140 /* MenuOption.swift in Sources */,
 				3EC0793D288986B700CBEB54 /* LegalViewController.swift in Sources */,
+				C004951C2B2BA185004F8804 /* ContentfulService.swift in Sources */,
 				3ED18D2128475A840075ABAF /* IntroRouter.swift in Sources */,
 				3E8F206928DDA64500C327BE /* HealthUserSymptomsRequest.swift in Sources */,
 				3E6BD0122885453D00A1FC4D /* SymptomListRouter.swift in Sources */,
@@ -5995,6 +6007,22 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		C00495152B2BA142004F8804 /* XCRemoteSwiftPackageReference "contentful" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/contentful/contentful.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.5.7;
+			};
+		};
+		C00495182B2BA15A004F8804 /* XCRemoteSwiftPackageReference "rich-text-renderer.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/contentful/rich-text-renderer.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -6047,6 +6075,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3EF70957284F6B5D00B6FDB5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
+		};
+		C00495162B2BA142004F8804 /* Contentful */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C00495152B2BA142004F8804 /* XCRemoteSwiftPackageReference "contentful" */;
+			productName = Contentful;
+		};
+		C00495192B2BA15A004F8804 /* ContentfulRichTextRenderer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C00495182B2BA15A004F8804 /* XCRemoteSwiftPackageReference "rich-text-renderer.swift" */;
+			productName = ContentfulRichTextRenderer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

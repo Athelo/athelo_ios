@@ -8,8 +8,10 @@
 import Combine
 import SwiftDate
 import UIKit
+import RichTextRenderer
+import SafariServices
 
-final class NewsDetailsViewController: BaseViewController {
+final class NewsDetailsViewController: BaseViewController, UITextViewDelegate {
     // MARK: - Outlets
     @IBOutlet private weak var buttonArticle: UIButton!
     @IBOutlet private weak var imageViewPhoto: UIImageView!
@@ -87,10 +89,10 @@ final class NewsDetailsViewController: BaseViewController {
         bindToViewModel(viewModel, cancellables: &cancellables)
         
         viewModel.$newsData
-            .compactMap({ $0 })
+            .compactMap({ $0?.contentfulData })
             .receive(on: DispatchQueue.main)
             .map({ value -> URL? in
-                value.photo?.fittingImageURL(forSizeInPixels: AppRouter.current.window.bounds.width)
+                value.image?.url
             })
             .removeDuplicates()
             .sink { [weak self] in
@@ -109,21 +111,21 @@ final class NewsDetailsViewController: BaseViewController {
             }.store(in: &cancellables)
         
         viewModel.$newsData
-            .compactMap({ $0 })
+            .compactMap({ $0?.contentfulData })
             .map({ $0.title })
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.textViewTitle.text = $0
                 
-                if $0?.isEmpty == false {
+                if $0.isEmpty == false {
                     self?.updateTitleTextViewMask()
                 }
             }.store(in: &cancellables)
         
         viewModel.$newsData
-            .compactMap({ $0 })
-            .map({ $0.createdAt.toString(.custom("MMM dd, yyyy")) })
+            .compactMap({ $0?.contentfulData })
+            .map({ $0.updatedAt?.toString(.custom("MMM dd, yyyy")) })
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
@@ -132,39 +134,54 @@ final class NewsDetailsViewController: BaseViewController {
             }.store(in: &cancellables)
         
         viewModel.$newsData
-            .compactMap({ $0 })
-            .map({ $0.content })
+            .compactMap({ $0?.contentfulData })
+            .map({ $0.body })
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.textViewBody.text = $0
+                // Default configuration of the renderer.
+                var configuration = DefaultRendererConfiguration()
+                let renderer = RichTextDocumentRenderer(configuration: configuration)
+                
+                if let body = $0 {
+                    self?.textViewBody.attributedText = renderer.render(document: body)
+                }
+                self?.textViewBody.delegate = self
                 self?.textViewBody.isHidden = !(self?.textViewBody.text.isEmpty == false)
             }.store(in: &cancellables)
         
-        viewModel.$newsData
-            .map({ !($0?.contentURL != nil) })
-            .removeDuplicates()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.buttonArticle.isHidden = $0
-                self?.viewButtonBackground.isHidden = $0
-                
-                self?.constraintStackViewContentBottom.constant = -(16.0 + ($0 ? 0.0 : ((self?.buttonArticle.frame.height ?? 0.0) + 16.0)))
-            }.store(in: &cancellables)
+//        viewModel.$newsData
+//            .map({ !($0?.contentURL != nil) })
+//            .removeDuplicates()
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] in
+//                self?.buttonArticle.isHidden = $0
+//                self?.viewButtonBackground.isHidden = $0
+//                
+//                self?.constraintStackViewContentBottom.constant = -(16.0 + ($0 ? 0.0 : ((self?.buttonArticle.frame.height ?? 0.0) + 16.0)))
+//            }.store(in: &cancellables)
         
-        viewModel.$newsData
-            .compactMap({ $0 })
-            .map({ $0.isFavourite })
-            .removeDuplicates()
-            .map({ $0 ? "heartSolid" : "heart" })
-            .receive(on: DispatchQueue.main)
-            .map({ UIImage(named: $0) })
-            .sink { [weak button = buttonFavorite] in
-                button?.setImage($0, for: .normal)
-            }.store(in: &cancellables)
+//        viewModel.$newsData
+//            .compactMap({ $0 })
+//            .map({ $0.isFavourite })
+//            .removeDuplicates()
+//            .map({ $0 ? "heartSolid" : "heart" })
+//            .receive(on: DispatchQueue.main)
+//            .map({ UIImage(named: $0) })
+//            .sink { [weak button = buttonFavorite] in
+//                button?.setImage($0, for: .normal)
+//            }.store(in: &cancellables)
     }
     
     // MARK: - Updates
+    
+    func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        let config = SFSafariViewController.Configuration()
+        let vc = SFSafariViewController(url: url, configuration: config)
+        present(vc, animated: true)
+        return false
+    }
+    
     private func updateTitleTextViewMask() {
         if self.labelDate.text?.isEmpty == true {
             guard !textViewTitle.textContainer.exclusionPaths.isEmpty else {
@@ -190,7 +207,7 @@ final class NewsDetailsViewController: BaseViewController {
     
     // MARK: - Actions
     @IBAction private func favoriteButtonTapped(_ sender: Any) {
-        viewModel.switchFavoriteState()
+//        viewModel.switchFavoriteState()
     }
     
     @IBAction private func readFullArticleButtonTapped(_ sender: Any) {
