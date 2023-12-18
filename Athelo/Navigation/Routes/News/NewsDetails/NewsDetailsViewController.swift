@@ -37,7 +37,8 @@ final class NewsDetailsViewController: BaseViewController, UITextViewDelegate {
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bottomImageView.visiblity(gone: true)
+        buttonArticle.visiblity(gone: true)
         configure()
         sink()
     }
@@ -263,3 +264,13 @@ extension NewsDetailsViewController: Routable {
     }
 }
 
+extension UIView {
+    
+    func visiblity(gone: Bool, dimension: CGFloat = 0.0, attribute: NSLayoutConstraint.Attribute = .height) -> Void {
+        if let constraint = (self.constraints.filter{$0.firstAttribute == attribute}.first) {
+            constraint.constant = gone ? 0.0 : dimension
+            self.layoutIfNeeded()
+            self.isHidden = gone
+        }
+    }
+}

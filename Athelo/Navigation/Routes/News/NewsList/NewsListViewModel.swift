@@ -11,8 +11,8 @@ import UIKit
 final class NewsListViewModel: BaseViewModel {
     
     var allNewsDataList: [NewsData] = [NewsData]()
-    var filteredNewsDataList: [NewsData] = [NewsData]()
-    var favoriteNewsDataList: [NewsData] = [NewsData]()
+    var filteredNewsValues = CurrentValueSubject<[NewsData], Never>([])
+    var favoriteNewsValues = CurrentValueSubject<[NewsData], Never>([])
     
     @Published private(set) var itemSnapshot: NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>?
     
@@ -76,9 +76,9 @@ final class NewsListViewModel: BaseViewModel {
         case .newsItem(let id):
             switch filter {
             case .allNews:
-                return allNewsDataList.first(where: { $0.contentfulData?.id == id })
+                return filteredNewsValues.value.first(where: { $0.contentfulData?.id == id })
             case .favoriteNews:
-                return favoriteNewsDataList.first(where: { $0.contentfulData?.id == id })
+                return favoriteNewsValues.value.first(where: { $0.contentfulData?.id == id })
             }
         }
     }
@@ -117,9 +117,9 @@ final class NewsListViewModel: BaseViewModel {
     func item(at indexPath: IndexPath) -> NewsData? {
         switch filter {
         case .allNews:
-            return allNewsDataList[indexPath.row]
+            return filteredNewsValues.value[indexPath.row]
         case .favoriteNews:
-            return favoriteNewsDataList[indexPath.row]
+            return favoriteNewsValues.value[indexPath.row]
         }
     }
     
@@ -127,13 +127,7 @@ final class NewsListViewModel: BaseViewModel {
         guard state.value != .loading else {
             return
         }
-        state.send(.loading)
-        switch filter {
-        case .allNews:
-            getNews()
-        case .favoriteNews:
-            getNews()
-        }
+        getNews()
     }
     
     func switchFilter(to filter: Filter) {
@@ -157,7 +151,8 @@ final class NewsListViewModel: BaseViewModel {
             case .success(let entriesArrayResponse):
                 
                 self?.allNewsDataList = entriesArrayResponse.compactMap({NewsData(abc: $0)}) // Convert to [News Data]
-                self?.createSnapShot(newsDataList: self?.allNewsDataList)
+                self?.filteredNewsValues.send(self?.allNewsDataList ?? [])
+                self?.getFavouritesList(callback: { _ in })
                 self?.state.send(.loaded)
             case .failure(let error):
                 self?.state.send(.error(error: error))
@@ -167,42 +162,58 @@ final class NewsListViewModel: BaseViewModel {
     
     func getFavouritesList(callback: (([NewsData])  -> Void)) {
         // TODO: API Call
-        self.favoriteNewsDataList = self.allNewsDataList.enumerated().filter { (index, _) in index % 2 == 0}.map( {$0.element} )
-        callback(self.favoriteNewsDataList)
+        let favoriteNewsDataList = self.allNewsDataList.enumerated().filter { (index, _) in index % 2 == 0}.map( {$0.element} )
+        
+        self.favoriteNewsValues.send(favoriteNewsDataList)
+        callback(favoriteNewsDataList)
     }
     
     // MARK: - Sinks
     private func sink() {
-        sinkFilter()
         sinkSearch()
         sinkIntoLocalNotifications()
     }
     
-    private func sinkFilter() {
-        self.filterSubject.sink { [weak self] value in
-            switch value {
-            case .allNews:
-                self?.createSnapShot(newsDataList: self?.allNewsDataList)
-            case .favoriteNews:
-                self?.getFavouritesList { list in
-                    self?.createSnapShot(newsDataList: list)
-                }
-            }
-        }.store(in: &cancellables)
-    }
-    
     private func sinkSearch() {
-        Publishers.CombineLatest(self.query, self.filterSubject)
-            .map({ (searchText, filter) -> [NewsData] in
-                switch filter {
-                case .allNews:
-                    return self.searchNews(searchText, list: self.allNewsDataList)
-                case .favoriteNews:
-                    return self.searchNews(searchText, list: self.favoriteNewsDataList)
-                }
-            }).sink { [weak self] list in
-                self?.createSnapShot(newsDataList: list)
-            }.store(in: &cancellables)
+        query.sink { [weak self] in
+            guard let query = $0 else {
+                self?.filteredNewsValues.send(self?.allNewsDataList ?? [])
+                self?.getFavouritesList(callback: {_ in })
+                return
+            }
+            self?.filteredNewsValues.send(self?.searchNews(query, list: self?.allNewsDataList) ?? [])
+            self?.getFavouritesList(callback: {value in
+                self?.favoriteNewsValues.send(self?.searchNews(query, list: value) ?? [])
+            })
+            self?.state.send(.loaded)
+        }.store(in: &cancellables)
+        
+        Publishers.CombineLatest3(
+            filterSubject,
+            filteredNewsValues,
+            favoriteNewsValues
+        )
+        .map({ (filter, allNews, favoriteNews) -> [NewsData]? in
+            switch filter {
+            case .allNews:
+                return allNews
+            case .favoriteNews:
+                return favoriteNews
+            }
+        })
+        .removeDuplicates()
+        .map({ value -> NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier> in
+            var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>()
+            
+            snapshot.appendSections([.news])
+            snapshot.appendItems(value?.map({ value in .newsItem(value.contentfulData?.id ?? "")}) ?? [], toSection: .news)
+            
+            return snapshot
+        })
+        .sink { [weak self] in
+            self?.state.send(.loaded)
+            self?.itemSnapshot = $0
+        }.store(in: &cancellables)
     }
     
     private func sinkIntoLocalNotifications() {
@@ -214,81 +225,16 @@ final class NewsListViewModel: BaseViewModel {
         //            }.store(in: &cancellables)
     }
     
-    func searchNews(_ query: String?, list: [NewsData]) -> [NewsData] {
+    func searchNews(_ query: String?, list: [NewsData]?) -> [NewsData] {
+        guard let list = list else {
+            return []
+        }
         guard let searchValue = query, !searchValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             return list
         }
-        self.filteredNewsDataList = list.filter { $0.title?.localizedCaseInsensitiveContains(searchValue) ?? false}
-        return self.filteredNewsDataList
+        
+        return list.filter { $0.title?.localizedCaseInsensitiveContains(searchValue) ?? false}
     }
-    
-    func createSnapShot(newsDataList: [NewsData]?) {
-        var snapShot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>() // Create to Snapshot from NewsData
-        snapShot.appendSections([.news])
-        newsDataList?.forEach { value in
-            snapShot.appendItems([.newsItem(value.contentfulData?.id ?? "")] , toSection: .news)
-        }
-        self.itemSnapshot = snapShot
-        state.send(.loaded)
-    }
-    
-    //    private func sinkIntoOwnSubjects() {
-    //        Publishers.CombineLatest3(
-    //            filterSubject,
-    //            allNewsFetcher.itemsPublisher,
-    //            favoriteNewsFetcher.itemsPublisher
-    //        )
-    //        .map({ (filter, allNews, favoriteNews) -> [NewsData]? in
-    //            switch filter {
-    //            case .allNews:
-    //                return allNews
-    //            case .favoriteNews:
-    //                return favoriteNews
-    //            }
-    //        })
-    //        .removeDuplicates()
-    //        .map({ value -> NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier> in
-    //            var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>()
-    //
-    //            snapshot.appendSections([.news])
-    //            snapshot.appendItems(value?.map({ .newsItem($0.id) }) ?? [], toSection: .news)
-    //
-    //            return snapshot
-    //        })
-    //        .sink { [weak self] in
-    //            self?.itemSnapshot = $0
-    //        }.store(in: &cancellables)
-    //
-    //        allNewsFetcher.itemsPublisher.dropFirst()
-    //            .merge(with: favoriteNewsFetcher.itemsPublisher.dropFirst())
-    //            .sinkDiscardingValue { [weak self] in
-    //                if self?.state.value != .loaded {
-    //                    self?.state.send(.loaded)
-    //                }
-    //            }.store(in: &cancellables)
-    //
-    //        allNewsFetcher.errorPublisher
-    //            .merge(with: favoriteNewsFetcher.errorPublisher)
-    //            .sink { [weak self] in
-    //                self?.state.send(.error(error: $0))
-    //            }.store(in: &cancellables)
-    //
-    //        query
-    //            .sink { [weak self] in
-    //                self?.allNewsFetcher.assignQuery($0)
-    //                self?.favoriteNewsFetcher.assignQuery($0)
-    //            }.store(in: &cancellables)
-    //
-    //        selectedTopics
-    //            .dropFirst()
-    //            .removeDuplicates(by: { prevTopics, currentTopics in
-    //                Set(prevTopics.map({ $0.id })) == Set(currentTopics.map({ $0.id }))
-    //            })
-    //            .sinkDiscardingValue { [weak self] in
-    //                self?.allNewsFetcher.refresh()
-    //                self?.favoriteNewsFetcher.refresh()
-    //            }.store(in: &cancellables)
-    //    }
 }
 
 // MARK: - Helper extensions
