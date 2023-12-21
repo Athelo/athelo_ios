@@ -30,8 +30,8 @@ private extension MenuOption {
         switch self {
         case .askAthelo:
             return UIImage(named: "chatHeart")
-        case .connectSmartWatch:
-            return UIImage(named: "watch")
+//        case .connectSmartWatch:
+//            return UIImage(named: "watch")
         case .messages:
             return UIImage(named: "envelope")
         case .myCaregivers:

@@ -12,8 +12,8 @@ final class MainContentViewController: BaseViewController {
     // MARK: - Constants
     enum Tab: Int {
         case home
-        case sleep
-        case activity
+//        case sleep
+//        case activity
         case community
         case news
     }
@@ -98,21 +98,21 @@ final class MainContentViewController: BaseViewController {
         
         homeNavigationController.viewControllers = [homeViewController]
         
-        let sleepNavigationController = navigationController(for: .sleep)
+//        let sleepNavigationController = navigationController(for: .sleep)
+//        
+//        let sleepRouter = SleepRouter(navigationController: sleepNavigationController)
+//        let sleepViewController = SleepViewController.viewController(router: sleepRouter)
+//        prepareRootController(sleepViewController)
+//        
+//        sleepNavigationController.viewControllers = [sleepViewController]
         
-        let sleepRouter = SleepRouter(navigationController: sleepNavigationController)
-        let sleepViewController = SleepViewController.viewController(router: sleepRouter)
-        prepareRootController(sleepViewController)
+//        let activityNavigationController = navigationController(for: .activity)
         
-        sleepNavigationController.viewControllers = [sleepViewController]
-        
-        let activityNavigationController = navigationController(for: .activity)
-        
-        let activityRouter = ActvityRouter(navigationController: activityNavigationController)
-        let activityViewController = ActivityViewController.viewController(router: activityRouter)
-        prepareRootController(activityViewController)
-        
-        activityNavigationController.viewControllers = [activityViewController]
+//        let activityRouter = ActvityRouter(navigationController: activityNavigationController)
+//        let activityViewController = ActivityViewController.viewController(router: activityRouter)
+//        prepareRootController(activityViewController)
+//        
+//        activityNavigationController.viewControllers = [activityViewController]
         
         let communityNavigationController = navigationController(for: .community)
         
@@ -142,8 +142,8 @@ final class MainContentViewController: BaseViewController {
         
         controller.viewControllers = [
             homeNavigationController,
-            sleepNavigationController,
-            activityNavigationController,
+//            sleepNavigationController,
+//            activityNavigationController,
             communityNavigationController,
             newsNavigationController
         ]
@@ -267,16 +267,16 @@ final class MainContentViewController: BaseViewController {
 private extension MainContentViewController.Tab {
     private var tabBarItemTitleSuffix: String {
         switch self {
-        case .activity:
-            return "activity"
+//        case .activity:
+//            return "activity"
         case .community:
             return "community"
         case .home:
             return "home"
         case .news:
             return "news"
-        case .sleep:
-            return "sleep"
+//        case .sleep:
+//            return "sleep"
         }
     }
     
@@ -286,31 +286,31 @@ private extension MainContentViewController.Tab {
     
     var tabBarImage: UIImage? {
         switch self {
-        case .activity:
-            return UIImage(named: "lovedOne")
+//        case .activity:
+//            return UIImage(named: "lovedOne")
         case .community:
             return UIImage(named: "chat")
         case .home:
             return UIImage(named: "home")
         case .news:
             return UIImage(named: "book")
-        case .sleep:
-            return UIImage(named: "moon")
+//        case .sleep:
+//            return UIImage(named: "moon")
         }
     }
     
     var tabBarSelectedImage: UIImage? {
         switch self {
-        case .activity:
-            return UIImage(named: "lovedOneSolid")
+//        case .activity:
+//            return UIImage(named: "lovedOneSolid")
         case .community:
             return UIImage(named: "chatSolid")
         case .home:
             return UIImage(named: "homeSolid")
         case .news:
             return UIImage(named: "bookSolid")
-        case .sleep:
-            return UIImage(named: "moonSolid")
+//        case .sleep:
+//            return UIImage(named: "moonSolid")
         }
     }
 }

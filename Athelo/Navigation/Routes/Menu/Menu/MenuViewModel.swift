@@ -99,9 +99,9 @@ private extension MenuOption {
         
         options.append(.settings)
         
-        if !isCaregiver {
-            options.append(.connectSmartWatch)
-        }
+//        if !isCaregiver {
+//            options.append(.connectSmartWatch)
+//        }
         
         options.append(.sendFeedback)
         

@@ -227,16 +227,18 @@ final class HomeViewModel: BaseViewModel {
         .map({ (symptomData, hasConnectedDevice, userRole) -> HomeLayoutData in
             var recommendations: [RecommendationPrompt] = []
             
-            if !userRole.isCaregiver, !hasConnectedDevice {
-                recommendations.append(.connectDevice)
-            }
+      //      let connectedDevice: Bool = (hasConnectedDevice ?? false) ?? false
             
-            if userRole.isCaregiver {
-                recommendations.append(contentsOf: [
-                    .checkActivityLevels,
-                    .checkSleepLevels
-                ])
-            }
+//            if let caregiver = !(userRole.isCaregiver), !connectedDevice {
+             //   recommendations.append(.connectDevice)
+//            }
+            
+//            if userRole.isCaregiver {
+//                recommendations.append(contentsOf: [
+//                    .checkActivityLevels,
+//                    .checkSleepLevels
+//                ])
+//            }
             
             recommendations.append(contentsOf: [
                 .readArticles,
@@ -362,9 +364,9 @@ extension HomeViewModel {
     
     enum RecommendationPrompt {
         case chatWithCommunity
-        case checkActivityLevels
-        case checkSleepLevels
-        case connectDevice
+//        case checkActivityLevels
+//        case checkSleepLevels
+    //    case connectDevice
         case readArticles
         case registerFeelings
         case updateFeelings
@@ -373,12 +375,12 @@ extension HomeViewModel {
             switch self {
             case .chatWithCommunity:
                 return UIImage(named: "chatSolid")!
-            case .checkActivityLevels:
-                return UIImage(named: "lovedOneSolid")!
-            case .checkSleepLevels:
-                return UIImage(named: "moonSolid")!
-            case .connectDevice:
-                return UIImage(named: "watchSolid")!
+//            case .checkActivityLevels:
+//                return UIImage(named: "lovedOneSolid")!
+//            case .checkSleepLevels:
+//                return UIImage(named: "moonSolid")!
+//            case .connectDevice:
+//                return UIImage(named: "watchSolid")!
             case .readArticles:
                 return UIImage(named: "bookSolid")!
             case .registerFeelings:
@@ -392,12 +394,12 @@ extension HomeViewModel {
             switch self {
             case .chatWithCommunity:
                 return "home.recommendation.chatwithcommunity".localized()
-            case .checkActivityLevels:
-                return "home.recommendation.checkactivitylevels".localized()
-            case .checkSleepLevels:
-                return "home.recommendation.checksleeplevels".localized()
-            case .connectDevice:
-                return "home.recommendation.connectdevice".localized()
+//            case .checkActivityLevels:
+//                return "home.recommendation.checkactivitylevels".localized()
+//            case .checkSleepLevels:
+//                return "home.recommendation.checksleeplevels".localized()
+//            case .connectDevice:
+//                return "home.recommendation.connectdevice".localized()
             case .readArticles:
                 return "home.recommendation.readarticles".localized()
             case .registerFeelings:

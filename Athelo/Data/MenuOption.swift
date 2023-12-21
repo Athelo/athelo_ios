@@ -14,7 +14,7 @@ enum MenuOption: String {
     case messages
     case mySymptoms
     case settings
-    case connectSmartWatch
+//    case connectSmartWatch
     case askAthelo
     case sendFeedback
     

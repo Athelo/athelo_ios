@@ -19,14 +19,15 @@ final class ConnectDeviceRouter: Router, UserProfileRoutable, WebContentRouter {
     
     // MARK: - Public API
     @MainActor func navigateToActivity() {
-        if AppRouter.current.root == .home {
-            let animateTransition = AppRouter.current.homeTab == .activity
-            
-            _ = navigationController?.popViewController(animated: animateTransition)
-        } else {
-            AppRouter.current.exchangeRoot(.home)
-        }
-        
-        AppRouter.current.switchHomeTab(.activity)
+        AppRouter.current.exchangeRoot(.home)
+//        if AppRouter.current.root == .home {
+//            let animateTransition = AppRouter.current.homeTab == .activity
+//            
+//            _ = navigationController?.popViewController(animated: animateTransition)
+//        } else {
+//            AppRouter.current.exchangeRoot(.home)
+//        }
+//        
+//        AppRouter.current.switchHomeTab(.activity)
     }
 }
