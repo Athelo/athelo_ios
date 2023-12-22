@@ -195,10 +195,10 @@
 
 "graph.legend.sleep" = "Hours";
 
-"home.header.recommendations" = "Have you checked your activity and sleep levels today? This new article might be interesting";
-"home.header.recommendations.caregiver" = "Have you checked %@'s activity and sleep levels today?";
-"home.header.recommendations.caregiver.activity" = "activity";
-"home.header.recommendations.caregiver.sleep" = "sleep";
+"home.header.recommendations" = "This new article might be interesting";
+"home.header.recommendations.caregiver" = "This new article might be interesting";
+"home.header.recommendations.caregiver.activity" = "This new article might be interesting";
+"home.header.recommendations.caregiver.sleep" = "This new article might be interesting";
 "home.header.recommendations.caregiver.name.fallback" = "this ward";
 "home.header.symptoms" = "Is anything bothering you today? Are you having any new symptoms?";
 "home.header.wellbeing" = "Let's take care of your health together!";
