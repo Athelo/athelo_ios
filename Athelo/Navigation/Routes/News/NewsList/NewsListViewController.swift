@@ -297,12 +297,12 @@ extension NewsListViewController: UICollectionViewDelegate {
         }
         
         guard newsItem.shouldOpenInBrowser, !newsItem.browserUrl.isEmpty else {
-            guard let url = URL(string: newsItem.browserUrl) else {
-                router?.navigateToNewsDetails(using: .data(item))
-                return
-            }
-            present(SFSafariViewController(url: url, configuration: SFSafariViewController.Configuration()), animated: true)
+            router?.navigateToNewsDetails(using: .data(item))
             return
         }
+        guard let url = URL(string: newsItem.browserUrl) else {
+            return
+        }
+        present(SFSafariViewController(url: url, configuration: SFSafariViewController.Configuration()), animated: true)
     }
 }
