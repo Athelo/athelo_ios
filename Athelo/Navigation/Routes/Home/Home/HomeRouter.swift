@@ -31,8 +31,8 @@ final class HomeRouter: Router, UserProfileRoutable, WebContentRouter {
     
     @MainActor func navigateUsingPrompt(_ navigationPrompt: HomeViewModel.RecommendationPrompt) {
         switch navigationPrompt {
-        case .chatWithCommunity:
-            AppRouter.current.switchHomeTab(.community)
+//        case .chatWithCommunity:
+//            AppRouter.current.switchHomeTab(.community)
 //        case .checkActivityLevels:
 //            AppRouter.current.switchHomeTab(.activity)
 //        case .checkSleepLevels:

@@ -241,8 +241,8 @@ final class HomeViewModel: BaseViewModel {
 //            }
             
             recommendations.append(contentsOf: [
-                .readArticles,
-                .chatWithCommunity
+                .readArticles
+//                .chatWithCommunity
             ])
             
             return HomeLayoutData(
@@ -363,7 +363,7 @@ extension HomeViewModel {
     }
     
     enum RecommendationPrompt {
-        case chatWithCommunity
+//        case chatWithCommunity
 //        case checkActivityLevels
 //        case checkSleepLevels
     //    case connectDevice
@@ -373,8 +373,8 @@ extension HomeViewModel {
         
         var icon: UIImage {
             switch self {
-            case .chatWithCommunity:
-                return UIImage(named: "chatSolid")!
+//            case .chatWithCommunity:
+//                return UIImage(named: "chatSolid")!
 //            case .checkActivityLevels:
 //                return UIImage(named: "lovedOneSolid")!
 //            case .checkSleepLevels:
@@ -392,8 +392,8 @@ extension HomeViewModel {
         
         var recommendation: String {
             switch self {
-            case .chatWithCommunity:
-                return "home.recommendation.chatwithcommunity".localized()
+//            case .chatWithCommunity:
+//                return "home.recommendation.chatwithcommunity".localized()
 //            case .checkActivityLevels:
 //                return "home.recommendation.checkactivitylevels".localized()
 //            case .checkSleepLevels:

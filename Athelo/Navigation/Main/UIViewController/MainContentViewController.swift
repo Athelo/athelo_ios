@@ -14,8 +14,8 @@ final class MainContentViewController: BaseViewController {
         case home
 //        case sleep
 //        case activity
-        case community
         case news
+//        case community
     }
     
     // MARK: - Outlets
@@ -114,21 +114,21 @@ final class MainContentViewController: BaseViewController {
 //        
 //        activityNavigationController.viewControllers = [activityViewController]
         
-        let communityNavigationController = navigationController(for: .community)
-        
-        if PreferencesStore.hasDisplayedCommunitiesLanding() {
-            let communityRouter = CommunitiesListRouter(navigationController: communityNavigationController)
-            let communityViewController = CommunitiesListViewController.viewController(router: communityRouter)
-            prepareRootController(communityViewController)
-            
-            communityNavigationController.viewControllers = [communityViewController]
-        } else {
-            let communityRouter = CommunitiesLandingRouter(navigationController: communityNavigationController)
-            let communityViewController = CommunitiesLandingViewController.viewController(router: communityRouter)
-            prepareRootController(communityViewController)
-            
-            communityNavigationController.viewControllers = [communityViewController]
-        }
+//        let communityNavigationController = navigationController(for: .community)
+//        
+//        if PreferencesStore.hasDisplayedCommunitiesLanding() {
+//            let communityRouter = CommunitiesListRouter(navigationController: communityNavigationController)
+//            let communityViewController = CommunitiesListViewController.viewController(router: communityRouter)
+//            prepareRootController(communityViewController)
+//            
+//            communityNavigationController.viewControllers = [communityViewController]
+//        } else {
+//            let communityRouter = CommunitiesLandingRouter(navigationController: communityNavigationController)
+//            let communityViewController = CommunitiesLandingViewController.viewController(router: communityRouter)
+//            prepareRootController(communityViewController)
+//            
+//            communityNavigationController.viewControllers = [communityViewController]
+//        }
         
         let newsNavigationController = navigationController(for: .news)
         
@@ -144,7 +144,7 @@ final class MainContentViewController: BaseViewController {
             homeNavigationController,
 //            sleepNavigationController,
 //            activityNavigationController,
-            communityNavigationController,
+//            communityNavigationController,
             newsNavigationController
         ]
         
@@ -192,46 +192,46 @@ final class MainContentViewController: BaseViewController {
     }
     
     func navigate(using navigationRoute: NavigationRoute) {
-        switch navigationRoute {
-        case .chatRoom(let chatRoomIdentifier):
-            guard let navigationController = contentController?.viewControllers?[safe: Tab.community.rawValue] as? UINavigationController else {
-                return
-            }
-            
-            contentController?.selectedIndex = Tab.community.rawValue
-            
-            if !PreferencesStore.hasDisplayedCommunitiesLanding() {
-                PreferencesStore.setCommunitiesLandingAsDisplayed(true)
-                
-                let communityRouter = CommunitiesLandingRouter(navigationController: navigationController)
-                let communityViewController = CommunitiesLandingViewController.viewController(router: communityRouter)
-                appendMenuNavigationItem(to: communityViewController)
-                
-                navigationController.viewControllers = [communityViewController]
-                
-                return
-            }
-            
-            if let viewController = navigationController.viewControllers.last(where: { ($0 as? CommunityChatViewController)?.chatRoomidentifier == chatRoomIdentifier }) {
-                navigationController.popToViewController(viewController, animated: true)
-                
-                ChatUtility.sendMessage(.getHistory(timestamp: Date().toChatTimestamp, limit: 100), chatRoomIdentifier: chatRoomIdentifier)
-            } else {
-                let router = CommunityChatRouter(navigationController: navigationController)
-                let viewController = CommunityChatViewController.viewController(
-                    configurationData: .init(
-                        dataType: .roomID(chatRoomIdentifier),
-                        identityData: nil
-                    ),
-                    router: router
-                )
-                
-                // Manual assignment of view controller title is done here to prevent any future updates of `title` from not showing up. It just sometimes doesn't appear with no apparent (or at least reproducible) reason without assigning any non-empty value first when pushed from here. "Chat Room" seems neutral enough.
-                viewController.title = "Chat Room"
-                
-                navigationController.pushViewController(viewController, animated: true)
-            }
-        }
+//        switch navigationRoute {
+//        case .chatRoom(let chatRoomIdentifier):
+//            guard let navigationController = contentController?.viewControllers?[safe: Tab.community.rawValue] as? UINavigationController else {
+//                return
+//            }
+//            
+//            contentController?.selectedIndex = Tab.community.rawValue
+//            
+//            if !PreferencesStore.hasDisplayedCommunitiesLanding() {
+//                PreferencesStore.setCommunitiesLandingAsDisplayed(true)
+//                
+//                let communityRouter = CommunitiesLandingRouter(navigationController: navigationController)
+//                let communityViewController = CommunitiesLandingViewController.viewController(router: communityRouter)
+//                appendMenuNavigationItem(to: communityViewController)
+//                
+//                navigationController.viewControllers = [communityViewController]
+//                
+//                return
+//            }
+//            
+//            if let viewController = navigationController.viewControllers.last(where: { ($0 as? CommunityChatViewController)?.chatRoomidentifier == chatRoomIdentifier }) {
+//                navigationController.popToViewController(viewController, animated: true)
+//                
+//                ChatUtility.sendMessage(.getHistory(timestamp: Date().toChatTimestamp, limit: 100), chatRoomIdentifier: chatRoomIdentifier)
+//            } else {
+//                let router = CommunityChatRouter(navigationController: navigationController)
+//                let viewController = CommunityChatViewController.viewController(
+//                    configurationData: .init(
+//                        dataType: .roomID(chatRoomIdentifier),
+//                        identityData: nil
+//                    ),
+//                    router: router
+//                )
+//                
+//                // Manual assignment of view controller title is done here to prevent any future updates of `title` from not showing up. It just sometimes doesn't appear with no apparent (or at least reproducible) reason without assigning any non-empty value first when pushed from here. "Chat Room" seems neutral enough.
+//                viewController.title = "Chat Room"
+//                
+//                navigationController.pushViewController(viewController, animated: true)
+//            }
+//        }
     }
     
     // MARK: - Sinks
@@ -269,8 +269,8 @@ private extension MainContentViewController.Tab {
         switch self {
 //        case .activity:
 //            return "activity"
-        case .community:
-            return "community"
+//        case .community:
+//            return "community"
         case .home:
             return "home"
         case .news:
@@ -288,8 +288,8 @@ private extension MainContentViewController.Tab {
         switch self {
 //        case .activity:
 //            return UIImage(named: "lovedOne")
-        case .community:
-            return UIImage(named: "chat")
+//        case .community:
+//            return UIImage(named: "chat")
         case .home:
             return UIImage(named: "home")
         case .news:
@@ -303,8 +303,8 @@ private extension MainContentViewController.Tab {
         switch self {
 //        case .activity:
 //            return UIImage(named: "lovedOneSolid")
-        case .community:
-            return UIImage(named: "chatSolid")
+//        case .community:
+//            return UIImage(named: "chatSolid")
         case .home:
             return UIImage(named: "homeSolid")
         case .news:
