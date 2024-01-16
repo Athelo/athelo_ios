@@ -28,22 +28,22 @@ extension MenuTableViewCell: ConfigurableCell {
 private extension MenuOption {
     var optionIcon: UIImage? {
         switch self {
-        case .askAthelo:
-            return UIImage(named: "chatHeart")
+//        case .askAthelo:
+//            return UIImage(named: "chatHeart")
 //        case .connectSmartWatch:
 //            return UIImage(named: "watch")
-        case .messages:
-            return UIImage(named: "envelope")
-        case .myCaregivers:
-            return UIImage(named: "handHeart")
+//        case .messages:
+//            return UIImage(named: "envelope")
+//        case .myCaregivers:
+//            return UIImage(named: "handHeart")
         case .myProfile:
             return UIImage(named: "person")
         case .mySymptoms:
             return UIImage(named: "monitor")
-        case .myWards:
-            return UIImage(named: "handHeart")
-        case .sendFeedback:
-            return UIImage(named: "chatHeart")
+//        case .myWards:
+//            return UIImage(named: "handHeart")
+//        case .sendFeedback:
+//            return UIImage(named: "chatHeart")
             // Restore this option once Ask Athelo will be added back to menu.
 //            return UIImage(named: "paperPlane")
         case .settings:

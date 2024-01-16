@@ -85,13 +85,13 @@ private extension MenuOption {
         let isCaregiver = role?.isCaregiver == true
         var options: [MenuOption] = [.myProfile]
     
-        if isCaregiver {
-            options.append(.myWards)
-        } else {
-            options.append(.myCaregivers)
-        }
-        
-        options.append(.messages)
+//        if isCaregiver {
+//            options.append(.myWards)
+//        } else {
+//            options.append(.myCaregivers)
+//        }
+//        
+//        options.append(.messages)
         
         if !isCaregiver {
             options.append(.mySymptoms)
@@ -103,7 +103,7 @@ private extension MenuOption {
 //            options.append(.connectSmartWatch)
 //        }
         
-        options.append(.sendFeedback)
+//        options.append(.sendFeedback)
         
         return options
     }

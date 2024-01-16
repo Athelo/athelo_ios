@@ -9,14 +9,14 @@ import Foundation
 
 enum MenuOption: String {
     case myProfile
-    case myWards
-    case myCaregivers
-    case messages
+//    case myWards
+//    case myCaregivers
+//    case messages
     case mySymptoms
     case settings
 //    case connectSmartWatch
-    case askAthelo
-    case sendFeedback
+//    case askAthelo
+//    case sendFeedback
     
     var optionName: String {
         "menu.\(rawValue)".localized()
