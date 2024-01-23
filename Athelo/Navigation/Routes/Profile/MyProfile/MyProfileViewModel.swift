@@ -121,8 +121,8 @@ final class MyProfileViewModel: BaseViewModel {
         snapshot.appendSections([.profileDetails])
         snapshot.appendItems([.profile], toSection: .profileDetails)
         
-        snapshot.appendSections([.roles])
-        snapshot.appendItems([.option(.actAs)], toSection: .roles)
+//        snapshot.appendSections([.roles])
+//        snapshot.appendItems([.option(.actAs)], toSection: .roles)
         
         snapshot.appendSections([.health])
         snapshot.appendItems([.option(.trackMyWellbeing), .option(.mySymptoms)], toSection: .health)

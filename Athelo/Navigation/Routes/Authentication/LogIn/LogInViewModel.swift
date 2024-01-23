@@ -53,74 +53,33 @@ final class LogInViewModel: BaseViewModel {
                 return
             }
             authResult.user.getIDToken(completion: { [weak self] token, error in
-                guard let token = token else {
-//                    self?.state.send(.error(error: self?.error(error) ?? <#default value#>))
+                guard let token = token, let email = authResult.user.email, let refreshToken = authResult.user.refreshToken else {
+                    self?.state.send(.error(error: error ?? AuthenticationPingError()))
                     return
                 }
-                let provider = authResult.credential?.provider
-//                let refreshToken:String = authResult
-                IdentityUtility.setToken(token: token, email: email)
-                
-                self?.state.send(.loaded)
+//                let provider = authResult.credential?.provider
+                let tokenData =  IdentityTokenData(accessToken: token, expiresIn: 24000, refreshToken: refreshToken, scope: "", tokenType: "email")
+                self?.setToken(tokenData: tokenData, email: email)
             })
-//            IdentityUtility.setToken(authResult: authResult, email: email)
-//                .sink {[weak self] _ in
-//                    
-//                } receiveValue: { _ in
-//                    
-//                }
-//            IdentityUtility.login(email: email, password: password)
-//                .sink {_ in 
-//                    
-//                } receiveValue: { _ in
-//                    
-//                }.cancel()
-//            self?.state.send(.loaded)
-            
         }
-//        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-//            
-//            guard let authResult = authResult else {
-//                guard let error = error else {
-//                    self?.state.send(.error(error: AuthenticationPingError()))
-//                    return
-//                }
-//                self?.state.send(.error(error: error))
-//                return
-//            }
-//            IdentityUtility.setToken(authResult: authResult, email: email)
-//                .sink {
-//                    switch $0 {
-//                    case .finished:
-//                        self?.state.send(.loaded)
-//                    case .failure(let error):
-//                        if case .missingCredentials = (error as? APIError) {
-//                            self?.state.send(.error(error: AuthenticationPingError()))
-//                        } else {
-//                            self?.state.send(.error(error: error))
-//                        }
-//                    }
-//                } receiveValue: { _ in
-//                    /* ... */
-//                }.store(in: self?.&cancellables)
-//            
-//        }
-//        IdentityUtility.login(email: email, password: password)
-//            .sink { [weak self] in
-//                switch $0 {
-//                case .finished:
-//                    self?.state.send(.loaded)
-//                case .failure(let error):
-//                    if case .missingCredentials = (error as? APIError) {
-//                        self?.state.send(.error(error: AuthenticationPingError()))
-//                    } else {
-//                        self?.state.send(.error(error: error))
-//                    }
-//                }
-//            } receiveValue: { _ in
-//                /* ... */
-//            }.store(in: &cancellables)
-        
+    }
+    
+    private func setToken(tokenData: IdentityTokenData, email: String) {
+        IdentityUtility.setToken(tokenData: tokenData, email: email)
+            .sink { [weak self] in
+                switch $0 {
+                case .finished:
+                    self?.state.send(.loaded)
+                case .failure(let error):
+                    if case .missingCredentials = (error as? APIError) {
+                        self?.state.send(.error(error: AuthenticationPingError()))
+                    } else {
+                        self?.state.send(.error(error: error))
+                    }
+                }
+            } receiveValue: { _ in
+                    /* ... */
+            }.store(in: &cancellables)
     }
     
     // MARK: - Sinks

@@ -111,6 +111,7 @@ final class IdentityRoleUtility {
     
     // MARK: - Role management
     private func checkExistingRoleForCurrentUser() {
+        activeRole = .patient
         guard let roleData: Data = Keys.value(for: .roles),
               let roles = try? JSONDecoder().decode([Int: ActiveUserRole].self, from: roleData) else {
             return

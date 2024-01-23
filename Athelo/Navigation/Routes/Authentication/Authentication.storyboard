@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -248,10 +248,22 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="thi-Ya-heD">
-                                        <rect key="frame" x="16" y="36" width="382" height="288"/>
+                                        <rect key="frame" x="16" y="36" width="382" height="392"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RKL-vB-7Zi" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEv-uI-eg9" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="80"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="999" constant="80" id="RBF-Hb-dpD"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="Yir-wY-nHr"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedTitle" value="form.field.username"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="fieldLocalizedPlaceholder" value="form.placeholder.username"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RKL-vB-7Zi" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="104" width="382" height="80"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="Loz-VB-N5C"/>
@@ -263,7 +275,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yHe-G3-6Hh" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="104" width="382" height="80"/>
+                                                <rect key="frame" x="0.0" y="208" width="382" height="80"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="IP0-KU-I61"/>
@@ -275,7 +287,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJP-60-cvD" customClass="FormTextField" customModule="Athelo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="208" width="382" height="80"/>
+                                                <rect key="frame" x="0.0" y="312" width="382" height="80"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="Ruj-qT-fTF"/>
@@ -360,6 +372,7 @@
                         <outlet property="formTextFieldConfirmPassword" destination="qJP-60-cvD" id="2dX-EZ-DGw"/>
                         <outlet property="formTextFieldEmail" destination="RKL-vB-7Zi" id="y7S-G4-lkd"/>
                         <outlet property="formTextFieldPassword" destination="yHe-G3-6Hh" id="b0M-dq-ax3"/>
+                        <outlet property="formTextFieldUserName" destination="zEv-uI-eg9" id="hmC-vh-Vus"/>
                         <outlet property="scrollViewContent" destination="VFX-px-hql" id="nBR-yn-hZU"/>
                         <outlet property="stackViewContent" destination="thi-Ya-heD" id="8Ac-Yw-jwL"/>
                     </connections>

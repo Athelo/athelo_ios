@@ -10,9 +10,10 @@ import UIKit
 
 final class SignUpWithEmailViewModel: BaseViewModel {
     // MARK: - Properties
-    private let confirmPassword = CurrentValueSubject<String?, Never>(nil)
+    private let userName = CurrentValueSubject<String?, Never>(nil)
     private let email = CurrentValueSubject<String?, Never>(nil)
     private let password = CurrentValueSubject<String?, Never>(nil)
+    private let confirmPassword = CurrentValueSubject<String?, Never>(nil)
     
     @Published private(set) var formErrors: [AuthFormError]? = nil
     @Published private(set) var isValid: Bool = false
@@ -27,8 +28,8 @@ final class SignUpWithEmailViewModel: BaseViewModel {
     }
     
     // MARK: - Public API
-    func assignConfirmPassword(_ confirmPassword: String?) {
-        self.confirmPassword.send(confirmPassword)
+    func assignUserName(_ userName: String?) {
+        self.userName.send(userName)
     }
     
     func assignEmail(_ email: String?) {
@@ -39,11 +40,17 @@ final class SignUpWithEmailViewModel: BaseViewModel {
         self.password.send(password)
     }
     
+    func assignConfirmPassword(_ confirmPassword: String?) {
+        self.confirmPassword.send(confirmPassword)
+    }
+    
     func sendRequest() {
         guard isValid, state.value != .loading,
+              let _ = userName.value,
               let confirmPassword = confirmPassword.value,
               let email = email.value,
-              let password = password.value else {
+              let password = password.value,
+              password == confirmPassword else {
             return
         }
         
@@ -61,16 +68,17 @@ final class SignUpWithEmailViewModel: BaseViewModel {
     }
     
     private func sinkIntoOwnSubjects() {
-        let validConfirmPasswordPublisher = confirmPassword.map({ $0?.isEmpty == false }).eraseToAnyPublisher()
+        let validUserName = userName.map({ $0?.isEmpty == false }).eraseToAnyPublisher()
         let validEmailPublisher = email.map({ $0?.isEmpty == false }).eraseToAnyPublisher()
         let validPasswordPublisher = password.map({ $0?.isEmpty == false }).eraseToAnyPublisher()
-        
-        Publishers.CombineLatest3(
+        let validConfirmPasswordPublisher = confirmPassword.map({ $0?.isEmpty == false }).eraseToAnyPublisher()
+        Publishers.CombineLatest4(
+            validUserName,
             validConfirmPasswordPublisher,
             validEmailPublisher,
             validPasswordPublisher
         )
-        .map({ $0 && $1 && $2 })
+        .map({ $0 && $1 && $2 && $3 })
         .removeDuplicates()
         .sink { [weak self] in
             self?.isValid = $0

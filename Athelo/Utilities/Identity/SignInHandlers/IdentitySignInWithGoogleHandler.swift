@@ -9,6 +9,7 @@ import Combine
 import FirebaseCore
 import GoogleSignIn
 import UIKit
+import FirebaseAuth
 
 protocol IdentitySignInWithGoogleUIProvider {
     var signInWithGooglePresentingViewController: UIViewController { get }
@@ -53,11 +54,10 @@ final class IdentitySignInWithGoogleHandler {
         Task { [weak self] in
             do {
                 let config = GIDConfiguration(clientID: clientID)
-                guard let tokenValue = try await self?.sendTokenRequest(using: config, uiProvider: uiProvider) else {
+                guard let credential = try await self?.sendTokenRequest(using: config, uiProvider: uiProvider) else {
                     throw GoogleAuthError.missingAccessToken
                 }
-                
-                self?.sendLoginRequest(using: tokenValue.token, email: tokenValue.email)
+                self?.firebaseLogin(credential: credential)
             } catch {
                 if (error as NSError).domain == kGIDSignInErrorDomain,
                    (error as NSError).code == GIDSignInError.canceled.rawValue {
@@ -71,20 +71,43 @@ final class IdentitySignInWithGoogleHandler {
         return state.eraseToAnyPublisher()
     }
     
-    // MARK: - Requests
-    private func sendLoginRequest(using token: String, email: String? = nil) {
-        let request = AuthenticationLoginWithSocialProfileRequest(provider: "google-oauth2", token: token)
-        AtheloAPI.Authentication.loginUsingSocialProfile(request: request)
-            .sink { [weak self] result in
-                if case .failure(let error) = result {
-                    self?.state.send(.error(error: error))
+    // MARK: - Firebase Login
+    private func firebaseLogin(credential: AuthCredential) {
+        Auth.auth().signIn(with: credential) { [weak self] authResult, error in
+            guard let authResult = authResult, let email = authResult.user.email, let refreshToken = authResult.user.refreshToken else {
+                guard let error = error else {
+                    self?.state.send(.error(error: AuthenticationPingError()))
+                    return
                 }
-            } receiveValue: { [weak self] value in
-                self?.state.send(.loaded(token: value.tokenData, email: email))
-            }.store(in: &cancellables)
+                self?.state.send(.error(error: error))
+                return
+            }
+            authResult.user.getIDToken(completion: { [weak self] token, error in
+                guard let token = token else {
+                    self?.state.send(.error(error: error ?? AuthenticationPingError()))
+                    return
+                }
+                let provider = authResult.credential?.provider
+                let tokenData =  IdentityTokenData(accessToken: token, expiresIn: 24000, refreshToken: refreshToken, scope: "", tokenType: provider ?? "google")
+                self?.state.send(.loaded(token: tokenData, email: email))
+            })
+        }
     }
     
-    private func sendTokenRequest(using config: GIDConfiguration, uiProvider: IdentitySignInWithGoogleUIProvider? = nil) async throws -> (token: String, email: String?) {
+//    // MARK: - Requests
+//    private func sendLoginRequest(using token: String, email: String? = nil) {
+//        let request = AuthenticationLoginWithSocialProfileRequest(provider: "google-oauth2", token: token)
+//        AtheloAPI.Authentication.loginUsingSocialProfile(request: request)
+//            .sink { [weak self] result in
+//                if case .failure(let error) = result {
+//                    self?.state.send(.error(error: error))
+//                }
+//            } receiveValue: { [weak self] value in
+//                self?.state.send(.loaded(token: value.tokenData, email: email))
+//            }.store(in: &cancellables)
+//    }
+    
+    private func sendTokenRequest(using config: GIDConfiguration, uiProvider: IdentitySignInWithGoogleUIProvider? = nil) async throws -> (AuthCredential) {
         try await withCheckedThrowingContinuation { continuation in
             Task {
                 var viewController = uiProvider?.signInWithGooglePresentingViewController
@@ -104,12 +127,13 @@ final class IdentitySignInWithGoogleHandler {
                             return
                         }
                         
-                        guard let token = user?.authentication.accessToken else {
+                        guard let accessToken = user?.authentication.accessToken, let idToken = user?.authentication.idToken else {
                             continuation.resume(throwing: GoogleAuthError.missingAccessToken)
                             return
                         }
+                        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
                         
-                        continuation.resume(returning: (token, user?.profile?.email))
+                        continuation.resume(returning: (credential))
                     }
                 }
             }

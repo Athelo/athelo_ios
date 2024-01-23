@@ -11,6 +11,7 @@ import UIKit
 
 final class SignUpWithEmailViewController: KeyboardListeningViewController {
     // MARK: - Outlets
+    @IBOutlet private weak var formTextFieldUserName: FormTextField!
     @IBOutlet private weak var buttonRegister: StyledButton!
     @IBOutlet private weak var formTextFieldConfirmPassword: FormTextField!
     @IBOutlet private weak var formTextFieldEmail: FormTextField!
@@ -78,6 +79,7 @@ final class SignUpWithEmailViewController: KeyboardListeningViewController {
     
     // MARK: - Sinks
     private func sink() {
+        sinkIntoUserNameFormTextField()
         sinkIntoConfirmPasswordFormTextField()
         sinkIntoEmailFormTextField()
         sinkIntoKeyboardChanges()
@@ -93,6 +95,17 @@ final class SignUpWithEmailViewController: KeyboardListeningViewController {
         
         formTextFieldConfirmPassword.currentTextPublisher
             .sink(receiveValue: viewModel.assignConfirmPassword(_:))
+            .store(in: &cancellables)
+    }
+    
+    private func sinkIntoUserNameFormTextField() {
+        formTextFieldUserName.returnPublisher
+            .sinkDiscardingValue { [weak textField = formTextFieldEmail] in
+                textField?.becomeFirstResponder()
+            }.store(in: &cancellables)
+        
+        formTextFieldUserName.currentTextPublisher
+            .sink(receiveValue: viewModel.assignUserName(_:))
             .store(in: &cancellables)
     }
     

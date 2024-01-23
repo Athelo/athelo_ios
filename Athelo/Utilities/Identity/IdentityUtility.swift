@@ -197,12 +197,6 @@ enum SignInHandlerState: Equatable {
 //        )
 //    }
     
-    static func loginFirebase(email: String) -> AnyPublisher<IdentityProfileData, Error> {
-        let abc = IdentityTokenData(accessToken: "",expiresIn: 0.00,refreshToken: "",scope: "",tokenType: "")
-        let x = Result<IdentityTokenData, Error>.Publisher(abc)
-        return wrapLoginPublisher(x.eraseToAnyPublisher(), loginMethod: .email)
-    }
-    
     static func logOut() {
         PreferencesStore.setCommunitiesLandingAsDisplayed(false)
         shared.clearUserData()
@@ -351,39 +345,9 @@ enum SignInHandlerState: Equatable {
         userDataSubject.send(profileData)
     }
     
-    static func setToken(token: String, email: String) -> AnyPublisher<IdentityProfileData, Error> {
-//        authResult.user.getIDToken(completion: { [weak self] token, error in
-//            guard let token = token else {
-//                // TODO: self?.state.send(.error(error: self?.error))
-//                return
-//            }
-//            let provider = authResult.credential?.provider
-//            let refreshToken:String = authResult
-//            IdentityUtility.setToken(token: token, email: email)
-//            self?.state.send(.loaded)
-//        })
-        let tokenData =  IdentityTokenData(accessToken: token, expiresIn: 24000, refreshToken: token, scope: "", tokenType: "email")
-        do {
-            try APIEnvironment.setUserToken(tokenData)
-        }
-        catch {
-            print("Error")
-        }
+    static func setToken(tokenData: IdentityTokenData, email: String) -> AnyPublisher<IdentityProfileData, Error> {
         return wrapLoginPublisher(Just(tokenData).setFailureType(to: Error.self).eraseToAnyPublisher(), loginMethod: .email, email: email)
     }
-    
-//    static func setToken1(authResult: AuthDataResult, email: String) -> AnyPublisher<IdentityProfileData, Error> {
-//        var token: String = "" // Declare token outside the closure
-//        authResult.user.getIDToken(completion: { [weak self] tokenResult, error in
-//            guard let tokenResult = tokenResult else {
-//                // TODO: self?.state.send(.error(error: self?.error))
-//                return
-//            }
-//        })
-//        // Move tokenData creation inside the closure
-//        let tokenData = IdentityTokenData(accessToken: "token", expiresIn: 24000, refreshToken: authResult.refreshToken?.tokenString ?? "", scope: "", tokenType: "email")
-//        return wrapLoginPublisher(Just(tokenData).setFailureType(to: Error.self).eraseToAnyPublisher(), loginMethod: .email, email: email)
-//    }
     
     // MARK: - Stream wrappers
     private static func wrapLoginPublisher(_ loginPublisher: AnyPublisher<IdentityTokenData, Error>, loginMethod: LoginData.Method, email: String? = nil) -> AnyPublisher<IdentityProfileData, Error> {
