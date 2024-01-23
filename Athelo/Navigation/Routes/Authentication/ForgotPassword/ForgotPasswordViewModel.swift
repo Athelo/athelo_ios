@@ -7,6 +7,7 @@
 
 import Combine
 import UIKit
+import FirebaseAuth
 
 final class ForgotPasswordViewModel: BaseViewModel {
     // MARK: - Properties
@@ -44,19 +45,29 @@ final class ForgotPasswordViewModel: BaseViewModel {
         }
 
         state.send(.loading)
+        
+        Auth.auth().sendPasswordReset(withEmail: email) { [weak self] error in
+            guard let error = error else {
+                self?.state.send(.loaded)
+                self?.successMessageSubject.send("action.passwordreset.send".localized())
+                return
+            }
+            self?.state.send(.error(error: error))
+        }
+        
 
-        let request = PasswordResetRequest(email: email, type: .link)
-        AtheloAPI.Passwords.reset(request: request)
-            .sink { [weak self] result in
-                switch result {
-                case .finished:
-                    self?.state.send(.loaded)
-                case .failure(let error):
-                    self?.state.send(.error(error: error))
-                }
-            } receiveValue: { [weak self] value in
-                self?.successMessageSubject.send(value.detail)
-            }.store(in: &cancellables)
+//        let request = PasswordResetRequest(email: email, type: .link)
+//        AtheloAPI.Passwords.reset(request: request)
+//            .sink { [weak self] result in
+//                switch result {
+//                case .finished:
+//                    self?.state.send(.loaded)
+//                case .failure(let error):
+//                    self?.state.send(.error(error: error))
+//                }
+//            } receiveValue: { [weak self] value in
+//                self?.successMessageSubject.send(value.detail)
+//            }.store(in: &cancellables)
     }
 
     // MARK: - Sinks

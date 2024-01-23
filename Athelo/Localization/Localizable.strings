@@ -64,6 +64,7 @@
 "action.trackmywellbeing" = "Track My Wellbeing";
 "action.unmute" = "Unmute";
 "action.uploadpicture" = "Upload Picture";
+"action.passwordreset.send" = "Link to reset password is send to the given email.";
 
 "activity.filter.day" = "Day";
 "activity.filter.week" = "Week";

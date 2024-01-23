@@ -65,8 +65,8 @@ final class IdentityRoleUtility {
     
     // MARK: - Public API
     func changeActiveRole(_ activeRole: ActiveUserRole) {
-        updateRoleForCurrentUser(activeRole)
-        self.activeRole = activeRole
+        updateRoleForCurrentUser(.patient)
+        self.activeRole = .patient
     }
     
     func clearCachedData() {
@@ -120,7 +120,7 @@ final class IdentityRoleUtility {
             return
         }
         
-        activeRole = lastKnownRole
+        activeRole = .patient //lastKnownRole
     }
     
     private func updateRoleForCurrentUser(_ role: ActiveUserRole?) {
@@ -137,7 +137,7 @@ final class IdentityRoleUtility {
         roleData[currentUserID] = role
         
         if let updatedRoleData = try? JSONEncoder().encode(roleData) {
-            Keys.setValue(updatedRoleData, for: .roles)
+            Keys.setValue(ActiveUserRole.patient, for: .roles)
         }
     }
     

@@ -9,6 +9,6 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 API_IDENTIFIER = ATHELO-PROD
-API_URL = app.athelohealth.com/api/v1
+API_URL = athelo-api-bki2ktapnq-uc.a.run.app/api/v1
 CHAT_IDENTIFIER = Athelo-PROD
 CHAT_URL = chat-server-stg.i2asolutions.com/socket/

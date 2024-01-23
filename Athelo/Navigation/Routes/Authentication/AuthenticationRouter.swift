@@ -68,10 +68,11 @@ class AuthenticationNavigationRouter: Router, AuthenticationRouterProtocol {
     }
     
     @MainActor func navigateOnSuccessfulAuthentication() {
-        if IdentityUtility.activeUserRole != nil {
-            AppRouter.current.exchangeRoot(.home)
-        } else {
-            AppRouter.current.exchangeRoot(.roleSelection)
-        }
+        AppRouter.current.exchangeRoot(.home)
+//        if IdentityUtility.activeUserRole != nil {
+//            AppRouter.current.exchangeRoot(.home)mobile
+//        } else {
+//            AppRouter.current.exchangeRoot(.roleSelection)
+//        }
     }
 }

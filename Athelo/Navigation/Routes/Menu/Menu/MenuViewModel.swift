@@ -39,9 +39,9 @@ final class MenuViewModel: BaseViewModel {
     private func sinkIntoIdentityUtility() {
         IdentityUtility.$activeRole
             .compactMap({ $0 })
-            .removeDuplicates { lhs, rhs in
-                lhs.isCaregiver == rhs.isCaregiver
-            }
+//            .removeDuplicates { lhs, rhs in
+//                lhs.isCaregiver == rhs.isCaregiver
+//            }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.displayedOptions.send(MenuOption.inMenuOrder(for: $0))

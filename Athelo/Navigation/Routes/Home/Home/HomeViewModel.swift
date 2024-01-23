@@ -198,11 +198,11 @@ final class HomeViewModel: BaseViewModel {
                 self?.dataSnapshot = snapshot
             }.store(in: &cancellables)
         
-        IdentityUtility.$activeRole
-            .map({ $0?.relatedPatientData })
-            .sink { [weak self] value in
-                self?.selectedWardModel.updateWard(value)
-            }.store(in: &cancellables)
+//        IdentityUtility.$activeRole
+//            .map({ $0?.relatedPatientData })
+//            .sink { [weak self] value in
+//                self?.selectedWardModel.updateWard(value)
+//            }.store(in: &cancellables)
     }
     
     private func sinkIntoLocalNotifications() {
@@ -214,17 +214,17 @@ final class HomeViewModel: BaseViewModel {
     }
     
     private func sinkIntoOwnSubjects() {
-        Publishers.CombineLatest3(
+        Publishers.CombineLatest(
             symptomData,
             IdentityUtility.userDataPublisher
                 .compactMap({ $0?.hasFitbitUserProfile })
                 .removeDuplicates()
-                .eraseToAnyPublisher(),
-            IdentityUtility.$activeRole
-                .compactMap({ $0 })
                 .eraseToAnyPublisher()
+//            IdentityUtility.$activeRole
+//                .compactMap({ $0 })
+//                .eraseToAnyPublisher()
         )
-        .map({ (symptomData, hasConnectedDevice, userRole) -> HomeLayoutData in
+        .map({ (symptomData, hasConnectedDevice) -> HomeLayoutData in
             var recommendations: [RecommendationPrompt] = []
             
       //      let connectedDevice: Bool = (hasConnectedDevice ?? false) ?? false
@@ -249,7 +249,7 @@ final class HomeViewModel: BaseViewModel {
                 feeling: symptomData?.feeling?.feeling,
                 symptoms: symptomData?.symptoms.map({ $0.symptom }),
                 recommendations: recommendations,
-                userRole: userRole
+                userRole: .patient
             )
         })
         .sink { [weak self] in

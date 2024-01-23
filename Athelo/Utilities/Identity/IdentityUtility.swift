@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import FirebaseAuth
 
 enum ThirdPartyAuthenticationPlatform {
     case apple
@@ -95,7 +96,8 @@ enum SignInHandlerState: Equatable {
     
     private let roleUtility = IdentityRoleUtility()
     static var activeUserRole: ActiveUserRole? {
-        shared.roleUtility.activeRole
+        .patient
+//        shared.roleUtility.activeRole
     }
     
     private let userDataSubject = CurrentValueSubject<IdentityProfileData?, Never>(nil)
@@ -183,16 +185,22 @@ enum SignInHandlerState: Equatable {
             .eraseToAnyPublisher()
     }
     
-    static func login(email: String, password: String) -> AnyPublisher<IdentityProfileData, Error> {
-        let loginRequest = AuthenticationLoginRequest(email: email, password: password)
-        return wrapLoginPublisher(
-            (AtheloAPI.Authentication.login(request: loginRequest) as AnyPublisher<IdentityTokenDataWrapper, APIError>)
-                .map({ $0.tokenData })
-                .mapError({ $0 as Error })
-                .eraseToAnyPublisher(),
-            loginMethod: .email,
-            email: email
-        )
+//    static func login(email: String, password: String) -> AnyPublisher<IdentityProfileData, Error> {
+//        let loginRequest = AuthenticationLoginRequest(email: email, password: password)
+//        return wrapLoginPublisher(
+//            (AtheloAPI.Authentication.login(request: loginRequest) as AnyPublisher<IdentityTokenDataWrapper, APIError>)
+//                .map({ $0.tokenData })
+//                .mapError({ $0 as Error })
+//                .eraseToAnyPublisher(),
+//            loginMethod: .email,
+//            email: email
+//        )
+//    }
+    
+    static func loginFirebase(email: String) -> AnyPublisher<IdentityProfileData, Error> {
+        let abc = IdentityTokenData(accessToken: "",expiresIn: 0.00,refreshToken: "",scope: "",tokenType: "")
+        let x = Result<IdentityTokenData, Error>.Publisher(abc)
+        return wrapLoginPublisher(x.eraseToAnyPublisher(), loginMethod: .email)
     }
     
     static func logOut() {
@@ -264,17 +272,18 @@ enum SignInHandlerState: Equatable {
             .handleEvents(receiveOutput: { value in
                 shared.userDataSubject.send(value)
             })
-            .eraseToAnyPublisher()
-            .flatMap({ value -> AnyPublisher<IdentityProfileData, APIError> in
-                (AtheloAPI.Profile.authorizationMethods() as AnyPublisher<[IdentityAuthenticationMethod], APIError>)
-                    .handleEvents(receiveOutput: { methods in
-                        shared.authenticationMethodsSubject.send(methods)
-                    })
-                    .map({ _ in value })
-                    .eraseToAnyPublisher()
-            })
             .mapError({ $0 as Error })
             .eraseToAnyPublisher()
+//            .flatMap({ value -> AnyPublisher<IdentityProfileData, APIError> in
+//                (AtheloAPI.Profile.authorizationMethods() as AnyPublisher<[IdentityAuthenticationMethod], APIError>)
+//                    .handleEvents(receiveOutput: { methods in
+//                        shared.authenticationMethodsSubject.send(methods)
+//                    })
+//                    .map({ _ in value })
+//                    .eraseToAnyPublisher()
+//            })
+//            .mapError({ $0 as Error })
+//            .eraseToAnyPublisher()
     }
     
     static func updateUserProfile(using params: [String: Any]) -> AnyPublisher<IdentityProfileData, Error> {
@@ -342,8 +351,43 @@ enum SignInHandlerState: Equatable {
         userDataSubject.send(profileData)
     }
     
+    static func setToken(token: String, email: String) -> AnyPublisher<IdentityProfileData, Error> {
+//        authResult.user.getIDToken(completion: { [weak self] token, error in
+//            guard let token = token else {
+//                // TODO: self?.state.send(.error(error: self?.error))
+//                return
+//            }
+//            let provider = authResult.credential?.provider
+//            let refreshToken:String = authResult
+//            IdentityUtility.setToken(token: token, email: email)
+//            self?.state.send(.loaded)
+//        })
+        let tokenData =  IdentityTokenData(accessToken: token, expiresIn: 24000, refreshToken: token, scope: "", tokenType: "email")
+        do {
+            try APIEnvironment.setUserToken(tokenData)
+        }
+        catch {
+            print("Error")
+        }
+        return wrapLoginPublisher(Just(tokenData).setFailureType(to: Error.self).eraseToAnyPublisher(), loginMethod: .email, email: email)
+    }
+    
+//    static func setToken1(authResult: AuthDataResult, email: String) -> AnyPublisher<IdentityProfileData, Error> {
+//        var token: String = "" // Declare token outside the closure
+//        authResult.user.getIDToken(completion: { [weak self] tokenResult, error in
+//            guard let tokenResult = tokenResult else {
+//                // TODO: self?.state.send(.error(error: self?.error))
+//                return
+//            }
+//        })
+//        // Move tokenData creation inside the closure
+//        let tokenData = IdentityTokenData(accessToken: "token", expiresIn: 24000, refreshToken: authResult.refreshToken?.tokenString ?? "", scope: "", tokenType: "email")
+//        return wrapLoginPublisher(Just(tokenData).setFailureType(to: Error.self).eraseToAnyPublisher(), loginMethod: .email, email: email)
+//    }
+    
     // MARK: - Stream wrappers
     private static func wrapLoginPublisher(_ loginPublisher: AnyPublisher<IdentityTokenData, Error>, loginMethod: LoginData.Method, email: String? = nil) -> AnyPublisher<IdentityProfileData, Error> {
+        
         loginPublisher
             .handleEvents(receiveOutput: {
                 try? APIEnvironment.setUserToken($0)

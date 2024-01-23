@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>864070173721-iejpseeouv4u6p1d3nn8cptr887qf7pp.apps.googleusercontent.com</string>
+	<string>143608640465-45g6sl6ee0hvg5hfcf7ren0eg4f4grkj.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.864070173721-iejpseeouv4u6p1d3nn8cptr887qf7pp</string>
+	<string>com.googleusercontent.apps.143608640465-45g6sl6ee0hvg5hfcf7ren0eg4f4grkj</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>143608640465-7ej0s2rfa8n9j6oisodvdesrsqu09hhj.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAvskDP1lQFZGqOh8e1oD4Suqj7TUcFPkI</string>
+	<string>AIzaSyBoKbCLRdwSuG-bEKBoanFDKLWD8UXhB0o</string>
 	<key>GCM_SENDER_ID</key>
-	<string>864070173721</string>
+	<string>143608640465</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.athelohealth.mobile</string>
 	<key>PROJECT_ID</key>
-	<string>athelo-health-fd05e</string>
+	<string>test-deploy-402816</string>
 	<key>STORAGE_BUCKET</key>
-	<string>athelo-health-fd05e.appspot.com</string>
+	<string>test-deploy-402816.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:864070173721:ios:085abc56ef4c5d72619688</string>
+	<string>1:143608640465:ios:08255845610533bb5566f0</string>
 </dict>
 </plist>
