@@ -84,8 +84,8 @@ extension IdentitySignInWithAppleHandler: ASAuthorizationControllerDelegate {
                 }
                 let provider = authResult.credential?.provider
                 
-                let tokenData =  IdentityTokenData(accessToken: token, expiresIn: 24000, refreshToken: refreshToken, scope: "", tokenType: provider ?? "google")
-                self?.state.send(.loaded(token: tokenData, email: email))
+                let tokenData =  IdentityTokenData(accessToken: token, expiresIn: 24000, refreshToken: refreshToken, scope: "", tokenType: provider ?? "Apple")
+                self?.createProfile(email: credential.email ?? "", displayName: credential.fullName?.givenName ?? "", tokenData: tokenData)
             })
         }
         
@@ -113,6 +113,22 @@ extension IdentitySignInWithAppleHandler: ASAuthorizationControllerDelegate {
 //                }.store(in: &self.cancellables)
 //        }
     }
+    
+    private func createProfile(email: String, displayName: String, tokenData: IdentityTokenData) {
+        let request = ProfileCreateRequest1(additionalParams: [
+            "display_name": displayName,
+            "first_name": "",
+            "last_name": ""
+        ])
+        
+        (AtheloAPI.Profile.createProfile(request: request) as AnyPublisher<IdentityProfileData, APIError>)
+            .sink { [weak self] _ in
+                self?.state.send(.loaded(token: tokenData, email: email))
+            } receiveValue: { _ in
+                    /* ... */
+            }.store(in: &cancellables)
+    }
+
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         if ASAuthorizationError(_nsError: error as NSError).code == .canceled {

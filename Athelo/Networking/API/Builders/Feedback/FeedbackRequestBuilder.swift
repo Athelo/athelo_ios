@@ -32,9 +32,9 @@ enum FeedbackRequestBuilder: APIBuilderProtocol {
     var path: String {
         switch self {
         case .feedback:
-            return "/applications/feedback/"
+            return "/applications/feedback"
         case .topics:
-            return "/applications/feedback-topic/"
+            return "/applications/feedback-topic"
         }
     }
 }

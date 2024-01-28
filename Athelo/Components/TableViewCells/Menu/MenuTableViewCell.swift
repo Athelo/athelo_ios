@@ -28,8 +28,8 @@ extension MenuTableViewCell: ConfigurableCell {
 private extension MenuOption {
     var optionIcon: UIImage? {
         switch self {
-//        case .askAthelo:
-//            return UIImage(named: "chatHeart")
+        case .askAthelo:
+            return UIImage(named: "chatHeart")
 //        case .connectSmartWatch:
 //            return UIImage(named: "watch")
 //        case .messages:

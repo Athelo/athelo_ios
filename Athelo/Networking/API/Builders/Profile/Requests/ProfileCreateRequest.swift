@@ -22,3 +22,21 @@ public struct ProfileCreateRequest: APIRequest {
         return parameters
     }
 }
+
+public struct ProfileCreateRequest1: APIRequest {
+    let additionalParams: [String : Any]?
+
+    public init(additionalParams: [String: Any]? = nil) {
+        self.additionalParams = additionalParams
+    }
+    
+    public var parameters: [String : Any]? {
+        var parameters: [String: Any] = [:]
+
+        additionalParams?.forEach { (key, value) in
+            parameters[key] = value
+        }
+
+        return parameters
+    }
+}

@@ -7,6 +7,16 @@
 
 import Combine
 import UIKit
+import FirebaseAuth
+
+public struct SignUpWithEmailData: APIRequest {
+    public var parameters: [String : Any]?
+    
+    let email: String
+    let display_name: String
+    let first_name: String
+    let last_name: String
+}
 
 final class SignUpWithEmailViewModel: BaseViewModel {
     // MARK: - Properties
@@ -46,7 +56,7 @@ final class SignUpWithEmailViewModel: BaseViewModel {
     
     func sendRequest() {
         guard isValid, state.value != .loading,
-              let _ = userName.value,
+              let displayName = userName.value,
               let confirmPassword = confirmPassword.value,
               let email = email.value,
               let password = password.value,
@@ -56,9 +66,84 @@ final class SignUpWithEmailViewModel: BaseViewModel {
         
         state.send(.loading)
         
-        IdentityUtility.register(email: email, password: password, confirmPassword: confirmPassword)
+//        IdentityUtility.register(email: email, password: password, confirmPassword: confirmPassword)
+//            .sink { [weak self] in
+//                self?.state.send($0.toViewModelState())
+//            }.store(in: &cancellables)
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            
+        }
+        
+        IdentityUtility.logOut()
+        
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
+            guard let authResult = authResult else {
+                guard let error = error else {
+                    self?.state.send(.error(error: AuthenticationPingError()))
+                    return
+                }
+                self?.state.send(.error(error: error))
+                return
+            }
+            authResult.user.getIDToken(completion: { [weak self] token, error in
+                guard let token = token, let email = authResult.user.email, let refreshToken = authResult.user.refreshToken else {
+                    self?.state.send(.error(error: error ?? AuthenticationPingError()))
+                    return
+                }
+                let tokenData =  IdentityTokenData(accessToken: token, 
+                                                   expiresIn: 24000,
+                                                   refreshToken: refreshToken,
+                                                   scope: "",
+                                                   tokenType: "email")
+                do {
+                    try APIEnvironment.setUserToken(tokenData)
+                } catch {
+                    
+                }
+                self?.createProfile(email: email, displayName: displayName, tokenData: tokenData)
+            })
+        }
+    }
+    
+    private func createProfile(email: String, displayName: String, tokenData: IdentityTokenData) {
+        let request = ProfileCreateRequest1(additionalParams: [
+            "display_name": displayName,
+            "first_name": "",
+            "last_name": ""
+        ])
+        
+        (AtheloAPI.Profile.createProfile(request: request) as AnyPublisher<IdentityProfileData, APIError>)
+            .mapError({
+                $0 as Error
+            })
+            .handleEvents(receiveOutput: { value in
+            })
+            .map({_ in
+               
+            }).sink(receiveCompletion: {_ in
+                self.setToken(tokenData: tokenData, email: email, displayName: displayName)
+            }, receiveValue: {
+                
+            }).store(in: &cancellables)
+    }
+    
+    private func setToken(tokenData: IdentityTokenData, email: String, displayName: String) {
+        IdentityUtility.setToken(tokenData: tokenData, email: email)
             .sink { [weak self] in
-                self?.state.send($0.toViewModelState())
+                switch $0 {
+                case .finished:
+                    self?.state.send(.loaded)
+                case .failure(let error):
+                    if case .missingCredentials = (error as? APIError) {
+                        self?.state.send(.error(error: AuthenticationPingError()))
+                    } else {
+                        self?.state.send(.error(error: error))
+                    }
+                }
+            } receiveValue: { _ in
+                    /* ... */
             }.store(in: &cancellables)
     }
     

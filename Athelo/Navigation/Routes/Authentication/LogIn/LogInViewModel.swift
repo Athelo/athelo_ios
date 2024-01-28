@@ -57,8 +57,8 @@ final class LogInViewModel: BaseViewModel {
                     self?.state.send(.error(error: error ?? AuthenticationPingError()))
                     return
                 }
-//                let provider = authResult.credential?.provider
                 let tokenData =  IdentityTokenData(accessToken: token, expiresIn: 24000, refreshToken: refreshToken, scope: "", tokenType: "email")
+    
                 self?.setToken(tokenData: tokenData, email: email)
             })
         }

@@ -103,7 +103,7 @@ private extension MenuOption {
 //            options.append(.connectSmartWatch)
 //        }
         
-//        options.append(.sendFeedback)
+        options.append(.askAthelo)
         
         return options
     }

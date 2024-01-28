@@ -15,7 +15,7 @@ enum MenuOption: String {
     case mySymptoms
     case settings
 //    case connectSmartWatch
-//    case askAthelo
+    case askAthelo
 //    case sendFeedback
     
     var optionName: String {

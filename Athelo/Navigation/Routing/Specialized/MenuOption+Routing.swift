@@ -46,11 +46,11 @@ extension MenuOption {
 //            let viewController = ConnectDeviceViewController.viewController(configurationData: .init(deviceType: .fitbit), router: router)
 //            
 //            return viewController
-//        case .askAthelo:
-//            let router = AskAtheloRouter(navigationController: navigationController)
-//            let viewController = AskAtheloViewController.viewController(router: router)
-//            
-//            return viewController
+        case .askAthelo:
+            let router = FeedbackRouter(navigationController: navigationController)
+            let viewController = FeedbackViewController.viewController(router: router)
+            
+            return viewController
 //        case .sendFeedback:
 //            let router = FeedbackRouter(navigationController: navigationController)
 //            let viewController = FeedbackViewController.viewController(router: router)

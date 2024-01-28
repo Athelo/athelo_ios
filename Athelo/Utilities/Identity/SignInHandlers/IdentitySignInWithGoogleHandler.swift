@@ -89,7 +89,7 @@ final class IdentitySignInWithGoogleHandler {
                 }
                 let provider = authResult.credential?.provider
                 let tokenData =  IdentityTokenData(accessToken: token, expiresIn: 24000, refreshToken: refreshToken, scope: "", tokenType: provider ?? "google")
-                self?.state.send(.loaded(token: tokenData, email: email))
+                self?.createProfile(email: authResult.user.email ?? "", displayName: authResult.user.displayName ?? "", tokenData: tokenData)
             })
         }
     }
@@ -106,6 +106,21 @@ final class IdentitySignInWithGoogleHandler {
 //                self?.state.send(.loaded(token: value.tokenData, email: email))
 //            }.store(in: &cancellables)
 //    }
+    
+    private func createProfile(email: String, displayName: String, tokenData: IdentityTokenData) {
+        let request = ProfileCreateRequest1(additionalParams: [
+            "display_name": displayName,
+            "first_name": "",
+            "last_name": ""
+        ])
+        
+        (AtheloAPI.Profile.createProfile(request: request) as AnyPublisher<IdentityProfileData, APIError>)
+            .sink { [weak self] _ in
+                self?.state.send(.loaded(token: tokenData, email: email))
+            } receiveValue: { _ in
+                    /* ... */
+            }.store(in: &cancellables)
+    }
     
     private func sendTokenRequest(using config: GIDConfiguration, uiProvider: IdentitySignInWithGoogleUIProvider? = nil) async throws -> (AuthCredential) {
         try await withCheckedThrowingContinuation { continuation in
