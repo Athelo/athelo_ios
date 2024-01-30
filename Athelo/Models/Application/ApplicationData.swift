@@ -7,17 +7,14 @@
 
 import Foundation
 
-struct ApplicationData: Decodable, Identifiable {
-    let id: Int
+struct ApplicationData: Decodable {
     
     let aboutUs: String?
-    let identifier: String
     let privacy: String?
     let termsOfUse: String?
     
     private enum CodingKeys: String, CodingKey {
-        case id, identifier, privacy
-        
+        case privacy
         case aboutUs = "about_us"
         case termsOfUse = "terms_of_use"
     }

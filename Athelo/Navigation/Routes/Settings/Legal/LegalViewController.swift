@@ -58,6 +58,10 @@ final class LegalViewController: BaseViewController {
             return
         }
         
+        guard viewModel.model.description != "" else {
+            return
+        }
+        
         let descriptionView = DescriptionView(model: viewModel.model, font: .withStyle(.paragraph)) { [weak self] url in
             self?.router?.displayURL(url)
         }
@@ -102,6 +106,12 @@ final class LegalViewController: BaseViewController {
                     self?.viewDescriptionContainer.alpha = 0.0
                     self?.viewNoContent.alpha = 1.0
                 }
+            }.store(in: &cancellables)
+        
+        viewModel.isUpdated
+            .receive(on: DispatchQueue.main)
+            .sinkDiscardingValue { [weak self] in
+                self?.configureDescriptionContainerView()
             }.store(in: &cancellables)
     }
 }

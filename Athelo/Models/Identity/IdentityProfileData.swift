@@ -17,7 +17,7 @@ struct IdentityProfileData: Decodable, Identifiable {
     }
     
     let commonProfileData: IdentityCommonProfileData
-    let dateOfBirth: Date?
+    let birthday: Date?
     let email: String?
     let firstName: String?
     let hasFitbitUserProfile: Bool?
@@ -50,13 +50,13 @@ struct IdentityProfileData: Decodable, Identifiable {
 
     private enum CodingKeys: String, CodingKey {
         case email, photo, user
-        case dateOfBirth = "date_of_birth"
+        case birthday = "birthday"
         case firstName = "first_name"
         case hasFitbitUserProfile = "has_fitbit_user_profile"
         case govXStateGUID = "gov_x_state_guid"
         case isFriend = "is_friend"
         case lastName = "last_name"
-        case phoneNumber = "phone_number"
+        case phoneNumber = "phone"
         case personTags = "person_tags"
         case relationStatus = "status"
     }
@@ -66,7 +66,7 @@ struct IdentityProfileData: Decodable, Identifiable {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        self.dateOfBirth = try container.decodeDateIfPresent(for: .dateOfBirth, format: "yyyy-MM-dd")
+        self.birthday = try container.decodeDateIfPresent(for: .birthday, format: "yyyy-MM-dd")
         self.email = try container.decodeValueIfPresent(forKey: .email)
         self.firstName = try container.decodeValueIfPresent(forKey: .firstName)
         self.hasFitbitUserProfile = try container.decodeValueIfPresent(forKey: .hasFitbitUserProfile)

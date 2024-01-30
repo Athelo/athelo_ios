@@ -26,6 +26,8 @@ final class LegalViewModel: BaseViewModel {
     
     private var cancellables: [AnyCancellable] = []
     
+    let isUpdated = CurrentValueSubject<Bool, Never>(false)
+    
     // MARK: - Public API
     func assignConfigurationData(_ configurationData: LegalConfigurationData) {
         switch configurationData.source {
@@ -43,6 +45,7 @@ final class LegalViewModel: BaseViewModel {
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] in
                     self?.state.send($0.toViewModelState())
+                    self?.isUpdated.value = true
                 } receiveValue: { [weak self] in
                     self?.model.updateDescription($0)
                 }.store(in: &cancellables)

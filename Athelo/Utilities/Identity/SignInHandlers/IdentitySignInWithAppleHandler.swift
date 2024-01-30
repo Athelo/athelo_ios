@@ -85,6 +85,11 @@ extension IdentitySignInWithAppleHandler: ASAuthorizationControllerDelegate {
                 let provider = authResult.credential?.provider
                 
                 let tokenData =  IdentityTokenData(accessToken: token, expiresIn: 24000, refreshToken: refreshToken, scope: "", tokenType: provider ?? "Apple")
+                do {
+                    try APIEnvironment.setUserToken(tokenData)
+                } catch {
+                    
+                }
                 self?.createProfile(email: credential.email ?? "", displayName: credential.fullName?.givenName ?? "", tokenData: tokenData)
             })
         }

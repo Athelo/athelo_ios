@@ -15,6 +15,7 @@ final class EditProfileViewModel: BaseViewModel {
     private let targetBirthDate = CurrentValueSubject<Date?, Never>(nil)
     private let targetName = CurrentValueSubject<String?, Never>(nil)
     private let targetPhoneNumber = CurrentValueSubject<String?, Never>(nil)
+    private let targetDescribesBest = CurrentValueSubject<String?, Never>(nil)
     
     var knownBirthDate: Date {
         targetBirthDate.value ?? Date().dateByAdding(-50, .year).dateAt(.startOfMonth).dateByAdding(14, .day).date
@@ -24,6 +25,7 @@ final class EditProfileViewModel: BaseViewModel {
     @Published private(set) var editsContent: Bool = false
     @Published private(set) var hasPendingChanges: Bool = false
     @Published private(set) var userData: IdentityProfileData?
+    @Published private(set) var selectedDescribesYou: DescribesYou?
     
     private var lockedInEditMode: Bool = false
     
@@ -57,6 +59,10 @@ final class EditProfileViewModel: BaseViewModel {
     
     func assignPhoneNumber(_ phoneNumber: String?) {
         targetPhoneNumber.send(phoneNumber)
+    }
+    
+    func assignDescribesBest(_ describesBest: String?) {
+        targetDescribesBest.send(describesBest)
     }
     
     func lockEditMode() {
@@ -183,6 +189,15 @@ final class EditProfileViewModel: BaseViewModel {
         }
     }
     
+    func describesBestPublisher() -> AnyPublisher<[ListInputCellItemData], Error> {
+        Deferred {
+            ConstantsStore.describesYouPublisher()
+                .map({ $0 as [ListInputCellItemData] })
+                .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
+    }
+    
     // MARK: - Sinks
     private func sink() {
         sinkIntoIdentityManager()
@@ -206,8 +221,8 @@ final class EditProfileViewModel: BaseViewModel {
         var params: [String: Any] = [:]
         
         if let birthDate = targetBirthDate.value,
-           birthDate.toFormat("yyyy-MM") != userData?.dateOfBirth?.toFormat("yyyy-MM") {
-            params["date_of_birth"] = "\(birthDate.toFormat("yyyy-MM"))-15"
+           birthDate.toFormat("yyyy-MM") != userData?.birthday?.toFormat("yyyy-MM") {
+            params["birthday"] = "\(birthDate.toFormat("yyyy-MM"))-15"
         }
         
         if let name = targetName.value,
@@ -216,7 +231,7 @@ final class EditProfileViewModel: BaseViewModel {
         }
         
         if targetPhoneNumber.value != userData?.phoneNumber {
-            params["phone_number"] = targetPhoneNumber.value ?? NSNull()
+            params["phone"] = targetPhoneNumber.value ?? NSNull()
         }
         
         return params
@@ -224,8 +239,40 @@ final class EditProfileViewModel: BaseViewModel {
     
     private func resetCachedFormData() {
         targetAvatarPhoto.send(nil)
-        targetBirthDate.send(userData?.dateOfBirth)
+        targetBirthDate.send(userData?.birthday)
         targetName.send(userData?.displayName)
         targetPhoneNumber.send(userData?.phoneNumber)
     }
+}
+
+enum DescribesYou: Hashable, CaseIterable, ListInputCellItemData {
+    case active
+    case remission
+    
+    var name: String {
+        switch self {
+        case .active:
+            return "ACTIVE"
+        case .remission:
+            return "REMISSION"
+        }
+    }
+    
+    var displayName: String {
+        switch self {
+        case .active:
+            return "Active Treatment"
+        case .remission:
+            return "Remission"
+        }
+    }
+    
+    var listInputItemID: Int {
+        0
+    }
+    
+    var listInputItemName: String {
+        displayName
+    }
+
 }

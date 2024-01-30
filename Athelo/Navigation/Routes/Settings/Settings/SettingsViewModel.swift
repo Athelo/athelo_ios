@@ -25,6 +25,15 @@ final class SettingsViewModel: BaseViewModel {
             .eraseToAnyPublisher()
     }
     
+    var settingsConfigurationData: LegalConfigurationData? = nil
+    
+    private var action = CurrentValueSubject<String, Never>("")
+    var actionUpdatePublisher: AnyPublisher<Void, Never> {
+        action
+            .map({ _ in () })
+            .eraseToAnyPublisher()
+    }
+    
     // MARK: - Public API
     func action(at indexPath: IndexPath) -> SettingsAction? {
         guard let option = option(at: indexPath) else {
@@ -37,10 +46,9 @@ final class SettingsViewModel: BaseViewModel {
             return .displayLegal(.init(title: "navigation.aboutus".localized(), source: aboutUs?.isEmpty == false ? .text(aboutUs!) : .publisher(
                 ConstantsStore.applicationDataPublisher()
                     .tryMap({
-                        guard let aboutUs = $0.aboutUs, !aboutUs.isEmpty else {
+                        guard let aboutUs: String = $0.aboutUs, !aboutUs.isEmpty else {
                             throw CommonError.missingContent
                         }
-                        
                         return aboutUs
                     })
                     .eraseToAnyPublisher()

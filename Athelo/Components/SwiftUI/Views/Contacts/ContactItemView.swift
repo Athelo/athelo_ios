@@ -111,7 +111,7 @@ private extension IdentityProfileData {
             displayName: "\(firstName) \(lastName)",
             imageURL: imageURL
         )
-        self.dateOfBirth = nil
+        self.birthday = nil
         self.email = nil
         self.firstName = firstName
         self.hasFitbitUserProfile = nil

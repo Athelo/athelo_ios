@@ -25,7 +25,7 @@ enum ProfileRequestBuilder: APIBuilderProtocol {
         case .authorizationMethods, .currentUserDetails, .deleteAccount, .details:
             return .get
         case .update:
-            return .patch
+            return .put
         }
     }
 
@@ -61,8 +61,8 @@ enum ProfileRequestBuilder: APIBuilderProtocol {
             return "/users/user-profiles/"
         case .removeTags:
             return "/users/me/remove-person-tags/"
-        case .update(let request):
-            return "/users/me/\(request.userID)/"
+        case .update:
+            return "/users/me/"
         }
     }
 }

@@ -77,10 +77,28 @@ struct APIService: APIServiceProtocol {
 
                     throw thrownError
                 }
-
+                
+                #if DEBUG
+                if let responseData = data.prettyPrintedJSONString {
+                    debugPrint(responseData)
+                }
+                #endif
+                
                 return data
             })
             .mapError({ APIError.convertToAPIError($0) })
             .eraseToAnyPublisher()
+    }
+}
+extension Data {
+    var prettyPrintedJSONString: NSString? {
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: self, options: []),
+              let data = try? JSONSerialization.data(withJSONObject: jsonObject,
+                                                       options: [.prettyPrinted]),
+              let prettyJSON = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else {
+                  return nil
+               }
+
+        return prettyJSON
     }
 }

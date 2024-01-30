@@ -21,12 +21,17 @@ final class EditProfileViewController: KeyboardListeningViewController {
     @IBOutlet private weak var formTextFieldEmail: FormTextField!
     @IBOutlet private weak var formTextFieldName: FormTextField!
     @IBOutlet private weak var formTextFieldPhoneNumber: FormTextField!
+    @IBOutlet private weak var formTextFieldWhatBestDescribesYou: FormTextField!
+    
     @IBOutlet private weak var stackViewActions: UIStackView!
     @IBOutlet private weak var stackViewAvatar: UIStackView!
     @IBOutlet private weak var stackViewContent: UIStackView!
     
+    
     weak var birthDateInputHostingController: UIHostingController<CalendarView>?
     weak var userTypeInputView: ListInputView?
+
+    weak var whatBestDescribesYouInputView: ListInputView?
     
     // MARK: - Constraints
     @IBOutlet private weak var constraintStackViewActionsBottom: NSLayoutConstraint!
@@ -39,11 +44,13 @@ final class EditProfileViewController: KeyboardListeningViewController {
     
     private var birthDateDismissalGestureRecognizer: UITapGestureRecognizer?
     private var userTypeDismissalGestureRecognizer: UITapGestureRecognizer?
+    private var describesYouDismissalGestureRecognizer: UITapGestureRecognizer?
     
     private var shouldLockEditMode: Bool = false
     
     private var cancellables: [AnyCancellable] = []
     private var userTypeInputCancellable: AnyCancellable?
+    private var desccribesBestInputCancellable: AnyCancellable?
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -66,6 +73,11 @@ final class EditProfileViewController: KeyboardListeningViewController {
         configurePhoneNumberFormTextField()
         configureRequestPasswordResetButton()
         configureUploadPictureButton()
+        configureWhatBestDescribesYouTextField()
+    }
+    
+    private func configureWhatBestDescribesYouTextField() {
+        formTextFieldWhatBestDescribesYou.delegate = self
     }
     
     private func configureBirthDateFormTextField() {
@@ -168,6 +180,19 @@ final class EditProfileViewController: KeyboardListeningViewController {
         formTextFieldPhoneNumber.currentTextPublisher
             .sink(receiveValue: viewModel.assignPhoneNumber(_:))
             .store(in: &cancellables)
+    }
+    
+    private func sinkIntoDescribesBestTextField() {
+        formTextFieldWhatBestDescribesYou.displayIcon(.verticalChevron)
+            .sink { [weak self] in
+                if self?.whatBestDescribesYouInputView == nil {
+                    self?.displayDescribesBestInputView()
+                } else {
+                    self?.hideDescribesYouInputView()
+                }
+                
+                self?.view.endEditing(true)
+            }.store(in: &cancellables)
     }
     
     private func sinkIntoViewModel() {
@@ -295,6 +320,74 @@ final class EditProfileViewController: KeyboardListeningViewController {
         }
     }
     
+    private func displayDescribesBestInputView() {
+        guard whatBestDescribesYouInputView == nil else {
+            return
+        }
+        
+        let inputView = ListInputView.instantiate()
+        
+        inputView.translatesAutoresizingMaskIntoConstraints = false
+        inputView.alpha = 0.0
+        
+        contentScrollView.addSubview(inputView)
+        whatBestDescribesYouInputView = inputView
+        
+        adjustFrameOfFormInputView(inputView, inRelationTo: formTextFieldWhatBestDescribesYou, inside: self.stackViewContent, of: contentScrollView, estimatedComponentHeight: inputView.maximumExpectedContainerHeight)
+        
+        UIView.animate(withDuration: 0.3) {
+            inputView.alpha = 1.0
+        }
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(describesYoutInputViewDismissalGestureRecognized(_:)))
+        tapGestureRecognizer.delegate = self
+        
+        if let oldGestureRecognizer = describesYouDismissalGestureRecognizer {
+            view.removeGestureRecognizer(oldGestureRecognizer)
+        }
+        view.addGestureRecognizer(tapGestureRecognizer)
+        
+        describesYouDismissalGestureRecognizer = tapGestureRecognizer
+        
+        inputView.assignAndFireItemsPublisher(viewModel.describesBestPublisher(), preselecting: viewModel.selectedDescribesYou)
+        
+        desccribesBestInputCancellable?.cancel()
+        desccribesBestInputCancellable = inputView.selectedItemPublisher
+            .compactMap({ $0 as? DescribesYou })
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.viewModel.assignDescribesBest($0.name)
+                
+                self?.hideDescribesYouInputView()
+                self?.view.endEditing(true)
+            }
+        
+        view.endEditing(true)
+        
+        formTextFieldWhatBestDescribesYou.activateIcon(.verticalChevron)
+    }
+    
+    private func hideDescribesYouInputView() {
+        guard whatBestDescribesYouInputView != nil else {
+            return
+        }
+        
+        if let describesYouDismissalGestureRecognizer = describesYouDismissalGestureRecognizer {
+            view.removeGestureRecognizer(describesYouDismissalGestureRecognizer)
+        }
+        
+        formTextFieldWhatBestDescribesYou.deactivateIcon(.verticalChevron)
+        
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.whatBestDescribesYouInputView?.alpha = 0.0
+        } completion: { [weak self] completed in
+            if completed {
+                self?.whatBestDescribesYouInputView?.removeFromSuperview()
+                self?.whatBestDescribesYouInputView = nil
+            }
+        }
+    }
+    
     private func updateButtonsVisibility() {
         let shouldHideEditActions = !viewModel.editsContent
         let shouldHideResetPasswordAction = shouldHideEditActions || (IdentityUtility.authenticationMethods?.containsNativeAuthData() == false)
@@ -329,7 +422,7 @@ final class EditProfileViewController: KeyboardListeningViewController {
         formTextFieldEmail.text = profileData.email
         formTextFieldName.text = profileData.displayName
         formTextFieldPhoneNumber.text = profileData.phoneNumber
-        formTextFieldBirthDate.text = profileData.dateOfBirth?.toFormat("MMMM yyyy")
+        formTextFieldBirthDate.text = profileData.birthday?.toFormat("MMMM yyyy")
     }
     
     private func updateFormTextFieldsEditability() {
@@ -361,6 +454,14 @@ final class EditProfileViewController: KeyboardListeningViewController {
     @IBAction private func uploadPictureButtonTapped(_ sender: Any) {
         dismissAllInputs()
         displayPhotoChangePrompt(with: router, withMultipleItemsIfPossible: false)
+    }
+    
+    @IBAction private func describesYoutInputViewDismissalGestureRecognized(_ sender: Any?) {
+        guard (sender as? UITapGestureRecognizer) == describesYouDismissalGestureRecognizer else {
+            return
+        }
+        
+        hideDescribesYouInputView()
     }
 }
 

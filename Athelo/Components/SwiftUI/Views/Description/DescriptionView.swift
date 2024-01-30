@@ -45,7 +45,6 @@ struct DescriptionView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: 70.0, alignment: .center)
-                    
                     HTMLContent(text: model.description,
                                 font: font,
                                 textAlignment: .justified,

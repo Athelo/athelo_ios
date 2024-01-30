@@ -123,7 +123,6 @@ extension SettingsViewController: UITableViewDelegate {
         guard let action = viewModel.action(at: indexPath) else {
             return
         }
-        
         switch action {
         case .displayLegal(let configurationData):
             router?.navigateToLegal(using: configurationData)

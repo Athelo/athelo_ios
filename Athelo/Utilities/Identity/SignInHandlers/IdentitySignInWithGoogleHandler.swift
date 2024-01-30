@@ -89,6 +89,11 @@ final class IdentitySignInWithGoogleHandler {
                 }
                 let provider = authResult.credential?.provider
                 let tokenData =  IdentityTokenData(accessToken: token, expiresIn: 24000, refreshToken: refreshToken, scope: "", tokenType: provider ?? "google")
+                do {
+                    try APIEnvironment.setUserToken(tokenData)
+                } catch {
+                    
+                }
                 self?.createProfile(email: authResult.user.email ?? "", displayName: authResult.user.displayName ?? "", tokenData: tokenData)
             })
         }

@@ -62,7 +62,7 @@ final class ConstantsStore {
         return Publishers.NetworkingPublishers.ListRepeatingPublisher(initialRequest: Deferred { AtheloAPI.Applications.applications() as AnyPublisher<ListResponseData<ApplicationData>, APIError> })
             .mapError({ $0 as Error })
             .tryMap({ value -> ApplicationData in
-                guard let application = value.first(where: { $0.identifier == (try! ConfigurationReader.configurationValue(for: .apiIdentifier)) }) else {
+                guard let application = value.first else {
                     throw CommonError.missingContent
                 }
                 
@@ -130,6 +130,12 @@ final class ConstantsStore {
                 instance[.feedbackTopics] = $0
             })
             .eraseToAnyPublisher()
+    }
+    
+    static func describesYouPublisher() -> AnyPublisher<[DescribesYou], Error> {
+            return Just(DescribesYou.allCases)
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
     }
     
     static func newsTopics() -> [NewsTopicData]? {

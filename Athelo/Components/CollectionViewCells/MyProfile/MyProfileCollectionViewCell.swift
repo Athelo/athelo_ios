@@ -77,7 +77,7 @@ extension MyProfileCollectionViewCell: ConfigurableCell {
         
         textViewName.text = item.displayName
         
-        if let dateOfBirth = item.dateOfBirth?.toFormat("MMMM yyyy") {
+        if let dateOfBirth = item.birthday?.toFormat("MMMM yyyy") {
             labelBirthDate.text = dateOfBirth
         } else {
             labelBirthDate.text = "\("message.noinformation".localized())"
