@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Appointment View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="AppointmentViewController" id="Y6W-OH-hqX" customClass="AppointmentViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sd3-eJ-ovD" customClass="NoAppointment" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="-25" width="393" height="719"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLa-d8-nbE" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="16" y="746" width="361" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="h34-fX-t4I"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="action.scheduleMyAppointment"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onClickScheduleAppointmentBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="oKA-oh-Zrk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" name="White"/>
+                        <constraints>
+                            <constraint firstItem="xLa-d8-nbE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="4z7-7W-CKN"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xLa-d8-nbE" secondAttribute="trailing" constant="16" id="6NQ-7u-Puv"/>
+                            <constraint firstItem="sd3-eJ-ovD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="L18-sE-0zk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="sd3-eJ-ovD" secondAttribute="bottom" constant="124" id="TC0-sg-5Js"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="xLa-d8-nbE" secondAttribute="bottom" constant="16" id="dos-9h-XEg"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sd3-eJ-ovD" secondAttribute="trailing" id="sug-yt-uaa"/>
+                            <constraint firstItem="sd3-eJ-ovD" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="-25" id="vJu-dl-Bc5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="noAppointmentView" destination="sd3-eJ-ovD" id="0dh-1I-8fU"/>
+                        <outlet property="schesualAppointmentBtn" destination="xLa-d8-nbE" id="r3Q-xy-5Ud"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
+        </scene>
+        <!--Schedule Appointment View Controller-->
+        <scene sceneID="ah2-dv-WYK">
+            <objects>
+                <viewController storyboardIdentifier="ScheduleAppointmentViewController" id="7CN-AC-Vow" customClass="ScheduleAppointmentViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aJH-Oz-bUt">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQ6-g4-qcj">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GN5-ce-r4E">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="GN5-ce-r4E" firstAttribute="top" secondItem="OQ6-g4-qcj" secondAttribute="top" id="4EK-9l-hra"/>
+                                    <constraint firstItem="GN5-ce-r4E" firstAttribute="leading" secondItem="OQ6-g4-qcj" secondAttribute="leading" id="fb5-84-BEZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="GN5-ce-r4E" secondAttribute="trailing" id="pGL-Ff-voF"/>
+                                    <constraint firstAttribute="bottom" secondItem="GN5-ce-r4E" secondAttribute="bottom" id="tJ1-jn-MPK"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="LFI-wd-A4P"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OQ6-g4-qcj" firstAttribute="top" secondItem="LFI-wd-A4P" secondAttribute="top" id="J39-DM-zJM"/>
+                            <constraint firstItem="LFI-wd-A4P" firstAttribute="bottom" secondItem="OQ6-g4-qcj" secondAttribute="bottom" id="RLD-7g-6oi"/>
+                            <constraint firstItem="LFI-wd-A4P" firstAttribute="trailing" secondItem="OQ6-g4-qcj" secondAttribute="trailing" id="buQ-xu-7Lu"/>
+                            <constraint firstItem="OQ6-g4-qcj" firstAttribute="leading" secondItem="LFI-wd-A4P" secondAttribute="leading" id="lJN-fl-FaM"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iL9-7G-l5j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="810" y="-35"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="White">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

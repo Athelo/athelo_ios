@@ -57,6 +57,7 @@
 "action.sendamessage" = "Send a message";
 "action.sendfeedback" = "Send Feedback";
 "action.sendmessage" = "Send Message";
+"action.scheduleMyAppointment" = "Schedule My Appointment";
 "action.signup" = "Sign Up";
 "action.skip" = "Skip";
 "action.start" = "Start";
@@ -65,6 +66,7 @@
 "action.unmute" = "Unmute";
 "action.uploadpicture" = "Upload Picture";
 "action.passwordreset.send" = "Link to reset password is send to the given email.";
+
 
 "activity.filter.day" = "Day";
 "activity.filter.week" = "Week";
@@ -271,11 +273,13 @@
 "navigation.symptom.description" = "Symptom Description";
 "navigation.symptom.list" = "My Symptoms";
 "navigation.symptom.wellbeing" = "Track My Wellbeing";
+"navigation.scheduleAppointment" = "Schedule My Appointment";
 "navigation.tab.activity" = "Activity";
 "navigation.tab.community" = "Community";
 "navigation.tab.home" = "Home";
 "navigation.tab.news" = "News";
 "navigation.tab.sleep" = "Sleep";
+"navigation.tab.appointments" = "Appointments";
 "navigation.termsofservice" = "Terms of Use";
 
 "news.filter.select" = "Search by topic";

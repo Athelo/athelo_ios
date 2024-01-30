@@ -16,6 +16,7 @@ final class MainContentViewController: BaseViewController {
 //        case activity
         case news
 //        case community
+        case appointment
     }
     
     // MARK: - Outlets
@@ -98,6 +99,15 @@ final class MainContentViewController: BaseViewController {
         
         homeNavigationController.viewControllers = [homeViewController]
         
+        
+        let appointmentNavigationController = navigationController(for: .appointment)
+        
+        let appointmentRouter = AppointmentRouter(navigationController: appointmentNavigationController)
+        let appointmentViewController = AppointmentViewController.viewController(router: appointmentRouter)
+        prepareRootController(appointmentViewController)
+        
+        appointmentNavigationController.viewControllers = [appointmentViewController]
+        
 //        let sleepNavigationController = navigationController(for: .sleep)
 //        
 //        let sleepRouter = SleepRouter(navigationController: sleepNavigationController)
@@ -145,7 +155,8 @@ final class MainContentViewController: BaseViewController {
 //            sleepNavigationController,
 //            activityNavigationController,
 //            communityNavigationController,
-            newsNavigationController
+            newsNavigationController,
+            appointmentNavigationController
         ]
         
         controller.view.translatesAutoresizingMaskIntoConstraints = false
@@ -275,6 +286,8 @@ private extension MainContentViewController.Tab {
             return "home"
         case .news:
             return "news"
+        case .appointment:
+            return "appointments"
 //        case .sleep:
 //            return "sleep"
         }
@@ -294,6 +307,8 @@ private extension MainContentViewController.Tab {
             return UIImage(named: "home")
         case .news:
             return UIImage(named: "book")
+        case .appointment:
+            return UIImage(named: "calendar")
 //        case .sleep:
 //            return UIImage(named: "moon")
         }
@@ -309,6 +324,8 @@ private extension MainContentViewController.Tab {
             return UIImage(named: "homeSolid")
         case .news:
             return UIImage(named: "bookSolid")
+        case .appointment:
+            return UIImage(named: "calendarSolid")
 //        case .sleep:
 //            return UIImage(named: "moonSolid")
         }

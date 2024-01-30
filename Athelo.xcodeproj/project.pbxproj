@@ -728,6 +728,16 @@
 		C0ADB4542B5746C0005A78E9 /* FirebaseMLModelDownloader in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4532B5746C0005A78E9 /* FirebaseMLModelDownloader */; };
 		C0ADB4562B5746C0005A78E9 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4552B5746C0005A78E9 /* FirebaseMessaging */; };
 		C0ADB4582B5746C0005A78E9 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4572B5746C0005A78E9 /* FirebasePerformance */; };
+		F36F3F4E2B68CD280072BE35 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F3F4D2B68CD280072BE35 /* AppointmentViewController.swift */; };
+		F36F3F502B68CDA80072BE35 /* Appointment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F36F3F4F2B68CDA80072BE35 /* Appointment.storyboard */; };
+		F36F3F532B68D1FF0072BE35 /* AppointmentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F3F522B68D1FF0072BE35 /* AppointmentRouter.swift */; };
+		F36F3F562B68F8450072BE35 /* NoAppointment.xib in Resources */ = {isa = PBXBuildFile; fileRef = F36F3F552B68F8450072BE35 /* NoAppointment.xib */; };
+		F36F3F582B68F84D0072BE35 /* NoAppointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F3F572B68F84D0072BE35 /* NoAppointment.swift */; };
+		F36F3F5B2B6914130072BE35 /* ScheduleAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F3F5A2B6914120072BE35 /* ScheduleAppointmentViewController.swift */; };
+		F36F3F5D2B6914AC0072BE35 /* ScheduleAppointmentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F3F5C2B6914AB0072BE35 /* ScheduleAppointmentRouter.swift */; };
+		F36F3F5F2B6927290072BE35 /* AppointmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F3F5E2B6927290072BE35 /* AppointmentViewModel.swift */; };
+		F36F3F632B69294B0072BE35 /* AppointmentBooked.xib in Resources */ = {isa = PBXBuildFile; fileRef = F36F3F622B69294B0072BE35 /* AppointmentBooked.xib */; };
+		F36F3F652B6929570072BE35 /* AppointmentBooked.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F3F642B6929570072BE35 /* AppointmentBooked.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1412,6 +1422,16 @@
 		3EFFCB3A288E8EA2000F066A /* FeelingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3EFFCB3B288E8EA2000F066A /* FeelingsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeelingsCollectionViewCell.xib; sourceTree = "<group>"; };
 		C004951B2B2BA185004F8804 /* ContentfulService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentfulService.swift; sourceTree = "<group>"; };
+		F36F3F4D2B68CD280072BE35 /* AppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
+		F36F3F4F2B68CDA80072BE35 /* Appointment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Appointment.storyboard; sourceTree = "<group>"; };
+		F36F3F522B68D1FF0072BE35 /* AppointmentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentRouter.swift; sourceTree = "<group>"; };
+		F36F3F552B68F8450072BE35 /* NoAppointment.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoAppointment.xib; sourceTree = "<group>"; };
+		F36F3F572B68F84D0072BE35 /* NoAppointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAppointment.swift; sourceTree = "<group>"; };
+		F36F3F5A2B6914120072BE35 /* ScheduleAppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAppointmentViewController.swift; sourceTree = "<group>"; };
+		F36F3F5C2B6914AB0072BE35 /* ScheduleAppointmentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAppointmentRouter.swift; sourceTree = "<group>"; };
+		F36F3F5E2B6927290072BE35 /* AppointmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewModel.swift; sourceTree = "<group>"; };
+		F36F3F622B69294B0072BE35 /* AppointmentBooked.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmentBooked.xib; sourceTree = "<group>"; };
+		F36F3F642B6929570072BE35 /* AppointmentBooked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentBooked.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2287,6 +2307,7 @@
 		3E5EB942284E02E500C30ADC /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				F36F3F602B6928E40072BE35 /* Appointment */,
 				3E78A6712876DE9B002599F7 /* Filter */,
 				3E5EB943284E02F300C30ADC /* ListInput */,
 				3ED215B02851E6E7003BB140 /* Menu */,
@@ -4000,6 +4021,7 @@
 				3E1341B028467066007C1381 /* Intro */,
 				3ED215AA2851E413003BB140 /* Menu */,
 				3ED215882851D412003BB140 /* News */,
+				F36F3F4C2B68CC000072BE35 /* Appointment */,
 				3EE0E9AA28570F5D00984C03 /* Profile */,
 				3EF218D329C8752600F0EA95 /* Role */,
 				3EC0792E2889820F00CBEB54 /* Settings */,
@@ -4111,6 +4133,7 @@
 				3E5EB93D284DFC1600C30ADC /* ListInput */,
 				3E13418E2846445B007C1381 /* Loading */,
 				3EFC0B482850BB8C00841341 /* Message */,
+				F36F3F542B68F8100072BE35 /* NoAppointment */,
 				3E78A6632876C3B0002599F7 /* NoContent */,
 				3ED85B0B284633E20008EC11 /* NoNetwork */,
 				3EFC0B432850AA0000841341 /* PageProgress */,
@@ -4783,6 +4806,61 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
+		F36F3F4C2B68CC000072BE35 /* Appointment */ = {
+			isa = PBXGroup;
+			children = (
+				F36F3F512B68CDB80072BE35 /* Appointment */,
+				F36F3F592B69120F0072BE35 /* AppointmentListViewController */,
+				F36F3F4F2B68CDA80072BE35 /* Appointment.storyboard */,
+			);
+			path = Appointment;
+			sourceTree = "<group>";
+		};
+		F36F3F512B68CDB80072BE35 /* Appointment */ = {
+			isa = PBXGroup;
+			children = (
+				F36F3F4D2B68CD280072BE35 /* AppointmentViewController.swift */,
+				F36F3F5E2B6927290072BE35 /* AppointmentViewModel.swift */,
+				F36F3F522B68D1FF0072BE35 /* AppointmentRouter.swift */,
+			);
+			path = Appointment;
+			sourceTree = "<group>";
+		};
+		F36F3F542B68F8100072BE35 /* NoAppointment */ = {
+			isa = PBXGroup;
+			children = (
+				F36F3F572B68F84D0072BE35 /* NoAppointment.swift */,
+				F36F3F552B68F8450072BE35 /* NoAppointment.xib */,
+			);
+			path = NoAppointment;
+			sourceTree = "<group>";
+		};
+		F36F3F592B69120F0072BE35 /* AppointmentListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F36F3F5A2B6914120072BE35 /* ScheduleAppointmentViewController.swift */,
+				F36F3F5C2B6914AB0072BE35 /* ScheduleAppointmentRouter.swift */,
+			);
+			path = AppointmentListViewController;
+			sourceTree = "<group>";
+		};
+		F36F3F602B6928E40072BE35 /* Appointment */ = {
+			isa = PBXGroup;
+			children = (
+				F36F3F612B6929190072BE35 /* AppointmentBooked */,
+			);
+			path = Appointment;
+			sourceTree = "<group>";
+		};
+		F36F3F612B6929190072BE35 /* AppointmentBooked */ = {
+			isa = PBXGroup;
+			children = (
+				F36F3F642B6929570072BE35 /* AppointmentBooked.swift */,
+				F36F3F622B69294B0072BE35 /* AppointmentBooked.xib */,
+			);
+			path = AppointmentBooked;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4918,12 +4996,14 @@
 				3EE8FA62287327A800CE8762 /* LoadMoreCollectionViewCell.xib in Resources */,
 				3EE9FDB02844A85300BE4661 /* Inter-ExtraBold.ttf in Resources */,
 				3EA8801728648E1200E81741 /* Feedback.storyboard in Resources */,
+				F36F3F502B68CDA80072BE35 /* Appointment.storyboard in Resources */,
 				3ED85AF5284620630008EC11 /* Localizable.strings in Resources */,
 				3E002A18284F87A90025516B /* IntroWomenView.xib in Resources */,
 				3ED215962851D461003BB140 /* News.storyboard in Resources */,
 				3ED85B0F284633FA0008EC11 /* NoNetworkView.xib in Resources */,
 				3E78A6702876DAB8002599F7 /* FiltersListView.xib in Resources */,
 				3EE9FDAF2844A85300BE4661 /* Inter-Light.ttf in Resources */,
+				F36F3F632B69294B0072BE35 /* AppointmentBooked.xib in Resources */,
 				3E43B9AE2847926600295E2F /* Authentication.storyboard in Resources */,
 				3EC0792D2889663800CBEB54 /* SymptomDetailsPopupView.xib in Resources */,
 				3EBF4F6628632614000E647F /* Faq.storyboard in Resources */,
@@ -4942,6 +5022,7 @@
 				3E1341B42846707C007C1381 /* Intro.storyboard in Resources */,
 				3E84D3212853866800288F08 /* HeadlineCollectionViewCell.xib in Resources */,
 				3E13419228464472007C1381 /* LoadingView.xib in Resources */,
+				F36F3F562B68F8450072BE35 /* NoAppointment.xib in Resources */,
 				3ECB51F2288056CB0044F3B7 /* Inter-ExtraBoldItalic.otf in Resources */,
 				3ED85AF228461E000008EC11 /* Main.storyboard in Resources */,
 				3E5EB937284DDCCC00C30ADC /* LargeLoadingView.xib in Resources */,
@@ -5044,10 +5125,12 @@
 				3E8F209A28DDA64500C327BE /* PageBasedRequests.swift in Sources */,
 				3E6BD00E288542DE00A1FC4D /* SymptomListViewController.swift in Sources */,
 				3E8F209E28DDA64500C327BE /* TagListRequest.swift in Sources */,
+				F36F3F4E2B68CD280072BE35 /* AppointmentViewController.swift in Sources */,
 				3EF70956284F5BF500B6FDB5 /* IdentitySignInWithAppleHandler.swift in Sources */,
 				3EE9FDBA2844A9CB00BE4661 /* Collection+Access.swift in Sources */,
 				3E002A13284F71690025516B /* IdentitySignInWithGoogleHandler.swift in Sources */,
 				3EA4FF1C288ACC1200717DA7 /* StyledSlider.swift in Sources */,
+				F36F3F5D2B6914AC0072BE35 /* ScheduleAppointmentRouter.swift in Sources */,
 				3E4C669A289A81A700E0F454 /* ActivitySummaryRouter.swift in Sources */,
 				3EFFCB3C288E8EA2000F066A /* FeelingsCollectionViewCell.swift in Sources */,
 				3E8F205728DDA64500C327BE /* ChatChangeOwnerRequest.swift in Sources */,
@@ -5123,6 +5206,7 @@
 				3ED215C32851FD28003BB140 /* RendererUtility.swift in Sources */,
 				3E1C13A828C206550096E4B7 /* InvitationCodeViewModel.swift in Sources */,
 				3EE0E9BD28574DD900984C03 /* MyProfileRouter.swift in Sources */,
+				F36F3F582B68F84D0072BE35 /* NoAppointment.swift in Sources */,
 				3EBF4F692863264C000E647F /* AskAtheloViewController.swift in Sources */,
 				3E14C6902859EA41002183F5 /* EditProfileViewController.swift in Sources */,
 				3E313A5229A60EEA005DEC43 /* AccessCodeViewModel.swift in Sources */,
@@ -5287,6 +5371,7 @@
 				3E75F52828A4D7AF00000968 /* GraphLegendItemData+Size.swift in Sources */,
 				3E8F205428DDA64500C327BE /* ChatConversationDetailsRequest.swift in Sources */,
 				3E8F207228DDA64500C327BE /* HealthAddFeelingRequest.swift in Sources */,
+				F36F3F532B68D1FF0072BE35 /* AppointmentRouter.swift in Sources */,
 				3EC079372889825500CBEB54 /* SettingsRouter.swift in Sources */,
 				3E8F206328DDA64500C327BE /* LocationListRequest.swift in Sources */,
 				3E8F20A428DDA64500C327BE /* ChecklistUpdateItemRequest.swift in Sources */,
@@ -5400,6 +5485,7 @@
 				3EA3D21E287EFAA10054699A /* SmallActionCollectionViewCell.swift in Sources */,
 				3EE97D85286DAE2B0027DC03 /* FeedbackTopicData.swift in Sources */,
 				3E2153802893DCB800737BCC /* SleepStatsSinglePercentageView.swift in Sources */,
+				F36F3F5B2B6914130072BE35 /* ScheduleAppointmentViewController.swift in Sources */,
 				3EF218E929C8A5FF00F0EA95 /* CaregiverRoleRouter.swift in Sources */,
 				3E7F385E2848DBCF00320E60 /* UIWindow+Overlays.swift in Sources */,
 				3E8F203E28DDA64500C327BE /* PasswordResetRequest.swift in Sources */,
@@ -5465,6 +5551,7 @@
 				3E8F206428DDA64500C327BE /* LocationDetailsRequest.swift in Sources */,
 				3E8F209428DDA64500C327BE /* EventsRequests.swift in Sources */,
 				3E8F20B028DDA64500C327BE /* PingbackResponseData.swift in Sources */,
+				F36F3F5F2B6927290072BE35 /* AppointmentViewModel.swift in Sources */,
 				3E8F208728DDA64500C327BE /* DeviceConfigRequestBuilder.swift in Sources */,
 				3ED0BFB828A239E500224561 /* LineGraphShape.swift in Sources */,
 				3E12D47F29C49440007DF485 /* RadioStateView.swift in Sources */,
@@ -5519,6 +5606,7 @@
 				3E75F53B28A5227500000968 /* Array+NumberFormatting.swift in Sources */,
 				3E8F207928DDA64500C327BE /* ContactsUpdateInviteRequest.swift in Sources */,
 				3ED85AEC28461B590008EC11 /* BaseViewController.swift in Sources */,
+				F36F3F652B6929570072BE35 /* AppointmentBooked.swift in Sources */,
 				3ED0BFC428A24CD400224561 /* LinearGraphView.swift in Sources */,
 				3E1341AD28466521007C1381 /* ImageData+URL.swift in Sources */,
 				3E5253F52888244800D6D643 /* SelectedDateModel.swift in Sources */,
