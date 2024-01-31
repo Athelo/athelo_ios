@@ -30,7 +30,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7u-Qa-9fd">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="452"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noAppointments" translatesAutoresizingMaskIntoConstraints="NO" id="Q4J-IP-3tw">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noAppointments" translatesAutoresizingMaskIntoConstraints="NO" id="Q4J-IP-3tw">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="452"/>
                                 </imageView>
                             </subviews>

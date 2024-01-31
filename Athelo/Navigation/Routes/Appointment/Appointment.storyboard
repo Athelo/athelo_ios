@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,38 +18,85 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sd3-eJ-ovD" customClass="NoAppointment" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="-25" width="393" height="719"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="694"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLa-d8-nbE" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="16" y="746" width="361" height="56"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uLK-gr-Iwk">
+                                <rect key="frame" x="0.0" y="75" width="393" height="727"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vBA-4c-cR8" userLabel="HideView">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="0.0"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="XWI-iZ-9zP"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLa-d8-nbE" customClass="StyledButton" customModule="Athelo" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="0.0" width="361" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="h34-fX-t4I"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="action.scheduleMyAppointment"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onClickScheduleAppointmentBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="oKA-oh-Zrk"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IS8-Ei-t0Q">
+                                        <rect key="frame" x="0.0" y="56" width="393" height="671"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3Xl-On-3pI">
+                                                <rect key="frame" x="0.0" y="24" width="393" height="647"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="3Xl-On-3pI" firstAttribute="leading" secondItem="IS8-Ei-t0Q" secondAttribute="leading" id="47u-so-iWf"/>
+                                            <constraint firstAttribute="trailing" secondItem="3Xl-On-3pI" secondAttribute="trailing" id="6Rr-gb-N62"/>
+                                            <constraint firstItem="3Xl-On-3pI" firstAttribute="top" secondItem="IS8-Ei-t0Q" secondAttribute="top" constant="24" id="cBJ-9z-bov"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" id="cin-Cz-sgN"/>
+                                            <constraint firstAttribute="bottom" secondItem="3Xl-On-3pI" secondAttribute="bottom" id="mC5-cu-REE"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="h34-fX-t4I"/>
+                                    <constraint firstItem="vBA-4c-cR8" firstAttribute="leading" secondItem="uLK-gr-Iwk" secondAttribute="leading" id="909-ck-gF4"/>
+                                    <constraint firstItem="xLa-d8-nbE" firstAttribute="leading" secondItem="uLK-gr-Iwk" secondAttribute="leading" constant="16" id="A8E-CA-lUR"/>
+                                    <constraint firstAttribute="trailing" secondItem="IS8-Ei-t0Q" secondAttribute="trailing" id="CPR-uJ-340"/>
+                                    <constraint firstAttribute="bottom" secondItem="IS8-Ei-t0Q" secondAttribute="bottom" id="HKu-7h-GLq"/>
+                                    <constraint firstAttribute="trailing" secondItem="vBA-4c-cR8" secondAttribute="trailing" id="O7O-xN-Hax"/>
+                                    <constraint firstItem="xLa-d8-nbE" firstAttribute="top" secondItem="vBA-4c-cR8" secondAttribute="bottom" id="SWu-xc-oJ8"/>
+                                    <constraint firstAttribute="trailing" secondItem="xLa-d8-nbE" secondAttribute="trailing" constant="16" id="Zvi-t5-NU9"/>
+                                    <constraint firstItem="vBA-4c-cR8" firstAttribute="top" secondItem="uLK-gr-Iwk" secondAttribute="top" id="jSz-nb-8hW"/>
+                                    <constraint firstItem="IS8-Ei-t0Q" firstAttribute="leading" secondItem="uLK-gr-Iwk" secondAttribute="leading" id="wYd-cC-0kg"/>
+                                    <constraint firstItem="IS8-Ei-t0Q" firstAttribute="top" secondItem="xLa-d8-nbE" secondAttribute="bottom" id="xAW-bn-ZvX"/>
                                 </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="action.scheduleMyAppointment"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onClickScheduleAppointmentBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="oKA-oh-Zrk"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" name="White"/>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xLa-d8-nbE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="4z7-7W-CKN"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xLa-d8-nbE" secondAttribute="trailing" constant="16" id="6NQ-7u-Puv"/>
-                            <constraint firstItem="sd3-eJ-ovD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="L18-sE-0zk"/>
+                            <constraint firstItem="sd3-eJ-ovD" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="L18-sE-0zk"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="sd3-eJ-ovD" secondAttribute="bottom" constant="124" id="TC0-sg-5Js"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="xLa-d8-nbE" secondAttribute="bottom" constant="16" id="dos-9h-XEg"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sd3-eJ-ovD" secondAttribute="trailing" id="sug-yt-uaa"/>
-                            <constraint firstItem="sd3-eJ-ovD" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="-25" id="vJu-dl-Bc5"/>
+                            <constraint firstItem="uLK-gr-Iwk" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="ZOA-Ce-Ina"/>
+                            <constraint firstItem="uLK-gr-Iwk" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="c7K-k2-3jG"/>
+                            <constraint firstItem="uLK-gr-Iwk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="jJs-ij-vtu"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="uLK-gr-Iwk" secondAttribute="bottom" constant="16" id="rVe-8d-SBj"/>
+                            <constraint firstAttribute="trailing" secondItem="sd3-eJ-ovD" secondAttribute="trailing" id="sug-yt-uaa"/>
+                            <constraint firstItem="sd3-eJ-ovD" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="vJu-dl-Bc5"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="hideView" destination="vBA-4c-cR8" id="BLt-V8-HV1"/>
                         <outlet property="noAppointmentView" destination="sd3-eJ-ovD" id="0dh-1I-8fU"/>
                         <outlet property="schesualAppointmentBtn" destination="xLa-d8-nbE" id="r3Q-xy-5Ud"/>
+                        <outlet property="stackView" destination="uLK-gr-Iwk" id="zl3-uw-sOi"/>
+                        <outlet property="tableStackHeight" destination="cin-Cz-sgN" id="wrn-mj-hfN"/>
+                        <outlet property="tableView" destination="3Xl-On-3pI" id="NBo-JT-81v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -91,6 +137,9 @@
                             <constraint firstItem="OQ6-g4-qcj" firstAttribute="leading" secondItem="LFI-wd-A4P" secondAttribute="leading" id="lJN-fl-FaM"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="GN5-ce-r4E" id="sCx-dH-FkX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iL9-7G-l5j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -98,9 +147,6 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="White">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
