@@ -37,6 +37,7 @@
 "action.mydevice" = "My Device";
 "action.mysymptoms" = "My Symptoms";
 "action.next" = "Next";
+"action.no" = "No";
 "action.ok" = "OK";
 "action.opencommunity" = "Open Community";
 "action.password.request" = "Request Password Reset";
@@ -66,6 +67,7 @@
 "action.unmute" = "Unmute";
 "action.uploadpicture" = "Upload Picture";
 "action.passwordreset.send" = "Link to reset password is send to the given email.";
+"action.yes" = "Yes";
 
 
 "activity.filter.day" = "Day";
@@ -312,8 +314,12 @@
 "popup.leavecommunity.title" = "Leave The Community";
 "popup.logout.message" = "Do you really want to log out?";
 "popup.logout.title" = "Log out";
+"popup.cancelAppointment.title" = "Cancel appointment";
+"popup.cancelAppointment.message" = "Are you sure you want to cancel your appointment?";
 "popup.selectphoto.message" = "Do you want to take a new photo or select one from your photo library?";
 "popup.selectphoto.title" = "Change Photo";
+"popup.reschedule.title" = "Re-schedule appointment";
+"popup.reschedule.message" = "Do you want to re-schedule your appointment?";
 
 "profile.passwordwarning" = "Your new password must be different from the old one";
 

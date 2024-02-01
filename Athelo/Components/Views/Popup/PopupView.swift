@@ -89,6 +89,8 @@ extension PopupView {
         case leaveCommunity = "leavecommunity"
         case logOut = "logout"
         case selectPhoto = "selectphoto"
+        case cancelAppointment = "cancelAppointment"
+        case reschedual = "reschedule"
     }
     
     struct ActionData {
@@ -158,7 +160,7 @@ private extension PopupView.ConfigurationTemplate {
         switch self {
         case .deleteAccount, .deleteSymptom, .disconnectDevice, .leaveCommunity, .logOut:
             return false
-        case .selectPhoto:
+        case .selectPhoto, .cancelAppointment, .reschedual:
             return true
         }
     }

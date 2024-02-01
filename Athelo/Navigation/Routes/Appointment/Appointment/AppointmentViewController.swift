@@ -30,7 +30,7 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
     
     
     // MARK: - Properties
-    private var viewModel: AppointmentViewModel?
+    private var viewModel = AppointmentViewModel()
     private var router: AppointmentRouter?
 
     
@@ -85,12 +85,14 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
 // MARK: UITableViewDataSource
 extension AppointmentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.allAppointments.count ?? 0
+        viewModel.allAppointments.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: AppointmentBookedCell.self, for: indexPath)
         cell.backgroundColor = .none
+        cell.parentScreen = self
+        
         return cell
     }
     
