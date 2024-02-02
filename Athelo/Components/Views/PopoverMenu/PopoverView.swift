@@ -7,9 +7,14 @@
 
 import UIKit
 
+
+
 class PopoverView: UIViewController {
 
     @IBOutlet weak var popupBackgroungView: UIView!
+    
+    var reschedualBtnClicked: (()->())?
+    
     
     init() {
         super.init(nibName: "PopoverView", bundle: nil)
@@ -47,7 +52,8 @@ class PopoverView: UIViewController {
     
     private func showReshedualPopup(){
         let yesAction = PopupActionData(title: "action.yes".localized(), customStyle: .main) {
-
+            print("Navigat to reschedule screen")
+            self.reschedualBtnClicked?()
         }
         
         let noAction = PopupActionData(title: "action.no".localized()){
@@ -62,11 +68,15 @@ class PopoverView: UIViewController {
 
     @IBAction func onClickJoinBtn(_ sender: UIControl) {
         self.dismiss(animated: false)
-        showCancelPopUp()
+        
     }
     
     @IBAction func onClickCancelBtn(_ sender: UIControl) {
+        
+        showCancelPopUp()
         self.dismiss(animated: true)
+        
     }
     
 }
+

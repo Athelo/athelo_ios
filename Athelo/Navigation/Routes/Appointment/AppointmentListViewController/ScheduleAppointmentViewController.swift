@@ -19,6 +19,8 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
     private var router: ScheduleAppointmentRouter?
     private var cancellables: [AnyCancellable] = []
     private var expandedCellIndex: IndexPath?
+    private var isDateSelect = false
+    private var viewModel = ScheduleAppointmentViewModel()
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -26,7 +28,6 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
         
         configure()
     }
-    
     
     private func configure() {
         configureOwnView()
@@ -50,18 +51,25 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
 // MARK: UITableViewDataSource
 extension ScheduleAppointmentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        viewModel.allAppointments.count 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: ScheduleAppointmentCell.self, for: indexPath)
+        
         cell.backgroundColor = .none
+        cell.choosDateView.isHidden = !(expandedCellIndex == indexPath)
+        cell.arrowImg.imageView?.image = expandedCellIndex == indexPath ? UIImage(named: "arrowUp") : UIImage(named: "arrowDown")
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        expandedCellIndex == indexPath ? 516 : 120
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let temp = expandedCellIndex
+        expandedCellIndex = expandedCellIndex==indexPath ? nil : indexPath
+        if temp != indexPath{
+            isDateSelect = false
+        }
+        tableView.reloadRows(at: [indexPath, temp ?? indexPath], with: .fade)
     }
 }
 

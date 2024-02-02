@@ -20,7 +20,7 @@ final class AppointmentBookedCell: UITableViewCell{
     @IBOutlet weak var backGroundView: UIView!
     
     // MARK: - Properties
-    var parentScreen: UIViewController!
+    var parentScreen: AppointmentViewController!
     
     
     // MARK: - View lifecycle
@@ -43,25 +43,16 @@ final class AppointmentBookedCell: UITableViewCell{
     
     private func configureOwnView() {
         selectionStyle = .none
-        clipsToBounds = false
-        
-        let shadowLayer = CAShapeLayer()
-        
-        shadowLayer.shadowColor = UIColor.withStyle(.shadow).cgColor
-        shadowLayer.shadowOpacity = 0.08
-        shadowLayer.shadowOffset = CGSize(width: 0.0, height: 10.0)
-        shadowLayer.shadowRadius = 18.0
-        
-        layer.addSublayer(shadowLayer)
-        
-        
+          
         
         
     }
     
     
     @IBAction func onClickMoreBtn(_ sender: UIButton) {
-        presentPopover(parentScreen, PopoverView(), sender: sender, size: CGSize(width: 256, height: 104))
+        var popoverView = PopoverView()
+        popoverView.reschedualBtnClicked = self.parentScreen.routToReschedualVC
+        presentPopover(parentScreen, popoverView, sender: sender, size: CGSize(width: 256, height: 104))
         
         
     }

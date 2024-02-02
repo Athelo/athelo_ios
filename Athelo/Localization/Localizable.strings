@@ -8,6 +8,7 @@
 "accesscode.prompt" = "Please input your pin to continue:";
 
 "action.actas" = "Act as...";
+"action.apply" = "Apply";
 "action.add.caregiver" = "Add A Caregiver";
 "action.add.patient" = "Add A Ward";
 "action.add.symptom" = "Add Symptom";

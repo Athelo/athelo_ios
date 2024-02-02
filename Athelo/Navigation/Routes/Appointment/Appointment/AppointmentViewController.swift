@@ -71,7 +71,7 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
     
     
     @IBAction func onClickScheduleAppointmentBtn(_ sender: UIButton) {
-        router?.navigatetoScheduleAppointment()
+        routToReschedualVC()
         
         //Button manage
 //        noAppointmentView.alpha = ishide ? 1.0 : 0.0
@@ -101,7 +101,11 @@ extension AppointmentViewController: UITableViewDataSource {
     }
 }
 
-
+extension AppointmentViewController {
+    func routToReschedualVC(){
+        router?.navigatetoScheduleAppointment()
+    }
+}
 
 extension AppointmentViewController: Routable {
     func assignRouter(_ router: AppointmentRouter) {

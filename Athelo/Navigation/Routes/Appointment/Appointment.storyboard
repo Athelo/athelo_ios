@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -114,14 +113,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQ6-g4-qcj">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GN5-ce-r4E">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GN5-ce-r4E">
+                                        <rect key="frame" x="0.0" y="24" width="393" height="735"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="GN5-ce-r4E" firstAttribute="top" secondItem="OQ6-g4-qcj" secondAttribute="top" id="4EK-9l-hra"/>
+                                    <constraint firstItem="GN5-ce-r4E" firstAttribute="top" secondItem="OQ6-g4-qcj" secondAttribute="top" constant="24" id="4EK-9l-hra"/>
                                     <constraint firstItem="GN5-ce-r4E" firstAttribute="leading" secondItem="OQ6-g4-qcj" secondAttribute="leading" id="fb5-84-BEZ"/>
                                     <constraint firstAttribute="trailing" secondItem="GN5-ce-r4E" secondAttribute="trailing" id="pGL-Ff-voF"/>
                                     <constraint firstAttribute="bottom" secondItem="GN5-ce-r4E" secondAttribute="bottom" id="tJ1-jn-MPK"/>
@@ -129,7 +128,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LFI-wd-A4P"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="OQ6-g4-qcj" firstAttribute="top" secondItem="LFI-wd-A4P" secondAttribute="top" id="J39-DM-zJM"/>
                             <constraint firstItem="LFI-wd-A4P" firstAttribute="bottom" secondItem="OQ6-g4-qcj" secondAttribute="bottom" id="RLD-7g-6oi"/>
@@ -146,9 +145,4 @@
             <point key="canvasLocation" x="810" y="-35"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
