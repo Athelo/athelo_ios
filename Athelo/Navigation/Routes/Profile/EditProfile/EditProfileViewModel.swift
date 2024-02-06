@@ -193,13 +193,13 @@ final class EditProfileViewModel: BaseViewModel {
                 self?.resetCachedFormData()
             }.store(in: &cancellables)
         
-//        IdentityUtility.updatePatientTreatmentStatus(status: selectedTreatmentStatus?.name ?? "")
-//            .mapError({ $0 as Error })
-//            .sink(receiveCompletion: { _ in
-//                    
-//            }, receiveValue: { [weak self] value in
-//                self?.selectedTreatmentStatus = TreatmentStatus.sanitizedValue(value: value.cancer_status ?? "")
-//            }).store(in: &cancellables)
+        IdentityUtility.updatePatientTreatmentStatus(status: selectedTreatmentStatus?.name ?? "")
+            .mapError({ $0 as Error })
+            .sink(receiveCompletion: { _ in
+                    
+            }, receiveValue: { [weak self] value in
+                self?.selectedTreatmentStatus = TreatmentStatus.sanitizedValue(value: value.cancer_status ?? "")
+            }).store(in: &cancellables)
     }
     
     func switchEditMode() {

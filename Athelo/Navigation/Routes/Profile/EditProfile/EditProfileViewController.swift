@@ -520,6 +520,9 @@ extension EditProfileViewController: UIGestureRecognizerDelegate {
         } else if let userTypeInputView = userTypeInputView,
                   userTypeInputView.bounds.contains(touch.location(in: userTypeInputView)) {
             return false
+        } else if let treatmentStatusInputView = self.whatBestDescribesYouInputView,
+                  treatmentStatusInputView.bounds.contains(touch.location(in: treatmentStatusInputView)) {
+            return false
         }
         
         return true
@@ -557,6 +560,7 @@ extension EditProfileViewController: UINavigationControllerDelegate {
 extension EditProfileViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         formTextFieldName.containsInstanceOfTextField(textField) || formTextFieldPhoneNumber.containsInstanceOfTextField(textField)
+        || !formTextFieldWhatBestDescribesYou.containsInstanceOfTextField(textField)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -566,6 +570,13 @@ extension EditProfileViewController: UITextFieldDelegate {
         
         if formTextFieldBirthDate.containsInstanceOfTextField(textField) {
             displayBirthDateInputView()
+            
+            view.endEditing(true)
+            return false
+        }
+        
+        if formTextFieldWhatBestDescribesYou.containsInstanceOfTextField(textField) {
+            displayTreatmentStatusInputView()
             
             view.endEditing(true)
             return false
