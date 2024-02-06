@@ -41,7 +41,6 @@ final class ScheduleAppointmentCell: UITableViewCell{
     private func configureOwnView() {
         selectionStyle = .none
         backgroundColor = .none
-        
     }
     
     private func configureAppointmentCalanderView() {
@@ -106,10 +105,9 @@ extension ScheduleAppointmentCell: ConfigurableCell {
         }
     }
     
-    func configure(_ item: ScheduleCellDecoration, isTimesloatHide: Bool = true, indexPath: IndexPath) {
+    func configure(_ item: ScheduleCellDecoration, isTimesloatHide: Bool = false, indexPath: IndexPath) {
         if item == .expanded{
             appointmentSchedulingView.isHidden = false
-            appointmentSchedulingView.dateBackgroundView.isHidden = false
         }else{
             appointmentSchedulingView.isHidden = true
         }

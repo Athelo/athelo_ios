@@ -21,7 +21,7 @@ final class AppointmnetCalanderView: UIView{
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
     // MARK: - Properties
-    var reloadCell: ((Bool)->())?
+    var reloadCell: ((String?)->())?
     var lastSelectedDate = Date()
     var schedualAction: (()->())?
     
@@ -63,8 +63,7 @@ final class AppointmnetCalanderView: UIView{
     @IBAction func onClickApplyBtn(_ sender: StyledButton) {
         dateBackgroundView.isHidden = true
         timeSlotView.isHidden = false
-        reloadCell?(true)
-        selectedDateLbl.text = datePicker.date.toString(.custom("dd MMM, EEEE"))
+        reloadCell?(datePicker.date.toString(.custom("dd MMM, EEEE")))
     }
     
     @IBAction func onClickScheduleBtn(_ sender: StyledButton) {
@@ -74,6 +73,6 @@ final class AppointmnetCalanderView: UIView{
     @IBAction func onCLickSelectedDate(_ sender: UIControl) {
         dateBackgroundView.isHidden = false
         timeSlotView.isHidden = true
-        reloadCell?(false)
+        reloadCell?(nil)
     }
 }

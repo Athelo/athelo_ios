@@ -19,7 +19,7 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
     private var router: ScheduleAppointmentRouter?
     private var cancellables: [AnyCancellable] = []
     private var expandedCellIndex: IndexPath?
-    private var isDateSelect = false
+    private var selectedDate: String? = nil
     private var viewModel = ScheduleAppointmentViewModel()
     
     // MARK: - View lifecycle
@@ -69,11 +69,13 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: ScheduleAppointmentCell.self, for: indexPath)
-        cell.configure(expandedCellIndex == indexPath ? .expanded : .noramal, isTimesloatHide: !isDateSelect, indexPath: indexPath)
+        cell.configure(expandedCellIndex == indexPath ? .expanded : .noramal, isTimesloatHide: false, indexPath: indexPath)
         cell.appointmentSchedulingView.reloadCell = reloadRow
         cell.appointmentSchedulingView.schedualAction = appointmentBooked
         if expandedCellIndex == indexPath{
-            cell.appointmentSchedulingView.timeSlotView.isHidden = !isDateSelect
+            cell.appointmentSchedulingView.dateBackgroundView.isHidden = selectedDate != nil
+            cell.appointmentSchedulingView.timeSlotView.isHidden = !(selectedDate != nil)
+            cell.appointmentSchedulingView.selectedDateLbl.text = selectedDate
         }
         return cell
     }
@@ -82,13 +84,13 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
         let temp = expandedCellIndex
         expandedCellIndex = expandedCellIndex==indexPath ? nil : indexPath
         if temp != indexPath{
-            isDateSelect = false
+            selectedDate = nil
         }
         tableView.reloadRows(at: [indexPath, temp ?? indexPath], with: .fade)
     }
     
-    func reloadRow(isTimePicker: Bool){
-        isDateSelect = isTimePicker
+    func reloadRow(isTimePickerDate: String?){
+        selectedDate = isTimePickerDate
         tableView.reloadRows(at: [expandedCellIndex ?? IndexPath(row: 0, section: 0)], with: .automatic)
     }
     

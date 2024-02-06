@@ -134,10 +134,10 @@
                                     <rect key="frame" x="0.0" y="45" width="452" height="232"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DTF-Ua-pqd">
-                                            <rect key="frame" x="16" y="16" width="82.333333333333329" height="20"/>
+                                            <rect key="frame" x="16.000000000000007" y="16" width="125.66666666666669" height="20"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Himanshu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dS-I7-WOt">
-                                                    <rect key="frame" x="13.000000000000004" y="2.6666666666666634" width="56.333333333333343" height="14.666666666666664"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 Jan, Thursday " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dS-I7-WOt">
+                                                    <rect key="frame" x="13" y="2.6666666666666634" width="99.666666666666671" height="14.666666666666664"/>
                                                     <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="12"/>
                                                     <color key="textColor" name="Light Olivaceous"/>
                                                     <nil key="highlightedColor"/>
@@ -148,7 +148,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvg-Xs-NUr" customClass="UIControl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="82.333333333333329" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="125.66666666666667" height="20"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
                                                         <action selector="onCLickSelectedDate:" destination="-1" eventType="touchUpInside" id="0pE-QM-Hnf"/>
