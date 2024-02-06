@@ -43,15 +43,14 @@ final class AppointmentBookedCell: UITableViewCell{
     
     private func configureOwnView() {
         selectionStyle = .none
-          
-        
         
     }
     
     
     @IBAction func onClickMoreBtn(_ sender: UIButton) {
-        var popoverView = PopoverView()
+        let popoverView = PopoverView()
         popoverView.reschedualBtnClicked = self.parentScreen.routToReschedualVC
+        popoverView.cancelAppointmentClicked = self.parentScreen.appointmentRemoveSuccess
         presentPopover(parentScreen, popoverView, sender: sender, size: CGSize(width: 256, height: 104))
         
         

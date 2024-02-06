@@ -10,9 +10,25 @@ import UIKit
 
 final class AppointmentViewModel: BaseViewModel{
     
-    @Published var allAppointments = [20, 30, 40, 50]
+//    @Published var allAppointments = CurrentValueSubject<AppointmentResponse, Never>(AppointmentResponse(from: <#Decoder#>)
+    
+    private var cancellables: [AnyCancellable] = []
+    override init() {
+        super.init()
+        
+//        getAllProviders()
+//        print(allAppointments.sink(receiveValue: { data in
+//            print(data,"**")
+//        }))
+    }
     
     
     
     
+    func getAllProviders() {
+            
+        
+
+        
+    }
 }

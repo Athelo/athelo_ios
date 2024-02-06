@@ -10,6 +10,6 @@ import Combine
 
 final class ScheduleAppointmentViewModel: BaseViewModel{
     
-    @Published var allAppointments = [10,20,30,40]
+    @Published var allAppointments = Array(repeating: 0, count: 10)
 
 }

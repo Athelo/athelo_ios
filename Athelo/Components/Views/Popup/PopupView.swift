@@ -108,7 +108,7 @@ extension PopupView {
     struct ConfigurationData {
         let title: String
         let message: NSAttributedString?
-        let displaysCloseButton: Bool
+        var displaysCloseButton: Bool
         let primaryAction: PopupActionData
         let secondaryAction: PopupActionData?
         
@@ -131,6 +131,9 @@ extension PopupView {
             self.title = template.title
             self.message = NSAttributedString(string: template.message)
             self.displaysCloseButton = template.displaysCloseButton
+            if template == .cancelAppointment || template == .reschedual{
+                self.displaysCloseButton = false
+            }
             
             self.primaryAction = primaryAction
             self.secondaryAction = secondaryAction

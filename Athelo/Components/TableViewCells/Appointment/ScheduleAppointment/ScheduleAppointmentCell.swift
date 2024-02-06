@@ -7,19 +7,19 @@
 import UIKit
 
 
-final class ScheduleAppointmentCell: UITableViewCell, UICollectionViewDelegate{
+final class ScheduleAppointmentCell: UITableViewCell{
     
-    
- 
+    // MARK: - Outlets
     @IBOutlet weak var professionLbl: UILabel!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var profileImg: UIImageView!
+    @IBOutlet weak var arrowImg: UIImageView!
+    @IBOutlet weak var appointmentSchedulingView: AppointmnetCalanderView!
     
-    @IBOutlet weak var arrowImg: UIButton!
-    @IBOutlet weak var choosDateView: UIView!
+    // MARK: - Properties
+    var selectedTimeCell: IndexPath? = nil
     
-    @IBOutlet weak var submiteBtn: StyledButton!
-    @IBOutlet weak var clanderView: AppointmnetCalanderView!
+    
     // MARK: - View lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,34 +31,36 @@ final class ScheduleAppointmentCell: UITableViewCell, UICollectionViewDelegate{
         
     }
     
+    // MARK: - Funcitons
+    // MARK: Configration
     private func configure() {
         configureOwnView()
+        configureAppointmentCalanderView()
     }
     
     private func configureOwnView() {
         selectionStyle = .none
-        clanderView.collectionView.register(AppointmentTimeCell.self)
-        clanderView.collectionView.delegate = self
-        clanderView.collectionView.dataSource = self
-        clanderView.dateBackgroundView.isHidden = false
-        clanderView.selectedDateView.layer.borderColor = #colorLiteral(red: 0.4078431373, green: 0.5843137255, blue: 0.1058823529, alpha: 1)
-        clanderView.selectedDateView.layer.borderWidth = 1
-        
-        
-        
+        backgroundColor = .none
         
     }
     
-    
-    @IBAction func submiteActionBtn(_ sender: StyledButton) {
-        clanderView.dateBackgroundView.isHidden.toggle()
-        clanderView.timeSlotView.isHidden = !clanderView.dateBackgroundView.isHidden
+    private func configureAppointmentCalanderView() {
+        appointmentSchedulingView.selectedDateView.layer.borderColor = #colorLiteral(red: 0.4078431373, green: 0.5843137255, blue: 0.1058823529, alpha: 1)
+        appointmentSchedulingView.selectedDateView.layer.borderWidth = 1
+        appointmentSchedulingView.scheduleBtn.isEnabled = false
+        configureCollectionView()
     }
     
+    private func configureCollectionView() {
+       let apView = appointmentSchedulingView
+       apView?.collectionView.register(AppointmentTimeCell.self)
+       apView?.collectionView.delegate = self
+       apView?.collectionView.dataSource = self
+   }
 }
 
-
-extension ScheduleAppointmentCell: UICollectionViewDataSource{
+// MARK: - CollectionView DataSource
+extension ScheduleAppointmentCell: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         9
     }
@@ -66,17 +68,58 @@ extension ScheduleAppointmentCell: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: AppointmentTimeCell.self, for: indexPath)
         cell.timeLbl.text = "10:00 AM"
-        cell.timeView.layer.borderWidth = 1
-        cell.timeView.layer.borderColor = #colorLiteral(red: 0.5019607843, green: 0.3843137255, blue: 0.4980392157, alpha: 1)
+        cell.configure(selectedTimeCell == indexPath ? .selected : .normal, indexPath: indexPath)
+        if selectedTimeCell == indexPath{
+            appointmentSchedulingView.scheduleBtn.isEnabled = true
+        }
+        
+        appointmentSchedulingView.collectionViewHeight.constant = collectionView.contentSize.height
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let temp = selectedTimeCell
+       selectedTimeCell =  indexPath
+       collectionView.reloadItems(at: [indexPath, temp ?? IndexPath(row: 0, section: 0)])
     }
 }
 
+// MARK: - CollectionView FlowLayout Deleget
 extension ScheduleAppointmentCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        var width = ( clanderView.collectionView.bounds.width - 67 )/3
-        
+        let width = ( appointmentSchedulingView.collectionView.bounds.width - 67 )/3
         return CGSize(width: width, height: 40)
     }
+}
+
+// MARK: - ConfigurableProtocol
+extension ScheduleAppointmentCell: ConfigurableCell {
+    typealias DataType = ScheduleCellDecoration
+    
+    func configure(_ item: ScheduleCellDecoration, indexPath: IndexPath) {
+        if item == .expanded{
+            appointmentSchedulingView.isHidden = false
+            appointmentSchedulingView.dateBackgroundView.isHidden = false
+        }else{
+            appointmentSchedulingView.isHidden = true
+        }
+    }
+    
+    func configure(_ item: ScheduleCellDecoration, isTimesloatHide: Bool = true, indexPath: IndexPath) {
+        if item == .expanded{
+            appointmentSchedulingView.isHidden = false
+            appointmentSchedulingView.dateBackgroundView.isHidden = false
+        }else{
+            appointmentSchedulingView.isHidden = true
+        }
+        arrowImg.image = item == .expanded ? UIImage(named: "arrowUp") : UIImage(named: "arrowDown")
+    }
+}
+ 
+// MARK: - Configuration Enum
+enum ScheduleCellDecoration{
+    case noramal
+    case expanded
+    
 }

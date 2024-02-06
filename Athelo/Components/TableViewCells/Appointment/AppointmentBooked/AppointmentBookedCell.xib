@@ -26,6 +26,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="516" height="171"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AnA-FR-KBG" customClass="ShadowCastingView" customModule="Athelo" customModuleProvider="target">
+                        <rect key="frame" x="22" y="5" width="473" height="140"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fw-cQ-sdr">
                         <rect key="frame" x="16" y="0.0" width="484" height="150"/>
                         <subviews>
@@ -137,7 +141,11 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="AnA-FR-KBG" firstAttribute="bottom" secondItem="3fw-cQ-sdr" secondAttribute="bottom" constant="-5" id="Gve-cZ-fyS"/>
+                    <constraint firstItem="AnA-FR-KBG" firstAttribute="leading" secondItem="3fw-cQ-sdr" secondAttribute="leading" constant="6" id="Q6Y-2d-RmR"/>
                     <constraint firstAttribute="bottom" secondItem="3fw-cQ-sdr" secondAttribute="bottom" constant="16" id="Xp0-y4-1ew"/>
+                    <constraint firstItem="AnA-FR-KBG" firstAttribute="trailing" secondItem="3fw-cQ-sdr" secondAttribute="trailing" constant="-5" id="hR4-VJ-9wW"/>
+                    <constraint firstItem="AnA-FR-KBG" firstAttribute="top" secondItem="3fw-cQ-sdr" secondAttribute="top" constant="5" id="kJQ-Vc-lRn"/>
                     <constraint firstItem="3fw-cQ-sdr" firstAttribute="top" secondItem="u2m-pz-9em" secondAttribute="top" id="sGT-FA-MYi"/>
                     <constraint firstAttribute="trailing" secondItem="3fw-cQ-sdr" secondAttribute="trailing" constant="16" id="u5H-hw-87Q"/>
                     <constraint firstItem="3fw-cQ-sdr" firstAttribute="leading" secondItem="u2m-pz-9em" secondAttribute="leading" constant="16" id="uiL-5j-aCt"/>

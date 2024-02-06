@@ -20,8 +20,8 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
     
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var tableStackHeight: NSLayoutConstraint!
-    @IBOutlet weak var hideView: UIView!
     
+    @IBOutlet weak var tableViewBackground: UIView!
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -58,6 +58,7 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
     
     private func configureNoAppoitmentView() {
         noAppointmentView.alpha = 0.0
+        tableStackHeight.constant = stackView.frame.height - 52 - 16
         
     }
     
@@ -75,7 +76,6 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
         
         //Button manage
 //        noAppointmentView.alpha = ishide ? 1.0 : 0.0
-//        hideView.isHidden = !ishide
 //        tableStackHeight.constant = ishide ? 0 : stackView.frame.height - 52 - 16
 //        ishide.toggle()
     }
@@ -85,7 +85,8 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
 // MARK: UITableViewDataSource
 extension AppointmentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.allAppointments.count
+//        viewModel.allAppointments.count
+        5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,6 +100,13 @@ extension AppointmentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         150
     }
+}
+
+extension AppointmentViewController {
+    func appointmentRemoveSuccess() {
+        displayMessage("message.appointmentRemove.success".localized(), type: .successSecondery)
+    }
+    
 }
 
 extension AppointmentViewController {

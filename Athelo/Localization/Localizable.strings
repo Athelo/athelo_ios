@@ -60,6 +60,7 @@
 "action.sendfeedback" = "Send Feedback";
 "action.sendmessage" = "Send Message";
 "action.scheduleMyAppointment" = "Schedule My Appointment";
+"action.schedule" = "Schedule";
 "action.signup" = "Sign Up";
 "action.skip" = "Skip";
 "action.start" = "Start";
@@ -251,6 +252,8 @@
 "message.password.reset" = "A link to reset your password has been sent to your mail.";
 "message.wellbeing" = "How are you feeling today? It is important!";
 "message.somethingwentwrong" = "Something went wrong, please try again later.";
+"message.appointmentRemove.success" = "Never mind! You can schedule new appointment!";
+"message.appointmentSchedule.success" = "Great! Your appointment has been scheduled successfully!";
 
 "navigation.aboutus" = "About Us";
 "navigation.article" = "Article";

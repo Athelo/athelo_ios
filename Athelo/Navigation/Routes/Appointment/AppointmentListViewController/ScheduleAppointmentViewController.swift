@@ -27,12 +27,14 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
         super.viewDidLoad()
         
         configure()
+        sink()
     }
     
     private func configure() {
         configureOwnView()
         configureTableView()
     }
+  
     
     private func configureOwnView() {
         navigationItem.title = "navigation.scheduleAppointment".localized()
@@ -44,7 +46,18 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
         tableView.delegate = self
         tableView.dataSource = self
     }
-      
+    
+    // MARK: - Sinks
+    private func sink(){
+        sinkIntoViewModel()
+        
+    }
+    
+    private func sinkIntoViewModel(){
+        bindToViewModel(viewModel, cancellables: &cancellables)
+        
+    }
+    
 }
 
 // MARK: - Protocol conformance
@@ -56,10 +69,12 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: ScheduleAppointmentCell.self, for: indexPath)
-        
-        cell.backgroundColor = .none
-        cell.choosDateView.isHidden = !(expandedCellIndex == indexPath)
-        cell.arrowImg.imageView?.image = expandedCellIndex == indexPath ? UIImage(named: "arrowUp") : UIImage(named: "arrowDown")
+        cell.configure(expandedCellIndex == indexPath ? .expanded : .noramal, isTimesloatHide: !isDateSelect, indexPath: indexPath)
+        cell.appointmentSchedulingView.reloadCell = reloadRow
+        cell.appointmentSchedulingView.schedualAction = appointmentBooked
+        if expandedCellIndex == indexPath{
+            cell.appointmentSchedulingView.timeSlotView.isHidden = !isDateSelect
+        }
         return cell
     }
     
@@ -71,8 +86,23 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
         }
         tableView.reloadRows(at: [indexPath, temp ?? indexPath], with: .fade)
     }
+    
+    func reloadRow(isTimePicker: Bool){
+        isDateSelect = isTimePicker
+        tableView.reloadRows(at: [expandedCellIndex ?? IndexPath(row: 0, section: 0)], with: .automatic)
+    }
+    
 }
 
+extension ScheduleAppointmentViewController{
+    func appointmentBooked(){
+        print(expandedCellIndex!.row, "Row Appointed")
+        router?.navigationController?.popViewController(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.7) {
+            self.displayMessage("message.appointmentSchedule.success".localized(), type: .successSecondery)
+        }
+    }
+}
 
 
 extension ScheduleAppointmentViewController: Navigable {
