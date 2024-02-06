@@ -15,7 +15,7 @@ final class EditProfileViewModel: BaseViewModel {
     private let targetBirthDate = CurrentValueSubject<Date?, Never>(nil)
     private let targetName = CurrentValueSubject<String?, Never>(nil)
     private let targetPhoneNumber = CurrentValueSubject<String?, Never>(nil)
-    private let targetDescribesBest = CurrentValueSubject<String?, Never>(nil)
+    private let targetTreatmentStatus = CurrentValueSubject<String?, Never>(nil)
     
     var knownBirthDate: Date {
         targetBirthDate.value ?? Date().dateByAdding(-50, .year).dateAt(.startOfMonth).dateByAdding(14, .day).date
@@ -25,7 +25,7 @@ final class EditProfileViewModel: BaseViewModel {
     @Published private(set) var editsContent: Bool = false
     @Published private(set) var hasPendingChanges: Bool = false
     @Published private(set) var userData: IdentityProfileData?
-    @Published private(set) var selectedDescribesYou: DescribesYou?
+    @Published private(set) var selectedTreatmentStatus: TreatmentStatus?
     
     private var lockedInEditMode: Bool = false
     
@@ -36,6 +36,7 @@ final class EditProfileViewModel: BaseViewModel {
         super.init()
         
         sink()
+        getPatientTreatmentStatus()
     }
     
     // MARK: - Public API
@@ -61,8 +62,9 @@ final class EditProfileViewModel: BaseViewModel {
         targetPhoneNumber.send(phoneNumber)
     }
     
-    func assignDescribesBest(_ describesBest: String?) {
-        targetDescribesBest.send(describesBest)
+    func assignTreatmentStatus(_ treatmentStatus: TreatmentStatus?) {
+        targetTreatmentStatus.send(treatmentStatus?.name)
+        selectedTreatmentStatus = treatmentStatus
     }
     
     func lockEditMode() {
@@ -71,6 +73,21 @@ final class EditProfileViewModel: BaseViewModel {
         }
         
         lockedInEditMode = true
+    }
+    
+    func getPatientTreatmentStatus() {
+        self.state.send(.loading)
+        IdentityUtility.getPatientTreatmentStatus()
+            .sink { [weak self] result in
+                switch result {
+                case .finished:
+                    self?.state.send(.loaded)
+                case .failure(let error):
+                    self?.state.send(.error(error: error))
+                }
+            } receiveValue: { [weak self] value in
+                self?.selectedTreatmentStatus = TreatmentStatus.sanitizedValue(value: value.cancer_status ?? "")
+            }.store(in: &cancellables)
     }
     
     func resetPassword() {
@@ -175,6 +192,14 @@ final class EditProfileViewModel: BaseViewModel {
                 
                 self?.resetCachedFormData()
             }.store(in: &cancellables)
+        
+//        IdentityUtility.updatePatientTreatmentStatus(status: selectedTreatmentStatus?.name ?? "")
+//            .mapError({ $0 as Error })
+//            .sink(receiveCompletion: { _ in
+//                    
+//            }, receiveValue: { [weak self] value in
+//                self?.selectedTreatmentStatus = TreatmentStatus.sanitizedValue(value: value.cancer_status ?? "")
+//            }).store(in: &cancellables)
     }
     
     func switchEditMode() {
@@ -189,7 +214,7 @@ final class EditProfileViewModel: BaseViewModel {
         }
     }
     
-    func describesBestPublisher() -> AnyPublisher<[ListInputCellItemData], Error> {
+    func treatmentStatusPublisher() -> AnyPublisher<[ListInputCellItemData], Error> {
         Deferred {
             ConstantsStore.describesYouPublisher()
                 .map({ $0 as [ListInputCellItemData] })
@@ -245,7 +270,7 @@ final class EditProfileViewModel: BaseViewModel {
     }
 }
 
-enum DescribesYou: Hashable, CaseIterable, ListInputCellItemData {
+enum TreatmentStatus: Hashable, CaseIterable, ListInputCellItemData {
     case active
     case remission
     
@@ -274,5 +299,15 @@ enum DescribesYou: Hashable, CaseIterable, ListInputCellItemData {
     var listInputItemName: String {
         displayName
     }
-
+    
+    static func sanitizedValue(value: String) -> TreatmentStatus? {
+        switch value {
+        case "ACTIVE":
+            return .active
+        case "REMISSION":
+            return .remission
+        default:
+            return nil
+        }
+    }
 }

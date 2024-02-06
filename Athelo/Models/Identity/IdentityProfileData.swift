@@ -47,6 +47,8 @@ struct IdentityProfileData: Decodable, Identifiable {
     var profileFriendVisibilityOnly: Bool? {
         commonProfileData.profileFriendVisibilityOnly
     }
+    
+    var cancerStatus: String?
 
     private enum CodingKeys: String, CodingKey {
         case email, photo, user

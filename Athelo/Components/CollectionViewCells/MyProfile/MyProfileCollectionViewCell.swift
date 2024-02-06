@@ -22,6 +22,8 @@ final class MyProfileCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var stackViewPhoneNumber: UIStackView!
     @IBOutlet private weak var textViewName: UITextView!
     @IBOutlet private weak var viewContentContainer: UIView!
+    @IBOutlet private weak var stackViewStatus: UIStackView!
+    @IBOutlet private weak var labelStatus: UILabel!
     
     // MARK: - Propoerties
     private weak var delegate: MyProfileCollectionViewCellDelegate?
@@ -87,6 +89,15 @@ extension MyProfileCollectionViewCell: ConfigurableCell {
             labelPhoneNumber.text = phoneNumber
         } else {
             labelPhoneNumber.text = "\("message.noinformation".localized())"
+        }
+        
+        if let status = item.cancerStatus {
+            labelStatus.text = "Cancer Status: \(status)"
+            labelStatus.isHidden = false
+            stackViewStatus.isHidden = false
+        } else {
+            labelStatus.isHidden = true
+            stackViewStatus.isHidden = true
         }
     }
 }

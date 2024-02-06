@@ -10,10 +10,12 @@ enum ProfileRequestBuilder: APIBuilderProtocol {
     case removeTags(request: ProfileRemoveTagsRequest)
     case update(request: ProfileUpdateRequest)
     case createProfile(request: ProfileCreateRequest1)
+    case updateTreatmentStatus(request: ProfileTreatmentStatus)
+    case treatmentStatus
 
     var headers: [String : String]? {
         switch self {
-        case .addTags, .authorizationMethods, .create, .currentUserDetails, .deleteAccount, .details, .removeTags, .update, .createProfile:
+        case .addTags, .authorizationMethods, .create, .currentUserDetails, .deleteAccount, .details, .removeTags, .update, .createProfile, .treatmentStatus, .updateTreatmentStatus:
             return nil
         }
     }
@@ -22,9 +24,9 @@ enum ProfileRequestBuilder: APIBuilderProtocol {
         switch self {
         case .addTags, .create, .removeTags, .createProfile:
             return .post
-        case .authorizationMethods, .currentUserDetails, .deleteAccount, .details:
+        case .authorizationMethods, .currentUserDetails, .deleteAccount, .details, .treatmentStatus:
             return .get
-        case .update:
+        case .update, .updateTreatmentStatus:
             return .put
         }
     }
@@ -36,9 +38,10 @@ enum ProfileRequestBuilder: APIBuilderProtocol {
              .details(let request as APIRequest),
              .removeTags(let request as APIRequest),
              .update(let request as APIRequest),
-             .createProfile(let request as APIRequest):
+             .createProfile(let request as APIRequest),
+             .updateTreatmentStatus(let request as APIRequest):
             return request.parameters
-        case .authorizationMethods, .currentUserDetails, .deleteAccount:
+        case .authorizationMethods, .currentUserDetails, .deleteAccount, .treatmentStatus:
             return nil
         }
     }
@@ -63,6 +66,9 @@ enum ProfileRequestBuilder: APIBuilderProtocol {
             return "/users/me/remove-person-tags/"
         case .update:
             return "/users/me/"
+        case .treatmentStatus, .updateTreatmentStatus:
+            return "/users/me/patient/"
+            
         }
     }
 }

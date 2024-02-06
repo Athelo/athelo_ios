@@ -13,6 +13,8 @@ final class MyProfileViewModel: BaseViewModel {
     // MARK: - Properties
     @Published private(set) var dataSnapshot: NSDiffableDataSourceSnapshot<SectionIdentifier, ItemIdentifier>?
     
+    var cancerStatus: String?
+    
     private var cancellables: [AnyCancellable] = []
     
     // MARK: - Initialization
@@ -20,6 +22,7 @@ final class MyProfileViewModel: BaseViewModel {
         super.init()
         
         sink()
+        getPatientDetails()
     }
     
     // MARK: - Public API
@@ -34,6 +37,17 @@ final class MyProfileViewModel: BaseViewModel {
             .sink { [weak self] in
                 self?.state.send($0.toViewModelState())
             }.store(in: &cancellables)
+    }
+    
+    func getPatientDetails() {
+        self.state.send(.loading)
+        IdentityUtility.getPatientTreatmentStatus()
+            .sink(receiveCompletion: { completion in
+                self.state.send(.loaded)
+            }, receiveValue: { value in
+                self.cancerStatus = value.cancer_status
+                self.updateDataSnapshot()
+            }).store(in: &cancellables)
     }
     
     func headerSupplementaryData(at index: Int) -> SectionTitleDecorationData? {
@@ -67,7 +81,7 @@ final class MyProfileViewModel: BaseViewModel {
     }
     
     func refresh() {
-        updateDataSnapshot()
+        getPatientDetails()
     }
     
     func section(at index: Int) -> SectionIdentifier? {

@@ -73,10 +73,10 @@ final class EditProfileViewController: KeyboardListeningViewController {
         configurePhoneNumberFormTextField()
         configureRequestPasswordResetButton()
         configureUploadPictureButton()
-        configureWhatBestDescribesYouTextField()
+        configureTreatmentStatusList()
     }
     
-    private func configureWhatBestDescribesYouTextField() {
+    private func configureTreatmentStatusList() {
         formTextFieldWhatBestDescribesYou.delegate = self
     }
     
@@ -143,6 +143,7 @@ final class EditProfileViewController: KeyboardListeningViewController {
         sinkIntoKeyboardChanges()
         sinkIntoNameFormTextField()
         sinkIntoPhoneNumberTextField()
+        sinkIntoDescribesBestTextField()
         sinkIntoViewModel()
     }
     
@@ -186,11 +187,10 @@ final class EditProfileViewController: KeyboardListeningViewController {
         formTextFieldWhatBestDescribesYou.displayIcon(.verticalChevron)
             .sink { [weak self] in
                 if self?.whatBestDescribesYouInputView == nil {
-                    self?.displayDescribesBestInputView()
+                    self?.displayTreatmentStatusInputView()
                 } else {
                     self?.hideDescribesYouInputView()
                 }
-                
                 self?.view.endEditing(true)
             }.store(in: &cancellables)
     }
@@ -238,6 +238,14 @@ final class EditProfileViewController: KeyboardListeningViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.updateFormTextFieldsContents(using: $0)
+            }.store(in: &cancellables)
+        
+        viewModel.$selectedTreatmentStatus
+            .map({ $0?.displayName })
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.formTextFieldWhatBestDescribesYou.text = $0
             }.store(in: &cancellables)
     }
     
@@ -320,7 +328,7 @@ final class EditProfileViewController: KeyboardListeningViewController {
         }
     }
     
-    private func displayDescribesBestInputView() {
+    private func displayTreatmentStatusInputView() {
         guard whatBestDescribesYouInputView == nil else {
             return
         }
@@ -349,21 +357,17 @@ final class EditProfileViewController: KeyboardListeningViewController {
         
         describesYouDismissalGestureRecognizer = tapGestureRecognizer
         
-        inputView.assignAndFireItemsPublisher(viewModel.describesBestPublisher(), preselecting: viewModel.selectedDescribesYou)
+        inputView.assignAndFireItemsPublisher(viewModel.treatmentStatusPublisher(), preselecting: viewModel.selectedTreatmentStatus)
         
         desccribesBestInputCancellable?.cancel()
         desccribesBestInputCancellable = inputView.selectedItemPublisher
-            .compactMap({ $0 as? DescribesYou })
+            .compactMap({ $0 as? TreatmentStatus })
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.viewModel.assignDescribesBest($0.name)
+                self?.viewModel.assignTreatmentStatus($0)
                 
                 self?.hideDescribesYouInputView()
-                self?.view.endEditing(true)
             }
-        
-        view.endEditing(true)
-        
         formTextFieldWhatBestDescribesYou.activateIcon(.verticalChevron)
     }
     

@@ -60,5 +60,13 @@ public extension AtheloAPI {
         public static func createProfile<T: Decodable>(request: ProfileCreateRequest1) -> AnyPublisher<T, APIError> {
             APIService().request(with: Builder.createProfile(request: request)).eraseToAnyPublisher()
         }
+        
+        public static func getTreatmentStatus<T: Decodable>() -> AnyPublisher<T, APIError> {
+            APIService().request(with: Builder.treatmentStatus).eraseToAnyPublisher()
+        }
+        
+        public static func updateTreatmentStatus<T: Decodable>(request: ProfileTreatmentStatus) -> AnyPublisher<T, APIError> {
+            APIService().request(with: Builder.updateTreatmentStatus(request: request)).eraseToAnyPublisher()
+        }
     }
 }
