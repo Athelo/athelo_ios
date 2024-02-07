@@ -14,11 +14,12 @@ final class ScheduleAppointmentCell: UITableViewCell{
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var arrowImg: UIImageView!
+    @IBOutlet weak var imageLoaingView: LoadingView!
     @IBOutlet weak var appointmentSchedulingView: AppointmnetCalanderView!
     
     // MARK: - Properties
     var selectedTimeCell: IndexPath? = nil
-    
+    var timeSloats: ProviderAvability?
     
     // MARK: - View lifecycle
     override func awakeFromNib() {
@@ -61,12 +62,12 @@ final class ScheduleAppointmentCell: UITableViewCell{
 // MARK: - CollectionView DataSource
 extension ScheduleAppointmentCell: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        9
+        timeSloats?.times.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: AppointmentTimeCell.self, for: indexPath)
-        cell.timeLbl.text = "10:00 AM"
+        cell.timeLbl.text = timeSloats?.times[indexPath.row]
         cell.configure(selectedTimeCell == indexPath ? .selected : .normal, indexPath: indexPath)
         if selectedTimeCell == indexPath{
             appointmentSchedulingView.scheduleBtn.isEnabled = true
@@ -97,27 +98,46 @@ extension ScheduleAppointmentCell: ConfigurableCell {
     typealias DataType = ScheduleCellDecoration
     
     func configure(_ item: ScheduleCellDecoration, indexPath: IndexPath) {
-        if item == .expanded{
+        let data = item.providerDetail
+        if item.state == .expanded{
             appointmentSchedulingView.isHidden = false
-            appointmentSchedulingView.dateBackgroundView.isHidden = false
         }else{
             appointmentSchedulingView.isHidden = true
+        }
+        arrowImg.image = item.state == .expanded ? UIImage(named: "arrowUp") : UIImage(named: "arrowDown")
+        loadImage(From: URL(string: data.photo ?? ""))
+        nameLbl.text = data.name
+        professionLbl.text = data.providerType
+    }
+    
+    private func loadImage(From url: URL?){
+        imageLoaingView.isHidden = false
+        profileImg.isHidden = true
+        profileImg.sd_setImage(with: url) { image, err, _, _ in
+            self.imageLoaingView.isHidden = true
+            self.profileImg.isHidden = false
+            self.profileImg.image = image
+            if let _ = err {
+                self.profileImg.image = UIImage(named: "logoSmall")
+            }
         }
     }
     
-    func configure(_ item: ScheduleCellDecoration, isTimesloatHide: Bool = false, indexPath: IndexPath) {
-        if item == .expanded{
-            appointmentSchedulingView.isHidden = false
-        }else{
-            appointmentSchedulingView.isHidden = true
-        }
-        arrowImg.image = item == .expanded ? UIImage(named: "arrowUp") : UIImage(named: "arrowDown")
-    }
 }
  
 // MARK: - Configuration Enum
-enum ScheduleCellDecoration{
-    case noramal
-    case expanded
+struct ScheduleCellDecoration{
     
+    var providerDetail: ProviderResponselData.ProvidersData
+    var state: CellState
+    
+    init(providerDetail: ProviderResponselData.ProvidersData, state: CellState) {
+        self.providerDetail = providerDetail
+        self.state = state
+    }
+    
+    enum CellState{
+        case noramal
+        case expanded
+    }
 }

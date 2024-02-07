@@ -63,7 +63,7 @@ final class AppointmnetCalanderView: UIView{
     @IBAction func onClickApplyBtn(_ sender: StyledButton) {
         dateBackgroundView.isHidden = true
         timeSlotView.isHidden = false
-        reloadCell?(datePicker.date.toString(.custom("dd MMM, EEEE")))
+        reloadCell?(datePicker.date.toString(.custom("MM/dd/yyyy")))
     }
     
     @IBAction func onClickScheduleBtn(_ sender: StyledButton) {

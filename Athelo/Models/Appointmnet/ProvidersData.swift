@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct AppointmentResponse: Decodable{
+struct ProviderResponselData: Decodable {
     var count: Int
     var next: Int?
     var previous: Int?
-    var results: [AppointmentData] = []
+    var results: [ProvidersData] = []
     
     
-    struct AppointmentData: Decodable, Identifiable, Hashable{
+    struct ProvidersData: Decodable, Identifiable, Hashable{
         var id: Int
         var name: String?
         var photo: String?

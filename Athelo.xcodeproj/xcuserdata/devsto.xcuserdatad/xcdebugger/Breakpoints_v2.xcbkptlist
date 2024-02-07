@@ -3,4 +3,102 @@
    uuid = "F20D9423-F65F-42F5-8A8F-0EDB134ABEDF"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EEFAC8AE-944D-4E2B-8C01-F70B1A7B19B1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athelo/Navigation/Routes/Appointment/AppointmentListViewController/ScheduleAppointmentViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "getTimeSloats(id:date:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "03D13BDB-1717-436E-B22B-F2D1C2279EA0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athelo/Networking/API/Builders/Appointment/AppointmentRequestBuilder.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "path"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F3E04C1E-1742-4E7E-8E20-A81B5AF9A62D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athelo/Navigation/Routes/Appointment/AppointmentListViewController/ScheduleAppointmentViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "getTimeSloats(id:date:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F3E04C1E-1742-4E7E-8E20-A81B5AF9A62D - ff269a6272f818ee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Combine.Subscribers.Completion&lt;Athelo.APIError&gt;) -&gt; () in Athelo.ScheduleAppointmentViewModel.getTimeSloats(id: Swift.Int, date: Swift.String) -&gt; ()"
+                  moduleName = "Athelo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devsto/Documents/Projects/Athelo/ios_athelo/Athelo/Navigation/Routes/Appointment/AppointmentListViewController/ScheduleAppointmentViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "168">
+               </Location>
+               <Location
+                  uuid = "F3E04C1E-1742-4E7E-8E20-A81B5AF9A62D - ff269a6272f818ee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Combine.Subscribers.Completion&lt;Athelo.APIError&gt;) -&gt; () in Athelo.ScheduleAppointmentViewModel.getTimeSloats(id: Swift.Int, date: Swift.String) -&gt; ()"
+                  moduleName = "Athelo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devsto/Documents/Projects/Athelo/ios_athelo/Athelo/Navigation/Routes/Appointment/AppointmentListViewController/ScheduleAppointmentViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "284">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E340AC3A-C495-44E2-AF19-FB3CF4C02D8C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Athelo/Navigation/Routes/Appointment/AppointmentListViewController/ScheduleAppointmentViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "getTimeSloats(id:date:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

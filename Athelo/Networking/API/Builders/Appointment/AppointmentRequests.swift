@@ -12,8 +12,12 @@ public extension AtheloAPI {
     enum Appointment {
         private typealias Builder = AppointmentRequestBuilder
         
-        public static func getAllProviders() -> AnyPublisher<Never, APIError> {
+        public static func getAllProviders<T: Decodable>() -> AnyPublisher<T, APIError> {
             APIService().request(with: Builder.providers).eraseToAnyPublisher()
+        }
+        
+        static func getProviderAvability(request: ProviderAvabilityRequest) -> AnyPublisher<ProviderAvability, APIError> {
+            APIService().request(with: Builder.providerAvability(request: request)).eraseToAnyPublisher()
         }
         
     }

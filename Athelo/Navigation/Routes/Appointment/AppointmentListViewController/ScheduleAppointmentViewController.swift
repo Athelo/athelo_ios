@@ -50,13 +50,34 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
     // MARK: - Sinks
     private func sink(){
         sinkIntoViewModel()
+        sinkIntoProvidersTableView()
         
     }
     
     private func sinkIntoViewModel(){
         bindToViewModel(viewModel, cancellables: &cancellables)
         
+        viewModel.$providers
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+            }
+            .store(in: &cancellables)
+        
+        
     }
+    
+    private func sinkIntoProvidersTableView() {
+        tableView.refreshControl?.controlEventPublisher(for: .valueChanged)
+            .sinkDiscardingValue { [weak self] in
+                if self?.viewModel.state.value == .loading {
+                    self?.tableView.refreshControl?.endRefreshing()
+                } else {
+                    self?.viewModel.refresh()
+                }
+            }.store(in: &cancellables)
+    }
+    
     
 }
 
@@ -64,14 +85,17 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
 // MARK: UITableViewDataSource
 extension ScheduleAppointmentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.allAppointments.count 
+        viewModel.providers?.results.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: ScheduleAppointmentCell.self, for: indexPath)
-        cell.configure(expandedCellIndex == indexPath ? .expanded : .noramal, isTimesloatHide: false, indexPath: indexPath)
+        
+        let schedualeCellData = ScheduleCellDecoration(providerDetail: viewModel.providers!.results[indexPath.row], state: expandedCellIndex == indexPath ? .expanded : .noramal)
+        cell.configure(schedualeCellData, indexPath: indexPath)
         cell.appointmentSchedulingView.reloadCell = reloadRow
         cell.appointmentSchedulingView.schedualAction = appointmentBooked
+        cell.timeSloats = viewModel.timeSloats.value
         if expandedCellIndex == indexPath{
             cell.appointmentSchedulingView.dateBackgroundView.isHidden = selectedDate != nil
             cell.appointmentSchedulingView.timeSlotView.isHidden = !(selectedDate != nil)
@@ -91,6 +115,9 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
     
     func reloadRow(isTimePickerDate: String?){
         selectedDate = isTimePickerDate
+        if isTimePickerDate != nil{
+            viewModel.getTimeSloats(id: viewModel.providers!.results[expandedCellIndex?.row ?? 0].id, date: selectedDate!)
+        }
         tableView.reloadRows(at: [expandedCellIndex ?? IndexPath(row: 0, section: 0)], with: .automatic)
     }
     
