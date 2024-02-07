@@ -27,7 +27,9 @@ final class MyProfileViewController: BaseViewController {
         
         configure()
         sink()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         viewModel.refresh()
     }
     
@@ -93,7 +95,7 @@ final class MyProfileViewController: BaseViewController {
                 }
                 
                 if var profileData = self?.viewModel.userProfileData() {
-                    profileData.cancerStatus = self?.viewModel.cancerStatus
+//                    profileData.cancerStatus = self?.viewModel.cancerStatus
                     cell.configure(profileData, indexPath: indexPath)
                 }
                 

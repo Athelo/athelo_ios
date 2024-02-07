@@ -22,7 +22,6 @@ final class MyProfileViewModel: BaseViewModel {
         super.init()
         
         sink()
-        getPatientDetails()
     }
     
     // MARK: - Public API
@@ -46,6 +45,11 @@ final class MyProfileViewModel: BaseViewModel {
                 self.state.send(.loaded)
             }, receiveValue: { value in
                 self.cancerStatus = value.cancer_status
+                guard var userData = IdentityUtility.userData else {
+                    return
+                }
+                userData.cancerStatus = value.cancer_status
+                IdentityUtility.updateUserDataWithTreatmentStatus(identityProfileData: userData)
                 self.updateDataSnapshot()
             }).store(in: &cancellables)
     }

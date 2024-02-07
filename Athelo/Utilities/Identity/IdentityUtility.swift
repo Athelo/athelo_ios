@@ -279,6 +279,10 @@ enum SignInHandlerState: Equatable {
         return shared.roleUtility.updatePatientDataForActiveUser()
     }
     
+    static func updateUserDataWithTreatmentStatus(identityProfileData: IdentityProfileData) {
+        shared.userDataSubject.send(identityProfileData)
+    }
+    
     static func refreshUserDetails() -> AnyPublisher<IdentityProfileData, Error> {
         guard APIEnvironment.hasTokenData() else {
             return Fail(error: APIError.missingCredentials)
