@@ -19,6 +19,18 @@ public extension AtheloAPI {
         static func getProviderAvability(request: ProviderAvabilityRequest) -> AnyPublisher<ProviderAvability, APIError> {
             APIService().request(with: Builder.providerAvability(request: request)).eraseToAnyPublisher()
         }
+     
+        public static func bookAppointment(request: BookAppoointmentRequest) -> AnyPublisher<Never, APIError>{
+            APIService().request(with: Builder.bookAppointment(request: request)).eraseToAnyPublisher()
+        }
+        
+        static func getAllAppointments() -> AnyPublisher<AppoitmentResponseData, APIError>{
+            APIService().request(with: Builder.getAppointments).eraseToAnyPublisher()
+        }
+        
+        static func delete(request: DeleteAppointmentRequest) -> AnyPublisher<Never, APIError>{
+            APIService().request(with: Builder.delete(request: request)).eraseToAnyPublisher()
+        }
         
     }
 }

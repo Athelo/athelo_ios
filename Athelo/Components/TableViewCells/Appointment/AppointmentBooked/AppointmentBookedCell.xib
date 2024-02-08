@@ -48,7 +48,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ave Calvar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5U-RX-gtb">
                                 <rect key="frame" x="88" y="22.666666666666671" width="102" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="00h-DE-ogb"/>
+                                    <constraint firstAttribute="height" constant="30" id="IqS-ab-Vug"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Inter-Medium" family="Inter" pointSize="20"/>
                                 <color key="textColor" name="Gray"/>
@@ -112,6 +112,14 @@
                                     <action selector="onClickMoreBtn:" destination="ZoW-ax-Uxp" eventType="touchUpInside" id="vsy-t9-czM"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9IO-Wg-xCT" customClass="LoadingView" customModule="Athelo" customModuleProvider="target">
+                                <rect key="frame" x="26" y="44" width="44" height="8"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="79Z-8e-10m"/>
+                                    <constraint firstAttribute="height" constant="8" id="jwg-Vl-rFl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
@@ -128,9 +136,11 @@
                             <constraint firstItem="dbl-1R-mOa" firstAttribute="top" secondItem="7lW-dw-pA8" secondAttribute="bottom" constant="16" id="VwM-UI-vvM"/>
                             <constraint firstItem="p9h-Dg-00D" firstAttribute="top" secondItem="J5U-RX-gtb" secondAttribute="bottom" id="W19-BP-ZIY"/>
                             <constraint firstAttribute="height" constant="150" id="dmS-9o-laZ"/>
+                            <constraint firstItem="9IO-Wg-xCT" firstAttribute="centerX" secondItem="ptQ-Ts-YfN" secondAttribute="centerX" id="hsv-tJ-tCx"/>
                             <constraint firstItem="p9h-Dg-00D" firstAttribute="leading" secondItem="ptQ-Ts-YfN" secondAttribute="trailing" constant="8" id="pWD-QU-yjH"/>
                             <constraint firstItem="J5U-RX-gtb" firstAttribute="top" secondItem="3fw-cQ-sdr" secondAttribute="top" constant="22.5" id="q0q-PN-8ui"/>
                             <constraint firstItem="7lW-dw-pA8" firstAttribute="leading" secondItem="3fw-cQ-sdr" secondAttribute="leading" constant="16" id="rlh-Up-oX9"/>
+                            <constraint firstItem="9IO-Wg-xCT" firstAttribute="centerY" secondItem="ptQ-Ts-YfN" secondAttribute="centerY" id="wyS-GC-UVC"/>
                             <constraint firstItem="7lW-dw-pA8" firstAttribute="top" secondItem="ptQ-Ts-YfN" secondAttribute="bottom" constant="16" id="xhy-Nu-6nx"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -156,6 +166,7 @@
                 <outlet property="backGroundView" destination="3fw-cQ-sdr" id="zQl-7r-XDM"/>
                 <outlet property="dateBgView" destination="bzj-p1-2AD" id="SKd-JU-gMx"/>
                 <outlet property="dateTimeLbl" destination="jDn-qr-PR5" id="7l6-ff-WR1"/>
+                <outlet property="loadingView" destination="9IO-Wg-xCT" id="kGh-DA-Zt6"/>
                 <outlet property="personNameLbl" destination="J5U-RX-gtb" id="TOF-yW-GVh"/>
                 <outlet property="professionLbl" destination="p9h-Dg-00D" id="WAB-Gs-8TO"/>
                 <outlet property="profileImgView" destination="ptQ-Ts-YfN" id="hur-J7-exV"/>

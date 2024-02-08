@@ -14,8 +14,9 @@ class PopoverView: UIViewController {
     @IBOutlet weak var popupBackgroungView: UIView!
     
     var reschedualBtnClicked: (()->())?
-    var cancelAppointmentClicked: (()->())?
+    var cancelAppointmentClicked: ((Int)->())?
     
+    var index: Int?
     init() {
         super.init(nibName: "PopoverView", bundle: nil)
     }
@@ -58,7 +59,7 @@ class PopoverView: UIViewController {
         
         let noAction = PopupActionData(title: "action.no".localized()){
             print("Remove Appointment from list")
-            self.cancelAppointmentClicked?()
+            self.cancelAppointmentClicked?(self.index!)
         }
         
         let popupData = PopupConfigurationData(template: .reschedual, primaryAction: yesAction, secondaryAction: noAction)

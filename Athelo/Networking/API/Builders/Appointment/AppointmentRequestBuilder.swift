@@ -10,27 +10,34 @@ import Foundation
 enum AppointmentRequestBuilder: APIBuilderProtocol{
     case providers
     case providerAvability(request: ProviderAvabilityRequest)
+    case bookAppointment(request: BookAppoointmentRequest)
+    case getAppointments
+    case delete(request: DeleteAppointmentRequest)
     
     var headers: [String : String]? {
         switch self {
-        case .providers, .providerAvability:
+        case .providers, .providerAvability, .bookAppointment, .getAppointments, .delete:
             return nil
-        
         }
     }
     
     var method: APIMethod {
         switch self {
-        case .providers, .providerAvability:
+        case .providers, .getAppointments, .providerAvability, .delete:
             return .get
+            
+        case .bookAppointment:
+            return .post
         }
     }
     
     var parameters: [String : Any]? {
         switch self {
-        case .providerAvability(let request as APIRequest):
+        case .bookAppointment(let request as APIRequest):
             return request.parameters
-        case .providers:
+        case .providerAvability( _), .delete( _):
+            return nil
+        case .providers, .getAppointments:
             return nil
         }
     }
@@ -39,9 +46,21 @@ enum AppointmentRequestBuilder: APIBuilderProtocol{
         switch self {
         case .providers:
             return "/providers"
+            
         case .providerAvability(request: let request):
-            return "/providers/\(request.id)/availability"
+            return "/providers/\(request.id)/availability?date=\(request.date)&tz=Asia/Calcutta"
+            
+        case .bookAppointment( _ as APIRequest):
+            return "/appointments/"
+            
+        case .getAppointments:
+            return "/appointments/"
+            
+        case .delete(request: let request):
+            return "/appointment/\(request.id)/"
         }
+        
+    
     }
     
     

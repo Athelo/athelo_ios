@@ -16,7 +16,6 @@ public struct ProviderAvabilityRequest: APIRequest {
     }
     
     public var parameters: [String : Any]? {
-        ["date": date,
-         "tz": "Asia/Calcutta"]
+        return nil
     }
 }

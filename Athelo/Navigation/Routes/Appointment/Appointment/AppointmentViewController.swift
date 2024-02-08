@@ -25,22 +25,23 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
     @IBOutlet weak var tableView: UITableView!
     
     
-    var ishide = false
-    
-    
-    
     // MARK: - Properties
     private var viewModel = AppointmentViewModel()
     private var router: AppointmentRouter?
-
-    
     private var cancellables: [AnyCancellable] = []
+    
+    
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
+        sink()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.getAllAppointmnets()
     }
     
     private func configure() {
@@ -49,7 +50,6 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
         configureTableView()
     }
     
-    
     private func configureOwnView() {
         navigationItem.displayAppLogo()
         
@@ -57,8 +57,8 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
     }
     
     private func configureNoAppoitmentView() {
-        noAppointmentView.alpha = 0.0
-        tableStackHeight.constant = stackView.frame.height - 52 - 16
+        noAppointmentView.alpha = 1.0
+        tableStackHeight.constant = 0/*stackView.frame.height - 52 - 16*/
         
     }
     
@@ -70,14 +70,46 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
 
     }
     
+    // MARK: - Sinks
+    private func sink(){
+        sinkIntoViewModel()
+        sinkIntoProvidersTableView()
+    }
+    
+    private func sinkIntoViewModel(){
+        bindToViewModel(viewModel, cancellables: &cancellables)
+        
+        viewModel.$allAppointments
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] data in
+                if self?.viewModel.isLastDeleteAction == true {
+                    DispatchQueue.main.asyncAfter(deadline: .now()+1){
+                        self?.displayMessage("message.appointmentRemove.success".localized(), type: .successSecondery)
+                    }
+                    self?.viewModel.isLastDeleteAction.toggle()
+                }
+                self?.tableView.reloadData()
+                let ishide = data.count>0
+                self?.noAppointmentView.alpha = ishide ? 0.0 : 1.0
+                self?.tableStackHeight.constant = ishide ? (self?.stackView.frame.height ?? 0) - 52 - 16 : 0
+                
+            }.store(in: &cancellables)
+    }
+    
+    private func sinkIntoProvidersTableView() {
+        tableView.refreshControl?.controlEventPublisher(for: .valueChanged)
+            .sinkDiscardingValue { [weak self] in
+                if self?.viewModel.state.value == .loading {
+                    self?.tableView.refreshControl?.endRefreshing()
+                } else {
+                    self?.viewModel.refresh()
+                }
+            }.store(in: &cancellables)
+    }
+    
     
     @IBAction func onClickScheduleAppointmentBtn(_ sender: UIButton) {
         routToReschedualVC()
-        
-        //Button manage
-//        noAppointmentView.alpha = ishide ? 1.0 : 0.0
-//        tableStackHeight.constant = ishide ? 0 : stackView.frame.height - 52 - 16
-//        ishide.toggle()
     }
 }
 
@@ -85,15 +117,13 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
 // MARK: UITableViewDataSource
 extension AppointmentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        viewModel.allAppointments.count
-        5
+        viewModel.allAppointments.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: AppointmentBookedCell.self, for: indexPath)
-        cell.backgroundColor = .none
+        cell.configure(.init(viewModel.allAppointments[indexPath.row]), indexPath: indexPath)
         cell.parentScreen = self
-        
         return cell
     }
     
@@ -103,10 +133,10 @@ extension AppointmentViewController: UITableViewDataSource {
 }
 
 extension AppointmentViewController {
-    func appointmentRemoveSuccess() {
-        displayMessage("message.appointmentRemove.success".localized(), type: .successSecondery)
+    func appointmentRemoveSuccess(index: Int) {
+        viewModel.isLastDeleteAction = true
+        viewModel.deleteAppointment(AppointmentID: viewModel.allAppointments[index].id)
     }
-    
 }
 
 extension AppointmentViewController {

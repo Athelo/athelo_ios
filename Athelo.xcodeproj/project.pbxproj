@@ -749,8 +749,12 @@
 		F387F6A82B6A5E97002B7CB6 /* ScheduleAppointmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F387F6A72B6A5E97002B7CB6 /* ScheduleAppointmentCell.swift */; };
 		F387F6AA2B6A5EA2002B7CB6 /* ScheduleAppointmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F387F6A92B6A5EA2002B7CB6 /* ScheduleAppointmentCell.xib */; };
 		F395379D2B73A8A900E3AE76 /* ProviderAvabilityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F395379C2B73A8A900E3AE76 /* ProviderAvabilityRequest.swift */; };
-		F39537A02B73ACE300E3AE76 /* ProviderAvability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F395379F2B73ACE300E3AE76 /* ProviderAvability.swift */; };
+		F39537A02B73ACE300E3AE76 /* ProviderAvabilityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F395379F2B73ACE300E3AE76 /* ProviderAvabilityData.swift */; };
 		F39537A22B73B3AD00E3AE76 /* String + DateModify.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39537A12B73B3AD00E3AE76 /* String + DateModify.swift */; };
+		F3A7EE2C2B74D03A000DBC44 /* AppoitmentResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A7EE2B2B74D03A000DBC44 /* AppoitmentResponseData.swift */; };
+		F3A7EE2E2B74EA32000DBC44 /* DeleteAppointmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A7EE2D2B74EA32000DBC44 /* DeleteAppointmentRequest.swift */; };
+		F3AC7C372B749B9C000B158B /* BookAppoointmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AC7C362B749B9C000B158B /* BookAppoointmentRequest.swift */; };
+		F3AC7C392B74A16D000B158B /* AppointmetntData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AC7C382B74A16D000B158B /* AppointmetntData.swift */; };
 		F3F0289B2B6B926F00494828 /* UIViewController+Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F0289A2B6B926F00494828 /* UIViewController+Popover.swift */; };
 		F3F0289F2B6B98F500494828 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F0289D2B6B98F500494828 /* PopoverView.swift */; };
 		F3F028A02B6B98F500494828 /* PopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F0289E2B6B98F500494828 /* PopoverView.xib */; };
@@ -1459,8 +1463,12 @@
 		F387F6A72B6A5E97002B7CB6 /* ScheduleAppointmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAppointmentCell.swift; sourceTree = "<group>"; };
 		F387F6A92B6A5EA2002B7CB6 /* ScheduleAppointmentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleAppointmentCell.xib; sourceTree = "<group>"; };
 		F395379C2B73A8A900E3AE76 /* ProviderAvabilityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderAvabilityRequest.swift; sourceTree = "<group>"; };
-		F395379F2B73ACE300E3AE76 /* ProviderAvability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderAvability.swift; sourceTree = "<group>"; };
+		F395379F2B73ACE300E3AE76 /* ProviderAvabilityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderAvabilityData.swift; sourceTree = "<group>"; };
 		F39537A12B73B3AD00E3AE76 /* String + DateModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + DateModify.swift"; sourceTree = "<group>"; };
+		F3A7EE2B2B74D03A000DBC44 /* AppoitmentResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppoitmentResponseData.swift; sourceTree = "<group>"; };
+		F3A7EE2D2B74EA32000DBC44 /* DeleteAppointmentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAppointmentRequest.swift; sourceTree = "<group>"; };
+		F3AC7C362B749B9C000B158B /* BookAppoointmentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAppoointmentRequest.swift; sourceTree = "<group>"; };
+		F3AC7C382B74A16D000B158B /* AppointmetntData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmetntData.swift; sourceTree = "<group>"; };
 		F3F0289A2B6B926F00494828 /* UIViewController+Popover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Popover.swift"; sourceTree = "<group>"; };
 		F3F0289D2B6B98F500494828 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		F3F0289E2B6B98F500494828 /* PopoverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopoverView.xib; sourceTree = "<group>"; };
@@ -4877,7 +4885,9 @@
 			isa = PBXGroup;
 			children = (
 				F33E02982B710CEF00F1D88E /* ProvidersData.swift */,
-				F395379F2B73ACE300E3AE76 /* ProviderAvability.swift */,
+				F395379F2B73ACE300E3AE76 /* ProviderAvabilityData.swift */,
+				F3AC7C382B74A16D000B158B /* AppointmetntData.swift */,
+				F3A7EE2B2B74D03A000DBC44 /* AppoitmentResponseData.swift */,
 			);
 			path = Appointmnet;
 			sourceTree = "<group>";
@@ -4952,6 +4962,8 @@
 			isa = PBXGroup;
 			children = (
 				F395379C2B73A8A900E3AE76 /* ProviderAvabilityRequest.swift */,
+				F3AC7C362B749B9C000B158B /* BookAppoointmentRequest.swift */,
+				F3A7EE2D2B74EA32000DBC44 /* DeleteAppointmentRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -5234,6 +5246,7 @@
 				3E6BD00E288542DE00A1FC4D /* SymptomListViewController.swift in Sources */,
 				3E8F209E28DDA64500C327BE /* TagListRequest.swift in Sources */,
 				F36F3F4E2B68CD280072BE35 /* AppointmentViewController.swift in Sources */,
+				F3AC7C392B74A16D000B158B /* AppointmetntData.swift in Sources */,
 				3EF70956284F5BF500B6FDB5 /* IdentitySignInWithAppleHandler.swift in Sources */,
 				3EE9FDBA2844A9CB00BE4661 /* Collection+Access.swift in Sources */,
 				3E002A13284F71690025516B /* IdentitySignInWithGoogleHandler.swift in Sources */,
@@ -5285,7 +5298,7 @@
 				3EBF4F7128635ABF000E647F /* CalendarView.swift in Sources */,
 				3E8F204428DDA64500C327BE /* PostCreateCommentRequest.swift in Sources */,
 				3E78A6742876DEE1002599F7 /* FilterTableViewCell.swift in Sources */,
-				F39537A02B73ACE300E3AE76 /* ProviderAvability.swift in Sources */,
+				F39537A02B73ACE300E3AE76 /* ProviderAvabilityData.swift in Sources */,
 				3EE97D95286DE6170027DC03 /* CommunitiesListViewModel.swift in Sources */,
 				3E8F209028DDA64500C327BE /* ApplicationsRequestBuilder.swift in Sources */,
 				3ED0BFB028A239CC00224561 /* SmallColumnGraphModel.swift in Sources */,
@@ -5643,6 +5656,7 @@
 				3ED85B0228462B750008EC11 /* SplashViewModel.swift in Sources */,
 				3E919675287D6DD4005F5290 /* ChatMessageCellDecorationData.swift in Sources */,
 				3EE626482865CCEC00DF06CD /* UserProfileRouter.swift in Sources */,
+				F3A7EE2C2B74D03A000DBC44 /* AppoitmentResponseData.swift in Sources */,
 				3EA4FF13288AA86F00717DA7 /* CreatedSymptomData.swift in Sources */,
 				3E91967B287D7125005F5290 /* Double+Measurement.swift in Sources */,
 				3EDB3796287C5C6600C3EDE8 /* UIImage+Filters.swift in Sources */,
@@ -5691,6 +5705,7 @@
 				3EA4FF0B288A807C00717DA7 /* ApplicationData.swift in Sources */,
 				3E53905D284E3930003CE983 /* ServiceConstantsData.swift in Sources */,
 				3E43B9C82847A5CA00295E2F /* UINavigationController+Styling.swift in Sources */,
+				F3A7EE2E2B74EA32000DBC44 /* DeleteAppointmentRequest.swift in Sources */,
 				3EC51866289284AD0012663C /* HealthSleepRecordData.swift in Sources */,
 				3E75F52E28A4FB5200000968 /* GraphSelectedItemInfoView.swift in Sources */,
 				3E5253DB2887F45000D6D643 /* SymptomChronologyViewModel.swift in Sources */,
@@ -5707,6 +5722,7 @@
 				3E37A3C828DB4B1100201306 /* PrivateChatListUtility.swift in Sources */,
 				3E27093B29D30D9000A7B09C /* PatientListViewModel.swift in Sources */,
 				3E0D559E287431E300E2EE6A /* WatchListViewModel.swift in Sources */,
+				F3AC7C372B749B9C000B158B /* BookAppoointmentRequest.swift in Sources */,
 				3E8F202D28DDA64500C327BE /* NetworkingImageData.swift in Sources */,
 				3E8F208128DDA64500C327BE /* FitbitDeleteProfileRequest.swift in Sources */,
 				3E8F206628DDA64500C327BE /* ConstantsRequests.swift in Sources */,

@@ -12,10 +12,10 @@ final class ScheduleAppointmentViewModel: BaseViewModel{
     
     @Published var allAppointments = Array(repeating: 0, count: 10)
     @Published var providers: ProviderResponselData?
-
-    var timeSloats = CurrentValueSubject<ProviderAvability, Never>(ProviderAvability())
     
-        
+    var timeSloats = CurrentValueSubject<ProviderAvability, Never>(ProviderAvability())
+    var bookingResponse: ((Bool)->())?
+    
     private var cancellables: [AnyCancellable] = []
     
     // MARK: - Initialization
@@ -60,11 +60,36 @@ final class ScheduleAppointmentViewModel: BaseViewModel{
                 }
             } receiveValue: { [weak self] in
                 self?.timeSloats.send($0)
-                
                 print($0 as Any)
             }
             .store(in: &cancellables)
+        
+    }
+    
+    func bookNewAppointment(id: Int, startTime: String, endTime: String){
+        guard state.value != .loading else {
+            return
+        }
+        state.send(.loading)
+        
+        AtheloAPI.Appointment.bookAppointment(request: .init(id: id, starTime: startTime, endTime: endTime))
+            .sink { [weak self] complision in
+                
+                self?.state.send(.loaded)
+                
+                switch complision {
+                case .failure(let err):
+                    print("Error is ", err.localizedDescription, "***")
+                    self?.bookingResponse?(false)
+                case .finished:
+                    self?.bookingResponse?(true)
+                    print("Provider Booked Successfully ***")
+                }
+                
+            }
+            .store(in: &cancellables)
 
+        
     }
     
     func refresh() {
@@ -73,5 +98,4 @@ final class ScheduleAppointmentViewModel: BaseViewModel{
         }
         getProviders()
     }
-
 }

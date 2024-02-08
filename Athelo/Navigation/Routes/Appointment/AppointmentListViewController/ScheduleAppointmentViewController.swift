@@ -51,7 +51,7 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
     private func sink(){
         sinkIntoViewModel()
         sinkIntoProvidersTableView()
-        
+        viewModel.bookingResponse = bookingResponse
     }
     
     private func sinkIntoViewModel(){
@@ -64,7 +64,6 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
             }
             .store(in: &cancellables)
         
-        
     }
     
     private func sinkIntoProvidersTableView() {
@@ -76,6 +75,22 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
                     self?.viewModel.refresh()
                 }
             }.store(in: &cancellables)
+    }
+    
+
+    func bookingResponse(isSuccess: Bool){
+        if isSuccess {
+
+            DispatchQueue.main.async{
+                self.router?.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now()+1){
+                    self.displayMessage("message.appointmentSchedule.success".localized(), type: .successSecondery)
+                }
+            }
+        }else{
+            self.displayMessage("message.appointmentSchedule.success".localized(), type: .successSecondery)
+        }
+        
     }
     
     
@@ -125,11 +140,7 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
 
 extension ScheduleAppointmentViewController{
     func appointmentBooked(){
-        print(expandedCellIndex!.row, "Row Appointed")
-        router?.navigationController?.popViewController(animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.7) {
-            self.displayMessage("message.appointmentSchedule.success".localized(), type: .successSecondery)
-        }
+        viewModel.bookNewAppointment(id: viewModel.providers!.results[expandedCellIndex?.row ?? 0].id, startTime: "2024-02-09T14:30:00:00", endTime: "2024-02-09T14:00:00")
     }
 }
 

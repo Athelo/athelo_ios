@@ -62,12 +62,16 @@ final class ScheduleAppointmentCell: UITableViewCell{
 // MARK: - CollectionView DataSource
 extension ScheduleAppointmentCell: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        timeSloats?.times.count ?? 0
+//        timeSloats?.times.count ?? 0
+         5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: AppointmentTimeCell.self, for: indexPath)
-        cell.timeLbl.text = timeSloats?.times[indexPath.row]
+//        cell.timeLbl.text = timeSloats?.times[indexPath.row]
+        cell.timeLbl.text = /*timeSloats?.responseDates[0][indexPath.row]*/"10:00 AM"
+        
+        
         cell.configure(selectedTimeCell == indexPath ? .selected : .normal, indexPath: indexPath)
         if selectedTimeCell == indexPath{
             appointmentSchedulingView.scheduleBtn.isEnabled = true
@@ -125,7 +129,7 @@ extension ScheduleAppointmentCell: ConfigurableCell {
     
 }
  
-// MARK: - Configuration Enum
+// MARK: - Configuration
 struct ScheduleCellDecoration{
     
     var providerDetail: ProviderResponselData.ProvidersData
