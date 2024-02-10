@@ -22,6 +22,7 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
     private var selectedDate: String? = nil
     private var viewModel = ScheduleAppointmentViewModel()
     
+    
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +65,21 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
             }
             .store(in: &cancellables)
         
+        viewModel.timeSloats
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                if self?.selectedDate != nil {
+                    if $0.times.count == 0 {
+                        DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+                            self?.displayMessage("message.noTimeSloatsAvailabel".localized(), type: .successSecondery)
+                        }
+                    }
+                }
+                self?.viewModel.isDateSelected = $0.times.count<0
+                self?.tableView.reloadData()
+                self?.tableView.reloadRows(at: [self?.expandedCellIndex ?? IndexPath(row: 0, section: 0)], with: .fade)
+            }
+            .store(in: &cancellables)
     }
     
     private func sinkIntoProvidersTableView() {
@@ -80,15 +96,16 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
 
     func bookingResponse(isSuccess: Bool){
         if isSuccess {
-
             DispatchQueue.main.async{
                 self.router?.navigationController?.popViewController(animated: true)
-                DispatchQueue.main.asyncAfter(deadline: .now()+1){
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
                     self.displayMessage("message.appointmentSchedule.success".localized(), type: .successSecondery)
                 }
             }
         }else{
-            self.displayMessage("message.appointmentSchedule.success".localized(), type: .successSecondery)
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+                self.displayMessage("message.appointmentSchedule.success".localized(), type: .successSecondery)
+            }
         }
         
     }
@@ -111,11 +128,14 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
         cell.appointmentSchedulingView.reloadCell = reloadRow
         cell.appointmentSchedulingView.schedualAction = appointmentBooked
         cell.timeSloats = viewModel.timeSloats.value
+        cell.appointmentSchedulingView.selectedDateLbl.text = selectedDate?.changeDateStringTo(Base: "MM/dd/yyyy", Changeto: "dd MMM, EEEE") ?? "No Selected"
         if expandedCellIndex == indexPath{
-            cell.appointmentSchedulingView.dateBackgroundView.isHidden = selectedDate != nil
-            cell.appointmentSchedulingView.timeSlotView.isHidden = !(selectedDate != nil)
+            let isCalanderHide = viewModel.timeSloats.value.times.count > 0
+            cell.appointmentSchedulingView.dateBackgroundView.isHidden = isCalanderHide
+            cell.appointmentSchedulingView.timeSlotView.isHidden = !(isCalanderHide)
             cell.appointmentSchedulingView.selectedDateLbl.text = selectedDate
         }
+        cell.appointmentSchedulingView.collectionView.reloadData()
         return cell
     }
     
@@ -124,6 +144,8 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
         expandedCellIndex = expandedCellIndex==indexPath ? nil : indexPath
         if temp != indexPath{
             selectedDate = nil
+            viewModel.timeSloats.send(ProviderAvability())
+            viewModel.isDateSelected = false
         }
         tableView.reloadRows(at: [indexPath, temp ?? indexPath], with: .fade)
     }
@@ -133,14 +155,18 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
         if isTimePickerDate != nil{
             viewModel.getTimeSloats(id: viewModel.providers!.results[expandedCellIndex?.row ?? 0].id, date: selectedDate!)
         }
-        tableView.reloadRows(at: [expandedCellIndex ?? IndexPath(row: 0, section: 0)], with: .automatic)
     }
     
 }
 
 extension ScheduleAppointmentViewController{
-    func appointmentBooked(){
-        viewModel.bookNewAppointment(id: viewModel.providers!.results[expandedCellIndex?.row ?? 0].id, startTime: "2024-02-09T14:30:00:00", endTime: "2024-02-09T14:00:00")
+    func appointmentBooked(time: String){
+        if selectedDate != nil{
+            let date = selectedDate?.changeDateStringTo(Base: "MM/dd/yyyy", Changeto: "yyyy-MM-dd")
+            let strTime = time.changeDateStringTo(Base: "hh:mm a", Changeto: "HH:mm:ss")
+            viewModel.bookNewAppointment(id: viewModel.providers!.results[expandedCellIndex?.row ?? 0].id, startTime: "\(date!)T\(strTime!)")
+        }
+        
     }
 }
 

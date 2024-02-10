@@ -19,6 +19,7 @@ final class ScheduleAppointmentCell: UITableViewCell{
     
     // MARK: - Properties
     var selectedTimeCell: IndexPath? = nil
+    var dateSelected = false
     var timeSloats: ProviderAvability?
     
     // MARK: - View lifecycle
@@ -62,27 +63,24 @@ final class ScheduleAppointmentCell: UITableViewCell{
 // MARK: - CollectionView DataSource
 extension ScheduleAppointmentCell: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        timeSloats?.times.count ?? 0
-         5
+        timeSloats!.times.count
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: AppointmentTimeCell.self, for: indexPath)
-//        cell.timeLbl.text = timeSloats?.times[indexPath.row]
-        cell.timeLbl.text = /*timeSloats?.responseDates[0][indexPath.row]*/"10:00 AM"
-        
-        
+        cell.timeLbl.text = timeSloats?.times[indexPath.row]/*"10:00 AM"*/
         cell.configure(selectedTimeCell == indexPath ? .selected : .normal, indexPath: indexPath)
         if selectedTimeCell == indexPath{
             appointmentSchedulingView.scheduleBtn.isEnabled = true
         }
-        
         appointmentSchedulingView.collectionViewHeight.constant = collectionView.contentSize.height
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let temp = selectedTimeCell
+        appointmentSchedulingView.selectedTime = timeSloats!.times[indexPath.row]
        selectedTimeCell =  indexPath
        collectionView.reloadItems(at: [indexPath, temp ?? IndexPath(row: 0, section: 0)])
     }
@@ -111,7 +109,7 @@ extension ScheduleAppointmentCell: ConfigurableCell {
         arrowImg.image = item.state == .expanded ? UIImage(named: "arrowUp") : UIImage(named: "arrowDown")
         loadImage(From: URL(string: data.photo ?? ""))
         nameLbl.text = data.name
-        professionLbl.text = data.providerType
+        professionLbl.text = (data.providerType == nil || data.providerType == "") ? "Care Navigator" : data.providerType
     }
     
     private func loadImage(From url: URL?){

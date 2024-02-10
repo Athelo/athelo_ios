@@ -23,7 +23,8 @@ final class AppointmnetCalanderView: UIView{
     // MARK: - Properties
     var reloadCell: ((String?)->())?
     var lastSelectedDate = Date()
-    var schedualAction: (()->())?
+    var selectedTime: String?
+    var schedualAction: ((String)->())?
     
     // MARK: - Initialization
     required init?(coder: NSCoder) {
@@ -61,18 +62,16 @@ final class AppointmnetCalanderView: UIView{
     }
     
     @IBAction func onClickApplyBtn(_ sender: StyledButton) {
-        dateBackgroundView.isHidden = true
-        timeSlotView.isHidden = false
         reloadCell?(datePicker.date.toString(.custom("MM/dd/yyyy")))
     }
     
     @IBAction func onClickScheduleBtn(_ sender: StyledButton) {
-        schedualAction?()
+        if selectedTime != nil {
+            schedualAction?(selectedTime!)
+        }
     }
     
     @IBAction func onCLickSelectedDate(_ sender: UIControl) {
-        dateBackgroundView.isHidden = false
-        timeSlotView.isHidden = true
         reloadCell?(nil)
     }
 }

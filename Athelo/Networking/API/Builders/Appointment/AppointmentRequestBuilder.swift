@@ -23,8 +23,11 @@ enum AppointmentRequestBuilder: APIBuilderProtocol{
     
     var method: APIMethod {
         switch self {
-        case .providers, .getAppointments, .providerAvability, .delete:
+        case .providers, .getAppointments, .providerAvability:
             return .get
+            
+        case .delete:
+            return .delete
             
         case .bookAppointment:
             return .post
@@ -48,8 +51,8 @@ enum AppointmentRequestBuilder: APIBuilderProtocol{
             return "/providers"
             
         case .providerAvability(request: let request):
-            return "/providers/\(request.id)/availability?date=\(request.date)&tz=Asia/Calcutta"
-            
+//            return "/providers/\(request.id)/availability?date=\(request.date)&tz=\(request.timeZone)"
+            return "/providers/\(request.id)/availability/?date=\(request.date)&tz=\(request.timeZone)"
         case .bookAppointment( _ as APIRequest):
             return "/appointments/"
             

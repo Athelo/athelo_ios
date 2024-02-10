@@ -92,10 +92,28 @@ extension AppointmentBookedCell: ConfigurableCell {
     typealias DataType = AppointmentCellDecoration
     
     func configure(_ item: AppointmentCellDecoration, indexPath: IndexPath) {
-        var data = item.appointmentData
+        let data = item.appointmentData
         personNameLbl.text = data.provider.name
-        let globelTime = data.startTime.toDate(style: .custom("yyyy-MM-dd'T'HH:mm:ss"), region: .local)
-        dateTimeLbl.text = globelTime?.toString(.custom("dd MMM, hh:mm a"))
+        let utcDateString = data.startTime
+
+        
+        // Create a DateFormatter for parsing UTC date
+        let utcDateFormatter = DateFormatter()
+        utcDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        utcDateFormatter.timeZone = TimeZone(identifier: "UTC")
+
+        // Parse UTC date string into a Date object
+        guard let utcDate = utcDateFormatter.date(from: utcDateString) else {
+            fatalError("Error: Unable to parse the UTC date string")
+        }
+
+        // Convert UTC date to the device's local time zone
+        let localDateFormatter = DateFormatter()
+        localDateFormatter.timeZone = TimeZone.current
+        localDateFormatter.dateFormat = "dd MMM, hh:mm a"
+        dateTimeLbl.text = localDateFormatter.string(from: utcDate)
+        
+        
         let localTimeZoneOffsetSeconds = TimeZone.current.secondsFromGMT()
         let hours = localTimeZoneOffsetSeconds / 3600
         let minutes = (localTimeZoneOffsetSeconds % 3600) / 60

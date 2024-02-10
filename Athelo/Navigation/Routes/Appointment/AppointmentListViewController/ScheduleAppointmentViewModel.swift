@@ -15,7 +15,7 @@ final class ScheduleAppointmentViewModel: BaseViewModel{
     
     var timeSloats = CurrentValueSubject<ProviderAvability, Never>(ProviderAvability())
     var bookingResponse: ((Bool)->())?
-    
+    var isDateSelected = false
     private var cancellables: [AnyCancellable] = []
     
     // MARK: - Initialization
@@ -36,7 +36,7 @@ final class ScheduleAppointmentViewModel: BaseViewModel{
             .sink { [weak self] complision in
                 switch complision {
                 case .failure(let err):
-                    print("Error is ", err.localizedDescription, "***")
+                    print("Error is:- ", err.localizedDescription, "***")
                 case .finished:
                     print("Provider Called Successfully ***")
                 }
@@ -50,12 +50,19 @@ final class ScheduleAppointmentViewModel: BaseViewModel{
     }
     
     func getTimeSloats(id: Int, date: String){
+        guard state.value != .loading else {
+            return
+        }
+        state.send(.loading)
+        
         AtheloAPI.Appointment.getProviderAvability(request: .init(id: id , date: date))
-            .sink { complision in
+            .sink { [weak self] complision in
+                self?.state.send(.loaded)
+                
                 switch complision {
                 case .failure(let err):
                     print("Error is ", err.localizedDescription, "***")
-                case .finished:
+                case .finished:                    
                     print("Provider Called Successfully ***")
                 }
             } receiveValue: { [weak self] in
@@ -66,13 +73,13 @@ final class ScheduleAppointmentViewModel: BaseViewModel{
         
     }
     
-    func bookNewAppointment(id: Int, startTime: String, endTime: String){
+    func bookNewAppointment(id: Int, startTime: String){
         guard state.value != .loading else {
             return
         }
         state.send(.loading)
         
-        AtheloAPI.Appointment.bookAppointment(request: .init(id: id, starTime: startTime, endTime: endTime))
+        AtheloAPI.Appointment.bookAppointment(request: .init(id: id, starTime: startTime))
             .sink { [weak self] complision in
                 
                 self?.state.send(.loaded)
