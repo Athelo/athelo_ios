@@ -106,3 +106,38 @@ final class ScheduleAppointmentViewModel: BaseViewModel{
         getProviders()
     }
 }
+
+
+extension ScheduleAppointmentViewModel {
+    enum Messages {
+        case bookSuccess
+        case bookFail
+        case noSlots
+        
+        var message: String{
+            switch self {
+            case .bookFail:
+                return "message.appointmentSchedule.Fail"
+            case .bookSuccess:
+                return "message.appointmentSchedule.success"
+            case .noSlots:
+                return "message.noTimeSloatsAvailabel"
+            }
+        }
+        
+        var style: InfoMessageData.MessageType{
+            switch self {
+                
+            case .bookSuccess:
+                return .successSecondery
+                
+            case .bookFail, .noSlots:
+                return .fail
+            }
+        }
+        
+    }
+    
+    
+    
+}

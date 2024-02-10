@@ -254,7 +254,8 @@
 "message.somethingwentwrong" = "Something went wrong, please try again later.";
 "message.appointmentRemove.success" = "Never mind! You can schedule new appointment!";
 "message.appointmentSchedule.success" = "Great! Your appointment has been scheduled successfully!";
-"message.noTimeSloatsAvailabel" = "Time sloats is not availabel for this date, Choose other one";
+"message.appointmentSchedule.Fail" = "Somthing wnt wrong plase try again to book";
+"message.noTimeSloatsAvailabel" = "This date's time slot is not available. Please select another";
 
 "navigation.aboutus" = "About Us";
 "navigation.article" = "Article";

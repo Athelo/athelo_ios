@@ -21,6 +21,7 @@ final class ScheduleAppointmentCell: UITableViewCell{
     var selectedTimeCell: IndexPath? = nil
     var dateSelected = false
     var timeSloats: ProviderAvability?
+    var selectedDate = ""
     
     // MARK: - View lifecycle
     override func awakeFromNib() {
@@ -110,6 +111,9 @@ extension ScheduleAppointmentCell: ConfigurableCell {
         loadImage(From: URL(string: data.photo ?? ""))
         nameLbl.text = data.name
         professionLbl.text = (data.providerType == nil || data.providerType == "") ? "Care Navigator" : data.providerType
+        
+        appointmentSchedulingView.selectedDateLbl.text = selectedDate.changeDateStringTo(Base: "MM/dd/yyyy", Changeto: "dd MMM, EEEE") ?? "NO Date Selected"
+        
     }
     
     private func loadImage(From url: URL?){

@@ -15,7 +15,6 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
-    
     private var router: ScheduleAppointmentRouter?
     private var cancellables: [AnyCancellable] = []
     private var expandedCellIndex: IndexPath?
@@ -31,6 +30,7 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
         sink()
     }
     
+    // MARK: - Configuration
     private func configure() {
         configureOwnView()
         configureTableView()
@@ -46,12 +46,12 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
         
         tableView.delegate = self
         tableView.dataSource = self
+        
     }
     
     // MARK: - Sinks
     private func sink(){
         sinkIntoViewModel()
-        sinkIntoProvidersTableView()
         viewModel.bookingResponse = bookingResponse
     }
     
@@ -70,47 +70,29 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
             .sink { [weak self] in
                 if self?.selectedDate != nil {
                     if $0.times.count == 0 {
-                        DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
-                            self?.displayMessage("message.noTimeSloatsAvailabel".localized(), type: .successSecondery)
+                        self?.showMessge(.noSlots)
+                    }else{
+                        self?.tableView.reloadData()
+                        DispatchQueue.main.asyncAfter(deadline: .now()+0.4){
+                            self?.tableView.reloadData()
                         }
                     }
                 }
-                self?.viewModel.isDateSelected = $0.times.count<0
-                self?.tableView.reloadData()
-                self?.tableView.reloadRows(at: [self?.expandedCellIndex ?? IndexPath(row: 0, section: 0)], with: .fade)
             }
             .store(in: &cancellables)
     }
-    
-    private func sinkIntoProvidersTableView() {
-        tableView.refreshControl?.controlEventPublisher(for: .valueChanged)
-            .sinkDiscardingValue { [weak self] in
-                if self?.viewModel.state.value == .loading {
-                    self?.tableView.refreshControl?.endRefreshing()
-                } else {
-                    self?.viewModel.refresh()
-                }
-            }.store(in: &cancellables)
-    }
-    
+ 
 
     func bookingResponse(isSuccess: Bool){
         if isSuccess {
             DispatchQueue.main.async{
                 self.router?.navigationController?.popViewController(animated: true)
-                DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
-                    self.displayMessage("message.appointmentSchedule.success".localized(), type: .successSecondery)
-                }
+                self.showMessge(.bookSuccess)
             }
         }else{
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
-                self.displayMessage("message.appointmentSchedule.success".localized(), type: .successSecondery)
-            }
+            self.showMessge(.bookFail)
         }
-        
     }
-    
-    
 }
 
 // MARK: - Protocol conformance
@@ -128,12 +110,15 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
         cell.appointmentSchedulingView.reloadCell = reloadRow
         cell.appointmentSchedulingView.schedualAction = appointmentBooked
         cell.timeSloats = viewModel.timeSloats.value
-        cell.appointmentSchedulingView.selectedDateLbl.text = selectedDate?.changeDateStringTo(Base: "MM/dd/yyyy", Changeto: "dd MMM, EEEE") ?? "No Selected"
+        cell.selectedDate = selectedDate ?? ""
         if expandedCellIndex == indexPath{
             let isCalanderHide = viewModel.timeSloats.value.times.count > 0
             cell.appointmentSchedulingView.dateBackgroundView.isHidden = isCalanderHide
             cell.appointmentSchedulingView.timeSlotView.isHidden = !(isCalanderHide)
-            cell.appointmentSchedulingView.selectedDateLbl.text = selectedDate
+            if selectedDate == nil{
+                 cell.appointmentSchedulingView.dateBackgroundView.isHidden = false
+                 cell.appointmentSchedulingView.timeSlotView.isHidden = true
+            }
         }
         cell.appointmentSchedulingView.collectionView.reloadData()
         return cell
@@ -145,7 +130,6 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
         if temp != indexPath{
             selectedDate = nil
             viewModel.timeSloats.send(ProviderAvability())
-            viewModel.isDateSelected = false
         }
         tableView.reloadRows(at: [indexPath, temp ?? indexPath], with: .fade)
     }
@@ -154,9 +138,11 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
         selectedDate = isTimePickerDate
         if isTimePickerDate != nil{
             viewModel.getTimeSloats(id: viewModel.providers!.results[expandedCellIndex?.row ?? 0].id, date: selectedDate!)
+        }else{
+            viewModel.timeSloats.send(ProviderAvability())
+            tableView.reloadData()
         }
     }
-    
 }
 
 extension ScheduleAppointmentViewController{
@@ -166,11 +152,18 @@ extension ScheduleAppointmentViewController{
             let strTime = time.changeDateStringTo(Base: "hh:mm a", Changeto: "HH:mm:ss")
             viewModel.bookNewAppointment(id: viewModel.providers!.results[expandedCellIndex?.row ?? 0].id, startTime: "\(date!)T\(strTime!)")
         }
-        
+    }
+    
+    func showMessge(_ message: ScheduleAppointmentViewModel.Messages) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+            
+            self.displayMessage(message.message.localized(), type: message.style)
+            
+        }
     }
 }
 
-
+// MARK: Navigatable
 extension ScheduleAppointmentViewController: Navigable {
     static var storyboardScene: StoryboardScene {
         .appointment

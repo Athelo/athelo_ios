@@ -117,7 +117,7 @@ extension AppointmentBookedCell: ConfigurableCell {
         let localTimeZoneOffsetSeconds = TimeZone.current.secondsFromGMT()
         let hours = localTimeZoneOffsetSeconds / 3600
         let minutes = (localTimeZoneOffsetSeconds % 3600) / 60
-        timeZoneLbl.text = String(format: "GMT%+03d:%02d", hours, minutes)
+        timeZoneLbl.text = String(format: "UTC%+03d:%02d", hours, minutes)
         index = indexPath
         setProileImage(Form: URL(string: data.provider.photo))
         dateBgView.layer.borderColor = #colorLiteral(red: 0.4078431373, green: 0.5843137255, blue: 0.1058823529, alpha: 1)

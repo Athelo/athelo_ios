@@ -27,13 +27,13 @@ public struct BookAppoointmentRequest: APIRequest {
             
         }
     }
-    let timeZon: String
+    let timeZone: String
     
     
     public init(id: Int, starTime: String) {
         self.id = id
         self.statrtTime = starTime
-        timeZon = TimeZone.current.identifier
+        timeZone = TimeZone.current.identifier
         
     }
     
@@ -42,7 +42,7 @@ public struct BookAppoointmentRequest: APIRequest {
             "provider_id": id,
             "start_time": statrtTime,
             "end_time": endTime,
-            "timezone": timeZon  //"Asia/Calcutta"
+            "timezone": timeZone  //"Asia/Calcutta"
         ]
     }
 }

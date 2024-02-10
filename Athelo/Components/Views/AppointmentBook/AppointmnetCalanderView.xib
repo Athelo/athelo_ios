@@ -22,7 +22,7 @@
                 <outlet property="dateBackgroundView" destination="FRc-vA-OWj" id="cjV-iI-fYF"/>
                 <outlet property="datePicker" destination="rev-Fb-jz6" id="pbP-5q-TKX"/>
                 <outlet property="scheduleBtn" destination="bM7-cq-bvh" id="WRz-1E-4Zh"/>
-                <outlet property="selectedDateLbl" destination="0dS-I7-WOt" id="7Ma-GY-TW9"/>
+                <outlet property="selectedDateLbl" destination="0dS-I7-WOt" id="Gra-gs-ecL"/>
                 <outlet property="selectedDateView" destination="DTF-Ua-pqd" id="pjt-wb-bGs"/>
                 <outlet property="timeSlotView" destination="HHH-V6-iXu" id="t7W-QR-0q6"/>
             </connections>

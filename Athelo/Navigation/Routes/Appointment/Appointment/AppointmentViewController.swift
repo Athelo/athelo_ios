@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 
-final class AppointmentViewController: BaseViewController, UITableViewDelegate{
+final class AppointmentViewController: BaseViewController{
    
     
    
@@ -17,20 +17,15 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
     
     @IBOutlet weak var schesualAppointmentBtn: StyledButton!
     @IBOutlet weak var noAppointmentView: NoAppointment!
-    
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var tableStackHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var tableViewBackground: UIView!
     @IBOutlet weak var tableView: UITableView!
-    
     
     // MARK: - Properties
     private var viewModel = AppointmentViewModel()
     private var router: AppointmentRouter?
     private var cancellables: [AnyCancellable] = []
-    
-    
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -44,6 +39,7 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
         viewModel.getAllAppointmnets()
     }
     
+    // MARK: - Configuration
     private func configure() {
         configureNoAppoitmentView()
         configureOwnView()
@@ -58,7 +54,7 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
     
     private func configureNoAppoitmentView() {
         noAppointmentView.alpha = 1.0
-        tableStackHeight.constant = 0/*stackView.frame.height - 52 - 16*/
+        tableStackHeight.constant = 0
         
     }
     
@@ -68,12 +64,18 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
         tableView.delegate = self
         tableView.dataSource = self
 
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .withStyle(.purple988098)
+        
+        tableView.refreshControl = refreshControl
+        
     }
     
     // MARK: - Sinks
     private func sink(){
         sinkIntoViewModel()
-        sinkIntoProvidersTableView()
+        sinkIntoAppointmentTableView()
     }
     
     private func sinkIntoViewModel(){
@@ -94,9 +96,21 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
                 self?.tableStackHeight.constant = ishide ? (self?.stackView.frame.height ?? 0) - 52 - 16 : 0
                 
             }.store(in: &cancellables)
+        
+        viewModel.state
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                switch $0 {
+                case .error, .loaded:
+                    self?.tableView.refreshControl?.endRefreshing()
+                case .loading, .initial:
+                    break
+                }
+            }.store(in: &cancellables)
+        
     }
     
-    private func sinkIntoProvidersTableView() {
+    private func sinkIntoAppointmentTableView() {
         tableView.refreshControl?.controlEventPublisher(for: .valueChanged)
             .sinkDiscardingValue { [weak self] in
                 if self?.viewModel.state.value == .loading {
@@ -107,7 +121,7 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
             }.store(in: &cancellables)
     }
     
-    
+    // MARK: - Actions
     @IBAction func onClickScheduleAppointmentBtn(_ sender: UIButton) {
         routToReschedualVC()
     }
@@ -115,7 +129,7 @@ final class AppointmentViewController: BaseViewController, UITableViewDelegate{
 
 // MARK: - Protocol conformance
 // MARK: UITableViewDataSource
-extension AppointmentViewController: UITableViewDataSource {
+extension AppointmentViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.allAppointments.count
     }
@@ -139,12 +153,7 @@ extension AppointmentViewController {
     }
 }
 
-extension AppointmentViewController {
-    func routToReschedualVC(){
-        router?.navigatetoScheduleAppointment()
-    }
-}
-
+// MARK: Routable
 extension AppointmentViewController: Routable {
     func assignRouter(_ router: AppointmentRouter) {
         self.router = router
@@ -155,5 +164,11 @@ extension AppointmentViewController: Routable {
 extension AppointmentViewController: Navigable {
     static var storyboardScene: StoryboardScene {
         .appointment
+    }
+}
+
+extension AppointmentViewController {
+    func routToReschedualVC(){
+        router?.navigatetoScheduleAppointment()
     }
 }

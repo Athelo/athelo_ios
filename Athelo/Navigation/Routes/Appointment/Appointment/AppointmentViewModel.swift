@@ -14,6 +14,8 @@ final class AppointmentViewModel: BaseViewModel{
     
     private var cancellables: [AnyCancellable] = []
     var isLastDeleteAction = false
+    
+    
     override init() {
         super.init()
     
@@ -31,9 +33,8 @@ final class AppointmentViewModel: BaseViewModel{
                 
                 switch compilation{
                 case .failure(let error):
-                    print("** Error:- ",error.localizedDescription)
-                case .finished:
-                    print("Appointment Data get Successfully")
+                    print(error.localizedDescription)
+                case .finished: break
                 }
             } receiveValue: { [weak self] in
                 self?.allAppointments = $0.results
@@ -53,9 +54,8 @@ final class AppointmentViewModel: BaseViewModel{
                 self?.state.send(.loaded)
                 switch compilation{
                 case .failure(let error):
-                    print("** Error:- ",error.localizedDescription)
+                    print(error.localizedDescription)
                 case .finished:
-                    print("Appointment Deleted Successfully")
                     self?.refresh()
                 }
             }

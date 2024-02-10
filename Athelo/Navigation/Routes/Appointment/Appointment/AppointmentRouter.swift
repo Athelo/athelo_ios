@@ -44,6 +44,6 @@ extension AppointmentRouter {
     typealias AppointmentSubject = PassthroughSubject<UpdateEvent, Never>
     
     enum UpdateEvent {
-//        case favoriteStatusUpdated(NewsData)
+        
     }
 }

@@ -60,6 +60,7 @@ class BaseNavigationController: UINavigationController {
         
         navigationBar.backIndicatorImage = image
         navigationBar.backIndicatorTransitionMaskImage = image
+        
     }
     
     private func updateNavigationBarStyle() {
