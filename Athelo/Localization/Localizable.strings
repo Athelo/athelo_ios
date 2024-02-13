@@ -8,6 +8,7 @@
 "accesscode.prompt" = "Please input your pin to continue:";
 
 "action.actas" = "Act as...";
+"action.apply" = "Apply";
 "action.add.caregiver" = "Add A Caregiver";
 "action.add.patient" = "Add A Ward";
 "action.add.symptom" = "Add Symptom";
@@ -37,6 +38,7 @@
 "action.mydevice" = "My Device";
 "action.mysymptoms" = "My Symptoms";
 "action.next" = "Next";
+"action.no" = "No";
 "action.ok" = "OK";
 "action.opencommunity" = "Open Community";
 "action.password.request" = "Request Password Reset";
@@ -57,6 +59,8 @@
 "action.sendamessage" = "Send a message";
 "action.sendfeedback" = "Send Feedback";
 "action.sendmessage" = "Send Message";
+"action.scheduleMyAppointment" = "Schedule My Appointment";
+"action.schedule" = "Schedule";
 "action.signup" = "Sign Up";
 "action.skip" = "Skip";
 "action.start" = "Start";
@@ -65,6 +69,8 @@
 "action.unmute" = "Unmute";
 "action.uploadpicture" = "Upload Picture";
 "action.passwordreset.send" = "Link to reset password is send to the given email.";
+"action.yes" = "Yes";
+
 
 "activity.filter.day" = "Day";
 "activity.filter.week" = "Week";
@@ -246,6 +252,10 @@
 "message.password.reset" = "A link to reset your password has been sent to your mail.";
 "message.wellbeing" = "How are you feeling today? It is important!";
 "message.somethingwentwrong" = "Something went wrong, please try again later.";
+"message.appointmentRemove.success" = "Never mind! You can schedule new appointment!";
+"message.appointmentSchedule.success" = "Great! Your appointment has been scheduled successfully!";
+"message.appointmentSchedule.Fail" = "Somthing wnt wrong plase try again to book";
+"message.noTimeSloatsAvailabel" = "This date's time slot is not available. Please select another";
 
 "navigation.aboutus" = "About Us";
 "navigation.article" = "Article";
@@ -271,11 +281,13 @@
 "navigation.symptom.description" = "Symptom Description";
 "navigation.symptom.list" = "My Symptoms";
 "navigation.symptom.wellbeing" = "Track My Wellbeing";
+"navigation.scheduleAppointment" = "Schedule My Appointment";
 "navigation.tab.activity" = "Activity";
 "navigation.tab.community" = "Community";
 "navigation.tab.home" = "Home";
 "navigation.tab.news" = "News";
 "navigation.tab.sleep" = "Sleep";
+"navigation.tab.appointments" = "Appointments";
 "navigation.termsofservice" = "Terms of Use";
 
 "news.filter.select" = "Search by topic";
@@ -308,8 +320,12 @@
 "popup.leavecommunity.title" = "Leave The Community";
 "popup.logout.message" = "Do you really want to log out?";
 "popup.logout.title" = "Log out";
+"popup.cancelAppointment.title" = "Cancel appointment";
+"popup.cancelAppointment.message" = "Are you sure you want to cancel your appointment?";
 "popup.selectphoto.message" = "Do you want to take a new photo or select one from your photo library?";
 "popup.selectphoto.title" = "Change Photo";
+"popup.reschedule.title" = "Re-schedule appointment";
+"popup.reschedule.message" = "Do you want to re-schedule your appointment?";
 
 "profile.passwordwarning" = "Your new password must be different from the old one";
 

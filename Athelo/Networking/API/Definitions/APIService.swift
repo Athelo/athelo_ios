@@ -45,6 +45,7 @@ struct APIService: APIServiceProtocol {
         #if DEBUG
         if let requestURL = request.url {
             debugPrint(builder.method.rawValue, requestURL)
+            debugPrint("Parameters:-" ,builder.parameters)
         }
         #endif
 

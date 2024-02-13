@@ -50,6 +50,7 @@ struct ServiceConstantValue: Codable {
         } else {
             self.intValue = nil
             self.stringValue = nil
+            
         }
     }
 }

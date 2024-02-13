@@ -89,6 +89,8 @@ extension PopupView {
         case leaveCommunity = "leavecommunity"
         case logOut = "logout"
         case selectPhoto = "selectphoto"
+        case cancelAppointment = "cancelAppointment"
+        case reschedual = "reschedule"
     }
     
     struct ActionData {
@@ -106,7 +108,7 @@ extension PopupView {
     struct ConfigurationData {
         let title: String
         let message: NSAttributedString?
-        let displaysCloseButton: Bool
+        var displaysCloseButton: Bool
         let primaryAction: PopupActionData
         let secondaryAction: PopupActionData?
         
@@ -129,6 +131,9 @@ extension PopupView {
             self.title = template.title
             self.message = NSAttributedString(string: template.message)
             self.displaysCloseButton = template.displaysCloseButton
+            if template == .cancelAppointment || template == .reschedual{
+                self.displaysCloseButton = false
+            }
             
             self.primaryAction = primaryAction
             self.secondaryAction = secondaryAction
@@ -158,7 +163,7 @@ private extension PopupView.ConfigurationTemplate {
         switch self {
         case .deleteAccount, .deleteSymptom, .disconnectDevice, .leaveCommunity, .logOut:
             return false
-        case .selectPhoto:
+        case .selectPhoto, .cancelAppointment, .reschedual:
             return true
         }
     }

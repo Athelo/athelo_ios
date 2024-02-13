@@ -40,6 +40,7 @@ import UIKit
     /// Global instance of coordinator bound to active application scene.
     static var current: AppRouter {
         // Since app works in single window mode, it's safe to assume that only one scene will be available at any given time.
+        
         guard let router = (Array(UIApplication.shared.connectedScenes).first?.delegate as? SceneDelegate)?.router else {
             fatalError("Cannot reach main app router.")
         }

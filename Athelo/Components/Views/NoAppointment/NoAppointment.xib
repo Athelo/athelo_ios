@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Inter-Medium.ttf">
+            <string>Inter-Medium</string>
+        </array>
+        <array key="Inter-Regular.ttf">
+            <string>Inter-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoAppointment" customModule="Athelo" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="614"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OrO-K9-1kf">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="580"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7u-Qa-9fd">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="452"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noAppointments" translatesAutoresizingMaskIntoConstraints="NO" id="Q4J-IP-3tw">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="452"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="Q4J-IP-3tw" secondAttribute="bottom" id="0Dd-S7-jNi"/>
+                                <constraint firstItem="Q4J-IP-3tw" firstAttribute="top" secondItem="f7u-Qa-9fd" secondAttribute="top" id="8LU-3T-pff"/>
+                                <constraint firstAttribute="trailing" secondItem="Q4J-IP-3tw" secondAttribute="trailing" id="Nw7-wK-ZXd"/>
+                                <constraint firstItem="Q4J-IP-3tw" firstAttribute="leading" secondItem="f7u-Qa-9fd" secondAttribute="leading" id="e33-6b-V3Z"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o4G-QE-lXv">
+                            <rect key="frame" x="0.0" y="460" width="375" height="120"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the Appointments!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8h-fN-rfp">
+                                    <rect key="frame" x="16" y="0.0" width="343" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="22" id="vff-vX-lEl"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Inter-Medium" family="Inter" pointSize="18"/>
+                                    <color key="textColor" name="#623E61"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvp-U3-HfY">
+                                    <rect key="frame" x="16" y="30" width="343" height="90"/>
+                                    <string key="text">It looks like you haven't booked any appointments yet. Would you like to? You can click the "Schedule My Appointment" button at the lower right corner of your menu</string>
+                                    <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="14"/>
+                                    <color key="textColor" name="Gray"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="nvp-U3-HfY" secondAttribute="bottom" id="COB-1v-3Y4"/>
+                                <constraint firstItem="h8h-fN-rfp" firstAttribute="leading" secondItem="o4G-QE-lXv" secondAttribute="leading" constant="16" id="GQe-nP-iMe"/>
+                                <constraint firstItem="nvp-U3-HfY" firstAttribute="leading" secondItem="o4G-QE-lXv" secondAttribute="leading" constant="16" id="MBf-2o-aCE"/>
+                                <constraint firstAttribute="trailing" secondItem="h8h-fN-rfp" secondAttribute="trailing" constant="16" id="ROX-od-2Qo"/>
+                                <constraint firstItem="nvp-U3-HfY" firstAttribute="top" secondItem="h8h-fN-rfp" secondAttribute="bottom" constant="8" id="SQ8-1K-njv"/>
+                                <constraint firstAttribute="height" constant="120" id="mqU-p5-vFk"/>
+                                <constraint firstAttribute="trailing" secondItem="nvp-U3-HfY" secondAttribute="trailing" constant="16" id="o6W-yU-fWw"/>
+                                <constraint firstItem="h8h-fN-rfp" firstAttribute="top" secondItem="o4G-QE-lXv" secondAttribute="top" id="w7O-31-LmT"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="f7u-Qa-9fd" firstAttribute="leading" secondItem="OrO-K9-1kf" secondAttribute="leading" id="2qO-Q8-ZCn"/>
+                        <constraint firstItem="f7u-Qa-9fd" firstAttribute="top" secondItem="OrO-K9-1kf" secondAttribute="top" id="5Zf-1P-CVc"/>
+                        <constraint firstAttribute="trailing" secondItem="f7u-Qa-9fd" secondAttribute="trailing" id="bBY-nY-A7E"/>
+                        <constraint firstAttribute="trailing" secondItem="o4G-QE-lXv" secondAttribute="trailing" id="bKD-z1-AZe"/>
+                        <constraint firstItem="o4G-QE-lXv" firstAttribute="leading" secondItem="OrO-K9-1kf" secondAttribute="leading" id="dsc-5d-c7v"/>
+                        <constraint firstAttribute="bottom" secondItem="o4G-QE-lXv" secondAttribute="bottom" id="moT-ac-L25"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="OrO-K9-1kf" secondAttribute="bottom" id="JKB-gB-6f4"/>
+                <constraint firstItem="OrO-K9-1kf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NaK-Yd-4fa"/>
+                <constraint firstItem="OrO-K9-1kf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="l5L-iL-7vc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OrO-K9-1kf" secondAttribute="trailing" id="sZg-1F-2qg"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="129.00763358778624" y="69.718309859154928"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="noAppointments" width="375" height="446"/>
+        <namedColor name="#623E61">
+            <color red="0.3843137254901961" green="0.24313725490196078" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Gray">
+            <color red="0.42745098039215684" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

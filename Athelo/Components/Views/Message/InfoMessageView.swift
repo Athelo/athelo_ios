@@ -14,6 +14,8 @@ struct InfoMessageData {
         case error
         case plain
         case success
+        case successSecondery
+        case fail
     }
     
     let text: String
@@ -102,7 +104,7 @@ private extension InfoMessageData.MessageType {
             return .withStyle(.redFF4D4D)
         case .success:
             return .withStyle(.green8FCC25)
-        case .plain:
+        case .plain, .successSecondery, .fail:
             return .clear
         }
     }
@@ -113,6 +115,10 @@ private extension InfoMessageData.MessageType {
             return .withStyle(.white)
         case .plain:
             return .withStyle(.gray)
+        case .successSecondery:
+            return .withStyle(.olivaceous)
+        case .fail:
+            return .withStyle(.redFF4D4D)
         }
     }
 }

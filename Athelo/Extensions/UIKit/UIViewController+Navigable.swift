@@ -19,6 +19,7 @@ enum StoryboardScene: String {
     case intro
     case menu
     case news
+    case appointment
     case profile
     case role
     case settings

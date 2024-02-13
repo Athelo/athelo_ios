@@ -1,0 +1,178 @@
+//
+//  ScheduleAppointmentViewController.swift
+//  Athelo
+//
+//  Created by Devsto on 30/01/24.
+//
+
+import UIKit
+import Combine
+
+final class ScheduleAppointmentViewController: BaseViewController, UITableViewDelegate{
+
+    // MARK: - Outlets
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - Properties
+    private var router: ScheduleAppointmentRouter?
+    private var cancellables: [AnyCancellable] = []
+    private var expandedCellIndex: IndexPath?
+    private var selectedDate: String? = nil
+    private var viewModel = ScheduleAppointmentViewModel()
+    
+    
+    // MARK: - View lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        configure()
+        sink()
+    }
+    
+    // MARK: - Configuration
+    private func configure() {
+        configureOwnView()
+        configureTableView()
+    }
+  
+    
+    private func configureOwnView() {
+        navigationItem.title = "navigation.scheduleAppointment".localized()
+    }
+    
+    private func configureTableView() {
+        tableView.register(ScheduleAppointmentCell.self)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+    }
+    
+    // MARK: - Sinks
+    private func sink(){
+        sinkIntoViewModel()
+        viewModel.bookingResponse = bookingResponse
+    }
+    
+    private func sinkIntoViewModel(){
+        bindToViewModel(viewModel, cancellables: &cancellables)
+        
+        viewModel.$providers
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+            }
+            .store(in: &cancellables)
+        
+        viewModel.timeSloats
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                if self?.selectedDate != nil {
+                    if $0.times.count == 0 {
+                        self?.showMessge(.noSlots)
+                    }else{
+                        self?.tableView.reloadData()
+                        DispatchQueue.main.asyncAfter(deadline: .now()+0.4){
+                            self?.tableView.reloadData()
+                        }
+                    }
+                }
+            }
+            .store(in: &cancellables)
+    }
+ 
+
+    func bookingResponse(isSuccess: Bool){
+        if isSuccess {
+            DispatchQueue.main.async{
+                self.router?.navigationController?.popViewController(animated: true)
+                self.showMessge(.bookSuccess)
+            }
+        }else{
+            self.showMessge(.bookFail)
+        }
+    }
+}
+
+// MARK: - Protocol conformance
+// MARK: UITableViewDataSource
+extension ScheduleAppointmentViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.providers?.results.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withClass: ScheduleAppointmentCell.self, for: indexPath)
+        
+        let schedualeCellData = ScheduleCellDecoration(providerDetail: viewModel.providers!.results[indexPath.row], state: expandedCellIndex == indexPath ? .expanded : .noramal)
+        cell.configure(schedualeCellData, indexPath: indexPath)
+        cell.appointmentSchedulingView.reloadCell = reloadRow
+        cell.appointmentSchedulingView.schedualAction = appointmentBooked
+        cell.timeSloats = viewModel.timeSloats.value
+        cell.selectedDate = selectedDate ?? ""
+        if expandedCellIndex == indexPath{
+            let isCalanderHide = viewModel.timeSloats.value.times.count > 0
+            cell.appointmentSchedulingView.dateBackgroundView.isHidden = isCalanderHide
+            cell.appointmentSchedulingView.timeSlotView.isHidden = !(isCalanderHide)
+            if selectedDate == nil{
+                 cell.appointmentSchedulingView.dateBackgroundView.isHidden = false
+                 cell.appointmentSchedulingView.timeSlotView.isHidden = true
+            }
+        }
+        cell.appointmentSchedulingView.collectionView.reloadData()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let temp = expandedCellIndex
+        expandedCellIndex = expandedCellIndex==indexPath ? nil : indexPath
+        if temp != indexPath{
+            selectedDate = nil
+            viewModel.timeSloats.send(ProviderAvability())
+        }
+        tableView.reloadRows(at: [indexPath, temp ?? indexPath], with: .fade)
+    }
+    
+    func reloadRow(isTimePickerDate: String?){
+        selectedDate = isTimePickerDate
+        if isTimePickerDate != nil{
+            viewModel.getTimeSloats(id: viewModel.providers!.results[expandedCellIndex?.row ?? 0].id, date: selectedDate!)
+        }else{
+            viewModel.timeSloats.send(ProviderAvability())
+            tableView.reloadData()
+        }
+    }
+}
+
+extension ScheduleAppointmentViewController{
+    func appointmentBooked(time: String){
+        if selectedDate != nil{
+            let date = selectedDate?.changeDateStringTo(Base: "MM/dd/yyyy", Changeto: "yyyy-MM-dd")
+            let strTime = time.changeDateStringTo(Base: "hh:mm a", Changeto: "HH:mm:ss")
+            viewModel.bookNewAppointment(id: viewModel.providers!.results[expandedCellIndex?.row ?? 0].id, startTime: "\(date!)T\(strTime!)")
+        }
+    }
+    
+    func showMessge(_ message: ScheduleAppointmentViewModel.Messages) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+            
+            self.displayMessage(message.message.localized(), type: message.style)
+            
+        }
+    }
+}
+
+// MARK: Navigatable
+extension ScheduleAppointmentViewController: Navigable {
+    static var storyboardScene: StoryboardScene {
+        .appointment
+    }
+}
+
+// MARK: Routable
+extension ScheduleAppointmentViewController: Routable {
+    func assignRouter(_ router: ScheduleAppointmentRouter) {
+        self.router = router
+    }
+}
