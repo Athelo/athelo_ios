@@ -66,6 +66,9 @@ public class APIEnvironment {
     }
     
     public static func setUserToken(_ token: IdentityTokenData) throws {
+    #if DEBUG
+        debugPrint("User Authentication Token:- " ,token)
+    #endif
         try setToken(token, for: .userToken)
     }
     

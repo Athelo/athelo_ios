@@ -63,8 +63,8 @@ final class AppointmentBookedCell: UITableViewCell{
         popoverView.index = self.index.row
         popoverView.reschedualBtnClicked = self.parentScreen.routToReschedualVC
         popoverView.cancelAppointmentClicked = self.parentScreen.appointmentRemoveSuccess
+        popoverView.joinAppointmentClicked = self.parentScreen.appointmentJoin
         presentPopover(parentScreen, popoverView, sender: sender, size: CGSize(width: 256, height: 104))
-        
         
     }
     

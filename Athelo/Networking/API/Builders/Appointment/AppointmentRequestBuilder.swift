@@ -13,17 +13,19 @@ enum AppointmentRequestBuilder: APIBuilderProtocol{
     case bookAppointment(request: BookAppoointmentRequest)
     case getAppointments
     case delete(request: DeleteAppointmentRequest)
+    case appointmentDetail(request: JoinAppointmentRequest)
+    case vonageKey(request: JoinAppointmentRequest)
     
     var headers: [String : String]? {
         switch self {
-        case .providers, .providerAvability, .bookAppointment, .getAppointments, .delete:
+        case .providers, .providerAvability, .bookAppointment, .getAppointments, .delete, .appointmentDetail, .vonageKey:
             return nil
         }
     }
     
     var method: APIMethod {
         switch self {
-        case .providers, .getAppointments, .providerAvability:
+        case .providers, .getAppointments, .providerAvability, .appointmentDetail, .vonageKey:
             return .get
             
         case .delete:
@@ -38,9 +40,8 @@ enum AppointmentRequestBuilder: APIBuilderProtocol{
         switch self {
         case .bookAppointment(let request as APIRequest):
             return request.parameters
-        case .providerAvability( _), .delete( _):
-            return nil
-        case .providers, .getAppointments:
+            
+        case .providers, .getAppointments, .appointmentDetail, .providerAvability, .delete, .vonageKey:
             return nil
         }
     }
@@ -51,8 +52,8 @@ enum AppointmentRequestBuilder: APIBuilderProtocol{
             return "/providers"
             
         case .providerAvability(request: let request):
-//            return "/providers/\(request.id)/availability?date=\(request.date)&tz=\(request.timeZone)"
             return "/providers/\(request.id)/availability/?date=\(request.date)&tz=\(request.timeZone)"
+            
         case .bookAppointment( _ as APIRequest):
             return "/appointments/"
             
@@ -61,6 +62,12 @@ enum AppointmentRequestBuilder: APIBuilderProtocol{
             
         case .delete(request: let request):
             return "/appointment/\(request.id)/"
+            
+        case .appointmentDetail(request: let request):
+            return "/appointment/\(request.id)/"
+            
+        case .vonageKey(request: let request):
+            return "/appointment/\(request.id)/vonage-appointment-details/"
         }
         
     

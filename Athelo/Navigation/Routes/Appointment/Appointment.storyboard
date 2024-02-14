@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -140,5 +141,57 @@
             </objects>
             <point key="canvasLocation" x="810" y="-35"/>
         </scene>
+        <!--Join Appointmnet View Controller-->
+        <scene sceneID="Lg0-eR-FIn">
+            <objects>
+                <viewController storyboardIdentifier="JoinAppointmnetViewController" modalPresentationStyle="fullScreen" id="e9d-7B-OCt" customClass="JoinAppointmnetViewController" customModule="Athelo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2V0-6o-umD">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLE-iR-A3I">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esL-Eu-GiF">
+                                <rect key="frame" x="345" y="75" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="cyL-jj-O6s"/>
+                                    <constraint firstAttribute="height" constant="24" id="hm1-si-y5O"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="close">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="onClickCloseBtn:" destination="e9d-7B-OCt" eventType="touchUpInside" id="n11-6e-HpU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ye9-es-Ym6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="esL-Eu-GiF" firstAttribute="top" secondItem="Ye9-es-Ym6" secondAttribute="top" constant="16" id="6lB-z8-39G"/>
+                            <constraint firstItem="Ye9-es-Ym6" firstAttribute="trailing" secondItem="esL-Eu-GiF" secondAttribute="trailing" constant="24" id="7m0-nH-6rw"/>
+                            <constraint firstAttribute="bottom" secondItem="dLE-iR-A3I" secondAttribute="bottom" id="Arp-sS-ACK"/>
+                            <constraint firstItem="Ye9-es-Ym6" firstAttribute="trailing" secondItem="dLE-iR-A3I" secondAttribute="trailing" id="RnF-xD-AHf"/>
+                            <constraint firstItem="dLE-iR-A3I" firstAttribute="leading" secondItem="Ye9-es-Ym6" secondAttribute="leading" id="i9d-ci-1I1"/>
+                            <constraint firstItem="dLE-iR-A3I" firstAttribute="top" secondItem="2V0-6o-umD" secondAttribute="top" id="sX0-kV-NfI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="videoView" destination="dLE-iR-A3I" id="G1I-jd-6Cv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FI6-Fr-S6n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1513.7404580152672" y="-35.211267605633807"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="close" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

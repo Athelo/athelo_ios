@@ -151,6 +151,11 @@ extension AppointmentViewController {
         viewModel.isLastDeleteAction = true
         viewModel.deleteAppointment(AppointmentID: viewModel.allAppointments[index].id)
     }
+    
+    func appointmentJoin(index: Int){
+        router?.navigatetoJoinAppointment(onId: viewModel.allAppointments[index].id)
+    }
+    
 }
 
 // MARK: Routable

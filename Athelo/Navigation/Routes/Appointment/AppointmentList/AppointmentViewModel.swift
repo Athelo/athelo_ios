@@ -60,9 +60,6 @@ final class AppointmentViewModel: BaseViewModel{
                 }
             }
             .store(in: &cancellables)
-
-        
-        
     }
     
     func refresh() {

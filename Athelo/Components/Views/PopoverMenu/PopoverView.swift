@@ -15,7 +15,7 @@ class PopoverView: UIViewController {
     
     var reschedualBtnClicked: (()->())?
     var cancelAppointmentClicked: ((Int)->())?
-    
+    var joinAppointmentClicked: ((Int)->())?
     var index: Int?
     init() {
         super.init(nibName: "PopoverView", bundle: nil)
@@ -68,8 +68,9 @@ class PopoverView: UIViewController {
     
 
     @IBAction func onClickJoinBtn(_ sender: UIControl) {
-        self.dismiss(animated: false)
-        
+        DispatchQueue.main.asyncAfter(deadline: .now()+1){
+            self.joinAppointmentClicked?(self.index!)
+        }
     }
     
     @IBAction func onClickCancelBtn(_ sender: UIControl) {
