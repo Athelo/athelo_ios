@@ -21,6 +21,8 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
     private var selectedDate: String? = nil
     private var viewModel = ScheduleAppointmentViewModel()
     
+    var delegate: ScheduleAppointmentProtocol?
+    
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -47,12 +49,16 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
         tableView.delegate = self
         tableView.dataSource = self
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .withStyle(.purple988098)
+        
+        tableView.refreshControl = refreshControl
     }
     
     // MARK: - Sinks
     private func sink(){
         sinkIntoViewModel()
-        viewModel.bookingResponse = bookingResponse
+        sinkIntoAppointmentTableView()
     }
     
     private func sinkIntoViewModel(){
@@ -80,19 +86,47 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
                 }
             }
             .store(in: &cancellables)
+        
+        viewModel.state
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                switch $0 {
+                case .error, .loaded:
+                    self?.tableView.refreshControl?.endRefreshing()
+                case .loading, .initial:
+                    break
+                }
+            }.store(in: &cancellables)
+        
+        viewModel.appointmentBookedResponse
+            .sink { isSuccess in
+                if isSuccess != nil {
+                    if isSuccess! {
+                        DispatchQueue.main.async{
+                            self.router?.navigationController?.popViewController(animated: true)
+                            self.showMessge(.bookSuccess)
+                            self.delegate?.scheduleAppointment()
+                        }
+                    }else{
+                        self.showMessge(.bookFail)
+                    }
+                }
+            }
+            .store(in: &cancellables)
     }
  
-
-    func bookingResponse(isSuccess: Bool){
-        if isSuccess {
-            DispatchQueue.main.async{
-                self.router?.navigationController?.popViewController(animated: true)
-                self.showMessge(.bookSuccess)
-            }
-        }else{
-            self.showMessge(.bookFail)
-        }
+    private func sinkIntoAppointmentTableView() {
+        tableView.refreshControl?.controlEventPublisher(for: .valueChanged)
+            .sinkDiscardingValue { [weak self] in
+                if self?.viewModel.state.value == .loading {
+                    self?.tableView.refreshControl?.endRefreshing()
+                } else {
+                    self?.viewModel.refresh()
+                }
+            }.store(in: &cancellables)
     }
+
+    
 }
 
 // MARK: - Protocol conformance
@@ -145,6 +179,7 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
     }
 }
 
+// MARK: Methods
 extension ScheduleAppointmentViewController{
     func appointmentBooked(time: String){
         if selectedDate != nil{

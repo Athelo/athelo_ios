@@ -8,13 +8,21 @@
 import UIKit
 import Combine
 
+
+protocol ScheduleAppointmentProtocol {
+    func scheduleAppointment()
+}
+
+
 final class ScheduleAppointmentViewModel: BaseViewModel{
     
     @Published var allAppointments = Array(repeating: 0, count: 10)
     @Published var providers: ProviderResponselData?
     
     var timeSloats = CurrentValueSubject<ProviderAvability, Never>(ProviderAvability())
-    var bookingResponse: ((Bool)->())?
+    var appointmentBookedResponse = CurrentValueSubject<Bool?, Never>(nil)
+    
+    
     var isDateSelected = false
     private var cancellables: [AnyCancellable] = []
     
@@ -87,16 +95,14 @@ final class ScheduleAppointmentViewModel: BaseViewModel{
                 switch complision {
                 case .failure(let err):
                     print("Error is ", err.localizedDescription, "***")
-                    self?.bookingResponse?(false)
+                    self?.appointmentBookedResponse.send(false)
                 case .finished:
-                    self?.bookingResponse?(true)
+                    self?.appointmentBookedResponse.send(true)
                     print("Provider Booked Successfully ***")
                 }
                 
             }
             .store(in: &cancellables)
-
-        
     }
     
     func refresh() {

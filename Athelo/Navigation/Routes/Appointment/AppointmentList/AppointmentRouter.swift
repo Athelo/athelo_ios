@@ -25,7 +25,7 @@ final class AppointmentRouter: Router, UserProfileRoutable{
         self.appointmentSubject = appointmentSubject ?? AppointmentSubject()
     }
     
-    @MainActor func navigatetoScheduleAppointment(){
+    @MainActor func navigatetoScheduleAppointment(delegate: AppointmentViewModel){
         
         guard let navigationController = navigationController else {
             fatalError("Missing \(UINavigationController.self) instance.")
@@ -33,6 +33,7 @@ final class AppointmentRouter: Router, UserProfileRoutable{
         
         let router = ScheduleAppointmentRouter(navigationController: navigationController)
         let viewController = ScheduleAppointmentViewController.viewController(router: router)
+        viewController.delegate = delegate
         
         navigationController.pushViewController(viewController, animated: true)
     }

@@ -11,8 +11,6 @@ import Combine
 
 final class AppointmentViewController: BaseViewController{
    
-    
-   
     // MARK: - Outlets
     
     @IBOutlet weak var schesualAppointmentBtn: StyledButton!
@@ -34,10 +32,7 @@ final class AppointmentViewController: BaseViewController{
         configure()
         sink()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        viewModel.getAllAppointmnets()
-    }
+   
     
     // MARK: - Configuration
     private func configure() {
@@ -81,15 +76,11 @@ final class AppointmentViewController: BaseViewController{
     private func sinkIntoViewModel(){
         bindToViewModel(viewModel, cancellables: &cancellables)
         
+        viewModel.getAllAppointmnets()
+        
         viewModel.$allAppointments
             .receive(on: DispatchQueue.main)
             .sink { [weak self] data in
-                if self?.viewModel.isLastDeleteAction == true {
-                    DispatchQueue.main.asyncAfter(deadline: .now()+1){
-                        self?.displayMessage("message.appointmentRemove.success".localized(), type: .successSecondery)
-                    }
-                    self?.viewModel.isLastDeleteAction.toggle()
-                }
                 self?.tableView.reloadData()
                 let ishide = data.count>0
                 self?.noAppointmentView.alpha = ishide ? 0.0 : 1.0
@@ -146,14 +137,20 @@ extension AppointmentViewController: UITableViewDataSource, UITableViewDelegate 
     }
 }
 
-extension AppointmentViewController {
-    func appointmentRemoveSuccess(index: Int) {
-        viewModel.isLastDeleteAction = true
-        viewModel.deleteAppointment(AppointmentID: viewModel.allAppointments[index].id)
-    }
-    
-    func appointmentJoin(index: Int){
-        router?.navigatetoJoinAppointment(onId: viewModel.allAppointments[index].id)
+extension AppointmentViewController: PopoverActions {
+    func PopoverActions(Action type: PopoverView.ResponseType, On index: Int) {
+        switch type {
+        case .delete:
+            viewModel.deleteAppointment(AppointmentID: viewModel.allAppointments[index].id)
+            viewModel.allAppointments.remove(at: index)
+            displayMessage("message.appointmentRemove.success".localized(), type: .successSecondery)
+            
+        case .join:
+            router?.navigatetoJoinAppointment(onId: viewModel.allAppointments[index].id)
+            
+        case .reschedule:
+            routToReschedualVC()
+        }
     }
     
 }
@@ -174,6 +171,6 @@ extension AppointmentViewController: Navigable {
 
 extension AppointmentViewController {
     func routToReschedualVC(){
-        router?.navigatetoScheduleAppointment()
+        router?.navigatetoScheduleAppointment(delegate: viewModel)
     }
 }

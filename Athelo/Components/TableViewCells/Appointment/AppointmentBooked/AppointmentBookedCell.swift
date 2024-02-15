@@ -45,8 +45,6 @@ final class AppointmentBookedCell: UITableViewCell{
         
     }
     
-    
-    
     // MARK: - Configuration
     private func configure() {
         configureOwnView()
@@ -61,9 +59,7 @@ final class AppointmentBookedCell: UITableViewCell{
     @IBAction func onClickMoreBtn(_ sender: UIButton) {
         let popoverView = PopoverView()
         popoverView.index = self.index.row
-        popoverView.reschedualBtnClicked = self.parentScreen.routToReschedualVC
-        popoverView.cancelAppointmentClicked = self.parentScreen.appointmentRemoveSuccess
-        popoverView.joinAppointmentClicked = self.parentScreen.appointmentJoin
+        popoverView.responseActions = self.parentScreen
         presentPopover(parentScreen, popoverView, sender: sender, size: CGSize(width: 256, height: 104))
         
     }
@@ -100,12 +96,11 @@ extension AppointmentBookedCell: ConfigurableCell {
         // Create a DateFormatter for parsing UTC date
         let utcDateFormatter = DateFormatter()
         utcDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
         utcDateFormatter.timeZone = TimeZone(identifier: "UTC")
 
         // Parse UTC date string into a Date object
-        guard let utcDate = utcDateFormatter.date(from: utcDateString) else {
-            fatalError("Error: Unable to parse the UTC date string")
-        }
+        guard let utcDate = utcDateFormatter.date(from: utcDateString) else { return }
 
         // Convert UTC date to the device's local time zone
         let localDateFormatter = DateFormatter()
