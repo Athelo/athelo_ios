@@ -154,10 +154,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esL-Eu-GiF">
-                                <rect key="frame" x="345" y="75" width="24" height="24"/>
+                                <rect key="frame" x="343" y="75" width="26" height="26"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="cyL-jj-O6s"/>
-                                    <constraint firstAttribute="height" constant="24" id="hm1-si-y5O"/>
+                                    <constraint firstAttribute="width" constant="26" id="cyL-jj-O6s"/>
+                                    <constraint firstAttribute="height" constant="26" id="hm1-si-y5O"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="close">

@@ -11,35 +11,25 @@ import Combine
 
 class JoinAppointmnetViewController: BaseViewController {
 
-    private var router: JoineAppointmentRouter?
-    
     @IBOutlet weak var videoView: UIView!
-    
-    
-    private var cancellables: [AnyCancellable] = []
-    
-    
-    
-    
     
     lazy var session: OTSession = {
         return OTSession(apiKey: viewModel.kApiKey, sessionId:  viewModel.kSessionId, delegate: self)!
     }()
-    
     lazy var publisher: OTPublisher = {
         let settings = OTPublisherSettings()
         settings.name = UIDevice.current.name
         return OTPublisher(delegate: self, settings: settings)!
     }()
     
+    private var viewModel = JoinAppointmentViewModel()
+    private var router: JoineAppointmentRouter?
+    private var cancellables: [AnyCancellable] = []
+    
     var subscriber: OTSubscriber?
     var appointmentID: Int!
-    
     var screenWidth: Double = 0
     var screenHight: Double = 0
-    
-    private var viewModel = JoinAppointmentViewModel()
-    
     
     
     override func viewDidLoad() {
@@ -49,8 +39,8 @@ class JoinAppointmnetViewController: BaseViewController {
         sink()
         
         viewModel.getAppointmentDetail(ID: appointmentID)
-        screenHight = view.frame.height
-        screenWidth = view.frame.width 
+        screenHight = self.view.frame.height
+        screenWidth = self.view.frame.width
         
     }
     
@@ -117,6 +107,7 @@ extension JoinAppointmnetViewController {
         }
         
         session.connect(withToken: viewModel.kToken.value, error: &error)
+        
     }
     
     /**
@@ -172,10 +163,7 @@ extension JoinAppointmnetViewController {
             }
         }
     }
-
 }
-
-
 
 // MARK: - OTSession delegate callbacks
 extension JoinAppointmnetViewController: OTSessionDelegate {
@@ -211,6 +199,7 @@ extension JoinAppointmnetViewController: OTSessionDelegate {
 // MARK: - OTPublisher delegate callbacks
 extension JoinAppointmnetViewController: OTPublisherDelegate {
     func publisher(_ publisher: OTPublisherKit, streamCreated stream: OTStream) {
+        viewModel.state.send(.loaded)
         print("Publishing")
     }
     
@@ -219,9 +208,11 @@ extension JoinAppointmnetViewController: OTPublisherDelegate {
         if let subStream = subscriber?.stream, subStream.streamId == stream.streamId {
             cleanupSubscriber()
         }
+        viewModel.state.send(.loaded)
     }
     
     func publisher(_ publisher: OTPublisherKit, didFailWithError error: OTError) {
+        viewModel.state.send(.loaded)
         print("Publisher failed: \(error.localizedDescription)")
     }
 }

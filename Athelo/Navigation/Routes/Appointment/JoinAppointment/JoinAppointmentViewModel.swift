@@ -17,12 +17,6 @@ final class JoinAppointmentViewModel: BaseViewModel {
 
     // Replace with your generated token
     var kToken = CurrentValueSubject<String, Never>("")
-
-    var kWidgetHeight: Double = 240
-    var kWidgetWidth: Double = 320
-    
-    
-    
     
     private var cancellables: [AnyCancellable] = []
     
@@ -35,7 +29,6 @@ final class JoinAppointmentViewModel: BaseViewModel {
 }
 
 extension JoinAppointmentViewModel {
-    
     func getAppointmentDetail(ID id:Int){
         guard state.value != .loading else {
             return
@@ -58,9 +51,7 @@ extension JoinAppointmentViewModel {
     
     private func getVonageDetail(ID id:Int){
         AtheloAPI.Appointment.getVonageDetail(request: .init(id: id))
-            .sink { [weak self] compilation in
-                self?.state.send(.loaded)
-                
+            .sink { compilation in
                 switch compilation{
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -71,6 +62,5 @@ extension JoinAppointmentViewModel {
             }
             .store(in: &cancellables)
     }
-    
-    
 }
+
