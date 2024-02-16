@@ -58,6 +58,8 @@ final class LogInViewModel: BaseViewModel {
                     return
                 }
                 let tokenData =  IdentityTokenData(accessToken: token, expiresIn: 24000, refreshToken: refreshToken, scope: "", tokenType: "email")
+                
+                print("Token is"+token)
     
                 self?.setToken(tokenData: tokenData, email: email)
             })

@@ -197,7 +197,7 @@
 "form.field.symptomdescription" = "Comment";
 "form.field.topic" = "Topic";
 "form.field.username" = "User Name";
-"form.field.whatdescribesyou" = "What best describes you?";
+"form.field.whatdescribesyou" = "What best describes your treatment status?";
 "form.field.yoursymptom" = "Your symptom";
 
 "graph.legend.sleep" = "Hours";

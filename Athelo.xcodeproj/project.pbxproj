@@ -691,6 +691,8 @@
 		C00495172B2BA142004F8804 /* Contentful in Frameworks */ = {isa = PBXBuildFile; productRef = C00495162B2BA142004F8804 /* Contentful */; };
 		C004951A2B2BA15A004F8804 /* ContentfulRichTextRenderer in Frameworks */ = {isa = PBXBuildFile; productRef = C00495192B2BA15A004F8804 /* ContentfulRichTextRenderer */; };
 		C004951C2B2BA185004F8804 /* ContentfulService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004951B2B2BA185004F8804 /* ContentfulService.swift */; };
+		C01677552B71C9BA00CB822A /* IdentityPatientTreatmentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01677542B71C9BA00CB822A /* IdentityPatientTreatmentStatus.swift */; };
+		C01677572B71DC2600CB822A /* ProfileTreatmentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01677562B71DC2600CB822A /* ProfileTreatmentStatus.swift */; };
 		C0ADB40F2B57312E005A78E9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB40E2B57312E005A78E9 /* FirebaseAnalytics */; };
 		C0ADB4112B57312E005A78E9 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4102B57312E005A78E9 /* FirebaseAnalyticsOnDeviceConversion */; };
 		C0ADB4132B57312E005A78E9 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4122B57312E005A78E9 /* FirebaseAnalyticsSwift */; };
@@ -1448,6 +1450,8 @@
 		3EFFCB3A288E8EA2000F066A /* FeelingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3EFFCB3B288E8EA2000F066A /* FeelingsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeelingsCollectionViewCell.xib; sourceTree = "<group>"; };
 		C004951B2B2BA185004F8804 /* ContentfulService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentfulService.swift; sourceTree = "<group>"; };
+		C01677542B71C9BA00CB822A /* IdentityPatientTreatmentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityPatientTreatmentStatus.swift; sourceTree = "<group>"; };
+		C01677562B71DC2600CB822A /* ProfileTreatmentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTreatmentStatus.swift; sourceTree = "<group>"; };
 		F33E02932B70EF5C00F1D88E /* AppointmentRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentRequestBuilder.swift; sourceTree = "<group>"; };
 		F33E02952B70F53F00F1D88E /* AppointmentRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentRequests.swift; sourceTree = "<group>"; };
 		F33E02982B710CEF00F1D88E /* ProvidersData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersData.swift; sourceTree = "<group>"; };
@@ -1686,6 +1690,7 @@
 				3E15486429A77CA8003EB241 /* IdentityCommonProfileData.swift */,
 				3E1341A12846644F007C1381 /* IdentityProfileData.swift */,
 				3E1341AE28466559007C1381 /* IdentityUserData.swift */,
+				C01677542B71C9BA00CB822A /* IdentityPatientTreatmentStatus.swift */,
 			);
 			path = Identity;
 			sourceTree = "<group>";
@@ -3107,6 +3112,7 @@
 				3E8F1FE628DDA64500C327BE /* ProfileUpdateRequest.swift */,
 				3E8F1FE728DDA64500C327BE /* ProfileDetailsRequest.swift */,
 				3E8F1FE828DDA64500C327BE /* ProfileCreateRequest.swift */,
+				C01677562B71DC2600CB822A /* ProfileTreatmentStatus.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -5483,9 +5489,11 @@
 				3EE97D93286DE50A0027DC03 /* CommunitiesListViewController.swift in Sources */,
 				3E539060284E39DD003CE983 /* ConstantsStore.swift in Sources */,
 				3EE9FDCD2844BA6900BE4661 /* Labels.swift in Sources */,
+				C01677572B71DC2600CB822A /* ProfileTreatmentStatus.swift in Sources */,
 				3EC5186A289286750012663C /* SleepSummaryModel.swift in Sources */,
 				3EC5187F2892B25B0012663C /* GraphColumnData.swift in Sources */,
 				3E3B62512ADE6AF800A762F0 /* HealthInvitationsRequest.swift in Sources */,
+				C01677552B71C9BA00CB822A /* IdentityPatientTreatmentStatus.swift in Sources */,
 				3EA979D529CC9F1B002B6764 /* IdentityRoleUtility.swift in Sources */,
 				3E7BAEA2286B1A2C00D180F0 /* UIViewController+ViewModelBinding.swift in Sources */,
 				3E27094429D3247200A7B09C /* OptionSheetModel.swift in Sources */,

@@ -132,8 +132,8 @@ final class ConstantsStore {
             .eraseToAnyPublisher()
     }
     
-    static func describesYouPublisher() -> AnyPublisher<[DescribesYou], Error> {
-            return Just(DescribesYou.allCases)
+    static func describesYouPublisher() -> AnyPublisher<[TreatmentStatus], Error> {
+            return Just(TreatmentStatus.allCases)
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
     }

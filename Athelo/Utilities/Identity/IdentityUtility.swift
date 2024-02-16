@@ -185,6 +185,30 @@ enum SignInHandlerState: Equatable {
             .eraseToAnyPublisher()
     }
     
+    static func getPatientTreatmentStatus() -> AnyPublisher<IdentityPatientTreatmentStatus, Error> {
+        guard APIEnvironment.hasTokenData() else {
+            return Fail(error: APIError.missingCredentials)
+                .mapError({ $0 as Error })
+                .eraseToAnyPublisher()
+        }
+        
+        return (AtheloAPI.Profile.getTreatmentStatus() as AnyPublisher<IdentityPatientTreatmentStatus, APIError>)
+            .mapError({ $0 as Error })
+            .eraseToAnyPublisher()
+    }
+    
+    static func updatePatientTreatmentStatus(status: String) -> AnyPublisher<IdentityPatientTreatmentStatus, Error> {
+        guard APIEnvironment.hasTokenData() else {
+            return Fail(error: APIError.missingCredentials)
+                .mapError({ $0 as Error })
+                .eraseToAnyPublisher()
+        }
+        
+        return (AtheloAPI.Profile.updateTreatmentStatus(request: ProfileTreatmentStatus(additionalParams: ["cancer_status": status]) ) as AnyPublisher<IdentityPatientTreatmentStatus, APIError>)
+            .mapError({ $0 as Error })
+            .eraseToAnyPublisher()
+    }
+    
 //    static func login(email: String, password: String) -> AnyPublisher<IdentityProfileData, Error> {
 //        let loginRequest = AuthenticationLoginRequest(email: email, password: password)
 //        return wrapLoginPublisher(
@@ -253,6 +277,10 @@ enum SignInHandlerState: Equatable {
         }
         
         return shared.roleUtility.updatePatientDataForActiveUser()
+    }
+    
+    static func updateUserDataWithTreatmentStatus(identityProfileData: IdentityProfileData) {
+        shared.userDataSubject.send(identityProfileData)
     }
     
     static func refreshUserDetails() -> AnyPublisher<IdentityProfileData, Error> {
