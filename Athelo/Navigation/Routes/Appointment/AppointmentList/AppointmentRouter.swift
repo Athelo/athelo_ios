@@ -48,6 +48,7 @@ final class AppointmentRouter: Router, UserProfileRoutable{
         let router = JoineAppointmentRouter(navigationController: navigationController)
         let viewController = JoinAppointmnetViewController.viewController(router: router)
         viewController.appointmentID = id
+        
         navigationController.presentedViewController?.present(viewController, animated: true)
     }
     

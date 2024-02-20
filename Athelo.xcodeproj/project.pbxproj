@@ -730,6 +730,7 @@
 		C0ADB4542B5746C0005A78E9 /* FirebaseMLModelDownloader in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4532B5746C0005A78E9 /* FirebaseMLModelDownloader */; };
 		C0ADB4562B5746C0005A78E9 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4552B5746C0005A78E9 /* FirebaseMessaging */; };
 		C0ADB4582B5746C0005A78E9 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4572B5746C0005A78E9 /* FirebasePerformance */; };
+		F30AF3BE2B8461C700FA94F9 /* DateFormates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30AF3BD2B8461C700FA94F9 /* DateFormates.swift */; };
 		F33E02942B70EF5C00F1D88E /* AppointmentRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33E02932B70EF5C00F1D88E /* AppointmentRequestBuilder.swift */; };
 		F33E02962B70F53F00F1D88E /* AppointmentRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33E02952B70F53F00F1D88E /* AppointmentRequests.swift */; };
 		F33E02992B710CEF00F1D88E /* ProvidersData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33E02982B710CEF00F1D88E /* ProvidersData.swift */; };
@@ -1452,6 +1453,7 @@
 		C004951B2B2BA185004F8804 /* ContentfulService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentfulService.swift; sourceTree = "<group>"; };
 		C01677542B71C9BA00CB822A /* IdentityPatientTreatmentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityPatientTreatmentStatus.swift; sourceTree = "<group>"; };
 		C01677562B71DC2600CB822A /* ProfileTreatmentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTreatmentStatus.swift; sourceTree = "<group>"; };
+		F30AF3BD2B8461C700FA94F9 /* DateFormates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormates.swift; sourceTree = "<group>"; };
 		F33E02932B70EF5C00F1D88E /* AppointmentRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentRequestBuilder.swift; sourceTree = "<group>"; };
 		F33E02952B70F53F00F1D88E /* AppointmentRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentRequests.swift; sourceTree = "<group>"; };
 		F33E02982B710CEF00F1D88E /* ProvidersData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersData.swift; sourceTree = "<group>"; };
@@ -2159,6 +2161,7 @@
 				3E3C585C28DC4A4700358EC8 /* CreatedChatData.swift */,
 				3E1E785528B4C9BC00ED1E73 /* CurvePointsData.swift */,
 				3E0D55A82874411800E2EE6A /* DeeplinkData.swift */,
+				F30AF3BD2B8461C700FA94F9 /* DateFormates.swift */,
 				3E6BD02C2885818400A1FC4D /* FeelingScale.swift */,
 				3E78A6762876ED3C002599F7 /* FilterData.swift */,
 				3E8F1F6728DDA64500C327BE /* JSONDataTypeValue.swift */,
@@ -5639,6 +5642,7 @@
 				3EE8FA5B28730EE000CE8762 /* NewsData.swift in Sources */,
 				3EC51860289270160012663C /* SleepSummaryViewModel.swift in Sources */,
 				3EEB1CF6288FF2B100E0AAA4 /* SleepSummaryView.swift in Sources */,
+				F30AF3BE2B8461C700FA94F9 /* DateFormates.swift in Sources */,
 				3ED0BFB128A239CC00224561 /* SmallLineGraphView.swift in Sources */,
 				3E8F206828DDA64500C327BE /* HealthUserFeelingsRequest.swift in Sources */,
 				3E13418D28463F31007C1381 /* UIView+Styling.swift in Sources */,

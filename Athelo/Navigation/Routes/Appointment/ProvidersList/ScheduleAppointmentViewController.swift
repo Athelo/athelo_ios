@@ -78,9 +78,13 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
                     if $0.times.count == 0 {
                         self?.showMessge(.noSlots)
                     }else{
+                        self?.tableView.reloadRows(at: [self?.expandedCellIndex ?? IndexPath(item: 0, section: 0)], with: .fade)
                         self?.tableView.reloadData()
-                        DispatchQueue.main.asyncAfter(deadline: .now()+0.4){
+                        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
                             self?.tableView.reloadData()
+                            self?.tableView.reloadRows(at: [self?.expandedCellIndex ?? IndexPath(item: 0, section: 0)], with: .fade)
+                            
+                            
                         }
                     }
                 }
@@ -183,8 +187,8 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
 extension ScheduleAppointmentViewController{
     func appointmentBooked(time: String){
         if selectedDate != nil{
-            let date = selectedDate?.changeDateStringTo(Base: "MM/dd/yyyy", Changeto: "yyyy-MM-dd")
-            let strTime = time.changeDateStringTo(Base: "hh:mm a", Changeto: "HH:mm:ss")
+            let date = selectedDate?.changeDateStringTo(Base: .MM_dd_yyyy, Changeto: .yyyy_MM_dd)
+            let strTime = time.changeDateStringTo(Base: .hh_mm_a, Changeto: .HH_mm_ss)
             viewModel.bookNewAppointment(id: viewModel.providers!.results[expandedCellIndex?.row ?? 0].id, startTime: "\(date!)T\(strTime!)")
         }
     }

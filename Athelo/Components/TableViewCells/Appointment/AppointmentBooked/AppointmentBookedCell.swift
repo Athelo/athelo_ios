@@ -105,6 +105,7 @@ extension AppointmentBookedCell: ConfigurableCell {
         // Convert UTC date to the device's local time zone
         let localDateFormatter = DateFormatter()
         localDateFormatter.timeZone = TimeZone.current
+        localDateFormatter.locale = Locale(identifier: "\(Locale.current.identifier)_POSIX")
         localDateFormatter.dateFormat = "dd MMM, hh:mm a"
         dateTimeLbl.text = localDateFormatter.string(from: utcDate)
         

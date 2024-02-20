@@ -34,8 +34,6 @@ final class LogInViewController: KeyboardListeningViewController {
         
         configure()
         sink()
-        formTextFieldEmail.text = "tester_ios@test.com"
-        formTextFieldPassword.text = "test123"
     }
     
     override func viewWillAppear(_ animated: Bool) {

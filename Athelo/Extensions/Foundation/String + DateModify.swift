@@ -8,8 +8,29 @@
 import Foundation
 
 extension String {
-    func changeDateStringTo(Base baseFormate: String, Changeto convertFormate: String) -> String? {
-        let tempDate = self.toDate(style:.custom(baseFormate))
-        return tempDate?.toString(.custom(convertFormate))
+    
+    func convertStringToDate(_ formate: AtheloDateFormates) -> Date? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "\(Locale.current.identifier)_POSIX")
+        formatter.dateFormat = formate.rawValue
+        guard let newDate = formatter.date(from: self) else {
+            print("fail to pars String to date")
+            return nil
+        }
+        return newDate
+    }
+    
+    
+    
+    func changeDateStringTo(Base baseFormate: AtheloDateFormates, Changeto convertFormate: AtheloDateFormates) -> String? {
+        
+        let tempDate = self.convertStringToDate(baseFormate)
+        return tempDate?.convertToString(formate: convertFormate)
+        
+//        let tempDate = self.toDate(style:.custom(baseFormate))
+//        return tempDate?.toString(.custom(convertFormate))
     }
 }
+
+
+
