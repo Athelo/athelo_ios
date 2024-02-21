@@ -11,7 +11,7 @@ struct ChatRoomData: Decodable, Identifiable {
     let id: Int
     
     let belongTo: Bool
-    let chatRoomIdentifier: String
+    let chatRoomIdentifierInt: Int
     let chatRoomType: Int
     let isPublic: Bool
     let name: String
@@ -21,7 +21,7 @@ struct ChatRoomData: Decodable, Identifiable {
     private enum CodingKeys: String, CodingKey {
         case id, name
         case belongTo = "belong_to"
-        case chatRoomIdentifier = "chat_room_identifier"
+        case chatRoomIdentifierInt = "chat_room_identifier"
         case chatRoomType = "chat_room_type"
         case isPublic = "is_public"
         case userProfiles = "user_profiles"
@@ -52,6 +52,10 @@ extension ChatRoomData: ChatRoomCellConfigurationData {
 }
 
 extension ChatRoomData: CommunityChatData {
+    var chatRoomIdentifier: String {
+        String(chatRoomIdentifierInt)
+    }
+    
     var displayName: String? {
         name
     }
