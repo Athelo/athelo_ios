@@ -32,5 +32,13 @@ public extension AtheloAPI {
             APIService().request(with: Builder.delete(request: request)).eraseToAnyPublisher()
         }
         
+        static func getAppointmentDetail(request: JoinAppointmentRequest) -> AnyPublisher<AppointmetntData, APIError>{
+            APIService().request(with: Builder.appointmentDetail(request: request)).eraseToAnyPublisher()
+        }
+        
+        static func getVonageDetail(request: JoinAppointmentRequest) -> AnyPublisher<VonageData, APIError>{
+            APIService().request(with: Builder.vonageKey(request: request)).eraseToAnyPublisher()
+        }
+        
     }
 }

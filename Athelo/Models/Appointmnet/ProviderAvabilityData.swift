@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 struct ProviderAvability: Decodable {
     
     
@@ -16,10 +14,23 @@ struct ProviderAvability: Decodable {
     
     var times: [String] {
         get {
+            
+//            let formate1 = DateFormatter()
+//            let formate2 = DateFormatter()
+//            
+//            formate1.locale = Locale(identifier: "\(Locale.current.identifier)_POSIX")
+//            formate2.locale = Locale(identifier: "\(Locale.current.identifier)_POSIX")
+//            formate1.dateFormat = "MM/dd/yyyy hh:mm a"
+//            formate2.dateFormat = "hh:mm a"
             if responseDates.count > 0 {
                 var tempArray: [String] = []
                 for i in responseDates[0] {
-                    tempArray.append(i.changeDateStringTo(Base: "MM/dd/yyyy hh:mm a", Changeto: "hh:mm a") ?? "Himabnshu")
+//                    guard let date1 = formate1.date(from: i) else {
+//                        print("Date Formate invalid in time slot")
+//                        break
+//                    }
+//                    tempArray.append(formate2.string(from: date1))
+                    tempArray.append(i.changeDateStringTo(Base: .MM_dd_yyyy_hh_mm_a, Changeto: .hh_mm_a) ?? "Invalid DFormmate")
                     
                 }
                 return tempArray

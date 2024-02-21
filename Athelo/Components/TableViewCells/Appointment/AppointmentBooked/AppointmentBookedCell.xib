@@ -114,7 +114,7 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9IO-Wg-xCT" customClass="LoadingView" customModule="Athelo" customModuleProvider="target">
                                 <rect key="frame" x="26" y="44" width="44" height="8"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="79Z-8e-10m"/>
                                     <constraint firstAttribute="height" constant="8" id="jwg-Vl-rFl"/>

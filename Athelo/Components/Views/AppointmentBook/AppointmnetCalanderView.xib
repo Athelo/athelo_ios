@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Inter-Medium.ttf">
+            <string>Inter-Medium</string>
+        </array>
         <array key="Inter-Regular.ttf">
             <string>Inter-Regular</string>
         </array>
@@ -134,11 +137,12 @@
                                     <rect key="frame" x="0.0" y="45" width="452" height="232"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DTF-Ua-pqd">
-                                            <rect key="frame" x="16.000000000000007" y="16" width="125.66666666666669" height="20"/>
+                                            <rect key="frame" x="15.999999999999993" y="16" width="126.33333333333331" height="21"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 Jan, Thursday " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dS-I7-WOt">
-                                                    <rect key="frame" x="13" y="2.6666666666666634" width="99.666666666666671" height="14.666666666666664"/>
-                                                    <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="12"/>
+                                                    <rect key="frame" x="13" y="3.3333333333333277" width="100.33333333333333" height="14.666666666666664"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="Inter-Medium" family="Inter" pointSize="12"/>
                                                     <color key="textColor" name="Light Olivaceous"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
@@ -148,16 +152,16 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvg-Xs-NUr" customClass="UIControl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="125.66666666666667" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="126.33333333333333" height="21"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
                                                         <action selector="onCLickSelectedDate:" destination="-1" eventType="touchUpInside" id="0pE-QM-Hnf"/>
                                                     </connections>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="2dB-jA-9mc"/>
+                                                <constraint firstAttribute="height" constant="21" id="2dB-jA-9mc"/>
                                                 <constraint firstItem="cvg-Xs-NUr" firstAttribute="leading" secondItem="DTF-Ua-pqd" secondAttribute="leading" id="N6h-ah-owj"/>
                                                 <constraint firstItem="cvg-Xs-NUr" firstAttribute="top" secondItem="DTF-Ua-pqd" secondAttribute="top" id="T1T-P9-Blt"/>
                                                 <constraint firstAttribute="trailing" secondItem="cvg-Xs-NUr" secondAttribute="trailing" id="cay-JQ-Nmy"/>
@@ -173,14 +177,14 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wIf-7J-jfa">
-                                            <rect key="frame" x="16" y="52" width="420" height="2"/>
+                                            <rect key="frame" x="16" y="53" width="420" height="2"/>
                                             <color key="backgroundColor" name="Background"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="2" id="CUD-Md-muY"/>
                                             </constraints>
                                         </view>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="TlT-SN-acl">
-                                            <rect key="frame" x="0.0" y="70" width="452" height="50"/>
+                                            <rect key="frame" x="0.0" y="71" width="452" height="50"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="oRS-gX-rSs"/>

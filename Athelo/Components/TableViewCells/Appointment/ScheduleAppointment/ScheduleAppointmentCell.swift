@@ -112,8 +112,7 @@ extension ScheduleAppointmentCell: ConfigurableCell {
         nameLbl.text = data.name
         professionLbl.text = (data.providerType == nil || data.providerType == "") ? "Care Navigator" : data.providerType
         
-        appointmentSchedulingView.selectedDateLbl.text = selectedDate.changeDateStringTo(Base: "MM/dd/yyyy", Changeto: "dd MMM, EEEE") ?? "NO Date Selected"
-        
+        appointmentSchedulingView.selectedDateLbl.text = " " + (selectedDate.changeDateStringTo(Base: .MM_dd_yyyy, Changeto: .dd_MMM_EEEE) ?? "NO Date Selected")
     }
     
     private func loadImage(From url: URL?){
@@ -128,7 +127,6 @@ extension ScheduleAppointmentCell: ConfigurableCell {
             }
         }
     }
-    
 }
  
 // MARK: - Configuration

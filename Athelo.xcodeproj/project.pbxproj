@@ -730,6 +730,7 @@
 		C0ADB4542B5746C0005A78E9 /* FirebaseMLModelDownloader in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4532B5746C0005A78E9 /* FirebaseMLModelDownloader */; };
 		C0ADB4562B5746C0005A78E9 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4552B5746C0005A78E9 /* FirebaseMessaging */; };
 		C0ADB4582B5746C0005A78E9 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4572B5746C0005A78E9 /* FirebasePerformance */; };
+		F30AF3BE2B8461C700FA94F9 /* DateFormates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30AF3BD2B8461C700FA94F9 /* DateFormates.swift */; };
 		F33E02942B70EF5C00F1D88E /* AppointmentRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33E02932B70EF5C00F1D88E /* AppointmentRequestBuilder.swift */; };
 		F33E02962B70F53F00F1D88E /* AppointmentRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33E02952B70F53F00F1D88E /* AppointmentRequests.swift */; };
 		F33E02992B710CEF00F1D88E /* ProvidersData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33E02982B710CEF00F1D88E /* ProvidersData.swift */; };
@@ -738,6 +739,9 @@
 		F33F82862B6CEF2E00E1C186 /* AppointmnetCalanderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F33F82852B6CEF2E00E1C186 /* AppointmnetCalanderView.xib */; };
 		F33F82892B6D036200E1C186 /* AppointmentTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33F82882B6D036200E1C186 /* AppointmentTimeCell.swift */; };
 		F33F828B2B6D038800E1C186 /* AppointmentTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F33F828A2B6D038800E1C186 /* AppointmentTimeCell.xib */; };
+		F353C74E2B7C724E00E45DD8 /* JoinAppointmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F353C74D2B7C724E00E45DD8 /* JoinAppointmentViewModel.swift */; };
+		F353C7502B7C74E600E45DD8 /* JoinAppointmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F353C74F2B7C74E600E45DD8 /* JoinAppointmentRequest.swift */; };
+		F353C7522B7C771B00E45DD8 /* VonageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F353C7512B7C771B00E45DD8 /* VonageData.swift */; };
 		F36F3F4E2B68CD280072BE35 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F3F4D2B68CD280072BE35 /* AppointmentViewController.swift */; };
 		F36F3F502B68CDA80072BE35 /* Appointment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F36F3F4F2B68CDA80072BE35 /* Appointment.storyboard */; };
 		F36F3F532B68D1FF0072BE35 /* AppointmentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F3F522B68D1FF0072BE35 /* AppointmentRouter.swift */; };
@@ -748,6 +752,9 @@
 		F36F3F5F2B6927290072BE35 /* AppointmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F3F5E2B6927290072BE35 /* AppointmentViewModel.swift */; };
 		F36F3F632B69294B0072BE35 /* AppointmentBookedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F36F3F622B69294B0072BE35 /* AppointmentBookedCell.xib */; };
 		F36F3F652B6929570072BE35 /* AppointmentBookedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F3F642B6929570072BE35 /* AppointmentBookedCell.swift */; };
+		F38041892B7B942B001CCC02 /* JoinAppointmnetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38041882B7B942B001CCC02 /* JoinAppointmnetViewController.swift */; };
+		F380418B2B7B944B001CCC02 /* JoinAppointmentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380418A2B7B944B001CCC02 /* JoinAppointmentRouter.swift */; };
+		F38041912B7B9922001CCC02 /* VonageClientSDKVideo in Frameworks */ = {isa = PBXBuildFile; productRef = F38041902B7B9922001CCC02 /* VonageClientSDKVideo */; };
 		F387F6A82B6A5E97002B7CB6 /* ScheduleAppointmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F387F6A72B6A5E97002B7CB6 /* ScheduleAppointmentCell.swift */; };
 		F387F6AA2B6A5EA2002B7CB6 /* ScheduleAppointmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F387F6A92B6A5EA2002B7CB6 /* ScheduleAppointmentCell.xib */; };
 		F395379D2B73A8A900E3AE76 /* ProviderAvabilityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F395379C2B73A8A900E3AE76 /* ProviderAvabilityRequest.swift */; };
@@ -1446,6 +1453,7 @@
 		C004951B2B2BA185004F8804 /* ContentfulService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentfulService.swift; sourceTree = "<group>"; };
 		C01677542B71C9BA00CB822A /* IdentityPatientTreatmentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityPatientTreatmentStatus.swift; sourceTree = "<group>"; };
 		C01677562B71DC2600CB822A /* ProfileTreatmentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTreatmentStatus.swift; sourceTree = "<group>"; };
+		F30AF3BD2B8461C700FA94F9 /* DateFormates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormates.swift; sourceTree = "<group>"; };
 		F33E02932B70EF5C00F1D88E /* AppointmentRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentRequestBuilder.swift; sourceTree = "<group>"; };
 		F33E02952B70F53F00F1D88E /* AppointmentRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentRequests.swift; sourceTree = "<group>"; };
 		F33E02982B710CEF00F1D88E /* ProvidersData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersData.swift; sourceTree = "<group>"; };
@@ -1454,6 +1462,9 @@
 		F33F82852B6CEF2E00E1C186 /* AppointmnetCalanderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmnetCalanderView.xib; sourceTree = "<group>"; };
 		F33F82882B6D036200E1C186 /* AppointmentTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentTimeCell.swift; sourceTree = "<group>"; };
 		F33F828A2B6D038800E1C186 /* AppointmentTimeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmentTimeCell.xib; sourceTree = "<group>"; };
+		F353C74D2B7C724E00E45DD8 /* JoinAppointmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinAppointmentViewModel.swift; sourceTree = "<group>"; };
+		F353C74F2B7C74E600E45DD8 /* JoinAppointmentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinAppointmentRequest.swift; sourceTree = "<group>"; };
+		F353C7512B7C771B00E45DD8 /* VonageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VonageData.swift; sourceTree = "<group>"; };
 		F36F3F4D2B68CD280072BE35 /* AppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
 		F36F3F4F2B68CDA80072BE35 /* Appointment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Appointment.storyboard; sourceTree = "<group>"; };
 		F36F3F522B68D1FF0072BE35 /* AppointmentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentRouter.swift; sourceTree = "<group>"; };
@@ -1464,6 +1475,8 @@
 		F36F3F5E2B6927290072BE35 /* AppointmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewModel.swift; sourceTree = "<group>"; };
 		F36F3F622B69294B0072BE35 /* AppointmentBookedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppointmentBookedCell.xib; sourceTree = "<group>"; };
 		F36F3F642B6929570072BE35 /* AppointmentBookedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentBookedCell.swift; sourceTree = "<group>"; };
+		F38041882B7B942B001CCC02 /* JoinAppointmnetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinAppointmnetViewController.swift; sourceTree = "<group>"; };
+		F380418A2B7B944B001CCC02 /* JoinAppointmentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinAppointmentRouter.swift; sourceTree = "<group>"; };
 		F387F6A72B6A5E97002B7CB6 /* ScheduleAppointmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAppointmentCell.swift; sourceTree = "<group>"; };
 		F387F6A92B6A5EA2002B7CB6 /* ScheduleAppointmentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleAppointmentCell.xib; sourceTree = "<group>"; };
 		F395379C2B73A8A900E3AE76 /* ProviderAvabilityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderAvabilityRequest.swift; sourceTree = "<group>"; };
@@ -1495,6 +1508,7 @@
 				C0ADB40F2B57312E005A78E9 /* FirebaseAnalytics in Frameworks */,
 				C0ADB4482B5746C0005A78E9 /* FirebaseAuth in Frameworks */,
 				C0ADB4522B5746C0005A78E9 /* FirebaseInstallations in Frameworks */,
+				F38041912B7B9922001CCC02 /* VonageClientSDKVideo in Frameworks */,
 				C0ADB42B2B57312E005A78E9 /* FirebaseFirestoreSwift in Frameworks */,
 				C0ADB4292B57312E005A78E9 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				3ED85AE02846190B0008EC11 /* SDWebImage in Frameworks */,
@@ -2147,6 +2161,7 @@
 				3E3C585C28DC4A4700358EC8 /* CreatedChatData.swift */,
 				3E1E785528B4C9BC00ED1E73 /* CurvePointsData.swift */,
 				3E0D55A82874411800E2EE6A /* DeeplinkData.swift */,
+				F30AF3BD2B8461C700FA94F9 /* DateFormates.swift */,
 				3E6BD02C2885818400A1FC4D /* FeelingScale.swift */,
 				3E78A6762876ED3C002599F7 /* FilterData.swift */,
 				3E8F1F6728DDA64500C327BE /* JSONDataTypeValue.swift */,
@@ -4894,6 +4909,7 @@
 				F395379F2B73ACE300E3AE76 /* ProviderAvabilityData.swift */,
 				F3AC7C382B74A16D000B158B /* AppointmetntData.swift */,
 				F3A7EE2B2B74D03A000DBC44 /* AppoitmentResponseData.swift */,
+				F353C7512B7C771B00E45DD8 /* VonageData.swift */,
 			);
 			path = Appointmnet;
 			sourceTree = "<group>";
@@ -4901,21 +4917,22 @@
 		F36F3F4C2B68CC000072BE35 /* Appointment */ = {
 			isa = PBXGroup;
 			children = (
-				F36F3F512B68CDB80072BE35 /* Appointment */,
-				F36F3F592B69120F0072BE35 /* AppointmentListViewController */,
+				F36F3F512B68CDB80072BE35 /* AppointmentList */,
+				F38041872B7B93ED001CCC02 /* JoinAppointment */,
+				F36F3F592B69120F0072BE35 /* ProvidersList */,
 				F36F3F4F2B68CDA80072BE35 /* Appointment.storyboard */,
 			);
 			path = Appointment;
 			sourceTree = "<group>";
 		};
-		F36F3F512B68CDB80072BE35 /* Appointment */ = {
+		F36F3F512B68CDB80072BE35 /* AppointmentList */ = {
 			isa = PBXGroup;
 			children = (
 				F36F3F4D2B68CD280072BE35 /* AppointmentViewController.swift */,
 				F36F3F5E2B6927290072BE35 /* AppointmentViewModel.swift */,
 				F36F3F522B68D1FF0072BE35 /* AppointmentRouter.swift */,
 			);
-			path = Appointment;
+			path = AppointmentList;
 			sourceTree = "<group>";
 		};
 		F36F3F542B68F8100072BE35 /* NoAppointment */ = {
@@ -4927,14 +4944,14 @@
 			path = NoAppointment;
 			sourceTree = "<group>";
 		};
-		F36F3F592B69120F0072BE35 /* AppointmentListViewController */ = {
+		F36F3F592B69120F0072BE35 /* ProvidersList */ = {
 			isa = PBXGroup;
 			children = (
 				F36F3F5A2B6914120072BE35 /* ScheduleAppointmentViewController.swift */,
 				F33F82782B6CE6DB00E1C186 /* ScheduleAppointmentViewModel.swift */,
 				F36F3F5C2B6914AB0072BE35 /* ScheduleAppointmentRouter.swift */,
 			);
-			path = AppointmentListViewController;
+			path = ProvidersList;
 			sourceTree = "<group>";
 		};
 		F36F3F602B6928E40072BE35 /* Appointment */ = {
@@ -4955,6 +4972,16 @@
 			path = AppointmentBooked;
 			sourceTree = "<group>";
 		};
+		F38041872B7B93ED001CCC02 /* JoinAppointment */ = {
+			isa = PBXGroup;
+			children = (
+				F38041882B7B942B001CCC02 /* JoinAppointmnetViewController.swift */,
+				F353C74D2B7C724E00E45DD8 /* JoinAppointmentViewModel.swift */,
+				F380418A2B7B944B001CCC02 /* JoinAppointmentRouter.swift */,
+			);
+			path = JoinAppointment;
+			sourceTree = "<group>";
+		};
 		F387F6A62B6A5E53002B7CB6 /* ScheduleAppointment */ = {
 			isa = PBXGroup;
 			children = (
@@ -4970,6 +4997,7 @@
 				F395379C2B73A8A900E3AE76 /* ProviderAvabilityRequest.swift */,
 				F3AC7C362B749B9C000B158B /* BookAppoointmentRequest.swift */,
 				F3A7EE2D2B74EA32000DBC44 /* DeleteAppointmentRequest.swift */,
+				F353C74F2B7C74E600E45DD8 /* JoinAppointmentRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -5048,6 +5076,7 @@
 				C0ADB4532B5746C0005A78E9 /* FirebaseMLModelDownloader */,
 				C0ADB4552B5746C0005A78E9 /* FirebaseMessaging */,
 				C0ADB4572B5746C0005A78E9 /* FirebasePerformance */,
+				F38041902B7B9922001CCC02 /* VonageClientSDKVideo */,
 			);
 			productName = Athelo;
 			productReference = 3EE9FD862844A57600BE4661 /* Athelo.app */;
@@ -5086,6 +5115,7 @@
 				C00495152B2BA142004F8804 /* XCRemoteSwiftPackageReference "contentful" */,
 				C00495182B2BA15A004F8804 /* XCRemoteSwiftPackageReference "rich-text-renderer.swift" */,
 				C0ADB43A2B5746C0005A78E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F380418F2B7B9922001CCC02 /* XCRemoteSwiftPackageReference "vonage-client-sdk-video" */,
 			);
 			productRefGroup = 3EE9FD872844A57600BE4661 /* Products */;
 			projectDirPath = "";
@@ -5335,6 +5365,7 @@
 				3E1C13A828C206550096E4B7 /* InvitationCodeViewModel.swift in Sources */,
 				3EE0E9BD28574DD900984C03 /* MyProfileRouter.swift in Sources */,
 				F36F3F582B68F84D0072BE35 /* NoAppointment.swift in Sources */,
+				F380418B2B7B944B001CCC02 /* JoinAppointmentRouter.swift in Sources */,
 				3EBF4F692863264C000E647F /* AskAtheloViewController.swift in Sources */,
 				3E14C6902859EA41002183F5 /* EditProfileViewController.swift in Sources */,
 				3E313A5229A60EEA005DEC43 /* AccessCodeViewModel.swift in Sources */,
@@ -5413,6 +5444,7 @@
 				3E13F25A286065CF009A75F6 /* StyledShadow.swift in Sources */,
 				3E8F203628DDA64500C327BE /* URLQueryItem+Extensions.swift in Sources */,
 				3E8F204D28DDA64500C327BE /* ChatReportMessageRequest.swift in Sources */,
+				F353C7502B7C74E600E45DD8 /* JoinAppointmentRequest.swift in Sources */,
 				F395379D2B73A8A900E3AE76 /* ProviderAvabilityRequest.swift in Sources */,
 				3E8F206128DDA64500C327BE /* LocationRequestBuilder.swift in Sources */,
 				3E8F204028DDA64500C327BE /* PostRequests.swift in Sources */,
@@ -5448,6 +5480,7 @@
 				3E6BD0122885453D00A1FC4D /* SymptomListRouter.swift in Sources */,
 				3E8F209C28DDA64500C327BE /* TagRequestsBuilder.swift in Sources */,
 				3E002A16284F878F0025516B /* IntroWomenView.swift in Sources */,
+				F353C74E2B7C724E00E45DD8 /* JoinAppointmentViewModel.swift in Sources */,
 				3E8F208028DDA64500C327BE /* FitbitRequestBuilder.swift in Sources */,
 				3E8F202B28DDA64500C327BE /* ChatMessageUserData.swift in Sources */,
 				3ECB51B628802FEE0044F3B7 /* CalendarDayCollectionViewCell.swift in Sources */,
@@ -5609,6 +5642,7 @@
 				3EE8FA5B28730EE000CE8762 /* NewsData.swift in Sources */,
 				3EC51860289270160012663C /* SleepSummaryViewModel.swift in Sources */,
 				3EEB1CF6288FF2B100E0AAA4 /* SleepSummaryView.swift in Sources */,
+				F30AF3BE2B8461C700FA94F9 /* DateFormates.swift in Sources */,
 				3ED0BFB128A239CC00224561 /* SmallLineGraphView.swift in Sources */,
 				3E8F206828DDA64500C327BE /* HealthUserFeelingsRequest.swift in Sources */,
 				3E13418D28463F31007C1381 /* UIView+Styling.swift in Sources */,
@@ -5633,6 +5667,7 @@
 				3ED85B0028462B4F0008EC11 /* ViewModel.swift in Sources */,
 				3EE9FD8A2844A57600BE4661 /* AppDelegate.swift in Sources */,
 				3EF218E129C8A40200F0EA95 /* CaregiverRoleViewController.swift in Sources */,
+				F353C7522B7C771B00E45DD8 /* VonageData.swift in Sources */,
 				3E5253D92887F42A00D6D643 /* SymptomChronologyViewController.swift in Sources */,
 				3E5253D62887EAB300D6D643 /* NavigationRoute.swift in Sources */,
 				3E8F203A28DDA64500C327BE /* DealDetailsRequest.swift in Sources */,
@@ -5789,6 +5824,7 @@
 				3E8F202228DDA64500C327BE /* ChatMostRecentMessage.swift in Sources */,
 				F33E02962B70F53F00F1D88E /* AppointmentRequests.swift in Sources */,
 				3E84D32C28539D3300288F08 /* HomeRouter.swift in Sources */,
+				F38041892B7B942B001CCC02 /* JoinAppointmnetViewController.swift in Sources */,
 				3E8F209F28DDA64500C327BE /* TagRequests.swift in Sources */,
 				3EE97D88286DCDF10027DC03 /* ChatRoomData.swift in Sources */,
 				3E8F20AB28DDA64500C327BE /* APIError.swift in Sources */,
@@ -6000,7 +6036,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 19;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9CAGH464QT;
 				ENABLE_BITCODE = NO;
@@ -6008,12 +6044,12 @@
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Our app would like to access your microphone so that you can join an appointment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -6039,7 +6075,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 19;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = WHV365RSPM;
 				ENABLE_BITCODE = NO;
@@ -6047,12 +6083,12 @@
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Our app would like to access your microphone so that you can join an appointment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -6139,7 +6175,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 19;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9CAGH464QT;
 				ENABLE_BITCODE = NO;
@@ -6147,12 +6183,12 @@
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Our app would like to access your microphone so that you can join an appointment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -6233,7 +6269,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Athelo/Athelo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 19;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 9CAGH464QT;
 				ENABLE_BITCODE = NO;
@@ -6241,12 +6277,12 @@
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Our app would like to access your microphone so that you can join an appointment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -6355,6 +6391,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 10.20.0;
+			};
+		};
+		F380418F2B7B9922001CCC02 /* XCRemoteSwiftPackageReference "vonage-client-sdk-video" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/opentok/vonage-client-sdk-video.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.27.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -6567,6 +6611,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C0ADB43A2B5746C0005A78E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebasePerformance;
+		};
+		F38041902B7B9922001CCC02 /* VonageClientSDKVideo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F380418F2B7B9922001CCC02 /* XCRemoteSwiftPackageReference "vonage-client-sdk-video" */;
+			productName = VonageClientSDKVideo;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

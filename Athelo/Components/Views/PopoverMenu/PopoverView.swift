@@ -8,15 +8,17 @@
 import UIKit
 
 
+protocol PopoverActions {
+    func PopoverActions(Action type: PopoverView.ResponseType, On index:Int)
+}
 
 class PopoverView: UIViewController {
 
     @IBOutlet weak var popupBackgroungView: UIView!
     
-    var reschedualBtnClicked: (()->())?
-    var cancelAppointmentClicked: ((Int)->())?
-    
     var index: Int?
+    var responseActions: PopoverActions?
+    
     init() {
         super.init(nibName: "PopoverView", bundle: nil)
     }
@@ -54,12 +56,12 @@ class PopoverView: UIViewController {
     private func showReshedualPopup(){
         let yesAction = PopupActionData(title: "action.yes".localized(), customStyle: .main) {
             print("Navigat to reschedule screen")
-            self.reschedualBtnClicked?()
+            self.responseActions?.PopoverActions(Action: .reschedule, On: self.index!)
         }
         
         let noAction = PopupActionData(title: "action.no".localized()){
             print("Remove Appointment from list")
-            self.cancelAppointmentClicked?(self.index!)
+            self.responseActions?.PopoverActions(Action: .delete, On: self.index!)
         }
         
         let popupData = PopupConfigurationData(template: .reschedual, primaryAction: yesAction, secondaryAction: noAction)
@@ -68,8 +70,11 @@ class PopoverView: UIViewController {
     
 
     @IBAction func onClickJoinBtn(_ sender: UIControl) {
-        self.dismiss(animated: false)
-        
+        sender.backgroundColor = #colorLiteral(red: 0.4274509804, green: 0.4274509804, blue: 0.4274509804, alpha: 0.07)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.3){
+            self.responseActions?.PopoverActions(Action: .join, On: self.index!)
+            sender.backgroundColor = .clear
+        }
     }
     
     @IBAction func onClickCancelBtn(_ sender: UIControl) {
@@ -77,9 +82,13 @@ class PopoverView: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now()+0.4){
             self.showCancelPopUp()
         }
-        
-        
     }
-    
 }
 
+extension PopoverView {
+    enum ResponseType {
+        case delete
+        case join
+        case reschedule
+    }
+}

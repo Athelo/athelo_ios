@@ -13,8 +13,6 @@ final class AppointmentViewModel: BaseViewModel{
     @Published var allAppointments: [AppointmetntData] = []
     
     private var cancellables: [AnyCancellable] = []
-    var isLastDeleteAction = false
-    
     
     override init() {
         super.init()
@@ -44,25 +42,15 @@ final class AppointmentViewModel: BaseViewModel{
     }
     
     func deleteAppointment(AppointmentID id:Int){
-        guard state.value != .loading else {
-            return
-        }
-        state.send(.loading)
-        
         AtheloAPI.Appointment.delete(request: .init(id: id))
-            .sink { [weak self] compilation in
-                self?.state.send(.loaded)
+            .sink { compilation in
                 switch compilation{
                 case .failure(let error):
                     print(error.localizedDescription)
-                case .finished:
-                    self?.refresh()
+                case .finished: return
                 }
             }
             .store(in: &cancellables)
-
-        
-        
     }
     
     func refresh() {
@@ -72,4 +60,11 @@ final class AppointmentViewModel: BaseViewModel{
         getAllAppointmnets()
     }
     
+}
+
+
+extension AppointmentViewModel: ScheduleAppointmentProtocol {
+    func scheduleAppointment() {
+        refresh()
+    }
 }

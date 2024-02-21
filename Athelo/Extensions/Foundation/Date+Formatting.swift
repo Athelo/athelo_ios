@@ -23,4 +23,15 @@ extension Date {
             return self.in(region: .current).toString(.date(.medium))
         }
     }
+    
+    
+    func convertToString(formate:AtheloDateFormates) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "\(Locale.current.identifier)_POSIX")
+        formatter.dateFormat = formate.rawValue
+        return formatter.string(from: self)
+        
+    }
+    
+    
 }

@@ -24,6 +24,8 @@
 	<string>$(CHAT_IDENTIFIER)</string>
 	<key>Config-ChatURL</key>
 	<string>$(CHAT_URL)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>mailto</string>

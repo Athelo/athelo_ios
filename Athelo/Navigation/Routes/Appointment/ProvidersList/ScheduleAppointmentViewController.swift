@@ -21,6 +21,8 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
     private var selectedDate: String? = nil
     private var viewModel = ScheduleAppointmentViewModel()
     
+    var delegate: ScheduleAppointmentProtocol?
+    
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -47,12 +49,16 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
         tableView.delegate = self
         tableView.dataSource = self
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .withStyle(.purple988098)
+        
+        tableView.refreshControl = refreshControl
     }
     
     // MARK: - Sinks
     private func sink(){
         sinkIntoViewModel()
-        viewModel.bookingResponse = bookingResponse
+        sinkIntoAppointmentTableView()
     }
     
     private func sinkIntoViewModel(){
@@ -72,27 +78,59 @@ final class ScheduleAppointmentViewController: BaseViewController, UITableViewDe
                     if $0.times.count == 0 {
                         self?.showMessge(.noSlots)
                     }else{
+                        self?.tableView.reloadRows(at: [self?.expandedCellIndex ?? IndexPath(item: 0, section: 0)], with: .fade)
                         self?.tableView.reloadData()
-                        DispatchQueue.main.asyncAfter(deadline: .now()+0.4){
+                        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
                             self?.tableView.reloadData()
+                            self?.tableView.reloadRows(at: [self?.expandedCellIndex ?? IndexPath(item: 0, section: 0)], with: .fade)
+                            
+                            
                         }
+                    }
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.state
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                switch $0 {
+                case .error, .loaded:
+                    self?.tableView.refreshControl?.endRefreshing()
+                case .loading, .initial:
+                    break
+                }
+            }.store(in: &cancellables)
+        
+        viewModel.appointmentBookedResponse
+            .sink { isSuccess in
+                if isSuccess != nil {
+                    if isSuccess! {
+                        DispatchQueue.main.async{
+                            self.router?.navigationController?.popViewController(animated: true)
+                            self.showMessge(.bookSuccess)
+                            self.delegate?.scheduleAppointment()
+                        }
+                    }else{
+                        self.showMessge(.bookFail)
                     }
                 }
             }
             .store(in: &cancellables)
     }
  
-
-    func bookingResponse(isSuccess: Bool){
-        if isSuccess {
-            DispatchQueue.main.async{
-                self.router?.navigationController?.popViewController(animated: true)
-                self.showMessge(.bookSuccess)
-            }
-        }else{
-            self.showMessge(.bookFail)
-        }
+    private func sinkIntoAppointmentTableView() {
+        tableView.refreshControl?.controlEventPublisher(for: .valueChanged)
+            .sinkDiscardingValue { [weak self] in
+                if self?.viewModel.state.value == .loading {
+                    self?.tableView.refreshControl?.endRefreshing()
+                } else {
+                    self?.viewModel.refresh()
+                }
+            }.store(in: &cancellables)
     }
+
+    
 }
 
 // MARK: - Protocol conformance
@@ -145,11 +183,12 @@ extension ScheduleAppointmentViewController: UITableViewDataSource {
     }
 }
 
+// MARK: Methods
 extension ScheduleAppointmentViewController{
     func appointmentBooked(time: String){
         if selectedDate != nil{
-            let date = selectedDate?.changeDateStringTo(Base: "MM/dd/yyyy", Changeto: "yyyy-MM-dd")
-            let strTime = time.changeDateStringTo(Base: "hh:mm a", Changeto: "HH:mm:ss")
+            let date = selectedDate?.changeDateStringTo(Base: .MM_dd_yyyy, Changeto: .yyyy_MM_dd)
+            let strTime = time.changeDateStringTo(Base: .hh_mm_a, Changeto: .HH_mm_ss)
             viewModel.bookNewAppointment(id: viewModel.providers!.results[expandedCellIndex?.row ?? 0].id, startTime: "\(date!)T\(strTime!)")
         }
     }
