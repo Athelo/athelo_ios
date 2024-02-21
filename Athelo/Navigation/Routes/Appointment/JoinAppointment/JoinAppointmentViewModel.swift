@@ -8,16 +8,22 @@
 import Combine
 import UIKit
 
+import AVFoundation
+
+   
 final class JoinAppointmentViewModel: BaseViewModel {
     
     let kApiKey = "47853731"
 
-    // Replace with your generated session ID
+    // your generated session ID
     var kSessionId: String = ""
 
-    // Replace with your generated token
+    // generated token
     var kToken = CurrentValueSubject<String, Never>("")
     
+
+    var firstMicroPermission = false
+    var firstCameraPermission = false
     private var cancellables: [AnyCancellable] = []
     
     
@@ -25,6 +31,9 @@ final class JoinAppointmentViewModel: BaseViewModel {
         super.init()
     
     }
+    
+ 
+
     
 }
 
@@ -64,3 +73,57 @@ extension JoinAppointmentViewModel {
     }
 }
 
+extension JoinAppointmentViewModel {
+    enum Permissions{
+        case camera
+        case microphone
+        
+    }
+    
+    
+    func checkBlutoothPermission() -> Bool {
+
+        var permissionCheck: Bool = false
+
+        switch AVAudioSession.sharedInstance().recordPermission {
+        case AVAudioSession.RecordPermission.granted:
+                permissionCheck = true
+        case AVAudioSession.RecordPermission.denied:
+                permissionCheck = false
+        case AVAudioSession.RecordPermission.undetermined:
+            firstMicroPermission = true
+            AVAudioSession.sharedInstance().requestRecordPermission({ (granted) in
+                if granted {
+                    permissionCheck = true
+                } else {
+                    permissionCheck = false
+                }
+            })
+            
+        default:
+            break
+        }
+        
+        return permissionCheck
+    }
+    
+    func checkCameraPermission() -> Bool {
+        var permissionCheck: Bool = false
+
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            permissionCheck = true
+        case .denied, .restricted:
+            permissionCheck = false
+        case .notDetermined:
+            firstCameraPermission = true
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                permissionCheck = granted
+            }
+        @unknown default:
+            break
+        }
+
+        return permissionCheck
+    }
+}

@@ -6044,6 +6044,7 @@
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Our app would like to access your microphone so that you can join an appointment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -6083,6 +6084,7 @@
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Our app would like to access your microphone so that you can join an appointment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -6183,6 +6185,7 @@
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Our app would like to access your microphone so that you can join an appointment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -6277,6 +6280,7 @@
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Athelo (STG)";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Our app would like to access your camera so that you can update your profile photo.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Our app would like to access your microphone so that you can join an appointment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

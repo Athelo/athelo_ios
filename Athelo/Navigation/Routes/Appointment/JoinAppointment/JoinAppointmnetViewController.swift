@@ -34,7 +34,7 @@ class JoinAppointmnetViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configure()
         sink()
         
@@ -46,11 +46,19 @@ class JoinAppointmnetViewController: BaseViewController {
     
     // MARK: - Configuration
     private func configure() {
-        configureOwnView()
+
     }
     
-    private func configureOwnView() {
-//        navigationItem.title = "Video Chat"
+    private func configurePermissions() {
+        
+        if !(viewModel.checkBlutoothPermission()) && !viewModel.firstMicroPermission {
+            showPermissionPopup(For: .microphone)
+        }else{
+            if !(self.viewModel.checkCameraPermission()) && !viewModel.firstCameraPermission {
+                self.showPermissionPopup(For: .camera)
+            }
+        }
+        
     }
     
     
@@ -59,7 +67,7 @@ class JoinAppointmnetViewController: BaseViewController {
         sinkIntoViewModel()
     }
     
-    private func sinkIntoViewModel(){
+    private func sinkIntoViewModel() {
         bindToViewModel(viewModel, cancellables: &cancellables)
         
         viewModel.kToken.sink { [weak self] in
@@ -70,12 +78,33 @@ class JoinAppointmnetViewController: BaseViewController {
         .store(in: &cancellables)
     }
     
+    private func showPermissionPopup(For unit: JoinAppointmentViewModel.Permissions) {
+        let popup = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        
+        popup.title = "popup.permission.\(unit).titel".localized()
+        popup.message = "popup.permission.\(unit).message".localized()
+        
+        let cancelBtn = UIAlertAction(title: "action.cancel".localized(), style: .cancel) { _ in
+            if !(self.viewModel.checkCameraPermission()) && unit == .microphone{
+                self.showPermissionPopup(For: .camera)
+            }
+        }
+        let setting = UIAlertAction(title: "action.settings".localized(), style: .default){ _ in
+            if !(self.viewModel.checkCameraPermission()) && unit == .microphone{
+                self.showPermissionPopup(For: .camera)
+            }
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+        }
+        
+        popup.addAction(cancelBtn)
+        popup.addAction(setting)
+        
+        self.present(popup, animated: true)
+    }
     
     @IBAction func onClickCloseBtn(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
-    
-    
 }
 
 
@@ -201,6 +230,9 @@ extension JoinAppointmnetViewController: OTPublisherDelegate {
     func publisher(_ publisher: OTPublisherKit, streamCreated stream: OTStream) {
         viewModel.state.send(.loaded)
         print("Publishing")
+        configurePermissions()
+        
+        
     }
     
     func publisher(_ publisher: OTPublisherKit, streamDestroyed stream: OTStream) {

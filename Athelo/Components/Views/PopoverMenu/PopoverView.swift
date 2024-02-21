@@ -70,8 +70,10 @@ class PopoverView: UIViewController {
     
 
     @IBAction func onClickJoinBtn(_ sender: UIControl) {
-        DispatchQueue.main.asyncAfter(deadline: .now()+1){
+        sender.backgroundColor = #colorLiteral(red: 0.4274509804, green: 0.4274509804, blue: 0.4274509804, alpha: 0.07)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.3){
             self.responseActions?.PopoverActions(Action: .join, On: self.index!)
+            sender.backgroundColor = .clear
         }
     }
     
