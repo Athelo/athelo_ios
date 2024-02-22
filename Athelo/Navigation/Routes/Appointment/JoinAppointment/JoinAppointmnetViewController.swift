@@ -11,7 +11,10 @@ import Combine
 
 class JoinAppointmnetViewController: BaseViewController {
 
-    @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var closeBtn: UIButton!
+    
+    @IBOutlet weak var publisherVideoView: UIView!
+    @IBOutlet weak var sbscribVideoView: UIView!
     
     lazy var session: OTSession = {
         return OTSession(apiKey: viewModel.kApiKey, sessionId:  viewModel.kSessionId, delegate: self)!
@@ -135,6 +138,15 @@ extension JoinAppointmnetViewController {
             processError(error)
         }
         
+        if let pubView = publisher.view {
+            pubView.frame = CGRect(x: 0, y: 0, width: 110, height: 150)
+            pubView.layer.borderColor = UIColor.white.cgColor
+            pubView.layer.borderWidth = 1
+            DispatchQueue.main.async {
+                self.publisherVideoView.addSubview(pubView)
+            }
+            
+        }
         session.connect(withToken: viewModel.kToken.value, error: &error)
         
     }
@@ -152,10 +164,7 @@ extension JoinAppointmnetViewController {
         
         session.publish(publisher, error: &error)
         
-        if let pubView = publisher.view {
-            pubView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHight)
-            videoView.addSubview(pubView)
-        }
+       
     }
     
     /**
@@ -252,10 +261,12 @@ extension JoinAppointmnetViewController: OTPublisherDelegate {
 // MARK: - OTSubscriber delegate callbacks
 extension JoinAppointmnetViewController: OTSubscriberDelegate {
     func subscriberDidConnect(toStream subscriberKit: OTSubscriberKit) {
+       
         if let subsView = subscriber?.view {
-            
-            subsView.frame = CGRect(x: 0, y: screenWidth, width: screenWidth, height: screenHight)
-            view.addSubview(subsView)
+            subsView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHight)
+            DispatchQueue.main.async {
+                self.sbscribVideoView.addSubview(subsView)
+            }
         }
     }
     
