@@ -6,12 +6,18 @@
 //
 
 import FirebaseCore
+import BranchSDK
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        Branch.setUseTestBranchKey(true)
+          // Listener for Branch deep link data
+        Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
+            print("***   Params:- ",params as? [String: AnyObject] ?? {})
+        }
         configureNetworkingAPI()
         
         FirebaseApp.configure()
@@ -53,3 +59,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+//Branch functions
+extension AppDelegate {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        Branch.getInstance().application(app, open: url, options: options)
+        return true
+    }
+
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+          // Handler for Universal Links
+        Branch.getInstance().continue(userActivity)
+        return true
+    }
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+      // Handler for Push Notifications
+      Branch.getInstance().handlePushNotification(userInfo)
+    }
+}

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BranchSDK
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var router: AppRouter?
@@ -17,6 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else {
             return
+        }
+        
+        if let userActivity = connectionOptions.userActivities.first {
+            BranchScene.shared().scene(scene, continue: userActivity)
+        } else if !connectionOptions.urlContexts.isEmpty {
+            BranchScene.shared().scene(scene, openURLContexts: connectionOptions.urlContexts)
         }
         
         let appWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
@@ -62,5 +69,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) {
         /* ... */
     }
+    
+    //Branch Functions
+    //Deeplinking 
+    func scene(_ scene: UIScene, willContinueUserActivityWithType userActivityType: String) {
+      scene.userActivity = NSUserActivity(activityType: userActivityType)
+        scene.delegate = self
+    }
+     
+     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+           BranchScene.shared().scene(scene, continue: userActivity)
+     }
+     
+     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+           BranchScene.shared().scene(scene, openURLContexts: URLContexts)
+     }
 }
 

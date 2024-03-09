@@ -731,6 +731,7 @@
 		C0ADB4562B5746C0005A78E9 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4552B5746C0005A78E9 /* FirebaseMessaging */; };
 		C0ADB4582B5746C0005A78E9 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = C0ADB4572B5746C0005A78E9 /* FirebasePerformance */; };
 		F30AF3BE2B8461C700FA94F9 /* DateFormates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30AF3BD2B8461C700FA94F9 /* DateFormates.swift */; };
+		F33390162B9994BB0071AB46 /* BranchSDK in Frameworks */ = {isa = PBXBuildFile; productRef = F33390152B9994BB0071AB46 /* BranchSDK */; };
 		F33E02942B70EF5C00F1D88E /* AppointmentRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33E02932B70EF5C00F1D88E /* AppointmentRequestBuilder.swift */; };
 		F33E02962B70F53F00F1D88E /* AppointmentRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33E02952B70F53F00F1D88E /* AppointmentRequests.swift */; };
 		F33E02992B710CEF00F1D88E /* ProvidersData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33E02982B710CEF00F1D88E /* ProvidersData.swift */; };
@@ -1498,6 +1499,7 @@
 			files = (
 				C0ADB4352B57312E005A78E9 /* FirebaseInstallations in Frameworks */,
 				C0ADB43E2B5746C0005A78E9 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				F33390162B9994BB0071AB46 /* BranchSDK in Frameworks */,
 				C0ADB4312B57312E005A78E9 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				C0ADB4392B57312E005A78E9 /* FirebaseMessaging in Frameworks */,
 				C0ADB4442B5746C0005A78E9 /* FirebaseAppCheck in Frameworks */,
@@ -5077,6 +5079,7 @@
 				C0ADB4552B5746C0005A78E9 /* FirebaseMessaging */,
 				C0ADB4572B5746C0005A78E9 /* FirebasePerformance */,
 				F38041902B7B9922001CCC02 /* VonageClientSDKVideo */,
+				F33390152B9994BB0071AB46 /* BranchSDK */,
 			);
 			productName = Athelo;
 			productReference = 3EE9FD862844A57600BE4661 /* Athelo.app */;
@@ -5116,6 +5119,7 @@
 				C00495182B2BA15A004F8804 /* XCRemoteSwiftPackageReference "rich-text-renderer.swift" */,
 				C0ADB43A2B5746C0005A78E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				F380418F2B7B9922001CCC02 /* XCRemoteSwiftPackageReference "vonage-client-sdk-video" */,
+				F33390142B9994BB0071AB46 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking" */,
 			);
 			productRefGroup = 3EE9FD872844A57600BE4661 /* Products */;
 			projectDirPath = "";
@@ -6077,7 +6081,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = WHV365RSPM;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Athelo/Resources/Info.plist;
@@ -6393,6 +6397,14 @@
 				minimumVersion = 10.20.0;
 			};
 		};
+		F33390142B9994BB0071AB46 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BranchMetrics/ios-branch-deep-linking";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.0;
+			};
+		};
 		F380418F2B7B9922001CCC02 /* XCRemoteSwiftPackageReference "vonage-client-sdk-video" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/opentok/vonage-client-sdk-video.git";
@@ -6611,6 +6623,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C0ADB43A2B5746C0005A78E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebasePerformance;
+		};
+		F33390152B9994BB0071AB46 /* BranchSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F33390142B9994BB0071AB46 /* XCRemoteSwiftPackageReference "ios-branch-deep-linking" */;
+			productName = BranchSDK;
 		};
 		F38041902B7B9922001CCC02 /* VonageClientSDKVideo */ = {
 			isa = XCSwiftPackageProductDependency;
