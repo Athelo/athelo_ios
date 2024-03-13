@@ -16,7 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Branch.setUseTestBranchKey(true)
           // Listener for Branch deep link data
         Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
-            print("***   Params:- ",params as? [String: AnyObject] ?? {})
+            if let deeplinkPath = params?["$deeplink_path"]{
+                UserDefaults.standard.setValue(deeplinkPath, forKey: "deepLinkPath")
+                UserDefaults.standard.synchronize()
+            }
         }
         configureNetworkingAPI()
         
