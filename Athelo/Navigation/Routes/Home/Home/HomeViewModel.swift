@@ -54,10 +54,10 @@ final class HomeViewModel: BaseViewModel {
             }
             
             return prompt
-        case .symptomAction:
-            return .updateFeelings
-        case .symptomList:
-            return nil
+//        case .symptomAction:
+//            return .updateFeelings
+//        case .symptomList:
+//            return nil
         case .wellBeing:
             return sectionData.value?.feeling != nil ? nil : .registerFeelings
         }
@@ -100,14 +100,14 @@ final class HomeViewModel: BaseViewModel {
             }
             
             return TileDecorationData(recommendationPrompt: recommendation)
-        case .symptomAction:
-            return TileDecorationData(recommendationPrompt: .updateFeelings)
-        case .symptomList:
-            guard let symptom = sectionData.value?.symptoms?[indexPath.item] else {
-                return nil
-            }
-            
-            return PillCellDecorationData(text: symptom.name)
+//        case .symptomAction:
+//            return TileDecorationData(recommendationPrompt: .updateFeelings)
+//        case .symptomList:
+//            guard let symptom = sectionData.value?.symptoms?[indexPath.item] else {
+//                return nil
+//            }
+//            
+//            return PillCellDecorationData(text: symptom.name)
         case .wellBeing:
             if let feeling = sectionData.value?.feeling {
                 return feeling
@@ -135,8 +135,8 @@ final class HomeViewModel: BaseViewModel {
             } else {
                 return SectionTitleDecorationData(title: "home.header.recommendations".localized())
             }
-        case .symptomAction, .symptomList:
-            return SectionTitleDecorationData(title: "home.header.symptoms".localized())
+//        case .symptomAction, .symptomList:
+//            return SectionTitleDecorationData(title: "home.header.symptoms".localized())
         case .wellBeing:
             return SectionTitleDecorationData(title: "home.header.wellbeing".localized())
         }
@@ -289,18 +289,18 @@ final class HomeViewModel: BaseViewModel {
                 snapshot.appendItems([.init(recommendationPrompt: .registerFeelings)])
             }
             
-            if layoutData.symptoms?.isEmpty == false {
-                snapshot.appendSections([.symptomList])
-                
-                if let symptoms = layoutData.symptoms {
-                    snapshot.appendItems(symptoms.map({ ItemIdentifier(symptomData: $0) }))
-                }
-            }
-            
-            if layoutData.feeling != nil || layoutData.symptoms?.isEmpty == false {
-                snapshot.appendSections([.symptomAction])
-                snapshot.appendItems([.init(recommendationPrompt: .updateFeelings)])
-            }
+//            if layoutData.symptoms?.isEmpty == false {
+//                snapshot.appendSections([.symptomList])
+//                
+//                if let symptoms = layoutData.symptoms {
+//                    snapshot.appendItems(symptoms.map({ ItemIdentifier(symptomData: $0) }))
+//                }
+//            }
+//            
+//            if layoutData.feeling != nil || layoutData.symptoms?.isEmpty == false {
+//                snapshot.appendSections([.symptomAction])
+//                snapshot.appendItems([.init(recommendationPrompt: .updateFeelings)])
+//            }
         }
         
         if let recommendations = layoutData.recommendations {
@@ -318,8 +318,8 @@ extension HomeViewModel {
         case heading
         case wellBeing
         case recommendations(ActiveUserRole)
-        case symptomAction
-        case symptomList
+//        case symptomAction
+//        case symptomList
     }
     
     struct ItemIdentifier: Hashable {

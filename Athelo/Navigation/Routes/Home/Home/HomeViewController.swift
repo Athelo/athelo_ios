@@ -216,45 +216,47 @@ final class HomeViewController: BaseViewController {
                 section.boundarySupplementaryItems = [headerItem]
                 
                 return section
-            case .symptomAction:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(72.0))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                //            case .symptomAction:
+                //                //symptom button click
+                //                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(72.0))
+                //                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                //
+                //                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1.0))
+                //                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+                //
+                //                let section = NSCollectionLayoutSection(group: group)
+                //                section.contentInsets = .init(top: 0.0, leading: 16.0, bottom: 32.0, trailing: 16.0)
+                //                section.interGroupSpacing = 16.0
+                //
+                //                if let symptomsCount = viewModel?.numberOfSymptoms, symptomsCount == 0 {
+                //                    let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1.0))
+                //                    let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: SectionTitleCollectionReusableView.identifier, alignment: .top, absoluteOffset: .init(x: 0.0, y: -16.0))
+                //
+                //                    section.boundarySupplementaryItems = [headerItem]
+                //                }
+                //
+                //                return section
+                //            case .symptomList:
+                //                let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(1.0), heightDimension: .estimated(50.0))
+                //                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                //
+                //                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50.0))
+                //                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                //                group.interItemSpacing = .fixed(16.0)
+                //
+                //                let shouldShrinkBottomOffset = (viewModel?.numberOfSymptoms ?? 0) > 0
+                //
+                //                let section = NSCollectionLayoutSection(group: group)
+                //                section.contentInsets = .init(top: 0.0, leading: 16.0, bottom: shouldShrinkBottomOffset ? 16.0 : 32.0, trailing: 16.0)
+                //                section.interGroupSpacing = 16.0
+                //
+                //                let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1.0))
+                //                let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: SectionTitleCollectionReusableView.identifier, alignment: .top, absoluteOffset: .init(x: 0.0, y: -16.0))
+                //
+                //                section.boundarySupplementaryItems = [headerItem]
+                //
+                //                return section
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1.0))
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-                
-                let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = .init(top: 0.0, leading: 16.0, bottom: 32.0, trailing: 16.0)
-                section.interGroupSpacing = 16.0
-                
-                if let symptomsCount = viewModel?.numberOfSymptoms, symptomsCount == 0 {
-                    let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1.0))
-                    let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: SectionTitleCollectionReusableView.identifier, alignment: .top, absoluteOffset: .init(x: 0.0, y: -16.0))
-                    
-                    section.boundarySupplementaryItems = [headerItem]
-                }
-                
-                return section
-            case .symptomList:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(1.0), heightDimension: .estimated(50.0))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                    
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50.0))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                group.interItemSpacing = .fixed(16.0)
-                
-                let shouldShrinkBottomOffset = (viewModel?.numberOfSymptoms ?? 0) > 0
-                
-                let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = .init(top: 0.0, leading: 16.0, bottom: shouldShrinkBottomOffset ? 16.0 : 32.0, trailing: 16.0)
-                section.interGroupSpacing = 16.0
-                
-                let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1.0))
-                let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: SectionTitleCollectionReusableView.identifier, alignment: .top, absoluteOffset: .init(x: 0.0, y: -16.0))
-
-                section.boundarySupplementaryItems = [headerItem]
-                
-                return section
             }
         }
         

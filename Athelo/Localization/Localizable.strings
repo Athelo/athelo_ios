@@ -362,8 +362,8 @@
 
 "symptoms.chronology.items.header" = "Symptoms:";
 "symptoms.chronology.items.year" = "%i year";
-"symptoms.filter.all" = "All";
-"symptoms.filter.mostused" = "Most Used";
+"symptoms.filter.dailytracker" = "Daily Tracker";
+"symptoms.filter.symptomhistory" = "Symptom History";
 "symptoms.track.header.symptoms" = "What symptom do you have?";
 "symptoms.track.header.wellbeing" = "How are you feeling? (7 being the best)";
 "symptoms.track.header.wellbeing.other" = "How were you feeling that day?";

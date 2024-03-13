@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJx-e5-hmJ">
-                                <rect key="frame" x="0.0" y="91" width="414" height="805"/>
+                                <rect key="frame" x="0.0" y="107" width="414" height="755"/>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3b8-9u-Ure" customClass="NoContentView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="91" width="414" height="805"/>
+                                <rect key="frame" x="0.0" y="107" width="414" height="789"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kaq-S1-Rvb" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
@@ -46,18 +46,18 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="3b8-9u-Ure" secondAttribute="bottom" constant="-34" id="5Ih-6x-Ocz"/>
                             <constraint firstItem="iJx-e5-hmJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="61L-Lr-01r"/>
                             <constraint firstItem="00b-24-MsP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="6Nh-QZ-aNT"/>
                             <constraint firstItem="iJx-e5-hmJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="8kv-yg-cXi"/>
-                            <constraint firstItem="iJx-e5-hmJ" firstAttribute="top" secondItem="00b-24-MsP" secondAttribute="centerY" id="9Oe-u8-ing"/>
+                            <constraint firstItem="iJx-e5-hmJ" firstAttribute="top" secondItem="00b-24-MsP" secondAttribute="centerY" constant="16" id="9Oe-u8-ing"/>
                             <constraint firstItem="3b8-9u-Ure" firstAttribute="top" secondItem="iJx-e5-hmJ" secondAttribute="top" id="CEG-0p-diH"/>
                             <constraint firstItem="3b8-9u-Ure" firstAttribute="trailing" secondItem="iJx-e5-hmJ" secondAttribute="trailing" id="GQv-uz-w75"/>
-                            <constraint firstItem="3b8-9u-Ure" firstAttribute="bottom" secondItem="iJx-e5-hmJ" secondAttribute="bottom" id="OPl-bl-uzg"/>
-                            <constraint firstAttribute="bottom" secondItem="iJx-e5-hmJ" secondAttribute="bottom" id="TzZ-AD-iIp"/>
                             <constraint firstItem="kaq-S1-Rvb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Zmz-l9-x3e"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="00b-24-MsP" secondAttribute="trailing" constant="16" id="eVF-2a-SQn"/>
                             <constraint firstItem="kaq-S1-Rvb" firstAttribute="bottom" secondItem="00b-24-MsP" secondAttribute="bottom" constant="16" id="mhd-a0-IFn"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="kaq-S1-Rvb" secondAttribute="trailing" id="nHN-3X-xzF"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="iJx-e5-hmJ" secondAttribute="bottom" id="sSc-tu-xPD"/>
                             <constraint firstItem="kaq-S1-Rvb" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="stV-YG-GGT"/>
                             <constraint firstItem="00b-24-MsP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="v2l-Xo-KHX"/>
                             <constraint firstItem="3b8-9u-Ure" firstAttribute="leading" secondItem="iJx-e5-hmJ" secondAttribute="leading" id="zuE-3L-1nR"/>

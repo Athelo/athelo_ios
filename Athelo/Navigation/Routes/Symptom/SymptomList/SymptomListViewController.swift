@@ -14,6 +14,7 @@ final class SymptomListViewController: BaseViewController {
     @IBOutlet private weak var segmentedPickerViewFilters: SegmentedPickerView!
     @IBOutlet private weak var viewListContainer: UIView!
     @IBOutlet private weak var viewNoContent: UIView!
+
     
     private var symptomListView: SymptomListView?
     
@@ -36,7 +37,9 @@ final class SymptomListViewController: BaseViewController {
     // MARK: - Configure
     private func configure() {
         configureFiltersSegmentedPickerView()
-        configureListContainerView()
+//        configureListContainerView()
+//        configureRegisterSymptomView()
+        configureSymptoHistoryView()
         configureNoContentView()
         configureOwnView()
     }
@@ -77,6 +80,32 @@ final class SymptomListViewController: BaseViewController {
         symptomListView = listView
     }
     
+    private func configureRegisterSymptomView() {
+        let registerRouter = RegisterSymptomsRouter(navigationController: router!.navigationController!)
+        let registerSymptomsVC = RegisterSymptomsViewController.viewController(router: registerRouter)
+        
+        registerSymptomsVC.view.translatesAutoresizingMaskIntoConstraints = false
+        registerSymptomsVC.view.backgroundColor = .clear
+        
+        addChild(registerSymptomsVC)
+        viewListContainer.addSubview(registerSymptomsVC.view)
+        
+        NSLayoutConstraint.activate([
+            registerSymptomsVC.view.topAnchor.constraint(equalTo: viewListContainer.topAnchor),
+            registerSymptomsVC.view.bottomAnchor.constraint(equalTo: viewListContainer.bottomAnchor),
+            registerSymptomsVC.view.leftAnchor.constraint(equalTo: viewListContainer.leftAnchor),
+            registerSymptomsVC.view.rightAnchor.constraint(equalTo: viewListContainer.rightAnchor)
+        ])
+        
+        registerSymptomsVC.didMove(toParent: self)
+    }
+    
+    private func configureSymptoHistoryView() {
+       
+        
+        
+    }
+    
     private func configureNoContentView() {
         viewNoContent.alpha = 0.0
     }
@@ -96,8 +125,9 @@ final class SymptomListViewController: BaseViewController {
             .compactMap({ SymptomListViewModel.Filter(rawValue: $0) })
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
-            .sink { [weak viewModel = viewModel] in
-                viewModel?.selectFilter($0)
+            .sink { [weak self] in
+//                viewModel?.selectFilter($0)
+                self?.viewListContainer.isHidden = $0 == .symptomhistory
             }.store(in: &cancellables)
     }
     

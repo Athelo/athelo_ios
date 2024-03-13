@@ -11,15 +11,15 @@ import UIKit
 final class SymptomListViewModel: BaseViewModel {
     // MARK: - Constants
     enum Filter: Int, CaseIterable {
-        case all
-        case mostUsed
+        case dailytracker
+        case symptomhistory
         
         var name: String {
             switch self {
-            case .all:
-                return "symptoms.filter.all".localized()
-            case .mostUsed:
-                return "symptoms.filter.mostused".localized()
+            case .dailytracker:
+                return "symptoms.filter.dailytracker".localized()
+            case .symptomhistory:
+                return "symptoms.filter.symptomhistory".localized()
             }
         }
     }
@@ -27,9 +27,10 @@ final class SymptomListViewModel: BaseViewModel {
     // MARK: - Properties
     let itemsModel = SymptomListModel(entries: [])
     
+    
     private var data: [Filter: [SymptomData]] = [:]
     
-    private let filterSubject = CurrentValueSubject<Filter, Never>(.all)
+    private let filterSubject = CurrentValueSubject<Filter, Never>(.dailytracker)
     var filterPublisher: AnyPublisher<Filter, Never> {
         filterSubject
             .eraseToAnyPublisher()
@@ -49,7 +50,7 @@ final class SymptomListViewModel: BaseViewModel {
     
     // MARK: - Public API
     func detailsConfigurationData(for symptom: SymptomData) -> ModelConfigurationListData<SymptomData> {
-        if let availableSymptom = data[.all]?.first(where: { $0.id == symptom.id }) {
+        if let availableSymptom = data[.dailytracker]?.first(where: { $0.id == symptom.id }) {
             return .data([availableSymptom])
         }
         
@@ -73,10 +74,10 @@ final class SymptomListViewModel: BaseViewModel {
             .sink { [weak self] in
                 self?.state.send($0.toViewModelState())
             } receiveValue: { [weak self] (allSymptoms, mostUsedSymptoms) in
-                self?.data[.all] = allSymptoms.sorted(by: \.name) { lhs, rhs in
+                self?.data[.dailytracker] = allSymptoms.sorted(by: \.name) { lhs, rhs in
                     lhs.localizedCaseInsensitiveCompare(rhs) == .orderedAscending
                 }
-                self?.data[.mostUsed] = mostUsedSymptoms
+                self?.data[.symptomhistory] = mostUsedSymptoms
                 
                 self?.updateVisibleItems()
             }.store(in: &cancellables)
