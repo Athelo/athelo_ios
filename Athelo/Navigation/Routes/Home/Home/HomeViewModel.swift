@@ -54,10 +54,6 @@ final class HomeViewModel: BaseViewModel {
             }
             
             return prompt
-//        case .symptomAction:
-//            return .updateFeelings
-//        case .symptomList:
-//            return nil
         case .wellBeing:
             return sectionData.value?.feeling != nil ? nil : .registerFeelings
         }
@@ -227,18 +223,6 @@ final class HomeViewModel: BaseViewModel {
         .map({ (symptomData, hasConnectedDevice) -> HomeLayoutData in
             var recommendations: [RecommendationPrompt] = []
             
-      //      let connectedDevice: Bool = (hasConnectedDevice ?? false) ?? false
-            
-//            if let caregiver = !(userRole.isCaregiver), !connectedDevice {
-             //   recommendations.append(.connectDevice)
-//            }
-            
-//            if userRole.isCaregiver {
-//                recommendations.append(contentsOf: [
-//                    .checkActivityLevels,
-//                    .checkSleepLevels
-//                ])
-//            }
             
             recommendations.append(contentsOf: [
                 .readArticles
@@ -288,19 +272,6 @@ final class HomeViewModel: BaseViewModel {
             } else {
                 snapshot.appendItems([.init(recommendationPrompt: .registerFeelings)])
             }
-            
-//            if layoutData.symptoms?.isEmpty == false {
-//                snapshot.appendSections([.symptomList])
-//                
-//                if let symptoms = layoutData.symptoms {
-//                    snapshot.appendItems(symptoms.map({ ItemIdentifier(symptomData: $0) }))
-//                }
-//            }
-//            
-//            if layoutData.feeling != nil || layoutData.symptoms?.isEmpty == false {
-//                snapshot.appendSections([.symptomAction])
-//                snapshot.appendItems([.init(recommendationPrompt: .updateFeelings)])
-//            }
         }
         
         if let recommendations = layoutData.recommendations {
@@ -318,8 +289,6 @@ extension HomeViewModel {
         case heading
         case wellBeing
         case recommendations(ActiveUserRole)
-//        case symptomAction
-//        case symptomList
     }
     
     struct ItemIdentifier: Hashable {

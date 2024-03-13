@@ -21,10 +21,6 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJx-e5-hmJ">
                                 <rect key="frame" x="0.0" y="107" width="414" height="755"/>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3b8-9u-Ure" customClass="NoContentView" customModule="Athelo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="107" width="414" height="789"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kaq-S1-Rvb" customClass="BlendingGradientView" customModule="Athelo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="134"/>
                                 <color key="backgroundColor" name="Background"/>
@@ -46,13 +42,10 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottomMargin" secondItem="3b8-9u-Ure" secondAttribute="bottom" constant="-34" id="5Ih-6x-Ocz"/>
                             <constraint firstItem="iJx-e5-hmJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="61L-Lr-01r"/>
                             <constraint firstItem="00b-24-MsP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="6Nh-QZ-aNT"/>
                             <constraint firstItem="iJx-e5-hmJ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="8kv-yg-cXi"/>
                             <constraint firstItem="iJx-e5-hmJ" firstAttribute="top" secondItem="00b-24-MsP" secondAttribute="centerY" constant="16" id="9Oe-u8-ing"/>
-                            <constraint firstItem="3b8-9u-Ure" firstAttribute="top" secondItem="iJx-e5-hmJ" secondAttribute="top" id="CEG-0p-diH"/>
-                            <constraint firstItem="3b8-9u-Ure" firstAttribute="trailing" secondItem="iJx-e5-hmJ" secondAttribute="trailing" id="GQv-uz-w75"/>
                             <constraint firstItem="kaq-S1-Rvb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Zmz-l9-x3e"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="00b-24-MsP" secondAttribute="trailing" constant="16" id="eVF-2a-SQn"/>
                             <constraint firstItem="kaq-S1-Rvb" firstAttribute="bottom" secondItem="00b-24-MsP" secondAttribute="bottom" constant="16" id="mhd-a0-IFn"/>
@@ -60,13 +53,11 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="iJx-e5-hmJ" secondAttribute="bottom" id="sSc-tu-xPD"/>
                             <constraint firstItem="kaq-S1-Rvb" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="stV-YG-GGT"/>
                             <constraint firstItem="00b-24-MsP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="v2l-Xo-KHX"/>
-                            <constraint firstItem="3b8-9u-Ure" firstAttribute="leading" secondItem="iJx-e5-hmJ" secondAttribute="leading" id="zuE-3L-1nR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="segmentedPickerViewFilters" destination="00b-24-MsP" id="8pO-cD-XCo"/>
                         <outlet property="viewListContainer" destination="iJx-e5-hmJ" id="2fZ-gE-85y"/>
-                        <outlet property="viewNoContent" destination="3b8-9u-Ure" id="acf-Dw-fX3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
