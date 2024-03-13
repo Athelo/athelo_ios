@@ -38,8 +38,7 @@ final class SymptomListViewController: BaseViewController {
     private func configure() {
         configureFiltersSegmentedPickerView()
 //        configureListContainerView()
-//        configureRegisterSymptomView()
-        configureSymptoHistoryView()
+        configureRegisterSymptomView()
         configureNoContentView()
         configureOwnView()
     }
@@ -49,10 +48,10 @@ final class SymptomListViewController: BaseViewController {
     }
     
     private func configureListContainerView() {
+        viewListContainer.subviews.forEach { $0.removeFromSuperview() }
         guard symptomListView == nil else {
             return
         }
-        
         let listView = SymptomListView(model: viewModel.itemsModel) { [weak self] value in
             DispatchQueue.main.async {
                 let configuration: ModelConfigurationListData<SymptomData> = self?.viewModel.detailsConfigurationData(for: value) ?? .id([value.id])
@@ -81,6 +80,7 @@ final class SymptomListViewController: BaseViewController {
     }
     
     private func configureRegisterSymptomView() {
+        viewListContainer.subviews.forEach{$0.removeFromSuperview()}
         let registerRouter = RegisterSymptomsRouter(navigationController: router!.navigationController!)
         let registerSymptomsVC = RegisterSymptomsViewController.viewController(router: registerRouter)
         
@@ -101,7 +101,23 @@ final class SymptomListViewController: BaseViewController {
     }
     
     private func configureSymptoHistoryView() {
-       
+        let registerRouter = SymptomChronologyRouter(navigationController: router!.navigationController!)
+        let registerSymptomsVC = SymptomChronologyViewController.viewController(router: registerRouter)
+        
+        registerSymptomsVC.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        addChild(registerSymptomsVC)
+        viewListContainer.addSubview(registerSymptomsVC.view)
+        
+        NSLayoutConstraint.activate([
+            registerSymptomsVC.view.topAnchor.constraint(equalTo: viewListContainer.topAnchor),
+            registerSymptomsVC.view.bottomAnchor.constraint(equalTo: viewListContainer.bottomAnchor),
+            registerSymptomsVC.view.leftAnchor.constraint(equalTo: viewListContainer.leftAnchor),
+            registerSymptomsVC.view.rightAnchor.constraint(equalTo: viewListContainer.rightAnchor)
+        ])
+        
+        registerSymptomsVC.didMove(toParent: self)
         
         
     }
@@ -127,7 +143,12 @@ final class SymptomListViewController: BaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
 //                viewModel?.selectFilter($0)
-                self?.viewListContainer.isHidden = $0 == .symptomhistory
+//                self?.viewListContainer.isHidden = $0 == .symptomhistory
+                if $0 == .symptomhistory {
+                    self?.configureSymptoHistoryView()
+                }else{
+                    self?.configureRegisterSymptomView()
+                }
             }.store(in: &cancellables)
     }
     
