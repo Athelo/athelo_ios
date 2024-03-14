@@ -10,10 +10,10 @@
 	</array>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:atheloz.app.link</string>
-		<string>applinks:atheloz.test-app.link</string>
-		<string>applinks:atheloz-alternate.test-app.link</string>
-		<string>applinks:atheloz-alternate.app.link</string>
+		<string>applinks:athelo.app.link</string>
+		<string>applinks:athelo-alternate.app.link</string>
+		<string>applinks:athelo.test-app.link</string>
+		<string>applinks:athelo-alternate.test-app.link</string>
 	</array>
 </dict>
 </plist>
