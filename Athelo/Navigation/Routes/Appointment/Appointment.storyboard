@@ -151,7 +151,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLE-iR-A3I">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esL-Eu-GiF">
                                 <rect key="frame" x="337" y="75" width="32" height="32"/>
@@ -165,20 +165,32 @@
                                     <action selector="onClickCloseBtn:" destination="e9d-7B-OCt" eventType="touchUpInside" id="n11-6e-HpU"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s11-MM-Bp5">
+                                <rect key="frame" x="259" y="653" width="110" height="150"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="3lq-xw-fet"/>
+                                    <constraint firstAttribute="width" constant="110" id="vVc-UU-U2G"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ye9-es-Ym6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="esL-Eu-GiF" firstAttribute="top" secondItem="Ye9-es-Ym6" secondAttribute="top" constant="16" id="6lB-z8-39G"/>
-                            <constraint firstItem="Ye9-es-Ym6" firstAttribute="trailing" secondItem="esL-Eu-GiF" secondAttribute="trailing" constant="24" id="7m0-nH-6rw"/>
+                            <constraint firstItem="esL-Eu-GiF" firstAttribute="top" secondItem="Ye9-es-Ym6" secondAttribute="top" constant="16" id="5ht-xq-iVv"/>
                             <constraint firstAttribute="bottom" secondItem="dLE-iR-A3I" secondAttribute="bottom" id="Arp-sS-ACK"/>
+                            <constraint firstItem="Ye9-es-Ym6" firstAttribute="trailing" secondItem="esL-Eu-GiF" secondAttribute="trailing" constant="24" id="FwM-v7-Vwy"/>
                             <constraint firstItem="Ye9-es-Ym6" firstAttribute="trailing" secondItem="dLE-iR-A3I" secondAttribute="trailing" id="RnF-xD-AHf"/>
+                            <constraint firstItem="Ye9-es-Ym6" firstAttribute="trailing" secondItem="s11-MM-Bp5" secondAttribute="trailing" constant="24" id="Tl4-g8-VOs"/>
+                            <constraint firstItem="Ye9-es-Ym6" firstAttribute="bottom" secondItem="s11-MM-Bp5" secondAttribute="bottom" constant="15" id="dyL-9e-zBh"/>
                             <constraint firstItem="dLE-iR-A3I" firstAttribute="leading" secondItem="Ye9-es-Ym6" secondAttribute="leading" id="i9d-ci-1I1"/>
                             <constraint firstItem="dLE-iR-A3I" firstAttribute="top" secondItem="2V0-6o-umD" secondAttribute="top" id="sX0-kV-NfI"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="videoView" destination="dLE-iR-A3I" id="G1I-jd-6Cv"/>
+                        <outlet property="closeBtn" destination="esL-Eu-GiF" id="IdN-88-YB0"/>
+                        <outlet property="publisherVideoView" destination="s11-MM-Bp5" id="ip6-rr-jbP"/>
+                        <outlet property="sbscribVideoView" destination="dLE-iR-A3I" id="myb-fg-KkR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FI6-Fr-S6n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

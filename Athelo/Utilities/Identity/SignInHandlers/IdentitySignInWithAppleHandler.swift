@@ -120,10 +120,14 @@ extension IdentitySignInWithAppleHandler: ASAuthorizationControllerDelegate {
     }
     
     private func createProfile(email: String, displayName: String, tokenData: IdentityTokenData) {
+        let deeplinkPath = UserDefaults.standard.string(forKey: "deepLinkPath")
+        UserDefaults.standard.removeObject(forKey: "deepLinkPath")
+        
         let request = ProfileCreateRequest1(additionalParams: [
             "display_name": displayName,
             "first_name": "",
-            "last_name": ""
+            "last_name": "",
+            "code" : deeplinkPath == nil ? "" : deeplinkPath!
         ])
         
         (AtheloAPI.Profile.createProfile(request: request) as AnyPublisher<IdentityProfileData, APIError>)
