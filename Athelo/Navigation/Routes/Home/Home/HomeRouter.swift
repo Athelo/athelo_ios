@@ -48,15 +48,15 @@ final class HomeRouter: Router, UserProfileRoutable, WebContentRouter {
 //            let viewController = ConnectDeviceViewController.viewController(configurationData: .init(deviceType: .fitbit), router: router)
 //            
 //            navigationController.pushViewController(viewController, animated: true)
-        case .registerFeelings, .updateFeelings:
-            guard let navigationController = navigationController else {
-                fatalError("Missing \(UINavigationController.self) instance.")
-            }
-            
-            let router = RegisterSymptomsRouter(navigationController: navigationController)
-            let viewController = RegisterSymptomsViewController.viewController(router: router)
-            
-            navigationController.pushViewController(viewController, animated: true)
+//        case .registerFeelings, .updateFeelings:
+//            guard let navigationController = navigationController else {
+//                fatalError("Missing \(UINavigationController.self) instance.")
+//            }
+//            
+//            let router = RegisterSymptomsRouter(navigationController: navigationController)
+//            let viewController = RegisterSymptomsViewController.viewController(router: router)
+//            
+//            navigationController.pushViewController(viewController, animated: true)
         }
     }
 }

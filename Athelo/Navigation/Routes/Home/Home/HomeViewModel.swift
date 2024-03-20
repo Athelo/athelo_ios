@@ -55,7 +55,7 @@ final class HomeViewModel: BaseViewModel {
             
             return prompt
         case .wellBeing:
-            return sectionData.value?.feeling != nil ? nil : .registerFeelings
+            return sectionData.value?.feeling != nil ? nil : nil
         }
     }
     
@@ -109,7 +109,8 @@ final class HomeViewModel: BaseViewModel {
                 return feeling
             }
             
-            return TileDecorationData(recommendationPrompt: .registerFeelings)
+//            return TileDecorationData(recommendationPrompt: .registerFeelings)
+            return nil
         }
     }
     
@@ -270,7 +271,7 @@ final class HomeViewModel: BaseViewModel {
             if let feelingData = layoutData.feeling {
                 snapshot.appendItems([.init(feelingScale: feelingData)])
             } else {
-                snapshot.appendItems([.init(recommendationPrompt: .registerFeelings)])
+//                snapshot.appendItems([.init(recommendationPrompt: .registerFeelings)])
             }
         }
         
@@ -337,8 +338,8 @@ extension HomeViewModel {
 //        case checkSleepLevels
     //    case connectDevice
         case readArticles
-        case registerFeelings
-        case updateFeelings
+//        case registerFeelings
+//        case updateFeelings
         
         var icon: UIImage {
             switch self {
@@ -352,10 +353,10 @@ extension HomeViewModel {
 //                return UIImage(named: "watchSolid")!
             case .readArticles:
                 return UIImage(named: "bookSolid")!
-            case .registerFeelings:
-                return UIImage(named: "laughSolid")!
-            case .updateFeelings:
-                return UIImage(named: "monitorSolid")!
+//            case .registerFeelings:
+//                return UIImage(named: "laughSolid")!
+//            case .updateFeelings:
+//                return UIImage(named: "monitorSolid")!
             }
         }
         
@@ -371,10 +372,10 @@ extension HomeViewModel {
 //                return "home.recommendation.connectdevice".localized()
             case .readArticles:
                 return "home.recommendation.readarticles".localized()
-            case .registerFeelings:
-                return "home.recommendation.registerfeelings".localized()
-            case .updateFeelings:
-                return "home.recommendation.updatefeelings".localized();
+//            case .registerFeelings:
+//                return "home.recommendation.registerfeelings".localized()
+//            case .updateFeelings:
+//                return "home.recommendation.updatefeelings".localized();
             }
         }
         
